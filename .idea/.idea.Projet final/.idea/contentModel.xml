@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\luca\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\luca\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Projet final.-54437107.00" t="ExcludeRecursive" />
+    <e p="C:\Users\luca\Documents\GitHub\Robospectif\Projet final" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="ChangeScene.cs" t="Include" />
+          <e p="Script_S1" t="Include">
+            <e p="Button_Ready_affichage.cs" t="Include" />
+            <e p="Button_ready_next_scene.cs" t="Include" />
+            <e p="Joueur_1_ready.cs" t="Include" />
+            <e p="Joueur_2_ready.cs" t="Include" />
+            <e p="Joueur_3_ready.cs" t="Include" />
+            <e p="Joueur_4_ready.cs" t="Include" />
+            <e p="Joueur_5_ready.cs" t="Include" />
+            <e p="Joueur_6_ready.cs" t="Include" />
+            <e p="Text_nb_joueurs.cs" t="Include" />
+          </e>
+          <e p="Script_S2" t="Include">
+            <e p="Text_Connexion.cs" t="Include" />
+            <e p="TitreConnextion.cs" t="Include" />
+          </e>
+          <e p="ScriptSc1" t="Include">
+            <e p="Main.cs" t="Include" />
+            <e p="rotatpaysage.cs" t="Include" />
+            <e p="SelectNmbPlayer.cs" t="Include" />
+            <e p="selectUser.cs" t="Include" />
+          </e>
+          <e p="ScriptSc2" t="Include">
+            <e p="ChangeIdCarte.cs" t="Include" />
+            <e p="ChangeImageDi.cs" t="Include" />
+            <e p="ChangeImageEqui.cs" t="Include" />
+            <e p="ChangeImageLoco.cs" t="Include" />
+            <e p="Equipement.cs" t="Include" />
+            <e p="MainScript.cs" t="Include" />
+          </e>
+          <e p="Serveur" t="Include">
+            <e p="IPManager.cs" t="Include" />
+            <e p="MyMessage.cs" t="Include" />
+            <e p="SansHUD.cs" t="Include" />
+          </e>
+          <e p="testbdd.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Projet final.sln" t="IncludeFlat" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

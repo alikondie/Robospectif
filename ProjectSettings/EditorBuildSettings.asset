@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LogoScene.unity
+    guid: aa246c9c210bd634eb54017479f93d48
+  - enabled: 1
+    path: Assets/Scenes/1ere scene jeu.unity
+    guid: 5f565cb3d9f1f1d4e8ec571572a427bf
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/2_PartieConnexion/Scene_2.unity
+    guid: 4792a84215b1ea54ba93e79fcecd7f9a
+  - enabled: 1
+    path: Assets/Scenes/scene3.unity
+    guid: e79fe322cb4f2bd4884d244850532871
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/scene1.unity
+    guid: d818dcf75dfe7514f94631ea57894092
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Scene_4.unity
+    guid: c2f2079cabb99a64f843a34ca76318f9
+  - enabled: 1
+    path: Assets/Scenes/scene2.unity
+    guid: 9a91424ab1525bf4eab0f6279b6d0657
+  - enabled: 1
+    path: Assets/Scenes/2_PartieConnexion/Scene_3.unity
+    guid: 639693aaaa8e8ae4f9c846723a741f6f
+  - enabled: 1
+    path: Assets/Scenes/2_PartieConnexion/Scene_3Bis.unity
+    guid: 120417f1ae96d3948ae655339d7b9b00
+  - enabled: 1
+    path: Assets/Scenes/scene4.unity
+    guid: ecb162cf5ac202e4b9e455752498550f
+  - enabled: 1
+    path: Assets/Scenes/scene2bis.unity
+    guid: 4fc207b1b8c50854594195ec6e3050b7
+  - enabled: 1
+    path: Assets/Scenes/Scene_6.unity
+    guid: 43540e737f4952746a001f1dceca03c3
+  - enabled: 1
+    path: Assets/Scenes/scene4bis.unity
+    guid: dfd3730e3256714479eeef18a560fbb5
+  - enabled: 1
+    path: Assets/Scenes/Scene5.unity
+    guid: 58d394cf06e7f5b4fbe618902c788a3c
+  - enabled: 1
+    path: Assets/Scenes/Scene_ChoixJetons.unity
+    guid: 6a6bdff5c11de4948a315285351ca56c
+  - enabled: 1
+    path: Assets/Scenes/scenePreEnd.unity
+    guid: 72e2750571e30564b94733dd1fadf6fa
+  - enabled: 1
+    path: Assets/Scenes/Scene_fin_tour.unity
+    guid: c89f8112aff5ac948b08a99cc30d864b
+  - enabled: 1
+    path: Assets/Scenes/FinTel.unity
+    guid: 29c0afeb95183074290099411778c363
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: e878c9cb7f1e5f844af280a1eb0a4597
+  - enabled: 1
+    path: Assets/Scenes/SceneFin.unity
+    guid: 927a3d00410d1344d854891c05f1a22b
+  m_configObjects: {}
