@@ -28,7 +28,7 @@ public class MainScript : MonoBehaviour
 
     private void RandomEqui()
     {
-        Main.TabImage tab = Main.Global.TabE;
+        Main.TabImage tab = Main.Global.TabEquipements;
         Debug.Log("taille tab : " + (tab.Taille - 1));
         Debug.Log("tab[" + 18 + "] = " + tab.getImageind(18).Sprite.ToString());
         Debug.Log("tab[" + 30 + "] = " + tab.getImageind(30).Sprite.ToString());
@@ -63,12 +63,12 @@ public class MainScript : MonoBehaviour
         equipements[3] = tab.getImageind(indices[3]);
         equipements[4] = tab.getImageind(indices[4]);
         equipements[5] = tab.getImageind(indices[5]);
-        Main.Global.TabE.removeImage(equipements[0]);
-        Main.Global.TabE.removeImage(equipements[1]);
-        Main.Global.TabE.removeImage(equipements[2]);
-        Main.Global.TabE.removeImage(equipements[3]);
-        Main.Global.TabE.removeImage(equipements[4]);
-        Main.Global.TabE.removeImage(equipements[5]);
+        Main.Global.TabEquipements.removeImage(equipements[0]);
+        Main.Global.TabEquipements.removeImage(equipements[1]);
+        Main.Global.TabEquipements.removeImage(equipements[2]);
+        Main.Global.TabEquipements.removeImage(equipements[3]);
+        Main.Global.TabEquipements.removeImage(equipements[4]);
+        Main.Global.TabEquipements.removeImage(equipements[5]);
 
         equipementGO1.sprite = equipements[0].Sprite;
         equipementGO2.sprite = equipements[1].Sprite;
@@ -78,7 +78,7 @@ public class MainScript : MonoBehaviour
     private void RandomLoco()
     {
         int x = 0, y = 0;
-        Main.TabImage tab = Main.Global.TabL;
+        Main.TabImage tab = Main.Global.TabLocomtions;
         while (tab.getImageind(x).Sprite.Equals(tab.getImageind(y).Sprite))
         {
             x = Random.Range(0, (tab.Taille - 1));
@@ -87,8 +87,8 @@ public class MainScript : MonoBehaviour
         locomotions = new Main.Image[2];
         locomotions[0] = tab.getImageind(x);
         locomotions[1] = tab.getImageind(y);
-        Main.Global.TabL.removeImage(locomotions[0]);
-        Main.Global.TabL.removeImage(locomotions[1]);
+        Main.Global.TabLocomtions.removeImage(locomotions[0]);
+        Main.Global.TabLocomtions.removeImage(locomotions[1]);
 
         locomotionGO1.sprite = locomotions[0].Sprite;
     }
@@ -96,7 +96,7 @@ public class MainScript : MonoBehaviour
     private void RandomDim()
     {
         int x = 0, y = 0;
-        Main.TabImage tab = Main.Global.TabD;
+        Main.TabImage tab = Main.Global.TabDimensions;
         while (tab.getImageind(x).Sprite.Equals(tab.getImageind(y).Sprite))
         {
             x = Random.Range(0, tab.Taille);
@@ -105,8 +105,8 @@ public class MainScript : MonoBehaviour
         dimensions = new Main.Image[2];
         dimensions[0] = tab.getImageind(x);
         dimensions[1] = tab.getImageind(y);
-        Main.Global.TabD.removeImage(dimensions[0]);
-        Main.Global.TabD.removeImage(dimensions[1]);
+        Main.Global.TabDimensions.removeImage(dimensions[0]);
+        Main.Global.TabDimensions.removeImage(dimensions[1]);
 
         dimensionGO1.sprite = dimensions[0].Sprite;
     }
@@ -124,7 +124,7 @@ public class MainScript : MonoBehaviour
         Debug.Log(Main.Global.Player.ToString());
         
        
-        Main.TabImage tab = Main.Global.TabD;
+        Main.TabImage tab = Main.Global.TabDimensions;
         text.text = "Joueur : " + position.ToString();
         RandomDim();
         

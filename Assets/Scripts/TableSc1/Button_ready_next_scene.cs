@@ -27,6 +27,7 @@ public class Button_ready_next_scene : MonoBehaviour
 
     void OnMouseDown()
     {
+        print("got here");
         // ----- PARTIE NATHAN -----
         // Envoies des positions
         for (int i = 1; i <= 6; i++)

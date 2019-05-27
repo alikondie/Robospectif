@@ -234,25 +234,25 @@ public class Main : MonoBehaviour
             set => player = value;
         }
 
-        public static TabImage TabL
+        public static TabImage TabLocomtions
         {
             get => tabL;
             set => tabL = value;
         }
 
-        public static TabImage TabD
+        public static TabImage TabDimensions
         {
             get => tabD;
             set => tabD = value;
         }
 
-        public static TabImage TabE
+        public static TabImage TabEquipements
         {
             get => tabE;
             set => tabE = value;
         }
 
-        public static TabImage TabP
+        public static TabImage TabPersonnages
         {
             get => tabP;
             set => tabP = value;
@@ -315,7 +315,7 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Veronique")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Yvette")));
         }
-        Global.TabP = tab;
+        Global.TabPersonnages = tab;
     }
 
     private void initializeLoco()
@@ -336,7 +336,7 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Rebondir")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Roues")));
         }
-        Global.TabL = tab;
+        Global.TabLocomtions = tab;
 
     }
 
@@ -356,7 +356,7 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/VehiculeLeger")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/VehiculeLourd")));
         }
-        Global.TabD = tab;
+        Global.TabDimensions = tab;
 
     }
     public void initializeEqui()
@@ -401,7 +401,7 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/TVSatellite")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Ventouses")));
         }
-        Global.TabE = tab;
+        Global.TabEquipements = tab;
 
     }
 }

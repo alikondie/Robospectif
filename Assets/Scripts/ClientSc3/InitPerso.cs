@@ -85,7 +85,7 @@ public class InitPerso : MonoBehaviour
             ticks[i].gameObject.SetActive(false);
         }
 
-        Main.TabImage tab = Main.Global.TabD;
+        Main.TabImage tab = Main.Global.TabDimensions;
         text.text = "Joueur : " + selectUser.positionStatic;
         Perso();
         if (JoueurStatic.Perso1Choisi)

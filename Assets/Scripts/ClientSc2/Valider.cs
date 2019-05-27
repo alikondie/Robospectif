@@ -44,7 +44,7 @@ public class Valider : MonoBehaviour
 
     private void RandomPerso()
     {
-        Main.TabImage tab = Main.Global.TabP;
+        Main.TabImage tab = Main.Global.TabPersonnages;
         int[] indices = { 0, 0, 0, 0, 0, 0 };
         bool allDiff = false;
         while (!allDiff)
@@ -74,12 +74,12 @@ public class Valider : MonoBehaviour
         personnages[3] = tab.getImageind(indices[3]);
         personnages[4] = tab.getImageind(indices[4]);
         personnages[5] = tab.getImageind(indices[5]);
-        Main.Global.TabE.removeImage(personnages[0]);
-        Main.Global.TabE.removeImage(personnages[1]);
-        Main.Global.TabE.removeImage(personnages[2]);
-        Main.Global.TabE.removeImage(personnages[3]);
-        Main.Global.TabE.removeImage(personnages[4]);
-        Main.Global.TabE.removeImage(personnages[5]);
+        Main.Global.TabEquipements.removeImage(personnages[0]);
+        Main.Global.TabEquipements.removeImage(personnages[1]);
+        Main.Global.TabEquipements.removeImage(personnages[2]);
+        Main.Global.TabEquipements.removeImage(personnages[3]);
+        Main.Global.TabEquipements.removeImage(personnages[4]);
+        Main.Global.TabEquipements.removeImage(personnages[5]);
 
         Debug.Log("perso : " + personnages[0].Sprite.ToString());
         Debug.Log("perso : " + personnages[1].Sprite.ToString());
