@@ -26,8 +26,7 @@ public class SansHUD : NetworkManager
     public NetworkConnection id;
     public bool conceptionTerminee;
     public static int premierFini;
-    // local network IP
-    private string Ip_serveur = "172.21.232.218"; // IP Table 192.168.43.40    192.168.1.10  127.0.0.1 
+    private string Ip_serveur = "192.168.43.40"; // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
 
     void Start()
@@ -35,8 +34,6 @@ public class SansHUD : NetworkManager
 
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-
-        //print(ipv4):
         if(ipv4 == Ip_serveur) 
         {
             Partie.Initialize();
@@ -207,6 +204,15 @@ public class SansHUD : NetworkManager
         Debug.Log("Client has requested to get his player added to the game");
 
     }
+
+
+
+
+
+
+
+
+
 
 
     public override void OnServerDisconnect(NetworkConnection conn)

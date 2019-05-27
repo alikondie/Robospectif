@@ -18,7 +18,7 @@ public class Button_Ready_affichage : MonoBehaviour
 
         // Debug.Log("Combien de joueurs : " + Text_nb_joueurs.nb_joueurs);
 
-        if (Text_nb_joueurs.nb_joueurs >= 1)
+        if (Text_nb_joueurs.nb_joueurs >= 4)
         {
         
             ready.SetActive(true);
