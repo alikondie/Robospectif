@@ -11,13 +11,7 @@ public class Jeton_pop : MonoBehaviour
     private Vector3 positionInit;
 
     public List<GameObject> joueurs;
-    public List<GameObject> cartes;
-
-    private bool estchanger = true;
-
-
-
-    
+    public List<GameObject> cartes;    
 
     public static int[] nb_bonus;
     public static int[] nb_malus;
