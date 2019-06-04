@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 48713931}
   - component: {fileID: 48713930}
   - component: {fileID: 48713929}
-  - component: {fileID: 48713932}
   - component: {fileID: 48713933}
   m_Layer: 5
   m_Name: Button
@@ -232,21 +231,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48713927}
   m_CullTransparentMesh: 0
---- !u!114 &48713932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48713927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0222f9f9b97274b46b6cee5fe6307ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 48713929}
-  scene:
-    m_Handle: 2
 --- !u!114 &48713933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,17 +659,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1132472525}
   dimensionGO1: {fileID: 613397689}
-  dimensionGO2: {fileID: 144220736}
-  dimensionGO3: {fileID: 0}
   locomotionGO1: {fileID: 1132935383}
-  locomotionGO2: {fileID: 1036079682}
-  locomotionGO3: {fileID: 0}
   equipementGO1: {fileID: 1077126258}
   equipementGO2: {fileID: 1567378383}
   equipementGO3: {fileID: 1729993596}
-  equipementGO4: {fileID: 620787682}
-  equipementGO5: {fileID: 457239377}
-  equipementGO6: {fileID: 1435753038}
 --- !u!1 &454654111
 GameObject:
   m_ObjectHideFlags: 0

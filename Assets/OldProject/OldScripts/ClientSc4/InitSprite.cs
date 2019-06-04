@@ -12,7 +12,7 @@ public class InitSprite : MonoBehaviour
     void Start()
     {
         text.text = "Joueur : " + selectUser.positionStatic;
-        perso.sprite = ValiderPerso.perso;
+        perso.sprite = ChoixPerso.perso;
     }
 
     // Update is called once per frame

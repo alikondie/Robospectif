@@ -439,6 +439,12 @@ MonoBehaviour:
   tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1022679068}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1322725394}
+  - {fileID: 1961560383}
+  - {fileID: 1230436334}
+  - {fileID: 371131766}
 --- !u!1 &439564499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1077,12 @@ MonoBehaviour:
   tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1322725394}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1961560383}
+  - {fileID: 1022679068}
+  - {fileID: 1230436334}
+  - {fileID: 371131766}
 --- !u!1 &1322725392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1334,12 @@ MonoBehaviour:
   tick5: {fileID: 1230436334}
   tickCurrent: {fileID: 371131766}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1322725394}
+  - {fileID: 1961560383}
+  - {fileID: 1022679068}
+  - {fileID: 1230436334}
 --- !u!1 &1926893407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,6 +1436,12 @@ MonoBehaviour:
   tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1961560383}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1322725394}
+  - {fileID: 1022679068}
+  - {fileID: 1230436334}
+  - {fileID: 371131766}
 --- !u!1 &1961560381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1612,12 @@ MonoBehaviour:
   tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1230436334}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1322725394}
+  - {fileID: 1961560383}
+  - {fileID: 1022679068}
+  - {fileID: 371131766}
 --- !u!1 &2065034042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,6 +1741,12 @@ MonoBehaviour:
   tick5: {fileID: 371131766}
   tickCurrent: {fileID: 192716001}
   button: {fileID: 515306477}
+  ticks:
+  - {fileID: 1322725394}
+  - {fileID: 1961560383}
+  - {fileID: 1022679068}
+  - {fileID: 1230436334}
+  - {fileID: 371131766}
 --- !u!1 &2067429856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,18 +1808,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 987154404}
-  personnageGO1: {fileID: 2065034044}
-  personnageGO2: {fileID: 1302260691}
-  personnageGO3: {fileID: 1926893409}
-  personnageGO4: {fileID: 378255251}
-  personnageGO5: {fileID: 2007135621}
-  personnageGO6: {fileID: 1826169336}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1322725394}
-  tick3: {fileID: 1961560383}
-  tick4: {fileID: 1022679068}
-  tick5: {fileID: 1230436334}
-  tick6: {fileID: 371131766}
+  personnagesGO:
+  - {fileID: 2065034044}
+  - {fileID: 1302260691}
+  - {fileID: 1926893409}
+  - {fileID: 378255251}
+  - {fileID: 2007135621}
+  - {fileID: 1826169336}
+  ticks:
+  - {fileID: 192716001}
+  - {fileID: 1322725394}
+  - {fileID: 1961560383}
+  - {fileID: 1022679068}
+  - {fileID: 1230436334}
+  - {fileID: 371131766}
 --- !u!114 &2067429859
 MonoBehaviour:
   m_ObjectHideFlags: 0

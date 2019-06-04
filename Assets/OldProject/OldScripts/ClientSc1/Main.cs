@@ -325,9 +325,6 @@ public class Main : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Ailes")));
-            /*string s = "image/Locomotion/Ailes";
-            Sprite sp = Resources.Load<Sprite>(s);
-            Debug.Log(sp);*/
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Ballon")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Chenilles")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Flottaison")));

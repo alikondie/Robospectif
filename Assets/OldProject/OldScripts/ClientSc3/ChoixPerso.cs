@@ -9,21 +9,16 @@ using UnityEngine.UI;
 public class ChoixPerso : MonoBehaviour, IPointerClickHandler
 {
     public Image image;
-    public Image tick1;
-    public Image tick2;
-    public Image tick3;
-    public Image tick4;
-    public Image tick5;
     public Image tickCurrent;
     public Button button;
-    private Image[] ticks;
+    public static Sprite perso;
+    public Image[] ticks;
 
     // Start is called before the first frame update
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
         button.gameObject.SetActive(false);
-        ticks = new Image[] { tick1, tick2, tick3, tick4, tick5};
     }
 
     // Update is called once per frame
@@ -43,7 +38,7 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
     }
     private void ButtonClicked()
     {
-        if (tickCurrent.gameObject.active)
+        if (tickCurrent.gameObject.activeSelf)
         {
             if (JoueurStatic.Perso1 == image.sprite)
                 JoueurStatic.Perso1Choisi = true;
@@ -62,15 +57,8 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
 
             if (JoueurStatic.Perso6 == image.sprite)
                 JoueurStatic.Perso6Choisi = true;
-            ValiderPerso.perso = image.sprite;
+            perso = image.sprite;
         }
-
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso1Choisi);
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso2Choisi);
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso3Choisi);
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso4Choisi);
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso5Choisi);
-        Debug.Log("persosChoisis :  " + JoueurStatic.Perso6Choisi);
 
         SceneManager.LoadScene("scene4");
     }
