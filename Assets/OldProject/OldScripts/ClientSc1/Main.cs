@@ -22,6 +22,7 @@ public class Main : MonoBehaviour
             this.place = place;
             this.idcarte1 = idcarte1;
             this.idcarte2 = idcarte2;
+
             this.idcarte3 = idcarte3;
             this.isOk = isOk;
         }
