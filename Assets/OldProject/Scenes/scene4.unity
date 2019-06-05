@@ -1320,7 +1320,6 @@ GameObject:
   - component: {fileID: 1240017065}
   - component: {fileID: 1240017064}
   - component: {fileID: 1240017063}
-  - component: {fileID: 1240017066}
   m_Layer: 5
   m_Name: Personnage1
   m_TagString: Untagged
@@ -1410,20 +1409,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240017060}
   m_CullTransparentMesh: 0
---- !u!114 &1240017066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240017060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b9fd93e348695e458524611add486a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  perso: {fileID: 1240017064}
-  text: {fileID: 1637179389}
 --- !u!1 &1271658227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 522676695}
   perso: {fileID: 1240017064}
+  text: {fileID: 1637179389}
   rural: {fileID: 1892082769}
   couleurRural: {fileID: 2100000, guid: 0365d9d2a5ad57c4d9da51fb46cb5a3b, type: 2}
   periUrbain: {fileID: 1179665658}

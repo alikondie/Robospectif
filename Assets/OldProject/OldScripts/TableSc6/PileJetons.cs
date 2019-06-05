@@ -14,57 +14,12 @@ public class PileJetons : MonoBehaviour
     public Sprite[,] sprites;
     public bool[,] actives;
 
-    /*
-    public SpriteRenderer rend;
-    public static bool joueur_4 = false;
-    public Sprite jeton_societe_positif, jeton_societe_negatif;
-    public Sprite jeton_usage_positif, jeton_usage_negatif;
-    public Sprite jeton_planete_positif, jeton_planete_negatif;
-    */
 
     // Start is called before the first frame update
     void Start()
     {
         sprites = InitDebat.envoiSprites;
         actives = InitDebat.envoiActives;
-
-        //for (int j = 0; j < 6; j++)
-        //{
-        //    for (int i = 0; i < sprites[j].Capacity - 1; i++)
-        //    {
-        //        Debug.Log("sprites[" + j + ", " + i + "] = " + sprites[j][i]);
-        //    }
-        //}
-
-        /*for (int i = 0; i < pile1.transform.childCount; i++)
-        {
-            pile1.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < pile2.transform.childCount; i++)
-        {
-            pile2.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < pile3.transform.childCount; i++)
-        {
-            pile3.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < pile4.transform.childCount; i++)
-        {
-            pile4.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < pile5.transform.childCount; i++)
-        {
-            pile5.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < pile6.transform.childCount; i++)
-        {
-            pile6.transform.GetChild(i).gameObject.SetActive(false);
-        }*/
 
         for (int j = 0; j < 6; j++)
         {

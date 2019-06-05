@@ -8,6 +8,16 @@ using UnityEngine.SceneManagement;
 
 public class InitDebat : MonoBehaviour
 {
+    public GameObject jeton1;
+    public GameObject jeton2;
+    public GameObject jeton3;
+    public GameObject jeton4;
+    public GameObject jeton5;
+    public GameObject jeton6;
+    public List<GameObject>[] jetons;
+    public int[] index;
+    GameObject objet;
+    short jeton = 1010;
 
     public Button button;
     private int JoueurCourant;
@@ -41,6 +51,52 @@ public class InitDebat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        jetons = new List<GameObject>[6];
+        jetons[0] = new List<GameObject>();
+        jetons[1] = new List<GameObject>();
+        jetons[2] = new List<GameObject>();
+        jetons[3] = new List<GameObject>();
+        jetons[4] = new List<GameObject>();
+        jetons[5] = new List<GameObject>();
+
+        for (int i = 0; i < jeton1.transform.childCount - 1; i++)
+        {
+            jetons[0].Add(jeton1.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < jeton2.transform.childCount - 1; i++)
+        {
+            jetons[1].Add(jeton2.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < jeton3.transform.childCount - 1; i++)
+        {
+            jetons[2].Add(jeton3.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < jeton4.transform.childCount - 1; i++)
+        {
+            jetons[3].Add(jeton4.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < jeton5.transform.childCount - 1; i++)
+        {
+            jetons[4].Add(jeton5.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < jeton6.transform.childCount - 1; i++)
+        {
+            jetons[5].Add(jeton6.transform.GetChild(i).gameObject);
+        }
+
+        index = new int[6];
+        for (int i = 0; i < 6; i++)
+        {
+            index[i] = 0;
+        }
+        NetworkServer.RegisterHandler(jeton, onJetonReceived);
+
+
         positionsButton = new Vector2[6];
         positionsButton[0] = new Vector2(-3, (float)-3.75);
         positionsButton[1] = new Vector2(3, (float)-3.75);
@@ -110,15 +166,27 @@ public class InitDebat : MonoBehaviour
         
     }
 
+    private void onJetonReceived(NetworkMessage netMsg)
+    {
+        var v = netMsg.ReadMessage<MyJetonMessage>();
+        int pos = v.joueur;
+        string s = "Jetons/" + v.sprite;
+        Sprite jeton_actuel = Resources.Load<Sprite>(s);
+        for (int j = 0; j < 6; j++)
+        {
+            if (positions[j] == pos)
+            {
+                jetons[j][index[j]].gameObject.GetComponent<SpriteRenderer>().sprite = jeton_actuel;
+                jetons[j][index[j]].gameObject.SetActive(true);
+                index[j]++;
+            }
+        }
+    }
+
     private void ButtonClicked()
     {
         Sprite[,] sprites = new Sprite[6, perso0.transform.GetChild(2).childCount];
         bool[,] bools = new bool[6, perso0.transform.GetChild(2).childCount];
-
-        //for (int i = 0; i < 6; i++)
-        //{
-        //    sprites[i] = new List<Sprite>();
-        //}
         
         for (int i = 0; i < perso0.transform.GetChild(2).childCount; i++)
         {

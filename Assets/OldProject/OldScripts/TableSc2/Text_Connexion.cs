@@ -38,15 +38,6 @@ public class Text_Connexion : MonoBehaviour
     void Start()
     {
         positions = Button_ready_next_scene.envoi;
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log("envoi[" + i + "] = " + Button_ready_next_scene.envoi[i]);
-        }
-
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log("positions[" + i + "] = " + Button_ready_next_scene.envoi[i]);
-        }
 
         infoAndroid = 0;
         estDebut = false;
@@ -55,9 +46,9 @@ public class Text_Connexion : MonoBehaviour
         //nbJoueur = 6; // Nombre de Joueurs
 
         // Recuperation de la position des joueurs:
-        for (int i = 0; i <= 5; i++)
+        for (int i = 1; i <= 6; i++)
         {
-            tabPosition[i] = PlayerPrefs.GetInt("P" + (i+1) );     // Position des joueurs
+            tabPosition[i] = PlayerPrefs.GetInt("P" + (i) );     // Position des joueurs
         }
         //tabPosition = new int[]  { 1, 2, 3, 4, 5, 6 }; // Position des joueurs
 
@@ -153,7 +144,6 @@ public class Text_Connexion : MonoBehaviour
         PlayerPrefs.SetInt("monInfoJoueur", pos);
         estDebut = true;
         nbJoueursConnectes++;
-        Debug.Log("joueurs connectés : " + nbJoueursConnectes);
     }
 
 
@@ -186,16 +176,6 @@ public class Text_Connexion : MonoBehaviour
             }
 
         }
-
-       /* PlayerPrefs.SetInt("TousConnecter", 0);
-
-        if (tousConnecter == nbJoueur)
-        {
-            // Changer Titre
-            PlayerPrefs.SetInt("TousConnecter", 1);
-            // Changer de scene (Suivante)
-            SceneManager.LoadScene("Scene_3");
-        }*/
     }
 
 

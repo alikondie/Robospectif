@@ -27,10 +27,6 @@ public class ConceptionTerminer : MonoBehaviour
     {
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
-            for (int i = 0; i < 6; i++)
-            {
-                Debug.Log("envoi[" + i + "] = " + Button_ready_next_scene.envoi[i]);
-            }
             SceneManager.LoadScene(nomSceneDemander);
         }
     }
@@ -39,6 +35,5 @@ public class ConceptionTerminer : MonoBehaviour
     public static void finiMaConception()
     {
         nbJoueurConceptionTerminer++;
-        Debug.Log("joueurs valides : " + nbJoueurConceptionTerminer);
     }
 }

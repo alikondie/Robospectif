@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 12
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
     m_AtlasSize: 1024
@@ -62,7 +62,6 @@ LightmapSettings:
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
-    m_ExtractAmbientOcclusion: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
@@ -77,16 +76,10 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVREnvironmentSampleCount: 500
-    m_PVREnvironmentReferencePointCount: 2048
-    m_PVRFilteringMode: 2
-    m_PVRDenoiserTypeDirect: 0
-    m_PVRDenoiserTypeIndirect: 0
-    m_PVRDenoiserTypeAO: 0
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVREnvironmentMIS: 0
+    m_PVRFilteringMode: 2
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -95,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-    m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -1758,10 +1750,9 @@ Camera:
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -2633,31 +2624,42 @@ MonoBehaviour:
   J1carte3: {fileID: 127982949}
   J1carte4: {fileID: 1948897676}
   J1carte5: {fileID: 2024454666}
+  J1:
+  - {fileID: 1486465709}
+  - {fileID: 1142561402}
+  - {fileID: 127982949}
+  - {fileID: 1948897676}
+  - {fileID: 2024454666}
   J2carte1: {fileID: 461871651}
   J2carte2: {fileID: 474931509}
   J2carte3: {fileID: 1040387818}
   J2carte4: {fileID: 2128297900}
   J2carte5: {fileID: 1202069771}
+  J2: []
   J3carte1: {fileID: 1201936990}
   J3carte2: {fileID: 34819224}
   J3carte3: {fileID: 1448794240}
   J3carte4: {fileID: 1108178950}
   J3carte5: {fileID: 987446683}
+  J3: []
   J4carte1: {fileID: 1290782265}
   J4carte2: {fileID: 155978068}
   J4carte3: {fileID: 349355415}
   J4carte4: {fileID: 715039362}
   J4carte5: {fileID: 1286201424}
+  J4: []
   J5carte1: {fileID: 1039467130}
   J5carte2: {fileID: 61308560}
   J5carte3: {fileID: 2053086641}
   J5carte4: {fileID: 726358543}
   J5carte5: {fileID: 1356515689}
+  J5: []
   J6carte1: {fileID: 218227601}
   J6carte2: {fileID: 1034824745}
   J6carte3: {fileID: 1790525522}
   J6carte4: {fileID: 651044115}
   J6carte5: {fileID: 733694034}
+  J6: []
 --- !u!114 &847594121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4409,20 +4411,17 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1362712858}
