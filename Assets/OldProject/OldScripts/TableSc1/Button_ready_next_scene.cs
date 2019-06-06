@@ -12,7 +12,6 @@ public class Button_ready_next_scene : MonoBehaviour
     public Button[] hands;
     public Sprite[] colors;
     private int[] indices;
-    public Button Button_ready;
     private int[] positions;
     public static int[] envoi;
     short positionsID = 1005;
