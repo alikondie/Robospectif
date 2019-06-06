@@ -4,23 +4,56 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region Properties
 
+    public List<Canvas> phases;
+    #endregion
+
+    #region Inputs
+    #endregion
+
+    #region Go or components
+    #endregion
+
+    #region Variables
+    private int currentPhase = 0;
     [HideInInspector]
     public int playersNumber = 0;
-    void Start()
+    #endregion
+
+    #region Unity loop
+    void Awake()
     {
         
     }
 
-    // Update is called once per frame
+	void FixedUpdate()
+    {
+        
+    }
+	
     void Update()
     {
         
     }
+    #endregion
 
+    #region Methods
     public void AddPlayer()
     {
         playersNumber++;
+        print("player's number : " + playersNumber);
     }
+
+    public void LoadNextPhase()
+    {
+        phases[currentPhase].gameObject.SetActive(false);
+        phases[++currentPhase].gameObject.SetActive(true);
+    }
+
+    public void LoadScene(int index)
+    {
+
+    }
+    #endregion
 }

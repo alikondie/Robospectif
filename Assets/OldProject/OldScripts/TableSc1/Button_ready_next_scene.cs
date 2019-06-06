@@ -39,7 +39,7 @@ public class Button_ready_next_scene : MonoBehaviour
 
     private void onHandClicked(int i)
     {
-        Debug.Log(i);
+        //Debug.Log(i);
         indices[i] = (indices[i] + 1) % 2;
         hands[i].gameObject.GetComponent<Image>().sprite = colors[indices[i]];
         MiseAJourText();
