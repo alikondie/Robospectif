@@ -25,7 +25,5 @@ public class Scene3 : MonoBehaviour
     public static void joueurValide()
     {
         nbValides++;
-        Debug.Log("joueurs validés : " + nbValides);
-        Debug.Log("joueurs connectés : " + Text_Connexion.nbJoueur);
     }
 }

@@ -31,9 +31,6 @@ public class EnAttenteCT : MonoBehaviour
 
             //changer de scene
             SceneManager.LoadScene(nomSceneDemander);
-
-            //estPremier = false;
-
         }
     }
 

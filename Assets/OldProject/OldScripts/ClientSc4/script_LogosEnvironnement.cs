@@ -14,6 +14,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     private int position;
     public Image perso;
     private string persoSprite;
+    public Text text;
 
     public static NetworkClient client = Valider.client;
     short persosID = 1007;
@@ -42,6 +43,8 @@ public class script_LogosEnvironnement : MonoBehaviour
     void Start()
     {
         position = selectUser.positionStatic;
+        text.text = "Joueur : " + position;
+        perso.sprite = ChoixPerso.perso;
         string spriteString = perso.sprite.ToString();
         string s = "";
         for (int i = 0; i < spriteString.Length - 21; i++)
@@ -70,7 +73,6 @@ public class script_LogosEnvironnement : MonoBehaviour
 
     private void ButtonClicked()
     {
-        Debug.Log("choixZone[0] = " + choixZone[0] + " | choixZone[1] = " + choixZone[1]);
         MyPersoMessage msg = new MyPersoMessage();
         msg.numero = position;
         msg.image = persoSprite;
@@ -160,7 +162,7 @@ public class script_LogosEnvironnement : MonoBehaviour
         
     }
 
-    // Actions lorsqu'on click sur le bouton Péripherique urbaine
+    // Actions lorsqu'on click sur le bouton Péripherie urbaine
     public void zonePeriUrbaine()
     {
 

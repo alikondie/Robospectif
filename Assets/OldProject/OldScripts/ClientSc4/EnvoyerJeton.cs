@@ -10,7 +10,6 @@ public class EnvoyerJeton : MonoBehaviour
     public Button button;
     NetworkClient client = script_LogosEnvironnement.client;
     short jeton = 1010;
-  //  public int position = selectUser.positionStatic;
 
     // Start is called before the first frame update
     void Start()

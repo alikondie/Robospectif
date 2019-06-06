@@ -49,12 +49,10 @@ public class Valider : MonoBehaviour
         bool allDiff = false;
         while (!allDiff)
         {
-            indices[0] = Random.Range(0, tab.Taille);
-            indices[1] = Random.Range(0, tab.Taille);
-            indices[2] = Random.Range(0, tab.Taille);
-            indices[3] = Random.Range(0, tab.Taille);
-            indices[4] = Random.Range(0, tab.Taille);
-            indices[5] = Random.Range(0, tab.Taille);
+            for (int i = 0; i < indices.Length; i++)
+            {
+                indices[i] = Random.Range(0, tab.Taille);
+            }
             allDiff = true;
             for (int i = 0; i < indices.Length - 1; i++)
             {
@@ -68,25 +66,11 @@ public class Valider : MonoBehaviour
             }
         }
         personnages = new Main.Image[6];
-        personnages[0] = tab.getImageind(indices[0]);
-        personnages[1] = tab.getImageind(indices[1]);
-        personnages[2] = tab.getImageind(indices[2]);
-        personnages[3] = tab.getImageind(indices[3]);
-        personnages[4] = tab.getImageind(indices[4]);
-        personnages[5] = tab.getImageind(indices[5]);
-        Main.Global.TabE.removeImage(personnages[0]);
-        Main.Global.TabE.removeImage(personnages[1]);
-        Main.Global.TabE.removeImage(personnages[2]);
-        Main.Global.TabE.removeImage(personnages[3]);
-        Main.Global.TabE.removeImage(personnages[4]);
-        Main.Global.TabE.removeImage(personnages[5]);
-
-        Debug.Log("perso : " + personnages[0].Sprite.ToString());
-        Debug.Log("perso : " + personnages[1].Sprite.ToString());
-        Debug.Log("perso : " + personnages[2].Sprite.ToString());
-        Debug.Log("perso : " + personnages[3].Sprite.ToString());
-        Debug.Log("perso : " + personnages[4].Sprite.ToString());
-        Debug.Log("perso : " + personnages[5].Sprite.ToString());
+        for (int i = 0; i < personnages.Length; i++)
+        {
+            personnages[i] = tab.getImageind(indices[i]);
+            Main.Global.TabP.removeImage(personnages[i]);
+        }
 
         JoueurStatic.Perso1 = personnages[0].Sprite;
         JoueurStatic.Perso2 = personnages[1].Sprite;
@@ -108,42 +92,17 @@ public class Valider : MonoBehaviour
         MyNetworkMessage conception = new MyNetworkMessage();
         conception.message = position;
         client.Send(conceptionID, conception);
-        MyImageMessage test = new MyImageMessage();
         MyImageMessage robot = new MyImageMessage();
-        //string s = UnityEditor.AssetDatabase.GetAssetPath(loco.sprite);
         robot.loco= loco.sprite.ToString();
         robot.dim = dim.sprite.ToString();
         robot.equi1 = equi0.sprite.ToString();
         robot.equi2 = equi1.sprite.ToString();
         robot.equi3 = equi2.sprite.ToString();
         robot.num = position;
-       // Debug.Log("zone : " + selectUser.zone);
         robot.zone = selectUser.zone;
         client.Send(idMessage, robot);
         RandomPerso();
-        SceneManager.LoadScene("scene2bis");
-        //if (position == SansHUD.premierFini) {
-        //    MyImageMessage mLoco = new MyImageMessage();
-        //    mLoco.image = loco.sprite.ToString();
-        //    mLoco.type = "Locomotion";
-        //    MyImageMessage mDim = new MyImageMessage();
-        //    mDim.image = dim.sprite.ToString().ToString();
-        //    mDim.type = "Dimension";
-        //    MyImageMessage mEqui0 = new MyImageMessage();
-        //    mEqui0.image = equi0.sprite.ToString().ToString();
-        //    mEqui0.type = "Equipements";
-        //    MyImageMessage mEqui1 = new MyImageMessage();
-        //    mEqui1.image = equi1.sprite.ToString().ToString();
-        //    mEqui1.type = "Equipements";
-        //    MyImageMessage mEqui2 = new MyImageMessage();
-        //    mEqui2.image = equi2.sprite.ToString().ToString();
-        //    mEqui2.type = "Equipements";
-        //    client.Send(idMessage, mLoco);
-        //    client.Send(idMessage, mDim);
-        //    client.Send(idMessage, mEqui0);
-        //    client.Send(idMessage, mEqui1);
-        //    client.Send(idMessage, mEqui2);
-        //}        
+        SceneManager.LoadScene("scene2bis"); 
     }
 
     // Update is called once per frame

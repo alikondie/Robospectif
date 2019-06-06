@@ -11,13 +11,7 @@ public class Jeton_pop : MonoBehaviour
     private Vector3 positionInit;
 
     public List<GameObject> joueurs;
-    public List<GameObject> cartes;
-
-    private bool estchanger = true;
-
-
-
-    
+    public List<GameObject> cartes;    
 
     public static int[] nb_bonus;
     public static int[] nb_malus;
@@ -56,18 +50,13 @@ public class Jeton_pop : MonoBehaviour
             this.gameObject.SetActive(false);
 
             int index = cartes.IndexOf(collision.gameObject);
-
-            Debug.Log("index = " + index);
+            
             if (Pile.piles[index] < 8)
             {
-                Debug.Log(joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).name);
                 joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.GetComponent<SpriteRenderer>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
-                Debug.Log(joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.GetComponent<SpriteRenderer>().sprite);
                 joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.SetActive(true);
                 Pile.piles[index]++;
             }
-
-            Debug.Log(Pile.piles[index]);
         }
 
     }
