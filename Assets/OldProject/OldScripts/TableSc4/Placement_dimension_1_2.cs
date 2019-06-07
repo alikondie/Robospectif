@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Placement_dimension_1_2 : MonoBehaviour
 {
     public GameObject dimension;
@@ -20,11 +21,12 @@ public class Placement_dimension_1_2 : MonoBehaviour
     void Update()
     {
 
-
+        //print(dimension.transform.position);
         if (x_position_dimension - 1 < dimension.transform.position.x && dimension.transform.position.x < x_position_dimension + 1)
         {
             if (y_position_dimension - 1 < dimension.transform.position.y && dimension.transform.position.y < y_position_dimension + 1)
             {
+                //print(x_position_dimension);
                 dimension.transform.position = new Vector3(x_position_dimension, y_position_dimension, dimension.transform.position.z);
             }
         }
