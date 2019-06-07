@@ -8,7 +8,7 @@ using System;
 public class Init : MonoBehaviour
 {
 
-    public static NetworkClient client = SansHUD.myclient;
+    public static NetworkClient client;
     short messageID = 1000;
     short positionsID = 1005;
     public Button[] buttons;
@@ -18,6 +18,8 @@ public class Init : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        positions = new int[6];
+        client = SansHUD.myclient;
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         client.RegisterHandler(messageID, OnMessageReceived);
         client.RegisterHandler(positionsID, OnPositionsReceived);
@@ -37,10 +39,12 @@ public class Init : MonoBehaviour
 
     private void OnPositionsReceived(NetworkMessage netMsg)
     {
+        
         Debug.Log("bieng connecté");
         int i = 0;
         var message = netMsg.ReadMessage<MyPositionsMessage>();
         int[] posMsg = new int[] { message.position1, message.position2, message.position3, message.position4, message.position5, message.position6 };
+        Debug.Log("posmsg : " + positions.Length);
 
         for (int j = 0; j < posMsg.Length; j++)
         {

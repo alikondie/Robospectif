@@ -8,18 +8,21 @@ using System;
 public class selectUser : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_position_joueurs;
     public Button button;
     private int positionEffective;
     public static int positionStatic;
     public int position;
     public static int zone;
-    public static NetworkClient client = Init.client;
+    public static NetworkClient client;
     public Scene sceneSuivante;
     short messageID = 1000;
     
 
     void Start()
     {
+        client = SansHUD.myclient;
         button.gameObject.SetActive(false);
         button.onClick.AddListener(() => ButtonClicked());
     }
@@ -36,7 +39,9 @@ public class selectUser : MonoBehaviour
         MyNetworkMessage message = new MyNetworkMessage();
         message.message = positionEffective;
         client.Send(messageID, message);
-        SceneManager.LoadScene("scene2");
+        canvas_position_joueurs.SetActive(false);
+        canvas_choix_cartes.SetActive(true);
+        //SceneManager.LoadScene("scene2");
     }
 }
 

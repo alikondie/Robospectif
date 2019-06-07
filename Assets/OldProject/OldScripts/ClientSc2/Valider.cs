@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 public class Valider : MonoBehaviour
 {
     public static Main.Image[] personnages;
+    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_pres_robot;
 
     public Button button;
     public Image loco;
@@ -19,7 +21,7 @@ public class Valider : MonoBehaviour
     public Image equi2;
     public static Joueur joueur;
     public static int position;
-    public static NetworkClient client = selectUser.client;
+    public static NetworkClient client;
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
@@ -28,6 +30,7 @@ public class Valider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        client = SansHUD.myclient;
         button.onClick.AddListener(() => ButtonClicked());
         position = selectUser.positionStatic;
         client.RegisterHandler(chronoID, onChronoReceived);
@@ -102,7 +105,9 @@ public class Valider : MonoBehaviour
         robot.zone = selectUser.zone;
         client.Send(idMessage, robot);
         RandomPerso();
-        SceneManager.LoadScene("scene2bis"); 
+        canvas_choix_cartes.SetActive(false);
+        canvas_pres_robot.SetActive(true);
+        //SceneManager.LoadScene("scene2bis"); 
     }
 
     // Update is called once per frame

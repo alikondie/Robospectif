@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class JetonsHandler : MonoBehaviour
 {
     public static NetworkClient client;
+    [SerializeField] GameObject canvas_choix_jetons;
+    [SerializeField] GameObject canvas_vainqueur;
 
     public Text text;
 
@@ -60,7 +62,9 @@ public class JetonsHandler : MonoBehaviour
 
     private void OnWaitReceived(NetworkMessage netMsg)
     {
-        SceneManager.LoadScene("scenePreEnd");
+        canvas_choix_jetons.SetActive(false);
+        canvas_vainqueur.SetActive(true);
+        //SceneManager.LoadScene("scenePreEnd");
     }
 
     // Update is called once per frame

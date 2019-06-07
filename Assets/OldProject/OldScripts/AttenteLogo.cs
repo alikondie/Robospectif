@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AttenteLogo : StateMachineBehaviour
 {
-    private string Ip_serveur = "172.21.232.220";  
+    private string Ip_serveur = "172.21.232.220";
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,7 +17,7 @@ public class AttenteLogo : StateMachineBehaviour
         }
         else
         {
-            SceneManager.LoadScene("scene1");
+            SceneManager.LoadScene("1ere scene jeu");
         }
     }
 }

@@ -46,6 +46,10 @@ public class MainScript : MonoBehaviour
         for (int i = 0; i < equipements.Length; i++)
         {
             equipements[i] = tab.getImageind(indices[i]);
+        }
+
+        for (int i = 0; i < equipements.Length; i++)
+        {
             Main.Global.TabE.removeImage(equipements[i]);
         }
 

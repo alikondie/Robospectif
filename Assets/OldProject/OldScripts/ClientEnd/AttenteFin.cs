@@ -8,18 +8,21 @@ using UnityEngine.UI;
 
 public class AttenteFin : MonoBehaviour
 {
-
+    [SerializeField] GameObject canvas_fin_partie;
+    [SerializeField] GameObject canvas_vainqueur;
+    [SerializeField] GameObject canvas_pres_robot;
     public Text text;
 
     private int position;
 
     short nextID = 1015;
-    public static NetworkClient client = Valider.client;
+    public static NetworkClient client;
     public static Joueur joueur = Valider.joueur;
 
     // Start is called before the first frame update
     void Start()
     {
+        client = Valider.client;
         text.text = "Joueur : " + joueur.Numero.ToString();
         client.RegisterHandler(nextID, onWaitReceived);
     }
@@ -29,11 +32,15 @@ public class AttenteFin : MonoBehaviour
         string msg = netMsg.ReadMessage<MyStringMessage>().s;
         if (msg.Equals("next"))
         {
-            SceneManager.LoadScene("scene2bis");
+            canvas_vainqueur.SetActive(false);
+            canvas_pres_robot.SetActive(true);
+            //SceneManager.LoadScene("scene2bis");
         }
         else
         {
-            SceneManager.LoadScene("FinJeu");
+            canvas_vainqueur.SetActive(false);
+            canvas_fin_partie.SetActive(true);
+            //SceneManager.LoadScene("FinTel");
         }
     }
 

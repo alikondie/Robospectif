@@ -17,6 +17,7 @@ public class Button_ready_next_scene : MonoBehaviour
     private int[] positions;
     public static int[] envoi;
     short positionsID = 1005;
+    private string Ip_serveur = "172.21.232.220";
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,12 @@ public class Button_ready_next_scene : MonoBehaviour
         hands[3].onClick.AddListener(() => onHandClicked(3));
         hands[4].onClick.AddListener(() => onHandClicked(4));
         hands[5].onClick.AddListener(() => onHandClicked(5));
+        string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4);
+        if (ipv4 != Ip_serveur)
+        {
+            canvas_mains.SetActive(false);
+            canvas_joueurs.SetActive(true);
+        }
     }
 
     private void onHandClicked(int i)

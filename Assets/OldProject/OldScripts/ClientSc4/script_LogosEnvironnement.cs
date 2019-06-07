@@ -9,14 +9,15 @@ using UnityEngine.UI;
 public class script_LogosEnvironnement : MonoBehaviour
 {
     private int[] choixZone; // TABLEAU A RECUPERER 
-
+    [SerializeField] GameObject canvas_choix_jetons;
+    [SerializeField] GameObject canvas_pres_perso;
     public Button button;
     private int position;
     public Image perso;
     private string persoSprite;
     public Text text;
 
-    public static NetworkClient client = Valider.client;
+    public static NetworkClient client;
     short persosID = 1007;
 
     public GameObject rural;
@@ -42,6 +43,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        client = Valider.client;
         position = selectUser.positionStatic;
         text.text = "Joueur : " + position;
         perso.sprite = ChoixPerso.perso;
@@ -79,7 +81,9 @@ public class script_LogosEnvironnement : MonoBehaviour
         msg.choixZone0 = choixZone[0];
         msg.choixZone1 = choixZone[1];
         client.Send(persosID, msg);
-        SceneManager.LoadScene("Scene_ChoixJetons");
+        canvas_pres_perso.SetActive(false);
+        canvas_choix_jetons.SetActive(true);
+        //SceneManager.LoadScene("Scene_ChoixJetons");
     }
 
     void Update()

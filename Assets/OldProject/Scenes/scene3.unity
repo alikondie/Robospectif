@@ -432,11 +432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 378255251}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1322725394}
-  tick3: {fileID: 1961560383}
-  tick4: {fileID: 1230436334}
-  tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1022679068}
   button: {fileID: 515306477}
   ticks:
@@ -1070,11 +1065,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1302260691}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1961560383}
-  tick3: {fileID: 1022679068}
-  tick4: {fileID: 1230436334}
-  tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1322725394}
   button: {fileID: 515306477}
   ticks:
@@ -1327,11 +1317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1826169336}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1322725394}
-  tick3: {fileID: 1961560383}
-  tick4: {fileID: 1022679068}
-  tick5: {fileID: 1230436334}
   tickCurrent: {fileID: 371131766}
   button: {fileID: 515306477}
   ticks:
@@ -1429,11 +1414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1926893409}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1322725394}
-  tick3: {fileID: 1022679068}
-  tick4: {fileID: 1230436334}
-  tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1961560383}
   button: {fileID: 515306477}
   ticks:
@@ -1605,11 +1585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2007135621}
-  tick1: {fileID: 192716001}
-  tick2: {fileID: 1322725394}
-  tick3: {fileID: 1961560383}
-  tick4: {fileID: 1022679068}
-  tick5: {fileID: 371131766}
   tickCurrent: {fileID: 1230436334}
   button: {fileID: 515306477}
   ticks:
@@ -1734,11 +1709,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2065034044}
-  tick1: {fileID: 1322725394}
-  tick2: {fileID: 1961560383}
-  tick3: {fileID: 1022679068}
-  tick4: {fileID: 1230436334}
-  tick5: {fileID: 371131766}
   tickCurrent: {fileID: 192716001}
   button: {fileID: 515306477}
   ticks:
@@ -1761,7 +1731,7 @@ GameObject:
   - component: {fileID: 2067429859}
   - component: {fileID: 2067429858}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_choix_perso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

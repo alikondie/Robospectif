@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ChoixPerso : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] GameObject canvas_choix_persos;
+    [SerializeField] GameObject canvas_pres_perso;
     public Image image;
     public Image tickCurrent;
     public Button button;
@@ -59,7 +61,8 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
                 JoueurStatic.Perso6Choisi = true;
             perso = image.sprite;
         }
-
-        SceneManager.LoadScene("scene4");
+        canvas_choix_persos.SetActive(false);
+        canvas_pres_perso.SetActive(true);
+        //SceneManager.LoadScene("scene4");
     }
 }
