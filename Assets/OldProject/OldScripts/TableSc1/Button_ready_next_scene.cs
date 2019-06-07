@@ -22,6 +22,10 @@ public class Button_ready_next_scene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < hands.Length; i++)
+        {
+            PlayerPrefs.SetInt("LaPosition" + (i + 1), 0);
+        }
         this.gameObject.SetActive(false);
         positions = new int[6];
         indices = new int[hands.Length];
@@ -46,7 +50,7 @@ public class Button_ready_next_scene : MonoBehaviour
     private void onHandClicked(int i)
     {
         indices[i] = (indices[i] + 1) % 2;
-        hands[i].gameObject.GetComponent<Image>().sprite = colors[indices[i]];
+        //hands[i].gameObject.GetComponent<Image>().sprite = colors[indices[i]];
         MiseAJourText();
     }
 
@@ -58,14 +62,25 @@ public class Button_ready_next_scene : MonoBehaviour
     private void MiseAJourText()
     {
         int nb = 0;
-        foreach (int i in indices)
+        for (int i = 0; i < indices.Length; i++)
         {
-            nb += i;
+            nb += indices[i];
+            if (indices[i] == 1)
+                PlayerPrefs.SetInt("LaPosition" + (i+1), nb);
         }
-        if (nb >= 4)
+        if (nb >= 1)
             this.gameObject.SetActive(true);
         else
             this.gameObject.SetActive(false);
+        
+        for (int i = 0; i < indices.Length; i++)
+        {
+            if (indices[i] == 1)
+            {
+
+            }
+        }
+
         nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur
     }

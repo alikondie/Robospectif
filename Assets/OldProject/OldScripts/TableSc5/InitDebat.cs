@@ -49,11 +49,12 @@ public class InitDebat : MonoBehaviour
     public static Sprite[,] envoiSprites;
     public static bool[,] envoiActives;
 
-    private int[] positions = Button_ready_next_scene.envoi;
+    private int[] positions;
 
     // Start is called before the first frame update
     void Start()
     {
+        positions = Button_ready_next_scene.envoi;
         jetons = new List<GameObject>[6];
         jetons[0] = new List<GameObject>();
         jetons[1] = new List<GameObject>();

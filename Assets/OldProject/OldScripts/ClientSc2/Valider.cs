@@ -30,7 +30,7 @@ public class Valider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        client = SansHUD.myclient;
+        client = selectUser.client;
         button.onClick.AddListener(() => ButtonClicked());
         position = selectUser.positionStatic;
         client.RegisterHandler(chronoID, onChronoReceived);

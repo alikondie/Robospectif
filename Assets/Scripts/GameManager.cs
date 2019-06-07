@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,7 +44,12 @@ public class GameManager : MonoBehaviour
     public void AddPlayer()
     {
         playersNumber++;
-        print("player's number : " + playersNumber);
+        GameObject clickedHand = EventSystem.current.currentSelectedGameObject.gameObject;
+        // get the hand's animator and image color.
+        clickedHand.GetComponent<Animator>().SetTrigger("Shake");
+        clickedHand.GetComponent<Image>().color = Color.green;
+        //print("player's number : " + playersNumber);
+
     }
 
     public void LoadNextPhase()
