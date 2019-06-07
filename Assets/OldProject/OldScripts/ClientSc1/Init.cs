@@ -39,7 +39,7 @@ public class Init : MonoBehaviour
 
     private void OnPositionsReceived(NetworkMessage netMsg)
     {
-        Debug.Log("bieng connecté");
+        Debug.Log("bien connecté");
         int i = 0;
         var message = netMsg.ReadMessage<MyPositionsMessage>();
         int[] posMsg = new int[] { message.position1, message.position2, message.position3, message.position4, message.position5, message.position6 };
