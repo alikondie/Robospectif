@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class InitDebat : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_debat;
+    [SerializeField] GameObject canvas_choix_vainqueur;
+
     public GameObject jeton1;
     public GameObject jeton2;
     public GameObject jeton3;
@@ -236,7 +239,9 @@ public class InitDebat : MonoBehaviour
         MyNetworkMessage wait = new MyNetworkMessage();
         NetworkServer.SendToAll(waitID, wait);
 
-        SceneManager.LoadScene("Scene_6");
+        canvas_debat.SetActive(false);
+        canvas_choix_vainqueur.SetActive(true);
+        //SceneManager.LoadScene("Scene_6");
     }
 
     private void onPersoReceived(NetworkMessage netMsg)

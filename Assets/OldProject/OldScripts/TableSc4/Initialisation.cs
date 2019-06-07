@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using static Main;
 
 public class Initialisation : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_plateau_vehicule;
+    [SerializeField] GameObject canvas_debat;
+
     public static int premierJoueur;
 
     private int pos = -1;
@@ -15,6 +19,8 @@ public class Initialisation : MonoBehaviour
     public int[] positions;
 
     public Button button;
+
+    short waitID = 1006;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
@@ -61,6 +67,8 @@ public class Initialisation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        button.onClick.AddListener(() => ButtonClicked());
+
         positions = Text_Connexion.positions;
 
         premierJoueur = Partie.JoueurCourant;
@@ -72,8 +80,6 @@ public class Initialisation : MonoBehaviour
                 pos = i + 1;
             }
         }
-
-        Debug.Log("pos : " + pos);
        
 
 
@@ -215,9 +221,19 @@ public class Initialisation : MonoBehaviour
         }
     }
 
+    private void ButtonClicked()
+    {
+        int joueurCourant = Initialisation.premierJoueur;
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.message = joueurCourant;
+        NetworkServer.SendToAll(waitID, msg);
+        canvas_plateau_vehicule.SetActive(false);
+        canvas_debat.SetActive(true);
+        //SceneManager.LoadScene("Scene5");
+    }
+
     public static void get(Sprite[] image, int zone)
     {
-        Debug.Log("zone : " + zone);
         for (int i = 0; i < 5; i++)
         {
             images[zone-1, i] = image[i];

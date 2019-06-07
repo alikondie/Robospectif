@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class FinTour : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_fin_tour;
+    [SerializeField] GameObject canvas_plateau_vehicule;
+    [SerializeField] GameObject canvas_fin;
+
     public Button prochain;
     public Button fin;
 
@@ -30,7 +34,9 @@ public class FinTour : MonoBehaviour
         MyStringMessage next = new MyStringMessage();
         next.s = "next";
         NetworkServer.SendToAll(nextID, next);
-        SceneManager.LoadScene("Scene_4");
+        canvas_fin_tour.SetActive(false);
+        canvas_plateau_vehicule.SetActive(true);
+        //SceneManager.LoadScene("Scene_4");
     }
 
     private void FinClicked()
@@ -38,6 +44,8 @@ public class FinTour : MonoBehaviour
         MyStringMessage end = new MyStringMessage();
         end.s = "end";
         NetworkServer.SendToAll(nextID, end);
-        SceneManager.LoadScene("SceneFin");
+        canvas_fin_tour.SetActive(false);
+        canvas_fin.SetActive(true);
+        //SceneManager.LoadScene("SceneFin");
     }
 }

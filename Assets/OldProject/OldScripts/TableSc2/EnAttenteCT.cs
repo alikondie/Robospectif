@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnAttenteCT : MonoBehaviour
 {
-    public string nomSceneDemander;
+    [SerializeField] GameObject canvas_attente_choix_cartes;
+    [SerializeField] GameObject canvas_sablier;
     private int nbJoueur; //Nb Joueurs
     private static int premierJoueurFini; //numero du 1er joueur a avoir fini sa conception 
     private static bool estPremier;
@@ -30,7 +31,9 @@ public class EnAttenteCT : MonoBehaviour
         {
 
             //changer de scene
-            SceneManager.LoadScene(nomSceneDemander);
+            //SceneManager.LoadScene(nomSceneDemander);
+            canvas_attente_choix_cartes.SetActive(false);
+            canvas_sablier.SetActive(true);
         }
     }
 

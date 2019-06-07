@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class ValiderVainqueur : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_choix_vainqueur;
+    [SerializeField] GameObject canvas_fin_tour;
+    [SerializeField] GameObject canvas_fin;
+
     private int  vainqueur;
 
     public GameObject couronne1;
@@ -71,6 +75,7 @@ public class ValiderVainqueur : MonoBehaviour
                 Partie.Joueurs[i].NbCouronnes++;
             }
         }
+        canvas_choix_vainqueur.SetActive(false);
         if (nb != Partie.Tour)
         {
             Partie.Tour++;
@@ -79,8 +84,9 @@ public class ValiderVainqueur : MonoBehaviour
             {
                 Partie.JoueurCourant = 1;
             }
-            SceneManager.LoadScene("Scene_fin_tour");
+            canvas_fin_tour.SetActive(true);
+            //SceneManager.LoadScene("Scene_fin_tour");
         }
-        else SceneManager.LoadScene("SceneFin");
+        else canvas_fin.SetActive(true);
     }
 }

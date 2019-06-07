@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ConceptionTerminer : MonoBehaviour
 {
-    public string nomSceneDemander;
+    [SerializeField] GameObject canvas_sablier;
+    [SerializeField] GameObject canvas_plateau_vehicule;
     private int nbJoueur; //Nb Joueurs
     private static int nbJoueurConceptionTerminer; //Conteur du nombre de joueurs a avoir Terminer leur conception
     
@@ -27,7 +28,9 @@ public class ConceptionTerminer : MonoBehaviour
     {
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
-            SceneManager.LoadScene(nomSceneDemander);
+            //SceneManager.LoadScene(nomSceneDemander);
+            canvas_sablier.SetActive(false);
+            canvas_plateau_vehicule.SetActive(true);
         }
     }
 

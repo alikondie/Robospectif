@@ -8,6 +8,9 @@ public class Text_Connexion : MonoBehaviour
 {
     // ---------- ATTRIBUETS ----------
 
+    [SerializeField] GameObject canvas_joueurs;
+    [SerializeField] GameObject canvas_attente_choix_cartes;
+
     public GameObject text_Position_1;      // Texte a la 1er position (En Bas a Gauche)
     public GameObject text_Position_2;      // Texte a la 2eme position (En Bas a Droite)
     public GameObject text_Position_3;      // Texte a la 3eme position (A Droite)
@@ -73,7 +76,9 @@ public class Text_Connexion : MonoBehaviour
         if (nbJoueursConnectes == nbJoueur)
         {
             //envoi = tabNum;            
-            SceneManager.LoadScene("Scene_3");
+            //SceneManager.LoadScene("Scene_3");
+            canvas_joueurs.SetActive(false);
+            canvas_attente_choix_cartes.SetActive(true);
         }
 
     }

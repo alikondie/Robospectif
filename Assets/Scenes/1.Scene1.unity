@@ -284,6 +284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Screen_AttenteDesJoueurs
       objectReference: {fileID: 0}
+    - target: {fileID: 6997268492565647196, guid: e35d908c7a3cec645ac15d79f15f1e9f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6997268492565647170, guid: e35d908c7a3cec645ac15d79f15f1e9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -573,7 +578,7 @@ MonoBehaviour:
   m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 172.21.232.219
+  m_NetworkAddress: 172.21.232.220
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1

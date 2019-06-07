@@ -8,6 +8,8 @@ using System;
 
 public class Button_ready_next_scene : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_mains;
+    [SerializeField] GameObject canvas_joueurs;
     public Text nb_joueurs;
     public Button[] hands;
     public Sprite[] colors;
@@ -25,8 +27,6 @@ public class Button_ready_next_scene : MonoBehaviour
         for (int i = 0; i < indices.Length; i++)
         {
             indices.SetValue(0, i);
-            //hands[i].gameObject.GetComponent<Image>().sprite = colors[1];
-            //hands[i].onClick.AddListener(() => onHandClicked(i));
         }
         hands[0].onClick.AddListener(() => onHandClicked(0));
         hands[1].onClick.AddListener(() => onHandClicked(1));
@@ -38,7 +38,6 @@ public class Button_ready_next_scene : MonoBehaviour
 
     private void onHandClicked(int i)
     {
-        //Debug.Log(i);
         indices[i] = (indices[i] + 1) % 2;
         hands[i].gameObject.GetComponent<Image>().sprite = colors[indices[i]];
         MiseAJourText();
@@ -87,15 +86,7 @@ public class Button_ready_next_scene : MonoBehaviour
                 indice++;
             }     // Position des joueurs
         }
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log("positions[" + i + "] = " + positions[i]);
-        }
         envoi = positions;
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log("envoi[" + i + "] = " + envoi[i]);
-        }
         MyPositionsMessage message = new MyPositionsMessage();
         message.position1 = positions[0];
         message.position2 = positions[1];
@@ -104,12 +95,13 @@ public class Button_ready_next_scene : MonoBehaviour
         message.position5 = positions[4];
         message.position6 = positions[5];
         NetworkServer.SendToAll(positionsID, message);
-        Debug.Log("envoi des positions");
 
         // --------------------------
 
         // Debug.Log("Click");
-        SceneManager.LoadScene("Scene_2");
+        //SceneManager.LoadScene("Scene_2");
+        canvas_mains.SetActive(false);
+        canvas_joueurs.SetActive(true);
     }
 
 }
