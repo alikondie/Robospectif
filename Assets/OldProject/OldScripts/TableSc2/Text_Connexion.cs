@@ -24,14 +24,12 @@ public class Text_Connexion : MonoBehaviour
     private Text affichageJoueur;   // Pour convertir de GameObjecte à Text
     private GameObject[] tabText = new GameObject[6];   //Tableau qui contient tout les GameObject "text_Position"
     public int[] tabNum ;   //Tableau qui contient tout la position et le numero de joueurs 
-    private int tousConnecter;
     private int infoAndroid;
 
     public static int[] positions;
 
     // Recuperation scene d'avant
     public static int nbJoueur ;  // Le nombre de joueur dans la partie (de 4 à 6)
-    private int[] tabPosition = new int[6]; // Position des joueurs qui sont choisi
     private static bool estDebut;
     public static int nbJoueursConnectes;
 
@@ -48,23 +46,13 @@ public class Text_Connexion : MonoBehaviour
         nbJoueur = PlayerPrefs.GetInt("nombreJoueur");     // Nombre de Joueurs
         //nbJoueur = 6; // Nombre de Joueurs
 
-        // Recuperation de la position des joueurs:
-        for (int i = 1; i <= 6; i++)
-        {
-            tabPosition[i] = PlayerPrefs.GetInt("P" + (i) );     // Position des joueurs
-        }
-        //tabPosition = new int[]  { 1, 2, 3, 4, 5, 6 }; // Position des joueurs
-
 
 
         //Initialisé le Tableau de GameObject "text_Position"
         tabText = new GameObject[] { text_Position_1, text_Position_2, text_Position_3, text_Position_4, text_Position_5, text_Position_6 };
 
-        //Initialisé le Tableau qui contient tout la position et le numero de joueurs 
-        tabNum = new int[2* nbJoueur];
-
         // Initialisé les textes à "Non Connecté".
-        InitAffichageTextJoueur(tabPosition);
+        InitAffichageTextJoueur(positions);
 
     }
 
@@ -74,8 +62,7 @@ public class Text_Connexion : MonoBehaviour
 
         AfficheJoueurConnecter();
         if (nbJoueursConnectes == nbJoueur)
-        {
-            //envoi = tabNum;            
+        {       
             //SceneManager.LoadScene("Scene_3");
             canvas_joueurs.SetActive(false);
             canvas_attente_choix_cartes.SetActive(true);
@@ -90,27 +77,23 @@ public class Text_Connexion : MonoBehaviour
         numJoueur = 1;  // Compteur pour affecter le bon numero de joueur
 
         // Boucle FOR qui peut parcourir les 6 joueurs
-        for (int i = 1; i <= 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             
 
             // Boucle IF qui Affiche le Text seulement pour les joueurs
-            if (EstDedans(i, tPosition)) //Si il fait partie du Tableau (Joueurs choisi)
+            if (tPosition[i] > 0) //Si il fait partie du Tableau (Joueurs choisi)
             {
                 //Ecrie dans la partie Text
-                affichageJoueur = tabText[i-1].GetComponent<Text>();
+                affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white; //Couleur de tout le texte 
                 affichageJoueur.text = "Joueur " + numJoueur + "\n" + "<color=red> Pas Connecté </color>";
-
-                // Remplie le Tableau "tabNum" avec la position et le numero de joueurs 
-                tabNum[(numJoueur-1)*2] = i; // Position
-                tabNum[((numJoueur - 1) * 2) +1] = numJoueur; // Numero
 
                 numJoueur++;    //Incrementation du numero de Joueur
             }
             else
             {
-                Destroy(tabText[i - 1]);    // Détruit les textes qui n'ont pas de joueurs
+                Destroy(tabText[i]);    // Détruit les textes qui n'ont pas de joueurs
             }
         }
     }
@@ -155,7 +138,6 @@ public class Text_Connexion : MonoBehaviour
     // Méthode Affichage de connexion par joueurs
     void AfficheJoueurConnecter()
     {
-        tousConnecter = 0; //Initialise la variable a 0
 
         //Recuperer les infos sur la connection du joueurs
 
@@ -163,23 +145,14 @@ public class Text_Connexion : MonoBehaviour
         {
             infoAndroid = PlayerPrefs.GetInt("monInfoJoueur");
         }
-        
 
-        // Boucle FOR qui peut parcourir le tableau  "tabNum" (position/numero de joueurs) 
-        for (int i = 0; i <= (2 * nbJoueur)-1; i = i + 2)
+        for (int i = 0; i < positions.Length; i++)
         {
-
-            // Boucle IF qui verifie si le Joueurs est connecté
-            if (estConnecte(tabNum[i], infoAndroid))
-            {
-                //Modifie le text
-                affichageJoueur = tabText[tabNum[i] - 1].GetComponent<Text>();
-                affichageJoueur.color = Color.white; //Couleur de tout le texte 
-                affichageJoueur.text = "Joueur " + tabNum[i + 1] + "\n" + "<color=blue> Connecté </color>";
-
-                tousConnecter++;
+            if ( (positions[i] != 0) && estConnecte(positions[i], infoAndroid)){
+                affichageJoueur = tabText[i].GetComponent<Text>();
+                affichageJoueur.color = Color.white;
+                affichageJoueur.text = "Joueur" + positions[i] + "\n" + "<color=blue> Connecté </color>";
             }
-
         }
     }
 

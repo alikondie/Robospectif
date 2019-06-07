@@ -19,7 +19,7 @@ public class Valider : MonoBehaviour
     public Image equi2;
     public static Joueur joueur;
     public static int position;
-    public static NetworkClient client = selectUser.client;
+    public static NetworkClient client;
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
@@ -28,6 +28,7 @@ public class Valider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        client = selectUser.client;
         button.onClick.AddListener(() => ButtonClicked());
         position = selectUser.positionStatic;
         client.RegisterHandler(chronoID, onChronoReceived);
