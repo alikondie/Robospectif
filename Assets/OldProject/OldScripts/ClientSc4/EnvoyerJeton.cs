@@ -8,12 +8,13 @@ public class EnvoyerJeton : MonoBehaviour
 {
     public Image image;
     public Button button;
-    NetworkClient client = script_LogosEnvironnement.client;
+    NetworkClient client;
     short jeton = 1010;
 
     // Start is called before the first frame update
     void Start()
     {
+        client = script_LogosEnvironnement.client;
         button.onClick.AddListener(() => envoyer());
     }
 

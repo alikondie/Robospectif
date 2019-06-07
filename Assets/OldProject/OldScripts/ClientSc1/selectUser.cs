@@ -13,13 +13,14 @@ public class selectUser : MonoBehaviour
     public static int positionStatic;
     public int position;
     public static int zone;
-    public static NetworkClient client = Init.client;
+    public static NetworkClient client;
     public Scene sceneSuivante;
     short messageID = 1000;
     
 
     void Start()
     {
+        client = Init.client;
         button.gameObject.SetActive(false);
         button.onClick.AddListener(() => ButtonClicked());
     }

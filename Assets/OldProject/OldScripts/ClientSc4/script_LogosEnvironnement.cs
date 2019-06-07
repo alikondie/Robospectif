@@ -16,7 +16,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     private string persoSprite;
     public Text text;
 
-    public static NetworkClient client = Valider.client;
+    public static NetworkClient client;
     short persosID = 1007;
 
     public GameObject rural;
@@ -42,6 +42,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        client = Valider.client;
         position = selectUser.positionStatic;
         text.text = "Joueur : " + position;
         perso.sprite = ChoixPerso.perso;

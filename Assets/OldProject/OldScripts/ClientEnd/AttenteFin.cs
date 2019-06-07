@@ -14,12 +14,13 @@ public class AttenteFin : MonoBehaviour
     private int position;
 
     short nextID = 1015;
-    public static NetworkClient client = Valider.client;
+    public static NetworkClient client;
     public static Joueur joueur = Valider.joueur;
 
     // Start is called before the first frame update
     void Start()
     {
+        client = Valider.client;
         text.text = "Joueur : " + joueur.Numero.ToString();
         client.RegisterHandler(nextID, onWaitReceived);
     }
