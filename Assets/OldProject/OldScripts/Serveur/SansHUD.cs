@@ -12,7 +12,8 @@ class RegisterHostMessage : MessageBase { public float message; }
 
 public class SansHUD : NetworkManager
 {
-
+    [SerializeField] GameObject canvas_serveur;
+    [SerializeField] GameObject canvas_client;
     public NetworkManager manager;
     public Scene sceneServeur;
     public Scene sceneClient;
@@ -26,7 +27,7 @@ public class SansHUD : NetworkManager
     public NetworkConnection id;
     public bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
 
     void Start()
@@ -47,7 +48,8 @@ public class SansHUD : NetworkManager
             Debug.Log("client");
             myclient = new NetworkClient();
             myclient.Connect(Ip_serveur, 7777);
-            SceneManager.LoadScene("scene1");
+            canvas_serveur.SetActive(false);
+            canvas_client.SetActive(true);
         } 
     }
 

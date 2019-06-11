@@ -50,7 +50,7 @@ public class Script_Conduite : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        button.gameObject.SetActive(false);
+        //button.gameObject.SetActive(false);
 
         positions = Text_Connexion.positions;
 

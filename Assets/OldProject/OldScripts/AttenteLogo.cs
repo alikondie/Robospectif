@@ -17,7 +17,7 @@ public class AttenteLogo : StateMachineBehaviour
         }
         else
         {
-            SceneManager.LoadScene("1ere scene jeu");
+            SceneManager.LoadScene("standard_game_client");
         }
     }
 }
