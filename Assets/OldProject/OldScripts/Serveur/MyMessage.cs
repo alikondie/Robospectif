@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿#pragma warning disable 0618
+
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Networking;
 
