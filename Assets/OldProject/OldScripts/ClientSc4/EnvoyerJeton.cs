@@ -14,7 +14,7 @@ public class EnvoyerJeton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        client = script_LogosEnvironnement.client;
+        client = SansHUD.myclient;
         button.onClick.AddListener(() => envoyer());
     }
 

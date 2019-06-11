@@ -5023,6 +5023,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  canvas_serveur: {fileID: 1055644355}
+  canvas_client: {fileID: 5257337}
   manager: {fileID: 840107650}
   sceneServeur:
     m_Handle: 0
@@ -7556,7 +7558,7 @@ MonoBehaviour:
   canvas_fin_partie: {fileID: 450419836}
   canvas_vainqueur: {fileID: 1299814206}
   canvas_pres_robot: {fileID: 1319778006}
-  text: {fileID: 0}
+  text: {fileID: 1832006254}
 --- !u!1 &1317530022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7755,7 +7757,7 @@ MonoBehaviour:
   canvas_choix_persos: {fileID: 629567235}
   canvas_choix_jetons: {fileID: 1365945322}
   canvas_pres_robot: {fileID: 1319778006}
-  text: {fileID: 0}
+  text: {fileID: 347864273}
 --- !u!1 &1361888088
 GameObject:
   m_ObjectHideFlags: 0

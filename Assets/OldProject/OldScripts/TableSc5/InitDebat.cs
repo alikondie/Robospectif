@@ -63,32 +63,32 @@ public class InitDebat : MonoBehaviour
         jetons[4] = new List<GameObject>();
         jetons[5] = new List<GameObject>();
 
-        for (int i = 0; i < jeton1.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton1.transform.childCount; i++)
         {
             jetons[0].Add(jeton1.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < jeton2.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton2.transform.childCount; i++)
         {
             jetons[1].Add(jeton2.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < jeton3.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton3.transform.childCount; i++)
         {
             jetons[2].Add(jeton3.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < jeton4.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton4.transform.childCount; i++)
         {
             jetons[3].Add(jeton4.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < jeton5.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton5.transform.childCount; i++)
         {
             jetons[4].Add(jeton5.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < jeton6.transform.childCount - 1; i++)
+        for (int i = 0; i < jeton6.transform.childCount; i++)
         {
             jetons[5].Add(jeton6.transform.GetChild(i).gameObject);
         }
@@ -118,7 +118,7 @@ public class InitDebat : MonoBehaviour
                 pos = Partie.Joueurs[i].Position;
         }
 
-        button.transform.position = positionsButton[pos-1];
+        //button.transform.position = positionsButton[pos-1];
 
         if (pos == 3)
             button.transform.Rotate(Vector3.forward * 90);
@@ -270,15 +270,15 @@ public class InitDebat : MonoBehaviour
             }
         }
         nbRecu++;
-        if (nbRecu == nbJoueurs - 1)
-        {
-            button.gameObject.SetActive(true);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    
+        if (nbRecu == nbJoueurs - 1)
+        {
+            button.gameObject.SetActive(true);
+        }
     }
 }

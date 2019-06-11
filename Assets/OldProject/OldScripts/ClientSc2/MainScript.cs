@@ -113,6 +113,6 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        text.text = "Joueur : " + position.ToString();
     }
 }

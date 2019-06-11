@@ -22,7 +22,7 @@ public class selectUser : MonoBehaviour
 
     void Start()
     {
-        client = Init.client;
+        client = SansHUD.myclient;
         button.gameObject.SetActive(false);
         button.onClick.AddListener(() => ButtonClicked());
     }

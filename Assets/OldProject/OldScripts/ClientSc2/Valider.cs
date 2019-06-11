@@ -54,7 +54,7 @@ public class Valider : MonoBehaviour
         {
             for (int i = 0; i < indices.Length; i++)
             {
-                indices[i] = Random.Range(0, tab.Taille);
+                indices[i] = Random.Range(0, tab.Taille - 1);
             }
             allDiff = true;
             for (int i = 0; i < indices.Length - 1; i++)
@@ -72,6 +72,10 @@ public class Valider : MonoBehaviour
         for (int i = 0; i < personnages.Length; i++)
         {
             personnages[i] = tab.getImageind(indices[i]);
+        }
+
+        for (int i = 0; i < personnages.Length; i++)
+        {
             Main.Global.TabP.removeImage(personnages[i]);
         }
 
