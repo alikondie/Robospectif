@@ -34,10 +34,21 @@ public class AffichageCouronne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    private void Update()
+    {
+
+        
+    }
+
+    void OnEnable()
+    {
+
         JoueurCourant = Partie.JoueurCourant;
 
         images = InitDebat.envoi;
-        
+
         personnage1.gameObject.SetActive(false);
         personnage2.gameObject.SetActive(false);
         personnage3.gameObject.SetActive(false);
@@ -113,11 +124,5 @@ public class AffichageCouronne : MonoBehaviour
 
         }
 
-    }
-
-    private void Update()
-    {
-
-        
     }
 }

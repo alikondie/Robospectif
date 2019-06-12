@@ -249,11 +249,11 @@ public class InitDebat : MonoBehaviour
     {
         var v = netMsg.ReadMessage<MyPersoMessage>();
         int i = v.numero;
-        Debug.Log("recu : " + i);
         string s = v.image;
         string spriteString = "image/Personnages/" + s;
         int zone1 = v.choixZone0;
         int zone2 = v.choixZone1;
+        Debug.Log("recu : " + s);
         Sprite sp = Resources.Load<Sprite>(spriteString);
         for (int j = 0; j < 6; j++)
         {
