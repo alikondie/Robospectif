@@ -46,7 +46,6 @@ public class script_LogosEnvironnement : MonoBehaviour
         client = Valider.client;
         position = selectUser.positionStatic;
         text.text = "Joueur : " + position;
-        perso.sprite = ChoixPerso.perso;
         string spriteString = perso.sprite.ToString();
         string s = "";
         for (int i = 0; i < spriteString.Length - 21; i++)
@@ -88,6 +87,7 @@ public class script_LogosEnvironnement : MonoBehaviour
 
     void Update()
     {
+        perso.sprite = ChoixPerso.perso;
         if (zoneToucher1)
         {
             choixZone[0] = 1;

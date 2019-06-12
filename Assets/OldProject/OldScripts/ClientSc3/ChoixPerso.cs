@@ -42,6 +42,7 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
     {
         if (tickCurrent.gameObject.activeSelf)
         {
+            Debug.Log(image.sprite);
             if (JoueurStatic.Perso1 == image.sprite)
                 JoueurStatic.Perso1Choisi = true;
 
