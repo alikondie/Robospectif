@@ -25,7 +25,7 @@ public class InitPerso : MonoBehaviour
         }
         
         text.text = "Joueur : " + selectUser.positionStatic;
-        //Perso();
+        Perso();
         for (int i = 0; i < persosChoisis.Length; i++)
         {
             if (persosChoisis[i])
