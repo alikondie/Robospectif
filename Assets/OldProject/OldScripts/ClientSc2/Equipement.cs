@@ -9,9 +9,9 @@ public class Equipement : MonoBehaviour
 {
     public static bool[] selection;
     public static int indice;
-    public Image image1;
-    public Image image2;
-    public Image image3;
+    [SerializeField] Image image1;
+    [SerializeField] Image image2;
+    [SerializeField] Image image3;
 
     // Start is called before the first frame update
     void Start()

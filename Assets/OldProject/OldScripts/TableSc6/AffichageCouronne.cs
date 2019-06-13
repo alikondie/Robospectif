@@ -6,28 +6,28 @@ using UnityEngine.Networking;
 
 public class AffichageCouronne : MonoBehaviour
 {
-    public int JoueurCourant;
+    private int JoueurCourant;
 
-    public GameObject personnage1;
-    public GameObject environnement_1;
-    public GameObject couronne_1;
-    public GameObject personnage2;
-    public GameObject environnement_2;
-    public GameObject couronne_2;
-    public GameObject personnage3;
-    public GameObject environnement_3;
-    public GameObject couronne_3;
-    public GameObject personnage4;
-    public GameObject environnement_4;
-    public GameObject couronne_4;
-    public GameObject personnage5;
-    public GameObject environnement_5;
-    public GameObject couronne_5;
-    public GameObject personnage6;
-    public GameObject environnement_6;
-    public GameObject couronne_6;
+    [SerializeField] GameObject personnage1;
+    [SerializeField] GameObject environnement_1;
+    [SerializeField] GameObject couronne_1;
+    [SerializeField] GameObject personnage2;
+    [SerializeField] GameObject environnement_2;
+    [SerializeField] GameObject couronne_2;
+    [SerializeField] GameObject personnage3;
+    [SerializeField] GameObject environnement_3;
+    [SerializeField] GameObject couronne_3;
+    [SerializeField] GameObject personnage4;
+    [SerializeField] GameObject environnement_4;
+    [SerializeField] GameObject couronne_4;
+    [SerializeField] GameObject personnage5;
+    [SerializeField] GameObject environnement_5;
+    [SerializeField] GameObject couronne_5;
+    [SerializeField] GameObject personnage6;
+    [SerializeField] GameObject environnement_6;
+    [SerializeField] GameObject couronne_6;
 
-    public Sprite[] images;
+    private Sprite[] images;
 
 
 

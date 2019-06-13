@@ -11,8 +11,8 @@ public class Init : MonoBehaviour
     public static NetworkClient client;
     short messageID = 1000;
     short positionsID = 1005;
-    public Button[] buttons;
-    public Text[] texts;
+    [SerializeField] Button[] buttons;
+    [SerializeField] Text[] texts;
     public static int[] positions;
     public static int nbJoueurs;
     // Start is called before the first frame update

@@ -11,23 +11,23 @@ public class script_LogosEnvironnement : MonoBehaviour
     private int[] choixZone; // TABLEAU A RECUPERER 
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_pres_perso;
-    public Button button;
+    [SerializeField] Button button;
     private int position;
-    public Image perso;
+    [SerializeField] Image perso;
     private string persoSprite;
-    public Text text;
+    [SerializeField] Text text;
 
     public static NetworkClient client;
     short persosID = 1007;
 
-    public GameObject rural;
-    public Material couleurRural;
-    public GameObject periUrbain;
-    public Material couleurPeriUrbain;
-    public GameObject urbain;
-    public Material couleurUrbain;
+    [SerializeField] GameObject rural;
+    [SerializeField] Material couleurRural;
+    [SerializeField] GameObject periUrbain;
+    [SerializeField] Material couleurPeriUrbain;
+    [SerializeField] GameObject urbain;
+    [SerializeField] Material couleurUrbain;
 
-    public Material couleurChoisie;
+    [SerializeField] Material couleurChoisie;
 
 
     private bool zoneToucher1;

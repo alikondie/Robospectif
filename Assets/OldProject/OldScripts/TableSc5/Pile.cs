@@ -17,7 +17,7 @@ public class Pile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < this.transform.GetChildCount(); i++)
+        for (int i = 0; i < this.transform.childCount; i++)
         {
             this.transform.GetChild(i).gameObject.SetActive(false);
         }

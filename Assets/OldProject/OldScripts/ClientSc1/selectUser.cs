@@ -10,13 +10,12 @@ public class selectUser : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] GameObject canvas_choix_cartes;
     [SerializeField] GameObject canvas_position_joueurs;
-    public Button button;
+    [SerializeField] Button button;
     private int positionEffective;
     public static int positionStatic;
-    public int position;
+    [SerializeField] int position;
     public static int zone;
     public static NetworkClient client;
-    public Scene sceneSuivante;
     short messageID = 1000;
     
 

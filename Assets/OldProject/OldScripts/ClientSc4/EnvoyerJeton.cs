@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class EnvoyerJeton : MonoBehaviour
 {
-    public Image image;
-    public Button button;
+    [SerializeField] Image image;
+    [SerializeField] Button button;
     NetworkClient client;
     short jeton = 1010;
 

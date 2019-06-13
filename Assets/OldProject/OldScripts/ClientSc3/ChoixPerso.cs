@@ -10,11 +10,11 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject canvas_choix_persos;
     [SerializeField] GameObject canvas_pres_perso;
-    public Image image;
-    public Image tickCurrent;
-    public Button button;
+    [SerializeField] Image image;
+    [SerializeField] Image tickCurrent;
+    [SerializeField] Button button;
     public static Sprite perso;
-    public Image[] ticks;
+    [SerializeField] Image[] ticks;
 
     // Start is called before the first frame update
     void Start()

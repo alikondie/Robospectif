@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Fin : MonoBehaviour
 {
-    public Text text;
+    [SerializeField] Text text;
 
     // Start is called before the first frame update
     void Start()

@@ -11,33 +11,34 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
 
-    public GameObject jeton1;
-    public GameObject jeton2;
-    public GameObject jeton3;
-    public GameObject jeton4;
-    public GameObject jeton5;
-    public GameObject jeton6;
-    public List<GameObject>[] jetons;
-    public int[] index;
+    /*[SerializeField] GameObject jeton1;
+    [SerializeField] GameObject jeton2;
+    [SerializeField] GameObject jeton3;
+    [SerializeField] GameObject jeton4;
+    [SerializeField] GameObject jeton5;
+    [SerializeField] GameObject jeton6;*/
+    private List<GameObject>[] jetons;
+    private int[] index;
     GameObject objet;
     short jeton = 1010;
 
-    public Button button;
+    [SerializeField] Button button;
     private int JoueurCourant;
-    public GameObject perso0;
-    public GameObject perso1;
-    public GameObject perso2;
-    public GameObject perso3;
-    public GameObject perso4;
-    public GameObject perso5;
+   /* [SerializeField] GameObject perso0;
+    [SerializeField] GameObject perso1;
+    [SerializeField] GameObject perso2;
+    [SerializeField] GameObject perso3;
+    [SerializeField] GameObject perso4;
+    [SerializeField] GameObject perso5;*/
+
+    [SerializeField] GameObject[] persos;
 
     private Vector2[] positionsButton;
 
     short persosID = 1007;
 
     short waitID = 1006;
-
-    private GameObject[] persos;
+    
     private Sprite[] persoSprites;
 
     private int nbJoueurs;
@@ -56,41 +57,18 @@ public class InitDebat : MonoBehaviour
     {
         positions = Button_ready_next_scene.envoi;
         jetons = new List<GameObject>[6];
-        jetons[0] = new List<GameObject>();
-        jetons[1] = new List<GameObject>();
-        jetons[2] = new List<GameObject>();
-        jetons[3] = new List<GameObject>();
-        jetons[4] = new List<GameObject>();
-        jetons[5] = new List<GameObject>();
 
-        for (int i = 0; i < jeton1.transform.childCount; i++)
+        for (int i = 0; i < jetons.Length; i++)
         {
-            jetons[0].Add(jeton1.transform.GetChild(i).gameObject);
+            jetons[i] = new List<GameObject>();
         }
 
-        for (int i = 0; i < jeton2.transform.childCount; i++)
+        for (int i = 0; i < jetons.Length; i++)
         {
-            jetons[1].Add(jeton2.transform.GetChild(i).gameObject);
-        }
-
-        for (int i = 0; i < jeton3.transform.childCount; i++)
-        {
-            jetons[2].Add(jeton3.transform.GetChild(i).gameObject);
-        }
-
-        for (int i = 0; i < jeton4.transform.childCount; i++)
-        {
-            jetons[3].Add(jeton4.transform.GetChild(i).gameObject);
-        }
-
-        for (int i = 0; i < jeton5.transform.childCount; i++)
-        {
-            jetons[4].Add(jeton5.transform.GetChild(i).gameObject);
-        }
-
-        for (int i = 0; i < jeton6.transform.childCount; i++)
-        {
-            jetons[5].Add(jeton6.transform.GetChild(i).gameObject);
+             for (int j = 0; j < persos[i].transform.GetChild(1).childCount; j++)
+             {
+                 jetons[i].Add(persos[i].transform.GetChild(1).GetChild(j).gameObject);
+             }
         }
 
         index = new int[6];
@@ -146,13 +124,6 @@ public class InitDebat : MonoBehaviour
         {
             persoSprites[i] = null;
         }
-        persos = new GameObject[6];
-        persos[0] = perso0;
-        persos[1] = perso1;
-        persos[2] = perso2;
-        persos[3] = perso3;
-        persos[4] = perso4;
-        persos[5] = perso5;
 
         
         for (int i = 0; i < 6; i++)
@@ -180,7 +151,7 @@ public class InitDebat : MonoBehaviour
         {
             if (positions[j] == pos)
             {
-                jetons[j][index[j]].gameObject.GetComponent<SpriteRenderer>().sprite = jeton_actuel;
+                jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
                 jetons[j][index[j]].gameObject.SetActive(true);
                 index[j]++;
             }
@@ -189,49 +160,17 @@ public class InitDebat : MonoBehaviour
 
     private void ButtonClicked()
     {
-        Sprite[,] sprites = new Sprite[6, perso0.transform.GetChild(2).childCount];
-        bool[,] bools = new bool[6, perso0.transform.GetChild(2).childCount];
-        
-        for (int i = 0; i < perso0.transform.GetChild(2).childCount; i++)
-        {
-            sprites[0, i] = perso0.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[0, i] = perso0.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
-        }
-        
-        for (int i = 0; i < perso1.transform.GetChild(2).childCount; i++)
-        {
-            sprites[1, i] = perso1.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[1, i] = perso1.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
-        }
+        Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
+        bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
 
-        
-        for (int i = 0; i < perso2.transform.GetChild(2).childCount; i++)
+        for (int i = 0; i < persos.Length; i++)
         {
-            sprites[2, i] = perso2.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[2, i] = perso2.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
+            for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+            {
+                sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+            }
         }
-        
-        for (int i = 0; i < perso3.transform.GetChild(2).childCount; i++)
-        {
-            sprites[3, i] = perso3.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[3, i] = perso3.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
-        }
-
-        
-        for (int i = 0; i < perso4.transform.GetChild(2).childCount; i++)
-        {
-            sprites[4, i] = perso4.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[4, i] = perso4.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
-        }
-
-        
-        for (int i = 0; i < perso5.transform.GetChild(2).childCount; i++)
-        {
-            sprites[5, i] = perso5.transform.GetChild(2).GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite;
-            bools[5, i] = perso5.transform.GetChild(2).GetChild(i).gameObject.activeSelf;
-        }
-        
-
         envoiSprites = sprites;
         envoiActives = bools;
         
@@ -260,7 +199,7 @@ public class InitDebat : MonoBehaviour
             if ((positions[j] == i) && (positions[j] != JoueurCourant))
             {
                 persoSprites[j] = sp;
-                persos[j].transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = sp;
+                persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;
                 if (zone1 != 0)
                     persos[j].transform.GetChild(zone1 + 2).gameObject.SetActive(true);
                 if (zone2 != 0)

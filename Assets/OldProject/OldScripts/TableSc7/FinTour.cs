@@ -11,8 +11,8 @@ public class FinTour : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_fin;
 
-    public Button prochain;
-    public Button fin;
+    [SerializeField] Button prochain;
+    [SerializeField] Button fin;
 
     short nextID = 1015;
 

@@ -12,7 +12,7 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_choix_persos;
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_pres_robot;
-    public Text text;
+    [SerializeField] Text text;
 
     private int position;
 

@@ -8,12 +8,12 @@ public class MainScript : MonoBehaviour
 {
     public static Main.Player player;
     public static Joueur joueur;
-    public Text text;
-    public Image dimensionGO1;
-    public Image locomotionGO1;
-    public Image equipementGO1;
-    public Image equipementGO2;
-    public Image equipementGO3;
+    [SerializeField] Text text;
+    [SerializeField] Image dimensionGO1;
+    [SerializeField] Image locomotionGO1;
+    [SerializeField] Image equipementGO1;
+    [SerializeField] Image equipementGO2;
+    [SerializeField] Image equipementGO3;
     public static Main.Image[] dimensions;
     public static Main.Image[] locomotions;
     public static Main.Image[] equipements;

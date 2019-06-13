@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class ChangeImageDi : MonoBehaviour, IPointerClickHandler
 {
-    public Image image;
+    [SerializeField] Image image;
     public Main.Image[] dim;
     private int indice;
     private Main.Player p;

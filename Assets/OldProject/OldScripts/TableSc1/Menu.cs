@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public Button standard;
+    [SerializeField] Button standard;
 
 
     // Start is called before the first frame update

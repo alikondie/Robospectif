@@ -14,18 +14,14 @@ public class SansHUD : NetworkManager
 {
     [SerializeField] GameObject canvas_serveur;
     [SerializeField] GameObject canvas_client;
-    public NetworkManager manager;
-    public Scene sceneServeur;
-    public Scene sceneClient;
+    [SerializeField] NetworkManager manager;
     public static NetworkClient myclient;
     short messageID = 1000;
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
-    public UnityEngine.UI.Text conText;
     public static short clientID = 123;
-    public NetworkConnection id;
-    public bool conceptionTerminee;
+    private bool conceptionTerminee;
     public static int premierFini;
     private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
