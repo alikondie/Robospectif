@@ -11,7 +11,7 @@ public class AttenteFin : MonoBehaviour
     [SerializeField] GameObject canvas_fin_partie;
     [SerializeField] GameObject canvas_vainqueur;
     [SerializeField] GameObject canvas_pres_robot;
-    public Text text;
+    [SerializeField] Text text;
 
     private int position;
 

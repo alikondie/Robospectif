@@ -14,54 +14,52 @@ public class Initialisation : MonoBehaviour
 
     private int pos = -1;
 
-    public int position;
+    private int[] positions;
 
-    public int[] positions;
-
-    public Button button;
+    [SerializeField] Button button;
 
     short waitID = 1006;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
-    public GameObject Plateau;
+    [SerializeField] GameObject Plateau;
 
-    public GameObject J1carte1;
-    public GameObject J1carte2;
-    public GameObject J1carte3;
-    public GameObject J1carte4;
-    public GameObject J1carte5;
+    [SerializeField] GameObject J1carte1;
+    [SerializeField] GameObject J1carte2;
+    [SerializeField] GameObject J1carte3;
+    [SerializeField] GameObject J1carte4;
+    [SerializeField] GameObject J1carte5;
 
-    public GameObject J2carte1;
-    public GameObject J2carte2;
-    public GameObject J2carte3;
-    public GameObject J2carte4;
-    public GameObject J2carte5;
+    [SerializeField] GameObject J2carte1;
+    [SerializeField] GameObject J2carte2;
+    [SerializeField] GameObject J2carte3;
+    [SerializeField] GameObject J2carte4;
+    [SerializeField] GameObject J2carte5;
 
-    public GameObject J3carte1;
-    public GameObject J3carte2;
-    public GameObject J3carte3;
-    public GameObject J3carte4;
-    public GameObject J3carte5;
+    [SerializeField] GameObject J3carte1;
+    [SerializeField] GameObject J3carte2;
+    [SerializeField] GameObject J3carte3;
+    [SerializeField] GameObject J3carte4;
+    [SerializeField] GameObject J3carte5;
 
-    public GameObject J4carte1;
-    public GameObject J4carte2;
-    public GameObject J4carte3;
-    public GameObject J4carte4;
-    public GameObject J4carte5;
+    [SerializeField] GameObject J4carte1;
+    [SerializeField] GameObject J4carte2;
+    [SerializeField] GameObject J4carte3;
+    [SerializeField] GameObject J4carte4;
+    [SerializeField] GameObject J4carte5;
 
-    public GameObject J5carte1;
-    public GameObject J5carte2;
-    public GameObject J5carte3;
-    public GameObject J5carte4;
-    public GameObject J5carte5;
+    [SerializeField] GameObject J5carte1;
+    [SerializeField] GameObject J5carte2;
+    [SerializeField] GameObject J5carte3;
+    [SerializeField] GameObject J5carte4;
+    [SerializeField] GameObject J5carte5;
 
-    public GameObject J6carte1;
-    public GameObject J6carte2;
-    public GameObject J6carte3;
-    public GameObject J6carte4;
-    public GameObject J6carte5;
+    [SerializeField] GameObject J6carte1;
+    [SerializeField] GameObject J6carte2;
+    [SerializeField] GameObject J6carte3;
+    [SerializeField] GameObject J6carte4;
+    [SerializeField] GameObject J6carte5;
 
 
     // Start is called before the first frame update

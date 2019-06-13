@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Placement_dimension_6 : MonoBehaviour
 {
-    public GameObject dimension;
+    [SerializeField] GameObject dimension;
     private float x_position_dimension;
     private float y_position_dimension;
 

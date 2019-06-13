@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class P4_couronne : MonoBehaviour
 {
-    public GameObject personnage4;
-    public GameObject couronne;
+    [SerializeField] GameObject personnage4;
+    [SerializeField] GameObject couronne;
     public static int couronne_active;
 
     // Start is called before the first frame update

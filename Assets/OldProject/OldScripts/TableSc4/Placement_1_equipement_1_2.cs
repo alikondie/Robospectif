@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Placement_1_equipement_1_2 : MonoBehaviour
 {
-    public GameObject equipement;
+    [SerializeField] GameObject equipement;
 
     public static bool carte_1_position_1;
     private float x_position_1_carte_1 ;

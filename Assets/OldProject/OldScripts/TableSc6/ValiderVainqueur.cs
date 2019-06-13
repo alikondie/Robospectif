@@ -12,14 +12,14 @@ public class ValiderVainqueur : MonoBehaviour
 
     private int  vainqueur;
 
-    public GameObject couronne1;
-    public GameObject couronne2;
-    public GameObject couronne3;
-    public GameObject couronne4;
-    public GameObject couronne5;
-    public GameObject couronne6;
+    [SerializeField] GameObject couronne1;
+    [SerializeField] GameObject couronne2;
+    [SerializeField] GameObject couronne3;
+    [SerializeField] GameObject couronne4;
+    [SerializeField] GameObject couronne5;
+    [SerializeField] GameObject couronne6;
 
-    public Button button;
+    [SerializeField] Button button;
 
     // Start is called before the first frame update
     void Start()

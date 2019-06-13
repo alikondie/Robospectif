@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PileJetons : MonoBehaviour
 {
-    public GameObject pile1;
-    public GameObject pile2;
-    public GameObject pile3;
-    public GameObject pile4;
-    public GameObject pile5;
-    public GameObject pile6;
+    [SerializeField] GameObject pile1;
+    [SerializeField] GameObject pile2;
+    [SerializeField] GameObject pile3;
+    [SerializeField] GameObject pile4;
+    [SerializeField] GameObject pile5;
+    [SerializeField] GameObject pile6;
 
     public Sprite[,] sprites;
     public bool[,] actives;

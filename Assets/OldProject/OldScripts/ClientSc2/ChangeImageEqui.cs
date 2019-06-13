@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 public class ChangeImageEqui : MonoBehaviour, IPointerClickHandler
 {
     // Start is called before the first frame update
-    public bool[] selection;
-    public Image image;
+    private bool[] selection;
+    [SerializeField] Image image;
     public Main.Image[] equi;
     private int indice;
     private Main.Player p;

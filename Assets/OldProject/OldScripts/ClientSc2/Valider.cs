@@ -13,12 +13,12 @@ public class Valider : MonoBehaviour
     [SerializeField] GameObject canvas_choix_cartes;
     [SerializeField] GameObject canvas_pres_robot;
 
-    public Button button;
-    public Image loco;
-    public Image dim;
-    public Image equi0;
-    public Image equi1;
-    public Image equi2;
+    [SerializeField] Button button;
+    [SerializeField] Image loco;
+    [SerializeField] Image dim;
+    [SerializeField] Image equi0;
+    [SerializeField] Image equi1;
+    [SerializeField] Image equi2;
     public static Joueur joueur;
     public static int position;
     public static NetworkClient client;

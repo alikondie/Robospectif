@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class FinJeu : MonoBehaviour
 {
-    public GameObject zone1;
-    public GameObject zone2;
-    public GameObject zone3;
-    public GameObject zone4;
-    public GameObject zone5;
-    public GameObject zone6;
+    [SerializeField] GameObject zone1;
+    [SerializeField] GameObject zone2;
+    [SerializeField] GameObject zone3;
+    [SerializeField] GameObject zone4;
+    [SerializeField] GameObject zone5;
+    [SerializeField] GameObject zone6;
     private GameObject[] zones;
 
     // Start is called before the first frame update

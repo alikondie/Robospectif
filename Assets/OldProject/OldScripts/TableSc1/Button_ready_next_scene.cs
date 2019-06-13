@@ -10,9 +10,10 @@ public class Button_ready_next_scene : MonoBehaviour
 {
     [SerializeField] GameObject canvas_mains;
     [SerializeField] GameObject canvas_joueurs;
-    public Text nb_joueurs;
-    public Button[] hands;
-    public Sprite[] colors;
+    [SerializeField] Text nb_joueurs;
+    [SerializeField] Button[] hands;
+    [SerializeField] Sprite[] colors;
+
     private int[] indices;
     private int[] positions;
     public static int[] envoi;

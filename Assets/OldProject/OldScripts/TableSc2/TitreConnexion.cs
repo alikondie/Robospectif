@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitreConnextion : MonoBehaviour
+public class TitreConnexion : MonoBehaviour
 {
     // ---------- ATRIBUES ----------
-    public GameObject titreScene;
+    [SerializeField] GameObject titreScene;
 
 
     private int estConnecter;

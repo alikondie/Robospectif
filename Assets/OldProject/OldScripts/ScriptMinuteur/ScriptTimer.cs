@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class ScriptTimer : MonoBehaviour
 {
     // ---------- ATTRIBUETS ----------
-    public Transform cercleMinuteur;
-    public GameObject imgMinuteur;
+    [SerializeField] Transform cercleMinuteur;
+    [SerializeField] GameObject imgMinuteur;
     public NetworkClient client;
     public static bool doitLancer;
 

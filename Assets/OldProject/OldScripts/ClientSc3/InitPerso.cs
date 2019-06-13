@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class InitPerso : MonoBehaviour
 {
     public static Main.Player player;
-    public Text text;
-    public Image[] personnagesGO;
-    public Image[] ticks;
+    [SerializeField] Text text;
+    [SerializeField] Image[] personnagesGO;
+    [SerializeField] Image[] ticks;
     public static Main.Image[] personnages;
     private int nbJoueurs = Init.nbJoueurs;
 

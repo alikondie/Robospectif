@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class Script_Autonomie : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
-    public int positionJoueur;
+    private int positionJoueur;
 
-    public int[] positions;
+    private int[] positions;
 
-    public GameObject volant;
+    [SerializeField] GameObject volant;
 
     private bool autonomie; // ou  public int autonomie; (avec 0 ou 1)
 
     //Déplacement sourie
-    public SpriteRenderer spriteRdr;
+    [SerializeField] SpriteRenderer spriteRdr;
     private float positionSouris;
     private Vector3 positionVollant;
 

@@ -12,16 +12,16 @@ public class JetonsHandler : MonoBehaviour
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_vainqueur;
 
-    public Text text;
+    [SerializeField] Text text;
 
     short waitID = 1006;
 
-    public Button usageVert;
-    public Button usageRouge;
-    public Button societeVert;
-    public Button societeRouge;
-    public Button planeteVert;
-    public Button planeteRouge;
+    [SerializeField] Button usageVert;
+    [SerializeField] Button usageRouge;
+    [SerializeField] Button societeVert;
+    [SerializeField] Button societeRouge;
+    [SerializeField] Button planeteVert;
+    [SerializeField] Button planeteRouge;
 
     private int usageCompteur;
     private int societeCompteur;

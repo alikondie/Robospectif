@@ -7,20 +7,20 @@ public class Script_Conduite : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
 
-    public int positionJoueur;
+    private int positionJoueur;
 
-    public int[] positions;
+    private int[] positions;
 
-    public Button button;
+    [SerializeField] Button button;
 
     // Curseur
-    public Image barre;
+    [SerializeField] Image barre;
     // Partie Attention Requise (TEXTE)
-    public Image cadreTxt0;
-    public Text texteNiv0;
+    [SerializeField] Image cadreTxt0;
+    [SerializeField] Text texteNiv0;
     // Partie Autonomie Complète (TEXTE)
-    public Image cadreTxt1;
-    public Text texteNiv1;
+    [SerializeField] Image cadreTxt1;
+    [SerializeField] Text texteNiv1;
 
 
     // Données construction partie Conduite
