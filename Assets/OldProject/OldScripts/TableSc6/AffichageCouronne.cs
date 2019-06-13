@@ -69,15 +69,7 @@ public class AffichageCouronne : MonoBehaviour
         personnage6.GetComponent<SpriteRenderer>().sprite = images[5];
         personnage6.gameObject.SetActive(true);
 
-        int pos = -1;
-
-        for (int i = 0; i < Partie.Joueurs.Count; i++)
-        {
-            if (Partie.Joueurs[i].Numero == JoueurCourant)
-            {
-                pos = Partie.Joueurs[i].Position;
-            }
-        }
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
 
         switch (pos)
         {
