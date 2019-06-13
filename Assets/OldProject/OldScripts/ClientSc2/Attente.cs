@@ -33,15 +33,14 @@ public class Attente : MonoBehaviour
     private void onWaitReceived(NetworkMessage netMsg)
     {
         int fini = netMsg.ReadMessage<MyNetworkMessage>().message;
+        canvas_pres_robot.SetActive(false);
         if (position == fini)
         {
             //SceneManager.LoadScene("Scene_ChoixJetons");
-            canvas_pres_robot.SetActive(false);
             canvas_choix_jetons.SetActive(true);
         }
         else
         {
-            canvas_pres_robot.SetActive(false);
             canvas_choix_persos.SetActive(true);
             //SceneManager.LoadScene("scene3");
         }

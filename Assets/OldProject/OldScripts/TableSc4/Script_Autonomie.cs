@@ -8,8 +8,6 @@ public class Script_Autonomie : MonoBehaviour
     // ---------- ATTRIBUTS ----------
     private int positionJoueur;
 
-    private int[] positions;
-
     [SerializeField] GameObject volant;
 
     private bool autonomie; // ou  public int autonomie; (avec 0 ou 1)
@@ -49,14 +47,12 @@ public class Script_Autonomie : MonoBehaviour
     {
         // Position du joueur
         positionJoueur = Partie.JoueurCourant;
-        
-        positions = Text_Connexion.positions;
 
         int pos = -1;
 
         for (int i = 0; i < 6; i++)
         {
-            if (positions[i] == positionJoueur)
+            if (Partie.Positions[i] == positionJoueur)
             {
                 pos = i + 1;
             }

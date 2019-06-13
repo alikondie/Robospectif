@@ -47,7 +47,7 @@ public class AffichageCouronne : MonoBehaviour
 
         JoueurCourant = Partie.JoueurCourant;
 
-        images = InitDebat.envoi;
+        images = Tour.PersosDebat;
 
         personnage1.gameObject.SetActive(false);
         personnage2.gameObject.SetActive(false);

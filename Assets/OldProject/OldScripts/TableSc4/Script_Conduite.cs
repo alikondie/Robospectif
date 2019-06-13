@@ -9,8 +9,6 @@ public class Script_Conduite : MonoBehaviour
 
     private int positionJoueur;
 
-    private int[] positions;
-
     [SerializeField] Button button;
 
     // Curseur
@@ -52,8 +50,6 @@ public class Script_Conduite : MonoBehaviour
     {
         //button.gameObject.SetActive(false);
 
-        positions = Text_Connexion.positions;
-
         // Position du joueur
         positionJoueur = Partie.JoueurCourant;
 
@@ -61,7 +57,7 @@ public class Script_Conduite : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            if (positions[i] == positionJoueur)
+            if (Partie.Positions[i] == positionJoueur)
             {
                 pos = i + 1;
             }

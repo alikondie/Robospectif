@@ -11,15 +11,15 @@ public class PileJetons : MonoBehaviour
     [SerializeField] GameObject pile5;
     [SerializeField] GameObject pile6;
 
-    public Sprite[,] sprites;
-    public bool[,] actives;
+    private Sprite[,] sprites;
+    private bool[,] actives;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        sprites = InitDebat.envoiSprites;
-        actives = InitDebat.envoiActives;
+        sprites = Tour.JetonsDebat;
+        actives = Tour.ActivesDebat;
 
         for (int j = 0; j < 6; j++)
         {
