@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Script_Autonomie : MonoBehaviour
+public class Script_Autonomie_clean : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
     public int positionJoueur;
