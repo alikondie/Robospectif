@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class Script_Autonomie : MonoBehaviour
@@ -53,7 +54,7 @@ public class Script_Autonomie : MonoBehaviour
         positions = Text_Connexion.positions;
 
         int pos = -1;
-
+        
         for (int i = 0; i < 6; i++)
         {
             if (positions[i] == positionJoueur)
@@ -61,7 +62,8 @@ public class Script_Autonomie : MonoBehaviour
                 pos = i + 1;
             }
         }
-
+        Debug.Log(" position methode pourrie : " + pos);
+        Debug.Log("position mieux : " + Array.IndexOf(positions, positionJoueur));
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
