@@ -54,6 +54,8 @@ public class Init : MonoBehaviour
     // un autre joueur a sélectionné l'un des boutons
     void OnMessageReceived(NetworkMessage message)
     {
+
+        // this executes to deactivate the button showed on screen.
         int i = message.ReadMessage<MyNetworkMessage>().message;
         for (int j = 0; j < positions.Length; j++)
         {
@@ -63,9 +65,10 @@ public class Init : MonoBehaviour
             }
         }
     }
-
+    
     private void OnPositionsReceived(NetworkMessage netMsg)
     {
+        // this executes to get positions from button_ready_next_scene.cs and show them in the texts of the buttons
         int i = 0;
         var message = netMsg.ReadMessage<MyPositionsMessage>();
         int[] posMsg = new int[] { message.position1, message.position2, message.position3, message.position4, message.position5, message.position6 };
