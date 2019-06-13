@@ -71,8 +71,7 @@ public class SansHUD : NetworkManager
             premierFini = netMsg.ReadMessage<MyNetworkMessage>().message;
 
             Partie.JoueurCourant = premierFini;
-
-            Debug.Log("premier joueur : " + premierFini);
+            
             EnAttenteCT.premierFini(premierFini);
             envoiChrono(premierFini);
             conceptionTerminee = true;
@@ -102,7 +101,6 @@ public class SansHUD : NetworkManager
         {
             s = s + dim[i];
         }
-        Debug.Log(s);
         dim = s;
 
         s = "";
