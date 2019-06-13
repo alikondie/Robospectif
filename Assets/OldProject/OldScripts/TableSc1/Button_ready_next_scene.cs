@@ -16,7 +16,6 @@ public class Button_ready_next_scene : MonoBehaviour
 
     private int[] indices;
     private int[] positions;
-    public static int[] envoi;
     short positionsID = 1005;
     private string Ip_serveur = "172.21.232.220";
 
@@ -109,7 +108,7 @@ public class Button_ready_next_scene : MonoBehaviour
                 indice++;
             }     // Position des joueurs
         }
-        envoi = positions;
+        Partie.Positions = positions;
         MyPositionsMessage message = new MyPositionsMessage();
         message.position1 = positions[0];
         message.position2 = positions[1];

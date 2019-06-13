@@ -25,8 +25,6 @@ public class Text_Connexion : MonoBehaviour
     private GameObject[] tabText = new GameObject[6];   //Tableau qui contient tout les GameObject "text_Position"
     private int infoAndroid;
 
-    public static int[] positions;
-
     // Recuperation scene d'avant
     public static int nbJoueur ;  // Le nombre de joueur dans la partie (de 4 à 6)
     private static bool estDebut;
@@ -37,7 +35,6 @@ public class Text_Connexion : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        positions = Button_ready_next_scene.envoi;
 
         infoAndroid = 0;
         estDebut = false;
@@ -51,7 +48,7 @@ public class Text_Connexion : MonoBehaviour
         tabText = new GameObject[] { text_Position_1, text_Position_2, text_Position_3, text_Position_4, text_Position_5, text_Position_6 };
 
         // Initialisé les textes à "Non Connecté".
-        InitAffichageTextJoueur(positions);
+        InitAffichageTextJoueur(Partie.Positions);
 
     }
 
@@ -123,7 +120,7 @@ public class Text_Connexion : MonoBehaviour
         int pos = -1;
         for (int j = 0; j < 6; j++)
         {
-            if (i == positions[j])
+            if (i == Partie.Positions[j])
             {
                 pos = j+1;
             }
@@ -145,12 +142,12 @@ public class Text_Connexion : MonoBehaviour
             infoAndroid = PlayerPrefs.GetInt("monInfoJoueur");
         }
 
-        for (int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < Partie.Positions.Length; i++)
         {
-            if ( (positions[i] != 0) && estConnecte(positions[i], infoAndroid)){
+            if ( (Partie.Positions[i] != 0) && estConnecte(Partie.Positions[i], infoAndroid)){
                 affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white;
-                affichageJoueur.text = "Joueur" + positions[i] + "\n" + "<color=blue> Connecté </color>";
+                affichageJoueur.text = "Joueur" + Partie.Positions[i] + "\n" + "<color=blue> Connecté </color>";
             }
         }
     }

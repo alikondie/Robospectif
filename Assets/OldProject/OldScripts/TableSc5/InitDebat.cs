@@ -11,12 +11,6 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
 
-    /*[SerializeField] GameObject jeton1;
-    [SerializeField] GameObject jeton2;
-    [SerializeField] GameObject jeton3;
-    [SerializeField] GameObject jeton4;
-    [SerializeField] GameObject jeton5;
-    [SerializeField] GameObject jeton6;*/
     private List<GameObject>[] jetons;
     private int[] index;
     GameObject objet;
@@ -24,12 +18,6 @@ public class InitDebat : MonoBehaviour
 
     [SerializeField] Button button;
     private int JoueurCourant;
-   /* [SerializeField] GameObject perso0;
-    [SerializeField] GameObject perso1;
-    [SerializeField] GameObject perso2;
-    [SerializeField] GameObject perso3;
-    [SerializeField] GameObject perso4;
-    [SerializeField] GameObject perso5;*/
 
     [SerializeField] GameObject[] persos;
 
@@ -45,17 +33,9 @@ public class InitDebat : MonoBehaviour
 
     private int nbRecu;
 
-    public static Sprite[] envoi;
-
-    public static Sprite[,] envoiSprites;
-    public static bool[,] envoiActives;
-
-    private int[] positions;
-
     // Start is called before the first frame update
     void Start()
     {
-        positions = Button_ready_next_scene.envoi;
         jetons = new List<GameObject>[6];
 
         for (int i = 0; i < jetons.Length; i++)
@@ -111,7 +91,7 @@ public class InitDebat : MonoBehaviour
         nbRecu = 0;
         for (int i = 0; i < 6; i++)
         {
-            if (positions[i] != 0)
+            if (Partie.Positions[i] != 0)
             {
                 nbJoueurs++;
             }
@@ -149,7 +129,7 @@ public class InitDebat : MonoBehaviour
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         for (int j = 0; j < 6; j++)
         {
-            if (positions[j] == pos)
+            if (Partie.Positions[j] == pos)
             {
                 jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
                 jetons[j][index[j]].gameObject.SetActive(true);
@@ -171,10 +151,8 @@ public class InitDebat : MonoBehaviour
                 bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
             }
         }
-        envoiSprites = sprites;
-        envoiActives = bools;
-        
-        envoi = persoSprites;
+        Tour.JetonsDebat = sprites;
+        Tour.ActivesDebat = bools;
 
         MyNetworkMessage wait = new MyNetworkMessage();
         NetworkServer.SendToAll(waitID, wait);
@@ -196,7 +174,7 @@ public class InitDebat : MonoBehaviour
         Sprite sp = Resources.Load<Sprite>(spriteString);
         for (int j = 0; j < 6; j++)
         {
-            if ((positions[j] == i) && (positions[j] != JoueurCourant))
+            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != JoueurCourant))
             {
                 persoSprites[j] = sp;
                 persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;

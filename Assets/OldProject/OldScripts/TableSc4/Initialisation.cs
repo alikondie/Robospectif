@@ -14,8 +14,6 @@ public class Initialisation : MonoBehaviour
 
     private int pos = -1;
 
-    private int[] positions;
-
     [SerializeField] Button button;
 
     short waitID = 1006;
@@ -67,13 +65,11 @@ public class Initialisation : MonoBehaviour
     {
         button.onClick.AddListener(() => ButtonClicked());
 
-        positions = Text_Connexion.positions;
-
         premierJoueur = Partie.JoueurCourant;
 
         for (int i = 0; i < 6; i++)
         {
-            if (positions[i] == premierJoueur)
+            if (Partie.Positions[i] == premierJoueur)
             {
                 pos = i + 1;
             }
@@ -164,7 +160,7 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((positions[0] != 0) && (pos == 1))
+        if ((Partie.Positions[0] != 0) && (pos == 1))
         {
             J1carte1.GetComponent<SpriteRenderer>().sprite = images[0, 1];
             J1carte2.GetComponent<SpriteRenderer>().sprite = images[0, 2];
@@ -173,7 +169,7 @@ public class Initialisation : MonoBehaviour
             J1carte5.GetComponent<SpriteRenderer>().sprite = images[0, 0];
         }
 
-        if ((positions[1] != 0) && (pos == 2))
+        if ((Partie.Positions[1] != 0) && (pos == 2))
         {
             J2carte1.GetComponent<SpriteRenderer>().sprite = images[1, 1];
             J2carte2.GetComponent<SpriteRenderer>().sprite = images[1, 2];
@@ -182,7 +178,7 @@ public class Initialisation : MonoBehaviour
             J2carte5.GetComponent<SpriteRenderer>().sprite = images[1, 0];
         }
 
-        if ((positions[2] != 0) && (pos == 3))
+        if ((Partie.Positions[2] != 0) && (pos == 3))
         {
             J3carte1.GetComponent<SpriteRenderer>().sprite = images[2, 1];
             J3carte2.GetComponent<SpriteRenderer>().sprite = images[2, 2];
@@ -191,7 +187,7 @@ public class Initialisation : MonoBehaviour
             J3carte5.GetComponent<SpriteRenderer>().sprite = images[2, 0];
         }
 
-        if ((positions[3] != 0) && (pos == 4))
+        if ((Partie.Positions[3] != 0) && (pos == 4))
         {
             J4carte1.GetComponent<SpriteRenderer>().sprite = images[3, 1];
             J4carte2.GetComponent<SpriteRenderer>().sprite = images[3, 2];
@@ -200,7 +196,7 @@ public class Initialisation : MonoBehaviour
             J4carte5.GetComponent<SpriteRenderer>().sprite = images[3, 0];
         }
 
-        if ((positions[4] != 0) && (pos == 5))
+        if ((Partie.Positions[4] != 0) && (pos == 5))
         {
             J5carte1.GetComponent<SpriteRenderer>().sprite = images[4, 1];
             J5carte2.GetComponent<SpriteRenderer>().sprite = images[4, 2];
@@ -209,7 +205,7 @@ public class Initialisation : MonoBehaviour
             J5carte5.GetComponent<SpriteRenderer>().sprite = images[4, 0];
         }
 
-        if ((positions[5] != 0) && (pos == 6))
+        if ((Partie.Positions[5] != 0) && (pos == 6))
         {
             J6carte1.GetComponent<SpriteRenderer>().sprite = images[5, 1];
             J6carte2.GetComponent<SpriteRenderer>().sprite = images[5, 2];
