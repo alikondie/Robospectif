@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,6 @@ using UnityEngine.UI;
 public class Script_Conduite : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
-
-    private int positionJoueur;
 
     [SerializeField] Button button;
 
@@ -51,17 +50,9 @@ public class Script_Conduite : MonoBehaviour
         //button.gameObject.SetActive(false);
 
         // Position du joueur
-        positionJoueur = Partie.JoueurCourant;
 
-        int pos = -1;
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
 
-        for (int i = 0; i < 6; i++)
-        {
-            if (Partie.Positions[i] == positionJoueur)
-            {
-                pos = i + 1;
-            }
-        }
 
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur

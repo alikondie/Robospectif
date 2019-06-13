@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,18 +7,11 @@ using UnityEngine.UI;
 public class Script_Autonomie_clean : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
-    public int positionJoueur;
-
-    public int[] positions;
-
-    public GameObject volant;
-
-    private bool autonomie; // ou  public int autonomie; (avec 0 ou 1)
+    [SerializeField] GameObject volant;
 
     //Déplacement sourie
-    public SpriteRenderer spriteRdr;
-    private float positionSouris;
-    private Vector3 positionVollant;
+    [SerializeField] SpriteRenderer spriteRdr;
+    private Vector3 positionVolant;
 
     //Pour la position du centre des Objets au debut
     private float positionDebutX;  
@@ -48,20 +42,9 @@ public class Script_Autonomie_clean : MonoBehaviour
     void Start()
     {
         // Position du joueur
-        positionJoueur = Partie.JoueurCourant;
-        
-        positions = Text_Connexion.positions;
 
-        int pos = -1;
-
-        for (int i = 0; i < 6; i++)
-        {
-            if (positions[i] == positionJoueur)
-            {
-                pos = i + 1;
-            }
-        }
-
+        //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        int pos = 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
@@ -89,7 +72,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         positionDebutX = postionX_Defaut[SENS - 1];
         positionDebutY = postionY_Defaut[SENS - 1];
         orientation = tabOrien[SENS - 1];
-
+        Debug.Log(volant.transform.position);
         // Initialise position et orientation du Volant
         spriteRdr = volant.GetComponent<SpriteRenderer>();
         volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
@@ -158,22 +141,22 @@ public class Script_Autonomie_clean : MonoBehaviour
             }
 
             Vector3 move = mousePos - mouseStartPos;
-            positionVollant = playerStartPos + move;
-            Debug.Log("position volant : " + positionVollant);
+            positionVolant = playerStartPos + move;
+            Debug.Log("position volant : " + positionVolant);
             Debug.Log("position playerStartPos : " + playerStartPos);
             Debug.Log("position move : " + move);
             if (SENS == 1 || SENS == 3)
             {
-                if (positionVollant.x <= (positionDebutX + ecart) && positionVollant.x >= (positionDebutX - ecart))
+                if (positionVolant.x <= (positionDebutX + ecart) && positionVolant.x >= (positionDebutX - ecart))
                 {
-                    volant.transform.position = positionVollant;
+                    volant.transform.position = positionVolant;
                 }
             }
             else
             {
-                if (positionVollant.y <= (positionDebutY + ecart) && positionVollant.y >= (positionDebutY - ecart))
+                if (positionVolant.y <= (positionDebutY + ecart) && positionVolant.y >= (positionDebutY - ecart))
                 {
-                    volant.transform.position = positionVollant;
+                    volant.transform.position = positionVolant;
                 }
             }
                 

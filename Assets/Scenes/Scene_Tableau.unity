@@ -2413,8 +2413,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas_plateau_vehicule: {fileID: 701243162}
   canvas_debat: {fileID: 0}
-  position: 0
-  positions: 010000000000000000000000020000000300000000000000
   button: {fileID: 1761848301}
   Plateau: {fileID: 2057932072}
   J1carte1: {fileID: 1329965825}
@@ -4060,6 +4058,7 @@ GameObject:
   - component: {fileID: 1336733205}
   - component: {fileID: 1336733204}
   - component: {fileID: 1336733203}
+  - component: {fileID: 1336733208}
   m_Layer: 0
   m_Name: volant
   m_TagString: Untagged
@@ -4093,8 +4092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d2b954dcd2efe4cacb6f24e38b6c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionJoueur: 1
-  positions: 010000000000000000000000020000000300000000000000
   button: {fileID: 1761848301}
   barre: {fileID: 2146368984}
   cadreTxt0: {fileID: 1334644072}
@@ -4193,13 +4190,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336733201}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48597d5fb68d5424b94aa133082de133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionJoueur: 1
-  positions: 010000000000000000000000020000000300000000000000
+  volant: {fileID: 1336733201}
+  spriteRdr: {fileID: 1336733206}
+--- !u!114 &1336733208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336733201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a04e0008a6e6b4b834b6e33b58c9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   volant: {fileID: 1336733201}
   spriteRdr: {fileID: 1336733206}
 --- !u!1 &1338134409
