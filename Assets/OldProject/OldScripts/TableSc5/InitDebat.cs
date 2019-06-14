@@ -154,8 +154,6 @@ public class InitDebat : MonoBehaviour
         Tour.JetonsDebat = sprites;
         Tour.ActivesDebat = bools;
 
-        Tour.PersosDebat = persoSprites;
-
         MyNetworkMessage wait = new MyNetworkMessage();
         NetworkServer.SendToAll(waitID, wait);
 
@@ -172,6 +170,7 @@ public class InitDebat : MonoBehaviour
         string spriteString = "image/Personnages/" + s;
         int zone1 = v.choixZone0;
         int zone2 = v.choixZone1;
+        Debug.Log("recu : " + s);
         Sprite sp = Resources.Load<Sprite>(spriteString);
         for (int j = 0; j < 6; j++)
         {

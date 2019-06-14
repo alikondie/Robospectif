@@ -2590,7 +2590,7 @@ PrefabInstance:
     - target: {fileID: 7896333963878693367, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896333963878693361, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -22245,7 +22245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1614783934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22309,20 +22309,12 @@ MonoBehaviour:
   canvas_choix_vainqueur: {fileID: 1614783933}
   canvas_fin_tour: {fileID: 2130956267}
   canvas_fin: {fileID: 1844340069}
-  couronnes:
-  - {fileID: 840939973}
-  - {fileID: 1760298140}
-  - {fileID: 72913559}
-  - {fileID: 308889291}
-  - {fileID: 2011403398}
-  - {fileID: 1605798257}
-  joueurs:
-  - {fileID: 1500085882}
-  - {fileID: 1303209152}
-  - {fileID: 519933912}
-  - {fileID: 4900062}
-  - {fileID: 2054565223}
-  - {fileID: 587252533}
+  couronne1: {fileID: 0}
+  couronne2: {fileID: 0}
+  couronne3: {fileID: 0}
+  couronne4: {fileID: 0}
+  couronne5: {fileID: 0}
+  couronne6: {fileID: 0}
   button: {fileID: 1420462729}
 --- !u!114 &1614783937
 MonoBehaviour:

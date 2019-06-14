@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,12 +12,14 @@ public class ValiderVainqueur : MonoBehaviour
 
     private int  vainqueur;
 
-    [SerializeField] GameObject[] couronnes;
-    [SerializeField] GameObject[] joueurs;
+    [SerializeField] GameObject couronne1;
+    [SerializeField] GameObject couronne2;
+    [SerializeField] GameObject couronne3;
+    [SerializeField] GameObject couronne4;
+    [SerializeField] GameObject couronne5;
+    [SerializeField] GameObject couronne6;
 
     [SerializeField] Button button;
-
-    private Sprite[] images;
 
     // Start is called before the first frame update
     void Start()
@@ -31,19 +32,42 @@ public class ValiderVainqueur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < joueurs.Length; i++)
+        if (couronne1.activeSelf)
         {
-            if (joueurs[i].transform.GetChild(2).gameObject.activeSelf)
-            {
-                vainqueur = i + 1;
-                button.gameObject.SetActive(true);
-            }
+            vainqueur = 1;
+            button.gameObject.SetActive(true);
+        }
+        if (couronne2.activeSelf)
+        {
+            vainqueur = 2;
+            button.gameObject.SetActive(true);
+        }
+        if (couronne3.activeSelf)
+        {
+            vainqueur = 3;
+            button.gameObject.SetActive(true);
+        }
+        if (couronne4.activeSelf)
+        {
+            vainqueur = 4;
+            button.gameObject.SetActive(true);
+        }
+        if (couronne5.activeSelf)
+        {
+            vainqueur = 5;
+            button.gameObject.SetActive(true);
+        }
+        if (couronne6.activeSelf)
+        {
+            vainqueur = 6;
+            button.gameObject.SetActive(true);
         }
     }
 
     private void ButtonClicked()
     {
         int nb = Partie.Joueurs.Count;
+        Debug.Log("capacité joueurs : " + nb);
         for (int i = 0; i < nb; i++)
         {
             if (Partie.Joueurs[i].Position == vainqueur)
@@ -64,25 +88,5 @@ public class ValiderVainqueur : MonoBehaviour
             //SceneManager.LoadScene("Scene_fin_tour");
         }
         else canvas_fin.SetActive(true);
-    }
-
-    private void OnEnable()
-    {
-        foreach (GameObject joueur in joueurs)
-        {
-            joueur.SetActive(false);
-        }
-
-        for (int i = 0; i < joueurs.Length; i++)
-        {
-            if (Tour.PersosDebat[i] != null)
-            {
-                joueurs[i].transform.GetChild(0).GetComponent<Image>().sprite = Tour.PersosDebat[i];
-                joueurs[i].SetActive(true);
-            }
-        }
-
-        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
-        Destroy(joueurs[pos - 1]);
     }
 }
