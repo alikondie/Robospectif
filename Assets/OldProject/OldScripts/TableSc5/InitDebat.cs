@@ -26,8 +26,10 @@ public class InitDebat : MonoBehaviour
     short persosID = 1007;
 
     short waitID = 1006;
-    
+
     private Sprite[] persoSprites;
+
+    private int[,] zones;
 
     private int nbJoueurs;
 
@@ -45,10 +47,10 @@ public class InitDebat : MonoBehaviour
 
         for (int i = 0; i < jetons.Length; i++)
         {
-             for (int j = 0; j < persos[i].transform.GetChild(1).childCount; j++)
-             {
-                 jetons[i].Add(persos[i].transform.GetChild(1).GetChild(j).gameObject);
-             }
+            for (int j = 0; j < persos[i].transform.GetChild(1).childCount; j++)
+            {
+                jetons[i].Add(persos[i].transform.GetChild(1).GetChild(j).gameObject);
+            }
         }
 
         index = new int[6];
@@ -84,7 +86,7 @@ public class InitDebat : MonoBehaviour
         if ((pos == 4) || (pos == 5))
             button.transform.Rotate(Vector3.forward * 180);
 
-        if(pos == 6)
+        if (pos == 6)
             button.transform.Rotate(Vector3.forward * 270);
 
         button.gameObject.SetActive(false);
@@ -105,7 +107,7 @@ public class InitDebat : MonoBehaviour
             persoSprites[i] = null;
         }
 
-        
+
         for (int i = 0; i < 6; i++)
         {
             persos[i].transform.GetChild(0).gameObject.SetActive(false);
@@ -117,8 +119,11 @@ public class InitDebat : MonoBehaviour
         persos[0].transform.GetChild(3).gameObject.SetActive(false);
         persos[0].transform.GetChild(4).gameObject.SetActive(false);
         persos[0].transform.GetChild(5).gameObject.SetActive(false);
+
+        zones = new int[6, 2];
+
         NetworkServer.RegisterHandler(persosID, onPersoReceived);
-        
+
     }
 
     private void onJetonReceived(NetworkMessage netMsg)
@@ -154,6 +159,9 @@ public class InitDebat : MonoBehaviour
         Tour.JetonsDebat = sprites;
         Tour.ActivesDebat = bools;
 
+        Tour.PersosDebat = persoSprites;
+        Tour.ZonesDebat = zones;
+
         MyNetworkMessage wait = new MyNetworkMessage();
         NetworkServer.SendToAll(waitID, wait);
 
@@ -170,7 +178,8 @@ public class InitDebat : MonoBehaviour
         string spriteString = "image/Personnages/" + s;
         int zone1 = v.choixZone0;
         int zone2 = v.choixZone1;
-        Debug.Log("recu : " + s);
+        zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;
+        zones[Array.IndexOf(Partie.Positions, i), 1] = zone2;
         Sprite sp = Resources.Load<Sprite>(spriteString);
         for (int j = 0; j < 6; j++)
         {
@@ -192,10 +201,15 @@ public class InitDebat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
         if (nbRecu == nbJoueurs - 1)
         {
             button.gameObject.SetActive(true);
         }
+    }
+
+    void OnEnable()
+    {
+        Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
     }
 }

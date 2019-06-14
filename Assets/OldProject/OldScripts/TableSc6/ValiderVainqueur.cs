@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,64 +11,61 @@ public class ValiderVainqueur : MonoBehaviour
     [SerializeField] GameObject canvas_fin_tour;
     [SerializeField] GameObject canvas_fin;
 
-    private int  vainqueur;
+    private int vainqueur;
+  
 
-    [SerializeField] GameObject couronne1;
-    [SerializeField] GameObject couronne2;
-    [SerializeField] GameObject couronne3;
-    [SerializeField] GameObject couronne4;
-    [SerializeField] GameObject couronne5;
-    [SerializeField] GameObject couronne6;
+    [SerializeField] GameObject[] couronnes;
+    [SerializeField] GameObject[] joueurs;
 
     [SerializeField] Button button;
+
+    private Sprite[] images;
 
     // Start is called before the first frame update
     void Start()
     {
         button.gameObject.SetActive(false);
-        vainqueur = 0 ;
+        vainqueur = 0;
         button.onClick.AddListener(() => ButtonClicked());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (couronne1.activeSelf)
+        if (Input.GetMouseButtonDown(0))
         {
-            vainqueur = 1;
-            button.gameObject.SetActive(true);
+            Vector2 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(v, Vector2.zero);
+            if (hit)
+            {
+                OnCardClicked(hit.collider.gameObject);
+            }
+
         }
-        if (couronne2.activeSelf)
+        for (int i = 0; i < joueurs.Length; i++)
         {
-            vainqueur = 2;
-            button.gameObject.SetActive(true);
+            if (joueurs[i].transform.GetChild(2).gameObject.activeSelf)
+            {
+                vainqueur = i + 1;
+                button.gameObject.SetActive(true);
+            }
         }
-        if (couronne3.activeSelf)
+    }
+
+    private void OnCardClicked(GameObject carte)
+    {
+        Transform joueur = carte.transform.parent;
+        joueur.GetChild(2).gameObject.SetActive(true);
+        for (int i = 0; i < joueurs.Length; i++)
         {
-            vainqueur = 3;
-            button.gameObject.SetActive(true);
-        }
-        if (couronne4.activeSelf)
-        {
-            vainqueur = 4;
-            button.gameObject.SetActive(true);
-        }
-        if (couronne5.activeSelf)
-        {
-            vainqueur = 5;
-            button.gameObject.SetActive(true);
-        }
-        if (couronne6.activeSelf)
-        {
-            vainqueur = 6;
-            button.gameObject.SetActive(true);
+            if (joueurs[i].gameObject != joueur.gameObject)
+                joueurs[i].transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
     private void ButtonClicked()
     {
         int nb = Partie.Joueurs.Count;
-        Debug.Log("capacité joueurs : " + nb);
         for (int i = 0; i < nb; i++)
         {
             if (Partie.Joueurs[i].Position == vainqueur)
@@ -88,5 +86,48 @@ public class ValiderVainqueur : MonoBehaviour
             //SceneManager.LoadScene("Scene_fin_tour");
         }
         else canvas_fin.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        foreach (GameObject joueur in joueurs)
+        {
+            joueur.SetActive(false);
+        }
+
+        for (int i = 0; i < joueurs.Length; i++)
+        {
+            if (Tour.PersosDebat[i] != null)
+            {
+                joueurs[i].transform.GetChild(0).GetComponent<Image>().sprite = Tour.PersosDebat[i];
+
+
+                int zone1 = Tour.ZonesDebat[i, 0];
+                int zone2 = Tour.ZonesDebat[i, 1];
+                for (int j = 1; j <= 3; j++)
+                {
+                    if ((j != zone1) && (j != zone2))
+                    {
+                        joueurs[i].transform.GetChild(j + 2).gameObject.SetActive(false);
+                    }
+                }
+
+
+                for (int j = 0; j < joueurs[i].transform.GetChild(1).childCount; j++)
+                {
+                    Debug.Log(Tour.JetonsDebat[i, j]);
+                    Debug.Log(Tour.ActivesDebat[i, j]);
+                    joueurs[i].transform.GetChild(1).GetChild(j).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[i, j];
+                    joueurs[i].transform.GetChild(1).GetChild(j).gameObject.SetActive(Tour.ActivesDebat[i, j]);
+                    Debug.Log(joueurs[i].transform.GetChild(1).GetChild(j).gameObject.activeSelf);
+                }
+
+                joueurs[i].SetActive(true);
+            }
+        }
+
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        Debug.Log(joueurs[pos-1]);
+        joueurs[pos - 1].SetActive(false);
     }
 }

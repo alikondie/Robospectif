@@ -7,6 +7,8 @@ public class Tour
     private static Sprite[] persosDebat;
     private static Sprite[,] jetonsDebat;
     private static bool[,] activesDebat;
+    private static int[,] zonesDebat;
+    private static int[] piles;
 
     public static Sprite[] PersosDebat
     {
@@ -24,6 +26,18 @@ public class Tour
     {
         get => activesDebat;
         set => activesDebat = value;
+    }
+
+    public static int[,] ZonesDebat
+    {
+        get => zonesDebat;
+        set => zonesDebat = value;
+    }
+
+    public static int[] Piles
+    {
+        get => piles;
+        set => piles = value;
     }
 
     // Start is called before the first frame update

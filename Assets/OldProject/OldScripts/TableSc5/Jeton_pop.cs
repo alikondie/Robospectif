@@ -12,7 +12,7 @@ public class Jeton_pop : MonoBehaviour
     private Vector3 positionInit;
 
     private List<GameObject> joueurs;
-    private List<GameObject> cartes;    
+    private List<GameObject> cartes;
 
     public static int[] nb_bonus;
     public static int[] nb_malus;
@@ -26,6 +26,11 @@ public class Jeton_pop : MonoBehaviour
         cartes = new List<GameObject>();
         for (int i = 3; i < canva.childCount; i++)
         {
+            for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
+            {
+                canva.GetChild(i).GetChild(2).GetChild(j).gameObject.SetActive(false);
+            }
+
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
         }
@@ -46,19 +51,17 @@ public class Jeton_pop : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(this.transform.parent.parent.name);
-
         if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
         {
             this.gameObject.SetActive(false);
 
             int index = cartes.IndexOf(collision.gameObject);
             
-            if (Pile.piles[index] < 8)
+            if (Tour.Piles[index] < 8)
             {
-                joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
-                joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.SetActive(true);
-                Pile.piles[index]++;
+                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
+                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
+                Tour.Piles[index]++;
             }
         }
 
