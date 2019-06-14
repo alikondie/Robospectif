@@ -1474,7 +1474,6 @@ GameObject:
   - component: {fileID: 249610738}
   - component: {fileID: 249610737}
   - component: {fileID: 249610739}
-  - component: {fileID: 249610736}
   m_Layer: 5
   m_Name: ButtonPlayer5
   m_TagString: Untagged
@@ -1502,22 +1501,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 250}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &249610736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249610734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 249610739}
-  position: 5
 --- !u!114 &249610737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3552,7 +3535,6 @@ GameObject:
   - component: {fileID: 632359302}
   - component: {fileID: 632359301}
   - component: {fileID: 632359303}
-  - component: {fileID: 632359300}
   m_Layer: 5
   m_Name: ButtonPlayer4
   m_TagString: Untagged
@@ -3580,22 +3562,6 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: 250}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &632359300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632359298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 632359303}
-  position: 4
 --- !u!114 &632359301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3687,7 +3653,6 @@ GameObject:
   - component: {fileID: 641127527}
   - component: {fileID: 641127526}
   - component: {fileID: 641127528}
-  - component: {fileID: 641127525}
   m_Layer: 5
   m_Name: ButtonPlayer6
   m_TagString: Untagged
@@ -3715,22 +3680,6 @@ RectTransform:
   m_AnchoredPosition: {x: -650, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &641127525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641127523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 641127528}
-  position: 6
 --- !u!114 &641127526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5081,7 +5030,6 @@ GameObject:
   - component: {fileID: 865081808}
   - component: {fileID: 865081807}
   - component: {fileID: 865081809}
-  - component: {fileID: 865081806}
   m_Layer: 5
   m_Name: ButtonPlayer2
   m_TagString: Untagged
@@ -5109,22 +5057,6 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: -250}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &865081806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865081804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 865081809}
-  position: 2
 --- !u!114 &865081807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5342,7 +5274,6 @@ GameObject:
   - component: {fileID: 1016202740}
   - component: {fileID: 1016202739}
   - component: {fileID: 1016202741}
-  - component: {fileID: 1016202738}
   m_Layer: 5
   m_Name: ButtonPlayer1
   m_TagString: Untagged
@@ -5370,22 +5301,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: -250}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1016202738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016202736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 1016202741}
-  position: 1
 --- !u!114 &1016202739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6561,7 +6476,6 @@ GameObject:
   - component: {fileID: 1113802064}
   - component: {fileID: 1113802063}
   - component: {fileID: 1113802065}
-  - component: {fileID: 1113802062}
   m_Layer: 5
   m_Name: ButtonPlayer3
   m_TagString: Untagged
@@ -6589,22 +6503,6 @@ RectTransform:
   m_AnchoredPosition: {x: 650, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1113802062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113802060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310d95f93bcd425428fcab133d05eb81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_position_joueurs: {fileID: 5257337}
-  button: {fileID: 1113802065}
-  position: 3
 --- !u!114 &1113802063
 MonoBehaviour:
   m_ObjectHideFlags: 0

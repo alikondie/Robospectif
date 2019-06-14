@@ -19,7 +19,6 @@ public class Valider : MonoBehaviour
     [SerializeField] Image equi0;
     [SerializeField] Image equi1;
     [SerializeField] Image equi2;
-    public static Joueur joueur;
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
@@ -75,23 +74,20 @@ public class Valider : MonoBehaviour
             Main.Global.TabP.removeImage(personnages[i]);
         }
 
-        JoueurStatic.Perso1 = personnages[0].Sprite;
-        JoueurStatic.Perso2 = personnages[1].Sprite;
-        JoueurStatic.Perso3 = personnages[2].Sprite;
-        JoueurStatic.Perso4 = personnages[3].Sprite;
-        JoueurStatic.Perso5 = personnages[4].Sprite;
-        JoueurStatic.Perso6 = personnages[5].Sprite;
+        for (int i = 0; i < personnages.Length; i++)
+        {
+            JoueurStatic.Persos[i] = personnages[i].Sprite;
+        }
 
     }
 
     private void ButtonClicked()
     {
-        joueur = MainScript.joueur;
-        joueur.Dim = dim.sprite;
-        joueur.Loco = loco.sprite;
-        joueur.Equi1 = equi0.sprite;
-        joueur.Equi2 = equi1.sprite;
-        joueur.Equi3 = equi2.sprite;
+        JoueurStatic.Dim = dim.sprite;
+        JoueurStatic.Loco = loco.sprite;
+        JoueurStatic.Equi1 = equi0.sprite;
+        JoueurStatic.Equi2 = equi1.sprite;
+        JoueurStatic.Equi3 = equi2.sprite;
         MyNetworkMessage conception = new MyNetworkMessage();
         conception.message = JoueurStatic.Numero;
         JoueurStatic.Client.Send(conceptionID, conception);

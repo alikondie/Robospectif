@@ -8,24 +8,15 @@ public class JoueurStatic
     private static int numero;
     private static int position;
     private static Sprite loco;
+    private static Sprite[] locomotions;
     private static Sprite dim;
+    private static Sprite[] dimensions;
     private static Sprite equi1;
     private static Sprite equi2;
     private static Sprite equi3;
+    private static Sprite[] equipements;
     private static Sprite[] robot;
-    private static Sprite perso1;
-    private static Sprite perso2;
-    private static Sprite perso3;
-    private static Sprite perso4;
-    private static Sprite perso5;
-    private static Sprite perso6;
     private static Sprite[] persos;
-    private static bool perso1Choisi;
-    private static bool perso2Choisi;
-    private static bool perso3Choisi;
-    private static bool perso4Choisi;
-    private static bool perso5Choisi;
-    private static bool perso6Choisi;
     private static bool[] persosChoisis;
     private static int nbCouronnes;
 #pragma warning disable CS0618 // Le type ou le membre est obsolète
@@ -89,78 +80,6 @@ public class JoueurStatic
         set => equi3 = value;
     }
 
-    public static Sprite Perso1
-    {
-        get => perso1;
-        set => perso1 = value;
-    }
-
-    public static Sprite Perso2
-    {
-        get => perso2;
-        set => perso2 = value;
-    }
-
-    public static Sprite Perso3
-    {
-        get => perso3;
-        set => perso3 = value;
-    }
-
-    public static Sprite Perso4
-    {
-        get => perso4;
-        set => perso4 = value;
-    }
-
-    public static Sprite Perso5
-    {
-        get => perso5;
-        set => perso5 = value;
-    }
-
-    public static Sprite Perso6
-    {
-        get => perso6;
-        set => perso6 = value;
-    }
-
-    public static bool Perso1Choisi
-    {
-        get => perso1Choisi;
-        set => perso1Choisi = value;
-    }
-
-    public static bool Perso2Choisi
-    {
-        get => perso2Choisi;
-        set => perso2Choisi = value;
-    }
-
-    public static bool Perso3Choisi
-    {
-        get => perso3Choisi;
-        set => perso3Choisi = value;
-    }
-
-    public static bool Perso4Choisi
-    {
-        get => perso4Choisi;
-        set => perso4Choisi = value;
-    }
-
-    public static bool Perso5Choisi
-    {
-        get => perso5Choisi;
-        set => perso5Choisi = value;
-    }
-
-    public static bool Perso6Choisi
-    {
-        get => perso6Choisi;
-        set => perso6Choisi = value;
-    }
-
     public static int NbCouronnes
     {
         get => nbCouronnes;
@@ -170,4 +89,7 @@ public class JoueurStatic
     public static Sprite[] Robot { get => robot; set => robot = value; }
     public static bool[] PersosChoisis { get => persosChoisis; set => persosChoisis = value; }
     public static NetworkClient Client { get => client; set => client = value; }
+    public static Sprite[] Locomotions { get => locomotions; set => locomotions = value; }
+    public static Sprite[] Dimensions { get => dimensions; set => dimensions = value; }
+    public static Sprite[] Equipements { get => equipements; set => equipements = value; }
 }

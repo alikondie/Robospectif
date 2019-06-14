@@ -43,23 +43,11 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
         if (tickCurrent.gameObject.activeSelf)
         {
             Debug.Log(image.sprite);
-            if (JoueurStatic.Perso1 == image.sprite)
-                JoueurStatic.Perso1Choisi = true;
-
-            if (JoueurStatic.Perso2 == image.sprite)
-                JoueurStatic.Perso2Choisi = true;
-
-            if (JoueurStatic.Perso3 == image.sprite)
-                JoueurStatic.Perso3Choisi = true;
-
-            if (JoueurStatic.Perso4 == image.sprite)
-                JoueurStatic.Perso4Choisi = true;
-
-            if (JoueurStatic.Perso5 == image.sprite)
-                JoueurStatic.Perso5Choisi = true;
-
-            if (JoueurStatic.Perso6 == image.sprite)
-                JoueurStatic.Perso6Choisi = true;
+            for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+            {
+                if (JoueurStatic.Persos[i] == image.sprite)
+                    JoueurStatic.PersosChoisis[i] = true;
+            }
             perso = image.sprite;
         }
         canvas_choix_persos.SetActive(false);

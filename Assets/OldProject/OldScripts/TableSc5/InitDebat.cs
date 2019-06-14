@@ -17,7 +17,6 @@ public class InitDebat : MonoBehaviour
     short jeton = 1010;
 
     [SerializeField] Button button;
-    private int JoueurCourant;
 
     [SerializeField] GameObject[] persos;
 
@@ -30,8 +29,6 @@ public class InitDebat : MonoBehaviour
     private Sprite[] persoSprites;
 
     private int[,] zones;
-
-    private int nbJoueurs;
 
     private int nbRecu;
 
@@ -53,11 +50,6 @@ public class InitDebat : MonoBehaviour
             }
         }
 
-        index = new int[6];
-        for (int i = 0; i < 6; i++)
-        {
-            index[i] = 0;
-        }
         NetworkServer.RegisterHandler(jeton, onJetonReceived);
 
 
@@ -69,44 +61,34 @@ public class InitDebat : MonoBehaviour
         positionsButton[4] = new Vector2(-3, (float)3.75);
         positionsButton[5] = new Vector2(-7, 0);
 
-        JoueurCourant = Partie.JoueurCourant;
-
-        int pos = -1;
-        for (int i = 0; i < Partie.Joueurs.Count; i++)
-        {
-            if (Partie.Joueurs[i].Numero == JoueurCourant)
-                pos = Partie.Joueurs[i].Position;
-        }
 
         //button.transform.position = positionsButton[pos-1];
 
-        if (pos == 3)
+       /* if (pos == 3)
             button.transform.Rotate(Vector3.forward * 90);
 
         if ((pos == 4) || (pos == 5))
             button.transform.Rotate(Vector3.forward * 180);
 
         if (pos == 6)
-            button.transform.Rotate(Vector3.forward * 270);
-
-        button.gameObject.SetActive(false);
-        nbRecu = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if (Partie.Positions[i] != 0)
-            {
-                nbJoueurs++;
-            }
-        }
+            button.transform.Rotate(Vector3.forward * 270);*/
 
         button.onClick.AddListener(() => ButtonClicked());
+        NetworkServer.RegisterHandler(persosID, onPersoReceived);
 
-        persoSprites = new Sprite[6];
-        for (int i = 0; i < 6; i++)
-        {
-            persoSprites[i] = null;
-        }
+    }
 
+ /*   void OnEnable()
+    {
+        Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
+
+        index = new int[] { 0, 0, 0, 0, 0, 0 };
+
+        nbRecu = 0;
+
+        persoSprites = new Sprite[] { null, null, null, null, null, null};
+
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
 
         for (int i = 0; i < 6; i++)
         {
@@ -116,15 +98,10 @@ public class InitDebat : MonoBehaviour
             persos[i].transform.GetChild(5).gameObject.SetActive(false);
         }
 
-        persos[0].transform.GetChild(3).gameObject.SetActive(false);
-        persos[0].transform.GetChild(4).gameObject.SetActive(false);
-        persos[0].transform.GetChild(5).gameObject.SetActive(false);
-
         zones = new int[6, 2];
 
-        NetworkServer.RegisterHandler(persosID, onPersoReceived);
-
-    }
+        button.gameObject.SetActive(false);
+    }*/
 
     private void onJetonReceived(NetworkMessage netMsg)
     {
@@ -183,7 +160,7 @@ public class InitDebat : MonoBehaviour
         Sprite sp = Resources.Load<Sprite>(spriteString);
         for (int j = 0; j < 6; j++)
         {
-            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != JoueurCourant))
+            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != Partie.JoueurCourant))
             {
                 persoSprites[j] = sp;
                 persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;
@@ -202,14 +179,9 @@ public class InitDebat : MonoBehaviour
     void Update()
     {
 
-        if (nbRecu == nbJoueurs - 1)
+        if (nbRecu == Partie.Joueurs.Capacity - 1)
         {
             button.gameObject.SetActive(true);
         }
-    }
-
-    void OnEnable()
-    {
-        Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
     }
 }

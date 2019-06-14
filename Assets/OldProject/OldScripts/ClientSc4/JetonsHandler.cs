@@ -28,13 +28,9 @@ public class JetonsHandler : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        text.text = "Joueur " + JoueurStatic.Numero;
+    {        
         JoueurStatic.Client.RegisterHandler(waitID, OnWaitReceived);
 
-        usageCompteur = 0;
-        societeCompteur = 0;
-        planeteCompteur = 0;
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       
         societeVert.onClick.AddListener(() => OnSocieteClicked());       
@@ -85,5 +81,14 @@ public class JetonsHandler : MonoBehaviour
             planeteVert.gameObject.SetActive(false);
             planeteRouge.gameObject.SetActive(false);
         }
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur " + JoueurStatic.Numero;
+
+        usageCompteur = 0;
+        societeCompteur = 0;
+        planeteCompteur = 0;
     }
 }

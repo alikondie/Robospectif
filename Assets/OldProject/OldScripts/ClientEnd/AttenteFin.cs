@@ -16,13 +16,10 @@ public class AttenteFin : MonoBehaviour
     private int position;
 
     short nextID = 1015;
-    public static Joueur joueur;
 
     // Start is called before the first frame update
     void Start()
     {
-        joueur = Valider.joueur;
-        text.text = "Joueur : " + joueur.Numero.ToString();
         JoueurStatic.Client.RegisterHandler(nextID, onWaitReceived);
     }
 
@@ -41,6 +38,11 @@ public class AttenteFin : MonoBehaviour
             canvas_fin_partie.SetActive(true);
             //SceneManager.LoadScene("FinTel");
         }
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 
     // Update is called once per frame

@@ -14,9 +14,6 @@ public class Jeton_pop : MonoBehaviour
     private List<GameObject> joueurs;
     private List<GameObject> cartes;
 
-    public static int[] nb_bonus;
-    public static int[] nb_malus;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +31,11 @@ public class Jeton_pop : MonoBehaviour
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
         }
-        positionInit = transform.position;
-        nb_bonus = new int[6];
-        nb_malus = new int[6];
+        positionInit = this.transform.position;
+    }
+
+    void OnEnable()
+    {
     }
 
 
