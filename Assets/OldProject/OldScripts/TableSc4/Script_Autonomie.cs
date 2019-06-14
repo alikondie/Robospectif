@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class Script_Autonomie : MonoBehaviour
@@ -50,7 +50,7 @@ public class Script_Autonomie : MonoBehaviour
         positionJoueur = Partie.JoueurCourant;
 
         int pos = -1;
-
+        
         for (int i = 0; i < 6; i++)
         {
             if (Partie.Positions[i] == positionJoueur)
@@ -58,7 +58,6 @@ public class Script_Autonomie : MonoBehaviour
                 pos = i + 1;
             }
         }
-
         Debug.Log(" position methode pourrie : " + pos);
         Debug.Log("position mieux : " + Array.IndexOf(Partie.Positions, positionJoueur));
         // Definie l'orientation et la postion de la partie Conduit
@@ -158,7 +157,9 @@ public class Script_Autonomie : MonoBehaviour
 
             Vector3 move = mousePos - mouseStartPos;
             positionVollant = playerStartPos + move;
-
+            Debug.Log("position volant : " + positionVollant);
+            Debug.Log("position playerStartPos : " + playerStartPos);
+            Debug.Log("position move : " + move);
             if (SENS == 1 || SENS == 3)
             {
                 if (positionVollant.x <= (positionDebutX + ecart) && positionVollant.x >= (positionDebutX - ecart))
