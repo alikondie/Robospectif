@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class InitPerso : MonoBehaviour
 {
-    public static Main.Player player;
     [SerializeField] Text text;
     [SerializeField] Image[] personnagesGO;
     [SerializeField] Image[] ticks;
-    public static Main.Image[] personnages;
     private int nbJoueurs = Init.nbJoueurs;
 
 
@@ -18,19 +16,6 @@ public class InitPerso : MonoBehaviour
     void Start()
     {
         
-        bool[] persosChoisis = new bool[] { JoueurStatic.Perso1Choisi, JoueurStatic.Perso2Choisi, JoueurStatic.Perso3Choisi, JoueurStatic.Perso4Choisi, JoueurStatic.Perso5Choisi, JoueurStatic.Perso6Choisi };
-        for (int i = 0; i < ticks.Length; i++)
-        {
-            ticks[i].gameObject.SetActive(false);
-        }
-        
-        text.text = "Joueur : " + JoueurStatic.Numero;
-        Perso();
-        for (int i = 0; i < persosChoisis.Length; i++)
-        {
-            if (persosChoisis[i])
-                personnagesGO[i].gameObject.SetActive(false);
-        }
     }
 
     // Update is called once per frame
@@ -39,13 +24,24 @@ public class InitPerso : MonoBehaviour
 
     }
 
-    private void Perso()
+    void OnEnable()
     {
-        personnagesGO[0].sprite = JoueurStatic.Perso1;
-        personnagesGO[1].sprite = JoueurStatic.Perso2;
-        personnagesGO[2].sprite = JoueurStatic.Perso3;
-        personnagesGO[3].sprite = JoueurStatic.Perso4;
-        personnagesGO[4].sprite = JoueurStatic.Perso5;
-        personnagesGO[5].sprite = JoueurStatic.Perso6;
+        for (int i = 0; i < ticks.Length; i++)
+        {
+            ticks[i].gameObject.SetActive(false);
+        }
+
+        text.text = "Joueur : " + JoueurStatic.Numero;
+
+        for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+        {
+            personnagesGO[i].sprite = JoueurStatic.Persos[i];
+        }
+
+        for (int i = 0; i < JoueurStatic.PersosChoisis.Length; i++)
+        {
+            if (JoueurStatic.PersosChoisis[i])
+                personnagesGO[i].gameObject.SetActive(false);
+        }
     }
 }

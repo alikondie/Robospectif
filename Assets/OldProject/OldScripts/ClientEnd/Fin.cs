@@ -10,6 +10,11 @@ public class Fin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    void OnEnable()
+    {
         text.text = "Joueur : " + JoueurStatic.Numero;
     }
 

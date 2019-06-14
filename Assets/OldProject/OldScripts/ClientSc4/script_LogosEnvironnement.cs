@@ -41,24 +41,10 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero;
-
         choixZone = new int[2];
-        choixZone[0] = 0;
-        choixZone[1] = 0;
 
         button.onClick.AddListener(() => ButtonClicked());
         button.gameObject.SetActive(false);
-
-        rural.GetComponent<Image>().material = couleurRural;
-        periUrbain.GetComponent<Image>().material = couleurPeriUrbain;
-        urbain.GetComponent<Image>().material = couleurUrbain;
-        zoneToucher1 = false;
-        zoneToucher2 = false;
-        zoneToucher3 = false;
-
-        nombreChoix = 0;
-
     }
 
     private void ButtonClicked()
@@ -79,6 +65,22 @@ public class script_LogosEnvironnement : MonoBehaviour
         canvas_pres_perso.SetActive(false);
         canvas_choix_jetons.SetActive(true);
         //SceneManager.LoadScene("Scene_ChoixJetons");
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero;
+        choixZone[0] = 0;
+        choixZone[1] = 0;
+
+        rural.GetComponent<Image>().material = couleurRural;
+        periUrbain.GetComponent<Image>().material = couleurPeriUrbain;
+        urbain.GetComponent<Image>().material = couleurUrbain;
+        zoneToucher1 = false;
+        zoneToucher2 = false;
+        zoneToucher3 = false;
+
+        nombreChoix = 0;
     }
 
     void Update()

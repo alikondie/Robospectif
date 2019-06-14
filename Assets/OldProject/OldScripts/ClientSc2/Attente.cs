@@ -15,13 +15,10 @@ public class Attente : MonoBehaviour
     [SerializeField] Text text;
 
     short waitID = 1006;
-    public static Joueur joueur;
 
     // Start is called before the first frame update
     void Start()
     {
-        joueur = Valider.joueur;
-        text.text = "Joueur : " + joueur.Numero.ToString();
         JoueurStatic.Client.RegisterHandler(waitID, onWaitReceived);
     }
 
@@ -45,5 +42,10 @@ public class Attente : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 }

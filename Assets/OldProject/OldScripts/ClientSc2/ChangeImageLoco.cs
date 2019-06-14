@@ -9,21 +9,18 @@ public class ChangeImageLoco : MonoBehaviour, IPointerClickHandler
 {
 
     [SerializeField] Image image;
-    public Main.Image[] loco;
     private int indice;
-    private Main.Player p;
 
     // Start is called before the first frame update
     void Start()
 
     {
-        loco = MainScript.locomotions;
         indice = 0;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         indice = (indice + 1) % 2;
-        image.sprite = loco[indice].Sprite;
+        image.sprite = JoueurStatic.Locomotions[indice];
     }
 }

@@ -7,16 +7,15 @@ using UnityEngine.Networking;
 public class MainScript : MonoBehaviour
 {
     public static Main.Player player;
-    public static Joueur joueur;
     [SerializeField] Text text;
     [SerializeField] Image dimensionGO1;
     [SerializeField] Image locomotionGO1;
     [SerializeField] Image equipementGO1;
     [SerializeField] Image equipementGO2;
     [SerializeField] Image equipementGO3;
-    public static Main.Image[] dimensions;
-    public static Main.Image[] locomotions;
-    public static Main.Image[] equipements;
+    private Main.Image[] dimensions;
+    private Main.Image[] locomotions;
+    private Main.Image[] equipements;
 
     private void RandomEqui()
     {
@@ -55,6 +54,13 @@ public class MainScript : MonoBehaviour
         equipementGO1.sprite = equipements[0].Sprite;
         equipementGO2.sprite = equipements[1].Sprite;
         equipementGO3.sprite = equipements[2].Sprite;
+
+        JoueurStatic.Equipements = new Sprite[equipements.Length];
+
+        for (int i = 0; i < equipements.Length; i++)
+        {
+            JoueurStatic.Equipements[i] = equipements[i].Sprite;
+        }
     }
 
     private void RandomLoco()
@@ -73,6 +79,13 @@ public class MainScript : MonoBehaviour
         Main.Global.TabL.removeImage(locomotions[1]);
 
         locomotionGO1.sprite = locomotions[0].Sprite;
+
+        JoueurStatic.Locomotions = new Sprite[locomotions.Length];
+
+        for (int i = 0; i < locomotions.Length; i++)
+        {
+            JoueurStatic.Locomotions[i] = locomotions[i].Sprite;
+        }
     }
 
     private void RandomDim()
@@ -91,14 +104,19 @@ public class MainScript : MonoBehaviour
         Main.Global.TabD.removeImage(dimensions[1]);
 
         dimensionGO1.sprite = dimensions[0].Sprite;
+
+        JoueurStatic.Dimensions = new Sprite[dimensions.Length];
+
+        for (int i = 0; i < dimensions.Length; i++)
+        {
+            JoueurStatic.Dimensions[i] = dimensions[i].Sprite;
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {        
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
-
         RandomDim();
         
         RandomLoco();
@@ -109,6 +127,11 @@ public class MainScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    void OnEnable()
     {
         text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
