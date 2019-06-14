@@ -156,6 +156,7 @@ public class SansHUD : NetworkManager
         Initialisation.get(images, z);
     }
 
+    // connexion d'un joueur sur un des boutons du client
     void OnMessageReceived(NetworkMessage message)
     {
         int id = message.ReadMessage<MyNetworkMessage>().message;

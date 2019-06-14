@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5257338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036c4d4f6e51d3848be62fa608000af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas_choix_cartes: {fileID: 160886055}
+  canvas_position_joueurs: {fileID: 5257337}
   buttons:
   - {fileID: 1016202741}
   - {fileID: 865081809}
@@ -159,6 +161,7 @@ MonoBehaviour:
   - {fileID: 526228323}
   - {fileID: 484173660}
   - {fileID: 453787511}
+  positions: 
 --- !u!114 &5257339
 MonoBehaviour:
   m_ObjectHideFlags: 0

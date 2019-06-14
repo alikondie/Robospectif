@@ -36,7 +36,9 @@ public class JoueurStatic
     // Start is called before the first frame update
     void Start()
     {
-
+        robot = new Sprite[5];
+        persos = new Sprite[6];
+        persosChoisis = new bool[] { false, false, false, false, false, false };
     }
 
     // Update is called once per frame

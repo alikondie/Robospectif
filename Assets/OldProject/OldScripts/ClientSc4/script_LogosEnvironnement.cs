@@ -12,7 +12,6 @@ public class script_LogosEnvironnement : MonoBehaviour
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_pres_perso;
     [SerializeField] Button button;
-    private int position;
     [SerializeField] Image perso;
     private string persoSprite;
     [SerializeField] Text text;
@@ -42,8 +41,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        position = selectUser.positionStatic;
-        text.text = "Joueur : " + position;
+        text.text = "Joueur : " + JoueurStatic.Numero;
 
         choixZone = new int[2];
         choixZone[0] = 0;
@@ -73,7 +71,7 @@ public class script_LogosEnvironnement : MonoBehaviour
             s = s + spriteString[i];
         }
         persoSprite = s;
-        msg.numero = position;
+        msg.numero = JoueurStatic.Numero;
         msg.image = persoSprite;
         msg.choixZone0 = choixZone[0];
         msg.choixZone1 = choixZone[1];

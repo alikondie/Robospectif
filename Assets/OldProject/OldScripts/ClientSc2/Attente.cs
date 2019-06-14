@@ -14,8 +14,6 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
 
-    private int position;
-
     short waitID = 1006;
     public static Joueur joueur;
 
@@ -23,7 +21,6 @@ public class Attente : MonoBehaviour
     void Start()
     {
         joueur = Valider.joueur;
-        position = Valider.position;
         text.text = "Joueur : " + joueur.Numero.ToString();
         JoueurStatic.Client.RegisterHandler(waitID, onWaitReceived);
     }
@@ -32,7 +29,7 @@ public class Attente : MonoBehaviour
     {
         int fini = netMsg.ReadMessage<MyNetworkMessage>().message;
         canvas_pres_robot.SetActive(false);
-        if (position == fini)
+        if (JoueurStatic.Numero == fini)
         {
             //SceneManager.LoadScene("Scene_ChoixJetons");
             canvas_choix_jetons.SetActive(true);

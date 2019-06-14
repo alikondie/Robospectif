@@ -7,22 +7,49 @@ using System;
 
 public class Init : MonoBehaviour
 {
-    
+
+    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_position_joueurs;
     short messageID = 1000;
     short positionsID = 1005;
     [SerializeField] Button[] buttons;
     [SerializeField] Text[] texts;
-    public static int[] positions;
+    public int[] positions;
     public static int nbJoueurs;
     // Start is called before the first frame update
     void Start()
     {
         positions = new int[6];
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
+        }
+
+        buttons[0].onClick.AddListener(() => onButtonClicked(0));
+        buttons[1].onClick.AddListener(() => onButtonClicked(1));
+        buttons[2].onClick.AddListener(() => onButtonClicked(2));
+        buttons[3].onClick.AddListener(() => onButtonClicked(3));
+        buttons[4].onClick.AddListener(() => onButtonClicked(4));
+        buttons[5].onClick.AddListener(() => onButtonClicked(5));
+
+
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         JoueurStatic.Client.RegisterHandler(messageID, OnMessageReceived);
         JoueurStatic.Client.RegisterHandler(positionsID, OnPositionsReceived);
     }
 
+    private void onButtonClicked(int i)
+    {
+        JoueurStatic.Numero = positions[i];
+        JoueurStatic.Position = i + 1;
+        MyNetworkMessage message = new MyNetworkMessage();
+        message.message = JoueurStatic.Numero;
+        JoueurStatic.Client.Send(messageID, message);
+        canvas_position_joueurs.SetActive(false);
+        canvas_choix_cartes.SetActive(true);
+    }
+
+    // un autre joueur a sélectionné l'un des boutons
     void OnMessageReceived(NetworkMessage message)
     {
         int i = message.ReadMessage<MyNetworkMessage>().message;
@@ -40,7 +67,6 @@ public class Init : MonoBehaviour
         int i = 0;
         var message = netMsg.ReadMessage<MyPositionsMessage>();
         int[] posMsg = new int[] { message.position1, message.position2, message.position3, message.position4, message.position5, message.position6 };
-        Debug.Log("posmsg : " + positions.Length);
 
         for (int j = 0; j < posMsg.Length; j++)
         {

@@ -20,7 +20,6 @@ public class Valider : MonoBehaviour
     [SerializeField] Image equi1;
     [SerializeField] Image equi2;
     public static Joueur joueur;
-    public static int position;
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
@@ -30,14 +29,13 @@ public class Valider : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
-        position = selectUser.positionStatic;
         JoueurStatic.Client.RegisterHandler(chronoID, onChronoReceived);
     }
 
     private void onChronoReceived(NetworkMessage netMsg)
     {
         int joueurFini = netMsg.ReadMessage<MyNetworkMessage>().message;
-        if (joueurFini != position)
+        if (joueurFini != JoueurStatic.Numero)
         {
             ScriptTimer.debutChrono();
         }
@@ -95,7 +93,7 @@ public class Valider : MonoBehaviour
         joueur.Equi2 = equi1.sprite;
         joueur.Equi3 = equi2.sprite;
         MyNetworkMessage conception = new MyNetworkMessage();
-        conception.message = position;
+        conception.message = JoueurStatic.Numero;
         JoueurStatic.Client.Send(conceptionID, conception);
         MyImageMessage robot = new MyImageMessage();
         robot.loco= loco.sprite.ToString();
@@ -103,8 +101,8 @@ public class Valider : MonoBehaviour
         robot.equi1 = equi0.sprite.ToString();
         robot.equi2 = equi1.sprite.ToString();
         robot.equi3 = equi2.sprite.ToString();
-        robot.num = position;
-        robot.zone = selectUser.zone;
+        robot.num = JoueurStatic.Numero;
+        robot.zone = JoueurStatic.Position;
         JoueurStatic.Client.Send(idMessage, robot);
         RandomPerso();
         canvas_choix_cartes.SetActive(false);

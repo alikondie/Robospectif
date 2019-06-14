@@ -24,7 +24,7 @@ public class InitPerso : MonoBehaviour
             ticks[i].gameObject.SetActive(false);
         }
         
-        text.text = "Joueur : " + selectUser.positionStatic;
+        text.text = "Joueur : " + JoueurStatic.Numero;
         Perso();
         for (int i = 0; i < persosChoisis.Length; i++)
         {

@@ -29,7 +29,7 @@ public class JetonsHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "Joueur " + selectUser.positionStatic;
+        text.text = "Joueur " + JoueurStatic.Numero;
         JoueurStatic.Client.RegisterHandler(waitID, OnWaitReceived);
 
         usageCompteur = 0;

@@ -25,7 +25,7 @@ public class EnvoyerJeton : MonoBehaviour
     public void envoyer()
     {
         MyJetonMessage msg = new MyJetonMessage();
-        msg.joueur = selectUser.positionStatic;
+        msg.joueur = JoueurStatic.Numero;
         string s = image.sprite.ToString();
         string msgs = "";
         for (int i = 0; i < s.Length - 21; i++)

@@ -13,31 +13,28 @@ public class selectUser : MonoBehaviour
     [SerializeField] Button button;
     private int positionEffective;
     [SerializeField] int position;
-    public static int zone;
     short messageID = 1000;
     
 
     void Start()
     {
-        button.gameObject.SetActive(false);
-        button.onClick.AddListener(() => ButtonClicked());
+        /*button.gameObject.SetActive(false);
+        button.onClick.AddListener(() => ButtonClicked());*/
     }
 
     void Update()
     {
-        positionEffective = (Init.positions[position - 1]);
     }
 
     void ButtonClicked()
     {
-        JoueurStatic.Numero = positionEffective;
+        /*JoueurStatic.Numero = positionEffective;
         JoueurStatic.Position = position;
-        zone = position;
         MyNetworkMessage message = new MyNetworkMessage();
         message.message = positionEffective;
         JoueurStatic.Client.Send(messageID, message);
         canvas_position_joueurs.SetActive(false);
-        canvas_choix_cartes.SetActive(true);
+        canvas_choix_cartes.SetActive(true);*/
         //SceneManager.LoadScene("scene2");
     }
 }
