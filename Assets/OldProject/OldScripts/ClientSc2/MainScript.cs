@@ -17,7 +17,6 @@ public class MainScript : MonoBehaviour
     public static Main.Image[] dimensions;
     public static Main.Image[] locomotions;
     public static Main.Image[] equipements;
-    private int position = selectUser.positionStatic;
 
     private void RandomEqui()
     {
@@ -97,10 +96,8 @@ public class MainScript : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        joueur = new Joueur();
-        joueur.Numero = position;        
-        text.text = "Joueur : " + position.ToString();
+    {        
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
 
         RandomDim();
         
@@ -113,6 +110,6 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Joueur : " + position.ToString();
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 }

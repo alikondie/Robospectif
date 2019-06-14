@@ -12,7 +12,6 @@ public class selectUser : MonoBehaviour
     [SerializeField] GameObject canvas_position_joueurs;
     [SerializeField] Button button;
     private int positionEffective;
-    public static int positionStatic;
     [SerializeField] int position;
     public static int zone;
     short messageID = 1000;
@@ -31,7 +30,8 @@ public class selectUser : MonoBehaviour
 
     void ButtonClicked()
     {
-        positionStatic = positionEffective;
+        JoueurStatic.Numero = positionEffective;
+        JoueurStatic.Position = position;
         zone = position;
         MyNetworkMessage message = new MyNetworkMessage();
         message.message = positionEffective;

@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class JetonsHandler : MonoBehaviour
 {
-    public static NetworkClient client;
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_vainqueur;
 
@@ -31,8 +30,7 @@ public class JetonsHandler : MonoBehaviour
     void Start()
     {
         text.text = "Joueur " + selectUser.positionStatic;
-        client = Valider.client;
-        client.RegisterHandler(waitID, OnWaitReceived);
+        JoueurStatic.Client.RegisterHandler(waitID, OnWaitReceived);
 
         usageCompteur = 0;
         societeCompteur = 0;

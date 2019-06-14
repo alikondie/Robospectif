@@ -8,13 +8,11 @@ public class EnvoyerJeton : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] Button button;
-    NetworkClient client;
     short jeton = 1010;
 
     // Start is called before the first frame update
     void Start()
     {
-        client = SansHUD.myclient;
         button.onClick.AddListener(() => envoyer());
     }
 
@@ -35,6 +33,6 @@ public class EnvoyerJeton : MonoBehaviour
             msgs = msgs + s[i];
         }
         msg.sprite = msgs;
-        client.Send(jeton, msg);
+        JoueurStatic.Client.Send(jeton, msg);
     }
 }

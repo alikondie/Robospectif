@@ -17,17 +17,15 @@ public class Attente : MonoBehaviour
     private int position;
 
     short waitID = 1006;
-    public static NetworkClient client;
     public static Joueur joueur;
 
     // Start is called before the first frame update
     void Start()
     {
         joueur = Valider.joueur;
-        client = Valider.client;
         position = Valider.position;
         text.text = "Joueur : " + joueur.Numero.ToString();
-        client.RegisterHandler(waitID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(waitID, onWaitReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)

@@ -21,7 +21,6 @@ public class Valider : MonoBehaviour
     [SerializeField] Image equi2;
     public static Joueur joueur;
     public static int position;
-    public static NetworkClient client;
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
@@ -30,10 +29,9 @@ public class Valider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        client = selectUser.client;
         button.onClick.AddListener(() => ButtonClicked());
         position = selectUser.positionStatic;
-        client.RegisterHandler(chronoID, onChronoReceived);
+        JoueurStatic.Client.RegisterHandler(chronoID, onChronoReceived);
     }
 
     private void onChronoReceived(NetworkMessage netMsg)
@@ -98,7 +96,7 @@ public class Valider : MonoBehaviour
         joueur.Equi3 = equi2.sprite;
         MyNetworkMessage conception = new MyNetworkMessage();
         conception.message = position;
-        client.Send(conceptionID, conception);
+        JoueurStatic.Client.Send(conceptionID, conception);
         MyImageMessage robot = new MyImageMessage();
         robot.loco= loco.sprite.ToString();
         robot.dim = dim.sprite.ToString();
@@ -107,7 +105,7 @@ public class Valider : MonoBehaviour
         robot.equi3 = equi2.sprite.ToString();
         robot.num = position;
         robot.zone = selectUser.zone;
-        client.Send(idMessage, robot);
+        JoueurStatic.Client.Send(idMessage, robot);
         RandomPerso();
         canvas_choix_cartes.SetActive(false);
         canvas_pres_robot.SetActive(true);

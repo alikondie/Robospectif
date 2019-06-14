@@ -16,8 +16,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     [SerializeField] Image perso;
     private string persoSprite;
     [SerializeField] Text text;
-
-    public static NetworkClient client;
+    
     short persosID = 1007;
 
     [SerializeField] GameObject rural;
@@ -43,7 +42,6 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        client = Valider.client;
         position = selectUser.positionStatic;
         text.text = "Joueur : " + position;
 
@@ -79,7 +77,7 @@ public class script_LogosEnvironnement : MonoBehaviour
         msg.image = persoSprite;
         msg.choixZone0 = choixZone[0];
         msg.choixZone1 = choixZone[1];
-        client.Send(persosID, msg);
+        JoueurStatic.Client.Send(persosID, msg);
         canvas_pres_perso.SetActive(false);
         canvas_choix_jetons.SetActive(true);
         //SceneManager.LoadScene("Scene_ChoixJetons");

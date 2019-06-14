@@ -10,7 +10,7 @@ public class Fin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "Joueur : " + selectUser.positionStatic;
+        text.text = "Joueur : " + JoueurStatic.Numero;
     }
 
     // Update is called once per frame
