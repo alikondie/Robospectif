@@ -1488,7 +1488,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 81558859}
-  - component: {fileID: 81558863}
   - component: {fileID: 81558862}
   - component: {fileID: 81558861}
   - component: {fileID: 81558860}
@@ -1581,20 +1580,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.38, y: 3.32}
   m_EdgeRadius: 0
---- !u!114 &81558863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81558858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 81558858}
-  couronne: {fileID: 1760298140}
 --- !u!1 &81831751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4104,7 +4089,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 252659172}
-  - component: {fileID: 252659176}
   - component: {fileID: 252659175}
   - component: {fileID: 252659174}
   - component: {fileID: 252659173}
@@ -4197,20 +4181,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.38, y: 3.32}
   m_EdgeRadius: 0
---- !u!114 &252659176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252659171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 252659171}
-  couronne: {fileID: 2011403398}
 --- !u!1 &253690621
 GameObject:
   m_ObjectHideFlags: 0
@@ -16521,7 +16491,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1144047536}
-  - component: {fileID: 1144047540}
   - component: {fileID: 1144047539}
   - component: {fileID: 1144047538}
   - component: {fileID: 1144047537}
@@ -16614,20 +16583,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.38, y: 3.32}
   m_EdgeRadius: 0
---- !u!114 &1144047540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144047535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 1144047535}
-  couronne: {fileID: 72913559}
 --- !u!1 &1146788203
 GameObject:
   m_ObjectHideFlags: 0
@@ -16637,7 +16592,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1146788204}
-  - component: {fileID: 1146788208}
   - component: {fileID: 1146788207}
   - component: {fileID: 1146788206}
   - component: {fileID: 1146788205}
@@ -16730,20 +16684,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.38, y: 3.32}
   m_EdgeRadius: 0
---- !u!114 &1146788208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146788203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 1146788203}
-  couronne: {fileID: 308889291}
 --- !u!1 &1153926588
 GameObject:
   m_ObjectHideFlags: 0
@@ -21937,7 +21877,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520441930}
-  - component: {fileID: 1520441934}
   - component: {fileID: 1520441933}
   - component: {fileID: 1520441932}
   - component: {fileID: 1520441931}
@@ -22030,20 +21969,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.38, y: 3.32}
   m_EdgeRadius: 0
---- !u!114 &1520441934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520441929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 1520441929}
-  couronne: {fileID: 1605798257}
 --- !u!1 &1542340638
 GameObject:
   m_ObjectHideFlags: 0
@@ -28523,7 +28448,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986353284}
-  - component: {fileID: 1986353285}
   - component: {fileID: 1986353283}
   - component: {fileID: 1986353287}
   - component: {fileID: 1986353286}
@@ -28579,20 +28503,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2.38, y: 3.32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1986353285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986353282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a05a7f486dde42a5ca83c3d7e2fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personnage1: {fileID: 1986353282}
-  couronne: {fileID: 840939973}
 --- !u!114 &1986353286
 MonoBehaviour:
   m_ObjectHideFlags: 0

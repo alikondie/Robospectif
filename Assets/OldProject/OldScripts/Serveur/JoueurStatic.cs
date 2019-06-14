@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class JoueurStatic
 {
@@ -11,19 +12,25 @@ public class JoueurStatic
     private static Sprite equi1;
     private static Sprite equi2;
     private static Sprite equi3;
+    private static Sprite[] robot;
     private static Sprite perso1;
     private static Sprite perso2;
     private static Sprite perso3;
     private static Sprite perso4;
     private static Sprite perso5;
     private static Sprite perso6;
+    private static Sprite[] persos;
     private static bool perso1Choisi;
     private static bool perso2Choisi;
     private static bool perso3Choisi;
     private static bool perso4Choisi;
     private static bool perso5Choisi;
     private static bool perso6Choisi;
+    private static bool[] persosChoisis;
     private static int nbCouronnes;
+#pragma warning disable CS0618 // Le type ou le membre est obsolète
+    private static NetworkClient client;
+#pragma warning restore CS0618 // Le type ou le membre est obsolète
 
 
     // Start is called before the first frame update
@@ -157,4 +164,8 @@ public class JoueurStatic
         get => nbCouronnes;
         set => nbCouronnes = value;
     }
+    public static Sprite[] Persos { get => persos; set => persos = value; }
+    public static Sprite[] Robot { get => robot; set => robot = value; }
+    public static bool[] PersosChoisis { get => persosChoisis; set => persosChoisis = value; }
+    public static NetworkClient Client { get => client; set => client = value; }
 }

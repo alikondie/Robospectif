@@ -15,7 +15,7 @@ public class SansHUD : NetworkManager
     [SerializeField] GameObject canvas_serveur;
     [SerializeField] GameObject canvas_client;
     [SerializeField] NetworkManager manager;
-    public static NetworkClient myclient;
+    private NetworkClient myclient;
     short messageID = 1000;
     short imageID = 1001;
     short conceptionID = 1002;
@@ -44,6 +44,7 @@ public class SansHUD : NetworkManager
             Debug.Log("client");
             myclient = new NetworkClient();
             myclient.Connect(Ip_serveur, 7777);
+            JoueurStatic.Client = myclient;
             canvas_serveur.SetActive(false);
             canvas_client.SetActive(true);
         } 

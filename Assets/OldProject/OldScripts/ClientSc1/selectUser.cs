@@ -15,13 +15,11 @@ public class selectUser : MonoBehaviour
     public static int positionStatic;
     [SerializeField] int position;
     public static int zone;
-    public static NetworkClient client;
     short messageID = 1000;
     
 
     void Start()
     {
-        client = SansHUD.myclient;
         button.gameObject.SetActive(false);
         button.onClick.AddListener(() => ButtonClicked());
     }
@@ -37,7 +35,7 @@ public class selectUser : MonoBehaviour
         zone = position;
         MyNetworkMessage message = new MyNetworkMessage();
         message.message = positionEffective;
-        client.Send(messageID, message);
+        JoueurStatic.Client.Send(messageID, message);
         canvas_position_joueurs.SetActive(false);
         canvas_choix_cartes.SetActive(true);
         //SceneManager.LoadScene("scene2");

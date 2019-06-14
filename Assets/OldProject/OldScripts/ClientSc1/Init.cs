@@ -7,8 +7,7 @@ using System;
 
 public class Init : MonoBehaviour
 {
-
-    public static NetworkClient client;
+    
     short messageID = 1000;
     short positionsID = 1005;
     [SerializeField] Button[] buttons;
@@ -19,10 +18,9 @@ public class Init : MonoBehaviour
     void Start()
     {
         positions = new int[6];
-        client = SansHUD.myclient;
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        client.RegisterHandler(messageID, OnMessageReceived);
-        client.RegisterHandler(positionsID, OnPositionsReceived);
+        JoueurStatic.Client.RegisterHandler(messageID, OnMessageReceived);
+        JoueurStatic.Client.RegisterHandler(positionsID, OnPositionsReceived);
     }
 
     void OnMessageReceived(NetworkMessage message)
