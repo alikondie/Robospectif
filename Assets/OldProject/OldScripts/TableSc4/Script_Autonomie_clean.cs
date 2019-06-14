@@ -6,22 +6,21 @@ using UnityEngine.UI;
 
 public class Script_Autonomie_clean : MonoBehaviour
 {
-    // ---------- ATTRIBUTS ----------
+    #region atributs
     [SerializeField] GameObject volant;
 
     //Déplacement sourie
     [SerializeField] SpriteRenderer spriteRdr;
-    private Vector3 positionVolant;
 
     //Pour la position du centre des Objets au debut
     private float positionDebutX;  
     private float positionDebutY;
-    private float positionDebutZ = -1;
-    private int ecart = 2;
+    private float positionDebutZ;
+    private int epsilon = 275;
 
 
     //Deplacement 
-    private bool est_cliquer;
+    private bool isClicked;
     private bool toucher = false;
     Vector3 mouseStartPos;
     Vector3 playerStartPos;
@@ -36,9 +35,9 @@ public class Script_Autonomie_clean : MonoBehaviour
     private int[] tabOrien = { 0, 90, 180, 270 };
 
 
-    // ---------- METHODES ----------
+    #endregion
 
-    // Methode d'inisialisation
+    #region main functions
     void Start()
     {
         // Position du joueur
@@ -68,9 +67,9 @@ public class Script_Autonomie_clean : MonoBehaviour
                 SENS = 4;
                 break;
         }
-
-        positionDebutX = postionX_Defaut[SENS - 1];
-        positionDebutY = postionY_Defaut[SENS - 1];
+        positionDebutX = volant.transform.position.x;
+        positionDebutY = volant.transform.position.y;
+        positionDebutZ = volant.transform.position.z;
         orientation = tabOrien[SENS - 1];
         Debug.Log(volant.transform.position);
         // Initialise position et orientation du Volant
@@ -78,7 +77,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
         volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
 
-        est_cliquer = false;
+        isClicked = false;
 
     }
 
@@ -86,92 +85,14 @@ public class Script_Autonomie_clean : MonoBehaviour
     // Méthode de mise a jour
     private void Update()
     {
-        // Si le vollant a dépasser sa limite:
-        if (toucher) { 
-            if(SENS == 1 || SENS == 3)
-            {
-                if (volant.transform.position.x > (positionDebutX + ecart))
-                {
-                    volant.transform.position = new Vector3((positionDebutX + ecart), positionDebutY, positionDebutZ);
-                }
-                if (volant.transform.position.x < (positionDebutX - ecart))
-                {
-                    volant.transform.position = new Vector3((positionDebutX - ecart), positionDebutY, positionDebutZ);
-                }
-            }
-            else
-            {
-                if (volant.transform.position.y > (positionDebutY + ecart))
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY + ecart), positionDebutZ);
-                }
-                if (volant.transform.position.y < (positionDebutY - ecart))
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY - ecart), positionDebutZ);
-                }
-            }
-
-        }
-
-        // Déplacement Vollant
-        if (Input.GetMouseButtonDown(0) && est_cliquer)
-        {
-            toucher = true;
-            if (SENS == 1 || SENS == 3)
-            {
-                mouseStartPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, positionDebutY, positionDebutZ));
-            }
-            else
-            {
-                mouseStartPos = Camera.main.ScreenToWorldPoint(new Vector3(positionDebutX, Input.mousePosition.y, positionDebutZ));
-            }               
-            playerStartPos = volant.transform.position;
-        }
-
-        if (toucher && est_cliquer)
-        {
-            Vector3 mousePos;
-            if (SENS == 1 || SENS == 3)
-            {
-                mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, positionDebutY, positionDebutZ));
-            }
-            else
-            {
-                mousePos = Camera.main.ScreenToWorldPoint(new Vector3(positionDebutX, Input.mousePosition.y, positionDebutZ));
-            }
-
-            Vector3 move = mousePos - mouseStartPos;
-            positionVolant = playerStartPos + move;
-            Debug.Log("position volant : " + positionVolant);
-            Debug.Log("position playerStartPos : " + playerStartPos);
-            Debug.Log("position move : " + move);
-            if (SENS == 1 || SENS == 3)
-            {
-                if (positionVolant.x <= (positionDebutX + ecart) && positionVolant.x >= (positionDebutX - ecart))
-                {
-                    volant.transform.position = positionVolant;
-                }
-            }
-            else
-            {
-                if (positionVolant.y <= (positionDebutY + ecart) && positionVolant.y >= (positionDebutY - ecart))
-                {
-                    volant.transform.position = positionVolant;
-                }
-            }
-                
-
-
-        }
-
-        // --
+        #region partie chelou
         if (Input.GetMouseButtonUp(0) && toucher)
         {
             if (SENS == 1 || SENS == 3)
             {
                 if (volant.transform.position.x <= positionDebutX)
                 {
-                    volant.transform.position = new Vector3((positionDebutX - ecart), positionDebutY, positionDebutZ);
+                    volant.transform.position = new Vector3((positionDebutX - epsilon), positionDebutY, positionDebutZ);
                     if (SENS == 1)
                     {
                         Script_Conduite.dimentionTexteConduite(0);
@@ -184,7 +105,7 @@ public class Script_Autonomie_clean : MonoBehaviour
                 }
                 else
                 {
-                    volant.transform.position = new Vector3((positionDebutX + ecart), positionDebutY, positionDebutZ);
+                    volant.transform.position = new Vector3((positionDebutX + epsilon), positionDebutY, positionDebutZ);
                     if (SENS == 1)
                     {
                         Script_Conduite.dimentionTexteConduite(1);
@@ -199,7 +120,7 @@ public class Script_Autonomie_clean : MonoBehaviour
             {
                 if (volant.transform.position.y <= positionDebutY)
                 {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY - ecart), positionDebutZ);
+                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY - epsilon), positionDebutZ);
                     if (SENS == 2)
                     {
                         Script_Conduite.dimentionTexteConduite(0);
@@ -212,7 +133,7 @@ public class Script_Autonomie_clean : MonoBehaviour
                 }
                 else
                 {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY + ecart), positionDebutZ);
+                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY + epsilon), positionDebutZ);
                     if (SENS == 2)
                     {
                         Script_Conduite.dimentionTexteConduite(1);
@@ -223,16 +144,49 @@ public class Script_Autonomie_clean : MonoBehaviour
                     }
                 }
             }
-                
+        }
+        #endregion
+
+        if(isClicked)
+        {
+            Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
+            SteeringWheelMotion(newPosition);
         }
     }
+    #endregion
+
+    #region helping and check functions
 
     void OnMouseDown()
     {
-        est_cliquer = true;
+        isClicked = true;
     }
     private void OnMouseUp()
     {
-        est_cliquer = false;
+        isClicked = false;
     }
+
+    private void SteeringWheelMotion(Vector3 newPosition)
+    {
+        if (IsSteeringWheelNotAtBorder())
+        {
+            if (SENS == 1 || SENS == 3)
+            {
+                newPosition.y = volant.transform.position.y;
+                volant.transform.position = newPosition;
+            }
+            else
+            {
+                newPosition.x = volant.transform.position.x;
+                volant.transform.position = newPosition;
+            }
+        }
+    }
+
+    private bool IsSteeringWheelNotAtBorder()
+    {
+        return ((SENS == 1 || SENS == 3) && Input.mousePosition.x <= (positionDebutX + epsilon) && Input.mousePosition.x >= (positionDebutX - epsilon)) ||
+               ((SENS == 2 || SENS == 4) && Input.mousePosition.y <= (positionDebutY + epsilon) && Input.mousePosition.y >= (positionDebutY - epsilon));
+    }
+    #endregion
 }
