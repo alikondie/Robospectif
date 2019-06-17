@@ -27,6 +27,7 @@ public class Valider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        JoueurStatic.Persos = new Sprite[6];
         button.onClick.AddListener(() => ButtonClicked());
         JoueurStatic.Client.RegisterHandler(chronoID, onChronoReceived);
     }
