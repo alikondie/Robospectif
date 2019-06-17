@@ -58,8 +58,6 @@ public class Script_Autonomie : MonoBehaviour
                 pos = i + 1;
             }
         }
-        Debug.Log(" position methode pourrie : " + pos);
-        Debug.Log("position mieux : " + Array.IndexOf(Partie.Positions, positionJoueur));
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)

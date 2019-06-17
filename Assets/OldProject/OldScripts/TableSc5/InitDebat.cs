@@ -78,7 +78,7 @@ public class InitDebat : MonoBehaviour
 
     }
 
- /*   void OnEnable()
+    void OnEnable()
     {
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
@@ -101,7 +101,7 @@ public class InitDebat : MonoBehaviour
         zones = new int[6, 2];
 
         button.gameObject.SetActive(false);
-    }*/
+    }
 
     private void onJetonReceived(NetworkMessage netMsg)
     {
@@ -178,8 +178,7 @@ public class InitDebat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (nbRecu == Partie.Joueurs.Capacity - 1)
+        if (nbRecu == Partie.Joueurs.Count - 1)
         {
             button.gameObject.SetActive(true);
         }

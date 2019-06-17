@@ -34,6 +34,7 @@ public class SansHUD : NetworkManager
         if(ipv4 == Ip_serveur) 
         {
             Partie.Initialize();
+            Debug.Log(Partie.Joueurs.Capacity);
             manager.StartServer(); // Connection Serveur
             RegisterHandlers();
             Debug.Log("Serveur connecté");
@@ -72,8 +73,6 @@ public class SansHUD : NetworkManager
             premierFini = netMsg.ReadMessage<MyNetworkMessage>().message;
 
             Partie.JoueurCourant = premierFini;
-
-            Debug.Log("premier joueur : " + premierFini);
             EnAttenteCT.premierFini(premierFini);
             envoiChrono(premierFini);
             conceptionTerminee = true;
@@ -103,7 +102,6 @@ public class SansHUD : NetworkManager
         {
             s = s + dim[i];
         }
-        Debug.Log(s);
         dim = s;
 
         s = "";
@@ -111,7 +109,6 @@ public class SansHUD : NetworkManager
         {
             s = s + loco[i];
         }
-        Debug.Log(s);
         loco = s;
 
         s = "";
@@ -119,7 +116,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi1[i];
         }
-        Debug.Log(s);
         equi1 = s;
 
         s = "";
@@ -127,7 +123,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi2[i];
         }
-        Debug.Log(s);
         equi2 = s;
 
         s = "";
@@ -135,7 +130,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi3[i];
         }
-        Debug.Log(s);
         equi3 = s;
 
         Sprite[] images = new Sprite[5];
@@ -163,7 +157,6 @@ public class SansHUD : NetworkManager
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = id;
         NetworkServer.SendToAll(messageID, msg);
-        Debug.Log("id_serveur : " + id);
         Text_Connexion.recupInfoJoueur(id);        
     }
 

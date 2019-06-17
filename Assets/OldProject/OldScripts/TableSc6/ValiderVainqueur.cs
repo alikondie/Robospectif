@@ -115,11 +115,8 @@ public class ValiderVainqueur : MonoBehaviour
 
                 for (int j = 0; j < joueurs[i].transform.GetChild(1).childCount; j++)
                 {
-                    Debug.Log(Tour.JetonsDebat[i, j]);
-                    Debug.Log(Tour.ActivesDebat[i, j]);
                     joueurs[i].transform.GetChild(1).GetChild(j).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[i, j];
                     joueurs[i].transform.GetChild(1).GetChild(j).gameObject.SetActive(Tour.ActivesDebat[i, j]);
-                    Debug.Log(joueurs[i].transform.GetChild(1).GetChild(j).gameObject.activeSelf);
                 }
 
                 joueurs[i].SetActive(true);
@@ -127,7 +124,6 @@ public class ValiderVainqueur : MonoBehaviour
         }
 
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        Debug.Log(joueurs[pos-1]);
         joueurs[pos - 1].SetActive(false);
     }
 }
