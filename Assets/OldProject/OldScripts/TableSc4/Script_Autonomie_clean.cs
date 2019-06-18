@@ -28,8 +28,6 @@ public class Script_Autonomie_clean : MonoBehaviour
 
     // En fonction du sens
     private int SENS;
-    private float[] postionX_Defaut = { 1, 3, -1, -3 };
-    private float[] postionY_Defaut = { -3, 1, 3, -1 };
 
     private int orientation;
     private int[] tabOrien = { 0, 90, 180, 270 };
@@ -41,9 +39,8 @@ public class Script_Autonomie_clean : MonoBehaviour
     void Start()
     {
         // Position du joueur
-
         //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        int pos = 1;
+        int pos = 3;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
@@ -71,11 +68,10 @@ public class Script_Autonomie_clean : MonoBehaviour
         positionDebutY = volant.transform.position.y;
         positionDebutZ = volant.transform.position.z;
         orientation = tabOrien[SENS - 1];
-        Debug.Log(volant.transform.position);
         // Initialise position et orientation du Volant
         spriteRdr = volant.GetComponent<SpriteRenderer>();
-        volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
-        volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
+        //volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
+        //volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
 
         isClicked = false;
 

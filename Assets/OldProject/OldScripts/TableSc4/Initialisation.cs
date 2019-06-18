@@ -9,8 +9,10 @@ using Image = UnityEngine.UI.Image;
 
 public class Initialisation : MonoBehaviour
 {
+    #region variables
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_debat;
+    [SerializeField] GameObject children;
 
     private int pos;
 
@@ -23,42 +25,6 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] GameObject Plateau;
 
-    [SerializeField] GameObject J1carte1;
-    [SerializeField] GameObject J1carte2;
-    [SerializeField] GameObject J1carte3;
-    [SerializeField] GameObject J1carte4;
-    [SerializeField] GameObject J1carte5;
-
-    [SerializeField] GameObject J2carte1;
-    [SerializeField] GameObject J2carte2;
-    [SerializeField] GameObject J2carte3;
-    [SerializeField] GameObject J2carte4;
-    [SerializeField] GameObject J2carte5;
-
-    [SerializeField] GameObject J3carte1;
-    [SerializeField] GameObject J3carte2;
-    [SerializeField] GameObject J3carte3;
-    [SerializeField] GameObject J3carte4;
-    [SerializeField] GameObject J3carte5;
-
-    [SerializeField] GameObject J4carte1;
-    [SerializeField] GameObject J4carte2;
-    [SerializeField] GameObject J4carte3;
-    [SerializeField] GameObject J4carte4;
-    [SerializeField] GameObject J4carte5;
-
-    [SerializeField] GameObject J5carte1;
-    [SerializeField] GameObject J5carte2;
-    [SerializeField] GameObject J5carte3;
-    [SerializeField] GameObject J5carte4;
-    [SerializeField] GameObject J5carte5;
-
-    [SerializeField] GameObject J6carte1;
-    [SerializeField] GameObject J6carte2;
-    [SerializeField] GameObject J6carte3;
-    [SerializeField] GameObject J6carte4;
-    [SerializeField] GameObject J6carte5;
-
     private GameObject[,] cartes;
     [SerializeField] GameObject[] cartes1;
     [SerializeField] GameObject[] cartes2;
@@ -67,7 +33,7 @@ public class Initialisation : MonoBehaviour
     [SerializeField] GameObject[] cartes5;
     [SerializeField] GameObject[] cartes6;
 
-
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +42,7 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
+        #region cards array
         cartes = new GameObject[6,cartes1.Length];
         
         for (int j = 0; j < cartes1.Length; j++)
@@ -107,33 +74,11 @@ public class Initialisation : MonoBehaviour
         {
             cartes[5, j] = cartes6[j];
         }
-
-        pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-
-        if (pos == 3)
-        {
-            Plateau.transform.Rotate(Vector3.forward * 90);
-            button.transform.Rotate(Vector3.forward * 90);
-            Vector2 posButton = new Vector2((float)-2.78, 0);
-            button.transform.position = posButton;
-        }
-
-        if ((pos == 4) || (pos == 5))
-        {
-            Plateau.transform.Rotate(Vector3.forward * 180);
-            button.transform.Rotate(Vector3.forward * 180);
-            Vector2 posButton = new Vector2(0, (float)-2.78);
-            button.transform.position = posButton;
-        }
-
-        if (pos == 6)
-        {
-            Plateau.transform.Rotate(Vector3.forward * -90);
-            button.transform.Rotate(Vector3.forward * -90);
-            Vector2 posButton = new Vector2((float)2.78, 0);
-            button.transform.position = posButton;
-        }
-        
+        #endregion
+        //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        pos = 5;
+        Rotate(pos);
+        #region players cards display
         for (int i = 0; i < 6; i++)
         {
             if (i == (pos-1))
@@ -152,6 +97,7 @@ public class Initialisation : MonoBehaviour
                 }
             }
         }
+        #endregion
     }
 
     // Update is called once per frame
@@ -175,8 +121,29 @@ public class Initialisation : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             images[zone-1, i] = image[i];
-
         }
+    }
+
+
+
+
+    //function which rotate the canvas depending on the current player who presents the robot
+    private void Rotate(int pos)
+    {
+        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (pos == 3)
+        {
+            rotation = Quaternion.Euler(0f, 0f, 90f);
+        }
+        else if(pos == 4 || pos == 5)
+        {
+            rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+        else if (pos == 6)
+        {
+            rotation = Quaternion.Euler(0f, 0f, -90f);
+        }
+        children.transform.rotation = rotation;
     }
 
 }

@@ -13,14 +13,12 @@ public class Placement_dimension_4_5 : MonoBehaviour
     {
         x_position_dimension = 3.3f;
         y_position_dimension = 2.9f;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
+        Debug.Log("position x : " + Input.mousePosition.x + "pos y : " + Input.mousePosition.y);
         if (x_position_dimension - 1 < dimension.transform.position.x && dimension.transform.position.x < x_position_dimension + 1)
         {
             if (y_position_dimension - 1 < dimension.transform.position.y && dimension.transform.position.y < y_position_dimension + 1)
