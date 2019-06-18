@@ -96,6 +96,13 @@ public class InitDebat : MonoBehaviour
             persos[i].transform.GetChild(3).gameObject.SetActive(false);
             persos[i].transform.GetChild(4).gameObject.SetActive(false);
             persos[i].transform.GetChild(5).gameObject.SetActive(false);
+            for (int j = 1; j <= 2; j++)
+            {
+                foreach (Transform child in persos[i].transform.GetChild(j))
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
         }
 
         zones = new int[6, 2];
