@@ -28,6 +28,7 @@ public class Valider : MonoBehaviour
     void Start()
     {
         JoueurStatic.Persos = new Sprite[6];
+        JoueurStatic.PersosChoisis = new bool[] { false, false, false, false, false, false };
         button.onClick.AddListener(() => ButtonClicked());
         JoueurStatic.Client.RegisterHandler(chronoID, onChronoReceived);
     }

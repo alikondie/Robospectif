@@ -41,7 +41,6 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        choixZone = new int[2];
 
         button.onClick.AddListener(() => ButtonClicked());
         button.gameObject.SetActive(false);
@@ -70,6 +69,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     void OnEnable()
     {
         text.text = "Joueur : " + JoueurStatic.Numero;
+        choixZone = new int[2];
         choixZone[0] = 0;
         choixZone[1] = 0;
 
