@@ -18,7 +18,7 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
-    short waitID = 1006;
+    short debatID = 1006;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
@@ -110,7 +110,7 @@ public class Initialisation : MonoBehaviour
     {
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
-        NetworkServer.SendToAll(waitID, msg);
+        NetworkServer.SendToAll(debatID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_debat.SetActive(true);
         //SceneManager.LoadScene("Scene5");

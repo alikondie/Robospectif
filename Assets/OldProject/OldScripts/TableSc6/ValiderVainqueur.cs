@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,10 +22,11 @@ public class ValiderVainqueur : MonoBehaviour
 
     private Sprite[] images;
 
+    short nextID = 1015;
+
     // Start is called before the first frame update
     void Start()
     {
-        button.gameObject.SetActive(false);
         vainqueur = 0;
         button.onClick.AddListener(() => ButtonClicked());
     }
@@ -85,13 +87,21 @@ public class ValiderVainqueur : MonoBehaviour
             canvas_fin_tour.SetActive(true);
             //SceneManager.LoadScene("Scene_fin_tour");
         }
-        else canvas_fin.SetActive(true);
+        else
+        {
+            MyStringMessage endMsg = new MyStringMessage();
+            endMsg.s = "end";
+            NetworkServer.SendToAll(nextID, endMsg);
+            canvas_fin.SetActive(true);
+        }
     }
 
     private void OnEnable()
     {
+        button.gameObject.SetActive(false);
         foreach (GameObject joueur in joueurs)
         {
+            joueur.transform.GetChild(2).gameObject.SetActive(false);
             joueur.SetActive(false);
         }
 
