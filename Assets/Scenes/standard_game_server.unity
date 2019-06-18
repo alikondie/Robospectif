@@ -25228,6 +25228,42 @@ MonoBehaviour:
   J6carte3: {fileID: 1916255195}
   J6carte4: {fileID: 1421916369}
   J6carte5: {fileID: 897028925}
+  cartes1:
+  - {fileID: 276662258}
+  - {fileID: 1507202786}
+  - {fileID: 2024816694}
+  - {fileID: 381036912}
+  - {fileID: 1649367997}
+  cartes2:
+  - {fileID: 1503957575}
+  - {fileID: 497725141}
+  - {fileID: 1185649039}
+  - {fileID: 1943078994}
+  - {fileID: 998033496}
+  cartes3:
+  - {fileID: 998202803}
+  - {fileID: 1220298920}
+  - {fileID: 219781933}
+  - {fileID: 287092424}
+  - {fileID: 724579888}
+  cartes4:
+  - {fileID: 1213835927}
+  - {fileID: 2009108442}
+  - {fileID: 1177664649}
+  - {fileID: 165077106}
+  - {fileID: 402495942}
+  cartes5:
+  - {fileID: 1319967537}
+  - {fileID: 329750162}
+  - {fileID: 101564769}
+  - {fileID: 982255321}
+  - {fileID: 1105385620}
+  cartes6:
+  - {fileID: 690464892}
+  - {fileID: 472185854}
+  - {fileID: 1916255195}
+  - {fileID: 1421916369}
+  - {fileID: 897028925}
 --- !u!224 &1791891302
 RectTransform:
   m_ObjectHideFlags: 0

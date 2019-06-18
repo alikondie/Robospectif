@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using static Main;
+using Image = UnityEngine.UI.Image;
 
 public class Initialisation : MonoBehaviour
 {
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_debat;
 
-    private int pos = -1;
+    private int pos;
 
     [SerializeField] Button button;
 
@@ -58,12 +59,56 @@ public class Initialisation : MonoBehaviour
     [SerializeField] GameObject J6carte4;
     [SerializeField] GameObject J6carte5;
 
+    private GameObject[,] cartes;
+    [SerializeField] GameObject[] cartes1;
+    [SerializeField] GameObject[] cartes2;
+    [SerializeField] GameObject[] cartes3;
+    [SerializeField] GameObject[] cartes4;
+    [SerializeField] GameObject[] cartes5;
+    [SerializeField] GameObject[] cartes6;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(() => ButtonClicked());
-        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        button.onClick.AddListener(() => ButtonClicked());        
+    }
+
+    void OnEnable()
+    {
+        cartes = new GameObject[6,cartes1.Length];
+        
+        for (int j = 0; j < cartes1.Length; j++)
+        {
+            cartes[0, j] = cartes1[j];
+        }
+
+        for (int j = 0; j < cartes2.Length; j++)
+        {
+            cartes[1, j] = cartes2[j];
+        }
+
+        for (int j = 0; j < cartes3.Length; j++)
+        {
+            cartes[2, j] = cartes3[j];
+        }
+
+        for (int j = 0; j < cartes4.Length; j++)
+        {
+            cartes[3, j] = cartes4[j];
+        }
+
+        for (int j = 0; j < cartes5.Length; j++)
+        {
+            cartes[4, j] = cartes5[j];
+        }
+
+        for (int j = 0; j < cartes6.Length; j++)
+        {
+            cartes[5, j] = cartes6[j];
+        }
+
+        pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
 
         if (pos == 3)
         {
@@ -88,119 +133,31 @@ public class Initialisation : MonoBehaviour
             Vector2 posButton = new Vector2((float)2.78, 0);
             button.transform.position = posButton;
         }
-
-        if (pos != 1)
-        { 
-            Destroy(J1carte1);
-            Destroy(J1carte2);
-            Destroy(J1carte3);
-            Destroy(J1carte4);
-            Destroy(J1carte5);
-        }
-
-        if (pos != 2)
-        {
-            Destroy(J2carte1);
-            Destroy(J2carte2);
-            Destroy(J2carte3);
-            Destroy(J2carte4);
-            Destroy(J2carte5);
-        }
-
-        if (pos != 3)
-        {
-            Destroy(J3carte1);
-            Destroy(J3carte2);
-            Destroy(J3carte3);
-            Destroy(J3carte4);
-            Destroy(J3carte5);
-        }
-
-        if (pos != 4)
-        {
-            Destroy(J4carte1);
-            Destroy(J4carte2);
-            Destroy(J4carte3);
-            Destroy(J4carte4);
-            Destroy(J4carte5);
-        }
-
-        if (pos != 5)
-        {
-            Destroy(J5carte1);
-            Destroy(J5carte2);
-            Destroy(J5carte3);
-            Destroy(J5carte4);
-            Destroy(J5carte5);
-        }
-
-        if (pos != 6)
-        {
-            Destroy(J6carte1);
-            Destroy(J6carte2);
-            Destroy(J6carte3);
-            Destroy(J6carte4);
-            Destroy(J6carte5);
-        }
         
+        for (int i = 0; i < 6; i++)
+        {
+            if (i == (pos-1))
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    cartes[i, j].GetComponent<SpriteRenderer>().sprite = images[i, j];
+                    cartes[i, j].SetActive(true);
+                }
+            }
+            else
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    cartes[i, j].SetActive(false);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-    //    if ((Partie.Positions[0] != 0) && (pos == 1))
-    //    {
-    //        J1carte1.GetComponent<SpriteRenderer>().sprite = images[0, 1];
-    //        J1carte2.GetComponent<SpriteRenderer>().sprite = images[0, 2];
-    //        J1carte3.GetComponent<SpriteRenderer>().sprite = images[0, 3];
-    //        J1carte4.GetComponent<SpriteRenderer>().sprite = images[0, 4];
-    //        J1carte5.GetComponent<SpriteRenderer>().sprite = images[0, 0];
-    //    }
 
-    //    if ((Partie.Positions[1] != 0) && (pos == 2))
-    //    {
-    //        J2carte1.GetComponent<SpriteRenderer>().sprite = images[1, 1];
-    //        J2carte2.GetComponent<SpriteRenderer>().sprite = images[1, 2];
-    //        J2carte3.GetComponent<SpriteRenderer>().sprite = images[1, 3];
-    //        J2carte4.GetComponent<SpriteRenderer>().sprite = images[1, 4];
-    //        J2carte5.GetComponent<SpriteRenderer>().sprite = images[1, 0];
-    //    }
-
-    //    if ((Partie.Positions[2] != 0) && (pos == 3))
-    //    {
-    //        J3carte1.GetComponent<SpriteRenderer>().sprite = images[2, 1];
-    //        J3carte2.GetComponent<SpriteRenderer>().sprite = images[2, 2];
-    //        J3carte3.GetComponent<SpriteRenderer>().sprite = images[2, 3];
-    //        J3carte4.GetComponent<SpriteRenderer>().sprite = images[2, 4];
-    //        J3carte5.GetComponent<SpriteRenderer>().sprite = images[2, 0];
-    //    }
-
-    //    if ((Partie.Positions[3] != 0) && (pos == 4))
-    //    {
-    //        J4carte1.GetComponent<SpriteRenderer>().sprite = images[3, 1];
-    //        J4carte2.GetComponent<SpriteRenderer>().sprite = images[3, 2];
-    //        J4carte3.GetComponent<SpriteRenderer>().sprite = images[3, 3];
-    //        J4carte4.GetComponent<SpriteRenderer>().sprite = images[3, 4];
-    //        J4carte5.GetComponent<SpriteRenderer>().sprite = images[3, 0];
-    //    }
-
-    //    if ((Partie.Positions[4] != 0) && (pos == 5))
-    //    {
-    //        J5carte1.GetComponent<SpriteRenderer>().sprite = images[4, 1];
-    //        J5carte2.GetComponent<SpriteRenderer>().sprite = images[4, 2];
-    //        J5carte3.GetComponent<SpriteRenderer>().sprite = images[4, 3];
-    //        J5carte4.GetComponent<SpriteRenderer>().sprite = images[4, 4];
-    //        J5carte5.GetComponent<SpriteRenderer>().sprite = images[4, 0];
-    //    }
-
-    //    if ((Partie.Positions[5] != 0) && (pos == 6))
-    //    {
-    //        J6carte1.GetComponent<SpriteRenderer>().sprite = images[5, 1];
-    //        J6carte2.GetComponent<SpriteRenderer>().sprite = images[5, 2];
-    //        J6carte3.GetComponent<SpriteRenderer>().sprite = images[5, 3];
-    //        J6carte4.GetComponent<SpriteRenderer>().sprite = images[5, 4];
-    //        J6carte5.GetComponent<SpriteRenderer>().sprite = images[5, 0];
-    //    }
     }
 
     private void ButtonClicked()
@@ -218,6 +175,7 @@ public class Initialisation : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             images[zone-1, i] = image[i];
+
         }
     }
 
