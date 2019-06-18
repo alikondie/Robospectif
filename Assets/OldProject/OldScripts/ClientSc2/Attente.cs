@@ -14,12 +14,12 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
 
-    short waitID = 1006;
+    short debatID = 1006;
 
     // Start is called before the first frame update
     void Start()
     {
-        JoueurStatic.Client.RegisterHandler(waitID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(debatID, onWaitReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)

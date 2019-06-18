@@ -13,7 +13,7 @@ public class JetonsHandler : MonoBehaviour
 
     [SerializeField] Text text;
 
-    short waitID = 1006;
+    short vainqueurID = 1008;
 
     [SerializeField] Button usageVert;
     [SerializeField] Button usageRouge;
@@ -29,7 +29,7 @@ public class JetonsHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        JoueurStatic.Client.RegisterHandler(waitID, OnWaitReceived);
+        JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       

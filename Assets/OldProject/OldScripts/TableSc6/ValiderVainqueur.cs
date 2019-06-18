@@ -92,6 +92,7 @@ public class ValiderVainqueur : MonoBehaviour
     {
         foreach (GameObject joueur in joueurs)
         {
+            joueur.transform.GetChild(2).gameObject.SetActive(false);
             joueur.SetActive(false);
         }
 

@@ -16,48 +16,12 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
-    short waitID = 1006;
+    short debatID = 1006;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
     [SerializeField] GameObject Plateau;
-
-    [SerializeField] GameObject J1carte1;
-    [SerializeField] GameObject J1carte2;
-    [SerializeField] GameObject J1carte3;
-    [SerializeField] GameObject J1carte4;
-    [SerializeField] GameObject J1carte5;
-
-    [SerializeField] GameObject J2carte1;
-    [SerializeField] GameObject J2carte2;
-    [SerializeField] GameObject J2carte3;
-    [SerializeField] GameObject J2carte4;
-    [SerializeField] GameObject J2carte5;
-
-    [SerializeField] GameObject J3carte1;
-    [SerializeField] GameObject J3carte2;
-    [SerializeField] GameObject J3carte3;
-    [SerializeField] GameObject J3carte4;
-    [SerializeField] GameObject J3carte5;
-
-    [SerializeField] GameObject J4carte1;
-    [SerializeField] GameObject J4carte2;
-    [SerializeField] GameObject J4carte3;
-    [SerializeField] GameObject J4carte4;
-    [SerializeField] GameObject J4carte5;
-
-    [SerializeField] GameObject J5carte1;
-    [SerializeField] GameObject J5carte2;
-    [SerializeField] GameObject J5carte3;
-    [SerializeField] GameObject J5carte4;
-    [SerializeField] GameObject J5carte5;
-
-    [SerializeField] GameObject J6carte1;
-    [SerializeField] GameObject J6carte2;
-    [SerializeField] GameObject J6carte3;
-    [SerializeField] GameObject J6carte4;
-    [SerializeField] GameObject J6carte5;
 
     private GameObject[,] cartes;
     [SerializeField] GameObject[] cartes1;
@@ -164,7 +128,7 @@ public class Initialisation : MonoBehaviour
     {
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
-        NetworkServer.SendToAll(waitID, msg);
+        NetworkServer.SendToAll(debatID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_debat.SetActive(true);
         //SceneManager.LoadScene("Scene5");

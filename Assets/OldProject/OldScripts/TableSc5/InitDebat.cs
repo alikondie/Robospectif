@@ -24,7 +24,7 @@ public class InitDebat : MonoBehaviour
 
     short persosID = 1007;
 
-    short waitID = 1006;
+    short vainqueurID = 1008;
 
     private Sprite[] persoSprites;
 
@@ -140,7 +140,7 @@ public class InitDebat : MonoBehaviour
         Tour.ZonesDebat = zones;
 
         MyNetworkMessage wait = new MyNetworkMessage();
-        NetworkServer.SendToAll(waitID, wait);
+        NetworkServer.SendToAll(vainqueurID, wait);
 
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
