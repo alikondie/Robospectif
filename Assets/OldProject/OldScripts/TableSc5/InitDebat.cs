@@ -122,6 +122,7 @@ public class InitDebat : MonoBehaviour
             {
                 jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
                 jetons[j][index[j]].gameObject.SetActive(true);
+                Debug.Log(jetons[j][index[j]].gameObject.activeSelf);
                 index[j]++;
             }
         }
