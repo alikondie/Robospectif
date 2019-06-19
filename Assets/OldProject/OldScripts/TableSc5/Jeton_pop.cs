@@ -17,7 +17,6 @@ public class Jeton_pop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.SetActive(false);
         Transform canva = this.transform.parent.parent.parent;
         joueurs = new List<GameObject>();
         cartes = new List<GameObject>();
@@ -63,6 +62,7 @@ public class Jeton_pop : MonoBehaviour
                 Tour.Piles[index]++;
             }
         }
+        this.transform.position = positionInit;
 
     }
 
