@@ -9,7 +9,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region attributs
     [SerializeField] GameObject volant;
 
-    //Déplacement sourie
+    //Déplacement souris
     [SerializeField] Image sprite;
 
     //Pour la position du centre des Objets au debut
@@ -70,8 +70,6 @@ public class Script_Autonomie_clean : MonoBehaviour
         orientation = tabOrien[SENS - 1];
         // Initialise position et orientation du Volant
         sprite = volant.GetComponent<Image>();
-        //volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
-        //volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
 
         isClicked = false;
 

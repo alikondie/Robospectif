@@ -543,14 +543,9 @@ GameObject:
   m_Component:
   - component: {fileID: 701243171}
   - component: {fileID: 701243170}
-  - component: {fileID: 701243169}
-  - component: {fileID: 701243168}
-  - component: {fileID: 701243167}
-  - component: {fileID: 701243166}
   - component: {fileID: 701243165}
   - component: {fileID: 701243164}
   - component: {fileID: 701243163}
-  - component: {fileID: 701243172}
   m_Layer: 0
   m_Name: Screen_n5_plateau_vehicule
   m_TagString: Untagged
@@ -618,54 +613,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &701243166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701243162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c10e93fadefe149997c35f24086bdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &701243167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701243162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10cff72d4e2240e4ebba74ae93e6a6d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &701243168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701243162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1519d21d219f1a47bb94d25d10264c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &701243169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701243162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d8576e5997a4aac62e04106b19c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &701243170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,23 +653,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &701243172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701243162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b4e85a930d849408adc7c620bf480b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimension_target: {fileID: 1653180181}
-  locomotion_target: {fileID: 1102307977}
-  manual_equipment_target: {fileID: 1166552138}
-  programmable_equipment_target: {fileID: 1126704700}
-  automatic_equipment_target: {fileID: 631854079}
 --- !u!1 &758690704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,7 +1468,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1653180182}
   - component: {fileID: 1653180183}
-  - component: {fileID: 1653180185}
   m_Layer: 5
   m_Name: boxcollider dimension
   m_TagString: dimension
@@ -1586,23 +1515,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1653180185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653180181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b4e85a930d849408adc7c620bf480b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimension_target: {fileID: 0}
-  locomotion_target: {fileID: 0}
-  manual_equipment_target: {fileID: 0}
-  programmable_equipment_target: {fileID: 0}
-  automatic_equipment_target: {fileID: 0}
 --- !u!1 &1719245041
 GameObject:
   m_ObjectHideFlags: 0

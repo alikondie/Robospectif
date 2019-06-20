@@ -95,7 +95,7 @@ public class Main : MonoBehaviour
             set => isOk = value;
         }
 
-        public String ToString()
+        override public string ToString()
         {
             return "" + this.id.ToString() + this.isSelect.ToString() + this.place.ToString() +
                    this.idcarte1.ToString() + this.idcarte2.ToString() + this.idcarte3.ToString() +
@@ -224,7 +224,7 @@ public class Main : MonoBehaviour
             tabPlayer[nbjoueur] = p;
             nbjoueur++;
         }
-        public static string ToString()
+        override public string ToString()
         {
             string res = "";
             for (int i = 1; i < 7; i++)
