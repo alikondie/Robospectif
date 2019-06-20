@@ -10,11 +10,9 @@ public class MainScript : MonoBehaviour
 
     public static Main.Player player;
     [SerializeField] Text text;
-    [SerializeField] Image dimensionGO1;
-    [SerializeField] Image locomotionGO1;
-    [SerializeField] Image equipementGO1;
-    [SerializeField] Image equipementGO2;
-    [SerializeField] Image equipementGO3;
+    [SerializeField] GameObject[] dimensionGO;
+    [SerializeField] GameObject[] locomotionGO;
+    [SerializeField] GameObject[] equipementGO;
     private Main.Image[] dimensions;
     private Main.Image[] locomotions;
     private Main.Image[] equipements;
@@ -28,6 +26,21 @@ public class MainScript : MonoBehaviour
         RandomLoco();
 
         RandomEqui();*/
+
+        foreach (GameObject i in dimensionGO)
+        {
+            i.SetActive(false);
+        }
+
+        foreach (GameObject i in locomotionGO)
+        {
+            i.SetActive(false);
+        }
+
+        foreach (GameObject i in equipementGO)
+        {
+            i.SetActive(false);
+        }
 
         JoueurStatic.Client.RegisterHandler(cardID, OnCardsReceived);
     }
@@ -69,11 +82,25 @@ public class MainScript : MonoBehaviour
             JoueurStatic.Persos[4] = Resources.Load<Sprite>("image/Personnages/" + v.perso5);
             JoueurStatic.Persos[5] = Resources.Load<Sprite>("image/Personnages/" + v.perso6);
 
-            dimensionGO1.sprite = JoueurStatic.Dimensions[0];
-            locomotionGO1.sprite = JoueurStatic.Locomotions[0];
-            equipementGO1.sprite = JoueurStatic.Equipements[0];
-            equipementGO2.sprite = JoueurStatic.Equipements[1];
-            equipementGO3.sprite = JoueurStatic.Equipements[2];
+            dimensionGO[0].GetComponent<Image>().sprite = JoueurStatic.Dimensions[0];
+            locomotionGO[0].GetComponent<Image>().sprite = JoueurStatic.Locomotions[0];
+            for (int i = 0; i < 3; i++)
+                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[1];
+
+            foreach (GameObject i in dimensionGO)
+            {
+                i.SetActive(true);
+            }
+
+            foreach (GameObject i in locomotionGO)
+            {
+                i.SetActive(true);
+            }
+
+            foreach (GameObject i in equipementGO)
+            {
+                i.SetActive(true);
+            }
         }
     }
 
@@ -112,9 +139,9 @@ public class MainScript : MonoBehaviour
             Main.Global.TabE.removeImage(equipements[i]);
         }
 
-        equipementGO1.sprite = equipements[0].Sprite;
+        /*equipementGO1.sprite = equipements[0].Sprite;
         equipementGO2.sprite = equipements[1].Sprite;
-        equipementGO3.sprite = equipements[2].Sprite;
+        equipementGO3.sprite = equipements[2].Sprite;*/
 
         JoueurStatic.Equipements = new Sprite[equipements.Length];
 
@@ -139,7 +166,7 @@ public class MainScript : MonoBehaviour
         Main.Global.TabL.removeImage(locomotions[0]);
         Main.Global.TabL.removeImage(locomotions[1]);
 
-        locomotionGO1.sprite = locomotions[0].Sprite;
+        //locomotionGO1.sprite = locomotions[0].Sprite;
 
         JoueurStatic.Locomotions = new Sprite[locomotions.Length];
 
@@ -164,7 +191,7 @@ public class MainScript : MonoBehaviour
         Main.Global.TabD.removeImage(dimensions[0]);
         Main.Global.TabD.removeImage(dimensions[1]);
 
-        dimensionGO1.sprite = dimensions[0].Sprite;
+        //dimensionGO1.sprite = dimensions[0].Sprite;
 
         JoueurStatic.Dimensions = new Sprite[dimensions.Length];
 

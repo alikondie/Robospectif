@@ -1125,11 +1125,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 87947699}
-  dimensionGO1: {fileID: 85347972}
-  locomotionGO1: {fileID: 431896120}
-  equipementGO1: {fileID: 1258955297}
-  equipementGO2: {fileID: 667927818}
-  equipementGO3: {fileID: 113216044}
+  dimensionGO:
+  - {fileID: 85347971}
+  - {fileID: 1460355950}
+  locomotionGO:
+  - {fileID: 431896119}
+  - {fileID: 240915742}
+  equipementGO:
+  - {fileID: 1258955293}
+  - {fileID: 667927814}
+  - {fileID: 113216043}
+  - {fileID: 20376782}
+  - {fileID: 276773809}
+  - {fileID: 789222624}
 --- !u!114 &160886057
 MonoBehaviour:
   m_ObjectHideFlags: 0
