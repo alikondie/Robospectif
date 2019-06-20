@@ -85,9 +85,9 @@ public class Initialisation : MonoBehaviour
         posCards[4] = new Vector2(560, 890);
         posCards[5] = new Vector2(190, 540);
         //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        pos = 1;
+        pos = 4;
         Rotate(pos);
-        #region players cards display
+       /* #region players cards display
         foreach (Joueur j in Partie.Joueurs)
         {
             if (j.Numero == Partie.JoueurCourant)
@@ -99,7 +99,7 @@ public class Initialisation : MonoBehaviour
                 cartes.transform.GetChild(4).GetComponent<Image>().sprite = j.Loco;
             }
         }
-        #endregion
+        #endregion*/
     }
 
     // Update is called once per frame
@@ -132,7 +132,6 @@ public class Initialisation : MonoBehaviour
     //function which rotate the canvas depending on the current player who presents the robot
     private void Rotate(int pos)
     {
-        Debug.Log(posCards[pos - 1]);
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         if (pos == 3)
         {

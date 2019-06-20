@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Script_Autonomie_clean : MonoBehaviour
 {
-    #region atributs
+    #region attributs
     [SerializeField] GameObject volant;
 
-    //Déplacement sourie
-    [SerializeField] SpriteRenderer spriteRdr;
+    //Déplacement souris
+    [SerializeField] Image sprite;
 
     //Pour la position du centre des Objets au debut
     private float positionDebutX;  
@@ -40,7 +40,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     {
         // Position du joueur
         //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        int pos = 3;
+        int pos = 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
@@ -69,9 +69,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         positionDebutZ = volant.transform.position.z;
         orientation = tabOrien[SENS - 1];
         // Initialise position et orientation du Volant
-        spriteRdr = volant.GetComponent<SpriteRenderer>();
-        //volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
-        //volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
+        sprite = volant.GetComponent<Image>();
 
         isClicked = false;
 

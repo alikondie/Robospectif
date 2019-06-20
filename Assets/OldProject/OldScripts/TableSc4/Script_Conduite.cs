@@ -27,8 +27,6 @@ public class Script_Conduite : MonoBehaviour
     private float[] postionX_Defaut = { 1, 3, -1, -3 };
     private float[] postionY_Defaut = { -3, 1, 3, -1 };
 
-    private int ecart = 2;
-
     private int tailleTxtMin = 30 ;
     private int tailleTxtMax = 40 ;
     private Vector2 tailleCadreMin = new Vector2(25, 15);
@@ -81,34 +79,6 @@ public class Script_Conduite : MonoBehaviour
         positionX = postionX_Defaut[SENS - 1];
         positionY = postionY_Defaut[SENS - 1];
         orientation = tabOrien[SENS - 1];
-
-        switch (SENS)
-        {
-            //case 1:
-            //    cadreTxt0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Cadre Bas
-            //    texteNiv0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Texte Bas
-            //    cadreTxt1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Cadre Haut
-            //    texteNiv1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Texte Haut
-            //    break;
-            //case 2:
-            //    cadreTxt0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Cadre Bas
-            //    texteNiv0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Texte Bas
-            //    cadreTxt1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Cadre Haut
-            //    texteNiv1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Texte Haut
-            //    break;
-            //case 3:
-            //    cadreTxt0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Cadre Bas
-            //    texteNiv0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Texte Bas
-            //    cadreTxt1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Cadre Haut
-            //    texteNiv1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Texte Haut
-            //    break;
-            //case 4:
-            //    cadreTxt0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Cadre Bas
-            //    texteNiv0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Texte Bas
-            //    cadreTxt1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Cadre Haut
-            //    texteNiv1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Texte Haut
-            //    break;
-        }
 
 
     }
