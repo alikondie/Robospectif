@@ -102,7 +102,7 @@ public class Valider : MonoBehaviour
         robot.num = JoueurStatic.Numero;
         robot.zone = JoueurStatic.Position;
         JoueurStatic.Client.Send(idMessage, robot);
-        RandomPerso();
+       // RandomPerso();
         canvas_choix_cartes.SetActive(false);
         canvas_pres_robot.SetActive(true);
         //SceneManager.LoadScene("scene2bis"); 

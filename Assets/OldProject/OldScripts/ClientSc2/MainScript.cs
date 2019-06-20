@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class MainScript : MonoBehaviour
 {
+    short cardID = 1009;
+
     public static Main.Player player;
     [SerializeField] Text text;
     [SerializeField] Image dimensionGO1;
@@ -16,6 +18,62 @@ public class MainScript : MonoBehaviour
     private Main.Image[] dimensions;
     private Main.Image[] locomotions;
     private Main.Image[] equipements;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        /*RandomDim();
+
+        RandomLoco();
+
+        RandomEqui();*/
+
+        JoueurStatic.Client.RegisterHandler(cardID, OnCardsReceived);
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+    }
+
+    private void OnCardsReceived(NetworkMessage netMsg)
+    {
+        var v = netMsg.ReadMessage<MyCardMessage>();
+        if (v.num == JoueurStatic.Numero)
+        {
+            JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("image/Dimension/" + v.dim1);
+            JoueurStatic.Dimensions[1] = Resources.Load<Sprite>("image/Dimension/" + v.dim2);
+            JoueurStatic.Locomotions[0] = Resources.Load<Sprite>("image/Locomotion/" + v.loco1);
+            JoueurStatic.Locomotions[1] = Resources.Load<Sprite>("image/Locomotion/" + v.loco2);
+            JoueurStatic.Equipements[0] = Resources.Load<Sprite>("image/Equipements/" + v.equi1);
+            JoueurStatic.Equipements[1] = Resources.Load<Sprite>("image/Equipements/" + v.equi2);
+            JoueurStatic.Equipements[2] = Resources.Load<Sprite>("image/Equipements/" + v.equi3);
+            JoueurStatic.Equipements[3] = Resources.Load<Sprite>("image/Equipements/" + v.equi4);
+            JoueurStatic.Equipements[4] = Resources.Load<Sprite>("image/Equipements/" + v.equi5);
+            JoueurStatic.Equipements[5] = Resources.Load<Sprite>("image/Equipements/" + v.equi6);
+            JoueurStatic.Persos[0] = Resources.Load<Sprite>("image/Personnages/" + v.perso1);
+            JoueurStatic.Persos[1] = Resources.Load<Sprite>("image/Personnages/" + v.perso2);
+            JoueurStatic.Persos[2] = Resources.Load<Sprite>("image/Personnages/" + v.perso3);
+            JoueurStatic.Persos[3] = Resources.Load<Sprite>("image/Personnages/" + v.perso4);
+            JoueurStatic.Persos[4] = Resources.Load<Sprite>("image/Personnages/" + v.perso5);
+            JoueurStatic.Persos[5] = Resources.Load<Sprite>("image/Personnages/" + v.perso6);
+
+            dimensionGO1.sprite = JoueurStatic.Dimensions[0];
+            locomotionGO1.sprite = JoueurStatic.Locomotions[0];
+            equipementGO1.sprite = JoueurStatic.Equipements[0];
+            equipementGO2.sprite = JoueurStatic.Equipements[1];
+            equipementGO3.sprite = JoueurStatic.Equipements[2];
+        }
+    }
+
 
     private void RandomEqui()
     {
@@ -86,7 +144,7 @@ public class MainScript : MonoBehaviour
         {
             JoueurStatic.Locomotions[i] = locomotions[i].Sprite;
         }
-    }
+    } 
 
     private void RandomDim()
     {
@@ -111,28 +169,5 @@ public class MainScript : MonoBehaviour
         {
             JoueurStatic.Dimensions[i] = dimensions[i].Sprite;
         }
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {        
-        RandomDim();
-        
-        RandomLoco();
-
-        RandomEqui();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnEnable()
-    {
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 }
