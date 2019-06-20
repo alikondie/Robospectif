@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Script_Autonomie_clean : MonoBehaviour
 {
-    #region atributs
+    #region attributs
     [SerializeField] GameObject volant;
 
     //Déplacement sourie
-    [SerializeField] SpriteRenderer spriteRdr;
+    [SerializeField] Image sprite;
 
     //Pour la position du centre des Objets au debut
     private float positionDebutX;  
@@ -69,7 +69,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         positionDebutZ = volant.transform.position.z;
         orientation = tabOrien[SENS - 1];
         // Initialise position et orientation du Volant
-        spriteRdr = volant.GetComponent<SpriteRenderer>();
+        sprite = volant.GetComponent<Image>();
         //volant.transform.position = new Vector3(positionDebutX, positionDebutY, positionDebutZ);    //Position du Volant
         //volant.transform.Rotate(0, 0, orientation);    // Rotation du Volant
 
@@ -145,6 +145,7 @@ public class Script_Autonomie_clean : MonoBehaviour
 
         if(isClicked)
         {
+            Debug.Log("clicked");
             Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
             SteeringWheelMotion(newPosition);
         }
