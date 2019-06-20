@@ -21,7 +21,7 @@ public class Jeton_pop : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         Transform canva = this.transform.parent.parent.parent;
-        for (int i = 1; i < canva.GetChildCount() - 1; i++)
+        for (int i = 1; i < canva.childCount - 1; i++)
         {
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
