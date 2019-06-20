@@ -182,11 +182,11 @@ public class Main : MonoBehaviour
     public class Global 
     {
         private static Player player;
-        public static TabImage tabL;
-        public static TabImage tabD;
-        public static TabImage tabE;
-        public static TabImage tabP;
-        public static Player[] tabPlayer;
+        private static TabImage tabL;
+        private static TabImage tabD;
+        private static TabImage tabE;
+        private static TabImage tabP;
+        private static Player[] tabPlayer;
         private static int nbjoueur;
 
         public Global()
@@ -335,6 +335,7 @@ public class Main : MonoBehaviour
           }*/
 
         Global.TabP = tab;
+        Debug.Log(Global.TabP.Taille);
     }
 
     private void initializeLoco()
