@@ -11,21 +11,16 @@ public class AttenteFin : MonoBehaviour
     [SerializeField] GameObject canvas_fin_partie;
     [SerializeField] GameObject canvas_vainqueur;
     [SerializeField] GameObject canvas_pres_robot;
-    public Text text;
+    [SerializeField] Text text;
 
     private int position;
 
     short nextID = 1015;
-    public static NetworkClient client;
-    public static Joueur joueur;
 
     // Start is called before the first frame update
     void Start()
     {
-        joueur = Valider.joueur;
-        client = Valider.client;
-        text.text = "Joueur : " + joueur.Numero.ToString();
-        client.RegisterHandler(nextID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(nextID, onWaitReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)
@@ -43,6 +38,11 @@ public class AttenteFin : MonoBehaviour
             canvas_fin_partie.SetActive(true);
             //SceneManager.LoadScene("FinTel");
         }
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 
     // Update is called once per frame

@@ -1,232 +1,118 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using static Main;
+using Image = UnityEngine.UI.Image;
 
 public class Initialisation : MonoBehaviour
 {
+    #region variables
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_debat;
+    [SerializeField] GameObject children;
 
-    public static int premierJoueur;
+    private int pos;
 
-    private int pos = -1;
+    [SerializeField] Button button;
 
-    public int position;
-
-    public int[] positions;
-
-    public Button button;
-
-    short waitID = 1006;
+    short debatID = 1006;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
-    public GameObject Plateau;
+    private Vector2[] posCards;
 
-    public GameObject J1carte1;
-    public GameObject J1carte2;
-    public GameObject J1carte3;
-    public GameObject J1carte4;
-    public GameObject J1carte5;
+    [SerializeField] GameObject Plateau;
 
-    public GameObject J2carte1;
-    public GameObject J2carte2;
-    public GameObject J2carte3;
-    public GameObject J2carte4;
-    public GameObject J2carte5;
+    //private GameObject[,] cartes;
+    [SerializeField] GameObject cartes;
+    /*[SerializeField] GameObject[] cartes2;
+    [SerializeField] GameObject[] cartes3;
+    [SerializeField] GameObject[] cartes4;
+    [SerializeField] GameObject[] cartes5;
+    [SerializeField] GameObject[] cartes6;*/
 
-    public GameObject J3carte1;
-    public GameObject J3carte2;
-    public GameObject J3carte3;
-    public GameObject J3carte4;
-    public GameObject J3carte5;
-
-    public GameObject J4carte1;
-    public GameObject J4carte2;
-    public GameObject J4carte3;
-    public GameObject J4carte4;
-    public GameObject J4carte5;
-
-    public GameObject J5carte1;
-    public GameObject J5carte2;
-    public GameObject J5carte3;
-    public GameObject J5carte4;
-    public GameObject J5carte5;
-
-    public GameObject J6carte1;
-    public GameObject J6carte2;
-    public GameObject J6carte3;
-    public GameObject J6carte4;
-    public GameObject J6carte5;
-
-
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
+    }
 
-        positions = Text_Connexion.positions;
-
-        premierJoueur = Partie.JoueurCourant;
-
-        for (int i = 0; i < 6; i++)
+    void OnEnable()
+    {
+        #region cards array
+        /*cartes = new GameObject[6,cartes1.Length];
+        
+        for (int j = 0; j < cartes1.Length; j++)
         {
-            if (positions[i] == premierJoueur)
+            cartes[0, j] = cartes1[j];
+        }
+
+        for (int j = 0; j < cartes2.Length; j++)
+        {
+            cartes[1, j] = cartes2[j];
+        }
+
+        for (int j = 0; j < cartes3.Length; j++)
+        {
+            cartes[2, j] = cartes3[j];
+        }
+
+        for (int j = 0; j < cartes4.Length; j++)
+        {
+            cartes[3, j] = cartes4[j];
+        }
+
+        for (int j = 0; j < cartes5.Length; j++)
+        {
+            cartes[4, j] = cartes5[j];
+        }
+
+        for (int j = 0; j < cartes6.Length; j++)
+        {
+            cartes[5, j] = cartes6[j];
+        }*/
+        #endregion
+        posCards = new Vector2[6];
+        posCards[0] = new Vector2(560, 190);
+        posCards[1] = new Vector2(1360, 190);
+        posCards[2] = new Vector2(1730, 540);
+        posCards[3] = new Vector2(1360, 890);
+        posCards[4] = new Vector2(560, 890);
+        posCards[5] = new Vector2(190, 540);
+        //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        pos = 1;
+        Rotate(pos);
+        #region players cards display
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (j.Numero == Partie.JoueurCourant)
             {
-                pos = i + 1;
+                cartes.transform.GetChild(0).GetComponent<Image>().sprite = j.Dim;
+                cartes.transform.GetChild(1).GetComponent<Image>().sprite = j.Equi1;
+                cartes.transform.GetChild(2).GetComponent<Image>().sprite = j.Equi2;
+                cartes.transform.GetChild(3).GetComponent<Image>().sprite = j.Equi3;
+                cartes.transform.GetChild(4).GetComponent<Image>().sprite = j.Loco;
             }
         }
-       
-
-
-        if (pos == 3)
-        {
-            Plateau.transform.Rotate(Vector3.forward * 90);
-            button.transform.Rotate(Vector3.forward * 90);
-            Vector2 posButton = new Vector2((float)-2.78, 0);
-            button.transform.position = posButton;
-        }
-
-        if ((pos == 4) || (pos == 5))
-        {
-            Plateau.transform.Rotate(Vector3.forward * 180);
-            button.transform.Rotate(Vector3.forward * 180);
-            Vector2 posButton = new Vector2(0, (float)-2.78);
-            button.transform.position = posButton;
-        }
-
-        if (pos == 6)
-        {
-            Plateau.transform.Rotate(Vector3.forward * -90);
-            button.transform.Rotate(Vector3.forward * -90);
-            Vector2 posButton = new Vector2((float)2.78, 0);
-            button.transform.position = posButton;
-        }
-
-        if (pos != 1)
-        { 
-            Destroy(J1carte1);
-            Destroy(J1carte2);
-            Destroy(J1carte3);
-            Destroy(J1carte4);
-            Destroy(J1carte5);
-        }
-
-        if (pos != 2)
-        {
-            Destroy(J2carte1);
-            Destroy(J2carte2);
-            Destroy(J2carte3);
-            Destroy(J2carte4);
-            Destroy(J2carte5);
-        }
-
-        if (pos != 3)
-        {
-            Destroy(J3carte1);
-            Destroy(J3carte2);
-            Destroy(J3carte3);
-            Destroy(J3carte4);
-            Destroy(J3carte5);
-        }
-
-        if (pos != 4)
-        {
-            Destroy(J4carte1);
-            Destroy(J4carte2);
-            Destroy(J4carte3);
-            Destroy(J4carte4);
-            Destroy(J4carte5);
-        }
-
-        if (pos != 5)
-        {
-            Destroy(J5carte1);
-            Destroy(J5carte2);
-            Destroy(J5carte3);
-            Destroy(J5carte4);
-            Destroy(J5carte5);
-        }
-
-        if (pos != 6)
-        {
-            Destroy(J6carte1);
-            Destroy(J6carte2);
-            Destroy(J6carte3);
-            Destroy(J6carte4);
-            Destroy(J6carte5);
-        }
-        
+        #endregion
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((positions[0] != 0) && (pos == 1))
-        {
-            J1carte1.GetComponent<SpriteRenderer>().sprite = images[0, 1];
-            J1carte2.GetComponent<SpriteRenderer>().sprite = images[0, 2];
-            J1carte3.GetComponent<SpriteRenderer>().sprite = images[0, 3];
-            J1carte4.GetComponent<SpriteRenderer>().sprite = images[0, 4];
-            J1carte5.GetComponent<SpriteRenderer>().sprite = images[0, 0];
-        }
 
-        if ((positions[1] != 0) && (pos == 2))
-        {
-            J2carte1.GetComponent<SpriteRenderer>().sprite = images[1, 1];
-            J2carte2.GetComponent<SpriteRenderer>().sprite = images[1, 2];
-            J2carte3.GetComponent<SpriteRenderer>().sprite = images[1, 3];
-            J2carte4.GetComponent<SpriteRenderer>().sprite = images[1, 4];
-            J2carte5.GetComponent<SpriteRenderer>().sprite = images[1, 0];
-        }
-
-        if ((positions[2] != 0) && (pos == 3))
-        {
-            J3carte1.GetComponent<SpriteRenderer>().sprite = images[2, 1];
-            J3carte2.GetComponent<SpriteRenderer>().sprite = images[2, 2];
-            J3carte3.GetComponent<SpriteRenderer>().sprite = images[2, 3];
-            J3carte4.GetComponent<SpriteRenderer>().sprite = images[2, 4];
-            J3carte5.GetComponent<SpriteRenderer>().sprite = images[2, 0];
-        }
-
-        if ((positions[3] != 0) && (pos == 4))
-        {
-            J4carte1.GetComponent<SpriteRenderer>().sprite = images[3, 1];
-            J4carte2.GetComponent<SpriteRenderer>().sprite = images[3, 2];
-            J4carte3.GetComponent<SpriteRenderer>().sprite = images[3, 3];
-            J4carte4.GetComponent<SpriteRenderer>().sprite = images[3, 4];
-            J4carte5.GetComponent<SpriteRenderer>().sprite = images[3, 0];
-        }
-
-        if ((positions[4] != 0) && (pos == 5))
-        {
-            J5carte1.GetComponent<SpriteRenderer>().sprite = images[4, 1];
-            J5carte2.GetComponent<SpriteRenderer>().sprite = images[4, 2];
-            J5carte3.GetComponent<SpriteRenderer>().sprite = images[4, 3];
-            J5carte4.GetComponent<SpriteRenderer>().sprite = images[4, 4];
-            J5carte5.GetComponent<SpriteRenderer>().sprite = images[4, 0];
-        }
-
-        if ((positions[5] != 0) && (pos == 6))
-        {
-            J6carte1.GetComponent<SpriteRenderer>().sprite = images[5, 1];
-            J6carte2.GetComponent<SpriteRenderer>().sprite = images[5, 2];
-            J6carte3.GetComponent<SpriteRenderer>().sprite = images[5, 3];
-            J6carte4.GetComponent<SpriteRenderer>().sprite = images[5, 4];
-            J6carte5.GetComponent<SpriteRenderer>().sprite = images[5, 0];
-        }
     }
 
     private void ButtonClicked()
     {
-        int joueurCourant = Initialisation.premierJoueur;
         MyNetworkMessage msg = new MyNetworkMessage();
-        msg.message = joueurCourant;
-        NetworkServer.SendToAll(waitID, msg);
+        msg.message = Partie.JoueurCourant;
+        NetworkServer.SendToAll(debatID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_debat.SetActive(true);
         //SceneManager.LoadScene("Scene5");
@@ -238,6 +124,31 @@ public class Initialisation : MonoBehaviour
         {
             images[zone-1, i] = image[i];
         }
+    }
+
+
+
+
+    //function which rotate the canvas depending on the current player who presents the robot
+    private void Rotate(int pos)
+    {
+        Debug.Log(posCards[pos - 1]);
+        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (pos == 3)
+        {
+            rotation = Quaternion.Euler(0f, 0f, 90f);
+        }
+        else if(pos == 4 || pos == 5)
+        {
+            rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+        else if (pos == 6)
+        {
+            rotation = Quaternion.Euler(0f, 0f, -90f);
+        }
+        children.transform.rotation = rotation;
+        cartes.transform.rotation = rotation;
+        cartes.transform.position = posCards[pos - 1];
     }
 
 }

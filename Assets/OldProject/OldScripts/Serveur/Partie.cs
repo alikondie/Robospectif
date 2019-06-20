@@ -8,6 +8,7 @@ public class Partie
     private static List<Joueur> joueurs;
     private static int tour;
     private static int joueurCourant;
+    private static int[] positions;
 
     public static void Initialize()
     {
@@ -36,6 +37,12 @@ public class Partie
     {
         get => joueurCourant;
         set => joueurCourant = value;
+    }
+
+    public static int[] Positions
+    {
+        get => positions;
+        set => positions = value;
     }
 
     // Start is called before the first frame update

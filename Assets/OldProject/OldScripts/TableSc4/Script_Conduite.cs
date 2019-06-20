@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,20 +8,16 @@ public class Script_Conduite : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
 
-    public int positionJoueur;
-
-    public int[] positions;
-
-    public Button button;
+    [SerializeField] Button button;
 
     // Curseur
-    public Image barre;
+    [SerializeField] Image barre;
     // Partie Attention Requise (TEXTE)
-    public Image cadreTxt0;
-    public Text texteNiv0;
+    [SerializeField] Image cadreTxt0;
+    [SerializeField] Text texteNiv0;
     // Partie Autonomie Complète (TEXTE)
-    public Image cadreTxt1;
-    public Text texteNiv1;
+    [SerializeField] Image cadreTxt1;
+    [SerializeField] Text texteNiv1;
 
 
     // Données construction partie Conduite
@@ -52,20 +49,10 @@ public class Script_Conduite : MonoBehaviour
     {
         //button.gameObject.SetActive(false);
 
-        positions = Text_Connexion.positions;
-
         // Position du joueur
-        positionJoueur = Partie.JoueurCourant;
 
-        int pos = -1;
-
-        for (int i = 0; i < 6; i++)
-        {
-            if (positions[i] == positionJoueur)
-            {
-                pos = i + 1;
-            }
-        }
+        //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
+        int pos = 3;
 
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
@@ -95,59 +82,32 @@ public class Script_Conduite : MonoBehaviour
         positionY = postionY_Defaut[SENS - 1];
         orientation = tabOrien[SENS - 1];
 
-
-        //Initialisation
-        // BARRE
-        barre = barre.GetComponent<Image>();
-        barre.rectTransform.sizeDelta = new Vector2(60, 5);
-        barre.rectTransform.position = new Vector2(positionX, positionY);   // Position de la Barre
-        barre.rectTransform.Rotate(0, 0, orientation);    // Rotation Barre
-        //text bas
-        cadreTxt0 = cadreTxt0.GetComponent<Image>();
-        cadreTxt0.rectTransform.sizeDelta = tailleCadreMax;    // Taille du Cadre bas
-        cadreTxt0.rectTransform.Rotate(0, 0, orientation);    // Rotation du Cadre Bas
-
-        texteNiv0 = texteNiv0.GetComponent<Text>();
-        texteNiv0.fontSize = tailleTxtMax;    // Taille du texte bas
-        texteNiv0.rectTransform.Rotate(0, 0, 0);    // Rotation du Texte Bas
-        //text Haut
-        cadreTxt1 = cadreTxt1.GetComponent<Image>();
-        cadreTxt1.rectTransform.sizeDelta = tailleCadreMax;    // Taille du Cadre Haut
-        cadreTxt1.rectTransform.Rotate(0, 0, orientation);    // Rotation du Cadre Haut
-
-        texteNiv1 = texteNiv1.GetComponent<Text>();
-        texteNiv1.fontSize = tailleTxtMax;    // Taille du texte Haut
-        texteNiv1.rectTransform.Rotate(0, 0, 0);    // Rotation du Texte Haut
-
-        // -----------------------------
-
-
         switch (SENS)
         {
-            case 1:
-                cadreTxt0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Cadre Bas
-                texteNiv0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Texte Bas
-                cadreTxt1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Cadre Haut
-                texteNiv1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Texte Haut
-                break;
-            case 2:
-                cadreTxt0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Cadre Bas
-                texteNiv0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Texte Bas
-                cadreTxt1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Cadre Haut
-                texteNiv1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Texte Haut
-                break;
-            case 3:
-                cadreTxt0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Cadre Bas
-                texteNiv0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Texte Bas
-                cadreTxt1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Cadre Haut
-                texteNiv1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Texte Haut
-                break;
-            case 4:
-                cadreTxt0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Cadre Bas
-                texteNiv0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Texte Bas
-                cadreTxt1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Cadre Haut
-                texteNiv1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Texte Haut
-                break;
+            //case 1:
+            //    cadreTxt0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Cadre Bas
+            //    texteNiv0.rectTransform.position = new Vector2((positionX - ecart), (positionY + (ecart / 2)));     // Position du Texte Bas
+            //    cadreTxt1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Cadre Haut
+            //    texteNiv1.rectTransform.position = new Vector2((positionX + ecart), (positionY + (ecart / 2)));     // Position du Texte Haut
+            //    break;
+            //case 2:
+            //    cadreTxt0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Cadre Bas
+            //    texteNiv0.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY - ecart));     // Position du Texte Bas
+            //    cadreTxt1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Cadre Haut
+            //    texteNiv1.rectTransform.position = new Vector2((positionX - (ecart / 2)), (positionY + ecart));     // Position du Texte Haut
+            //    break;
+            //case 3:
+            //    cadreTxt0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Cadre Bas
+            //    texteNiv0.rectTransform.position = new Vector2((positionX + ecart), (positionY - (ecart / 2)));     // Position du Texte Bas
+            //    cadreTxt1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Cadre Haut
+            //    texteNiv1.rectTransform.position = new Vector2((positionX - ecart), (positionY - (ecart / 2)));     // Position du Texte Haut
+            //    break;
+            //case 4:
+            //    cadreTxt0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Cadre Bas
+            //    texteNiv0.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY + ecart));     // Position du Texte Bas
+            //    cadreTxt1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Cadre Haut
+            //    texteNiv1.rectTransform.position = new Vector2((positionX + (ecart / 2)), (positionY - ecart));     // Position du Texte Haut
+            //    break;
         }
 
 
@@ -156,8 +116,9 @@ public class Script_Conduite : MonoBehaviour
     // Méthode de mise a jour
     void Update()
     {
-        if(niveauChoisi == 0)
+        if(niveauChoisi == 1)
         {
+            Debug.Log("niveau 1");
             // Niveau choisi: BAS
             cadreTxt0.rectTransform.sizeDelta = tailleCadreMax;    // Taille du Cadre bas  
             texteNiv0.fontSize = tailleTxtMax;                     // Taille du texte bas
@@ -168,8 +129,9 @@ public class Script_Conduite : MonoBehaviour
         }
         else
         {
-            if(niveauChoisi == 1)
+            if(niveauChoisi == 2)
             {
+                Debug.Log("niveau 2");
                 // Niveau choisi: HAUT
                 cadreTxt1.rectTransform.sizeDelta = tailleCadreMax;    // Taille du Cadre Haut
                 texteNiv1.fontSize = tailleTxtMax;                     // Taille du texte Haut

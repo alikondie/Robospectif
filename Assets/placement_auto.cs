@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Fin : MonoBehaviour
+public class placement_auto : MonoBehaviour
 {
-    [SerializeField] Text text;
-
+    #region variables
+    private GameObject[,] cards_list;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    void OnEnable()
-    {
-        text.text = "Joueur : " + JoueurStatic.Numero;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    private void SetCardsList(GameObject[,] cartes)
+    {
+        cards_list = cartes;
     }
 }

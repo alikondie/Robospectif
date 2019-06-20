@@ -6,18 +6,104 @@ using UnityEngine.Networking;
 
 public class MainScript : MonoBehaviour
 {
+    short cardID = 1009;
+
     public static Main.Player player;
-    public static Joueur joueur;
-    public Text text;
-    public Image dimensionGO1;
-    public Image locomotionGO1;
-    public Image equipementGO1;
-    public Image equipementGO2;
-    public Image equipementGO3;
-    public static Main.Image[] dimensions;
-    public static Main.Image[] locomotions;
-    public static Main.Image[] equipements;
-    private int position = selectUser.positionStatic;
+    [SerializeField] Text text;
+    [SerializeField] GameObject[] dimensionGO;
+    [SerializeField] GameObject[] locomotionGO;
+    [SerializeField] GameObject[] equipementGO;
+    private Main.Image[] dimensions;
+    private Main.Image[] locomotions;
+    private Main.Image[] equipements;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        /*RandomDim();
+
+        RandomLoco();
+
+        RandomEqui();*/
+
+        foreach (GameObject i in dimensionGO)
+        {
+            i.SetActive(false);
+        }
+
+        foreach (GameObject i in locomotionGO)
+        {
+            i.SetActive(false);
+        }
+
+        foreach (GameObject i in equipementGO)
+        {
+            i.SetActive(false);
+        }
+
+        JoueurStatic.Client.RegisterHandler(cardID, OnCardsReceived);
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+    }
+
+    private void OnCardsReceived(NetworkMessage netMsg)
+    {
+        var v = netMsg.ReadMessage<MyCardMessage>();
+        if (v.num == JoueurStatic.Numero)
+        {
+            JoueurStatic.Dimensions = new Sprite[2];
+            JoueurStatic.Locomotions = new Sprite[2];
+            JoueurStatic.Equipements = new Sprite[6];
+            JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("image/Dimension/" + v.dim1);
+            JoueurStatic.Dimensions[1] = Resources.Load<Sprite>("image/Dimension/" + v.dim2);
+            JoueurStatic.Locomotions[0] = Resources.Load<Sprite>("image/Locomotion/" + v.loco1);
+            JoueurStatic.Locomotions[1] = Resources.Load<Sprite>("image/Locomotion/" + v.loco2);
+            JoueurStatic.Equipements[0] = Resources.Load<Sprite>("image/Equipements/" + v.equi1);
+            JoueurStatic.Equipements[1] = Resources.Load<Sprite>("image/Equipements/" + v.equi2);
+            JoueurStatic.Equipements[2] = Resources.Load<Sprite>("image/Equipements/" + v.equi3);
+            JoueurStatic.Equipements[3] = Resources.Load<Sprite>("image/Equipements/" + v.equi4);
+            JoueurStatic.Equipements[4] = Resources.Load<Sprite>("image/Equipements/" + v.equi5);
+            JoueurStatic.Equipements[5] = Resources.Load<Sprite>("image/Equipements/" + v.equi6);
+            JoueurStatic.Persos[0] = Resources.Load<Sprite>("image/Personnages/" + v.perso1);
+            JoueurStatic.Persos[1] = Resources.Load<Sprite>("image/Personnages/" + v.perso2);
+            JoueurStatic.Persos[2] = Resources.Load<Sprite>("image/Personnages/" + v.perso3);
+            JoueurStatic.Persos[3] = Resources.Load<Sprite>("image/Personnages/" + v.perso4);
+            JoueurStatic.Persos[4] = Resources.Load<Sprite>("image/Personnages/" + v.perso5);
+            JoueurStatic.Persos[5] = Resources.Load<Sprite>("image/Personnages/" + v.perso6);
+
+            dimensionGO[0].GetComponent<Image>().sprite = JoueurStatic.Dimensions[0];
+            locomotionGO[0].GetComponent<Image>().sprite = JoueurStatic.Locomotions[0];
+            for (int i = 0; i < 3; i++)
+                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[1];
+
+            foreach (GameObject i in dimensionGO)
+            {
+                i.SetActive(true);
+            }
+
+            foreach (GameObject i in locomotionGO)
+            {
+                i.SetActive(true);
+            }
+
+            foreach (GameObject i in equipementGO)
+            {
+                i.SetActive(true);
+            }
+        }
+    }
+
 
     private void RandomEqui()
     {
@@ -53,9 +139,16 @@ public class MainScript : MonoBehaviour
             Main.Global.TabE.removeImage(equipements[i]);
         }
 
-        equipementGO1.sprite = equipements[0].Sprite;
+        /*equipementGO1.sprite = equipements[0].Sprite;
         equipementGO2.sprite = equipements[1].Sprite;
-        equipementGO3.sprite = equipements[2].Sprite;
+        equipementGO3.sprite = equipements[2].Sprite;*/
+
+        JoueurStatic.Equipements = new Sprite[equipements.Length];
+
+        for (int i = 0; i < equipements.Length; i++)
+        {
+            JoueurStatic.Equipements[i] = equipements[i].Sprite;
+        }
     }
 
     private void RandomLoco()
@@ -73,8 +166,15 @@ public class MainScript : MonoBehaviour
         Main.Global.TabL.removeImage(locomotions[0]);
         Main.Global.TabL.removeImage(locomotions[1]);
 
-        locomotionGO1.sprite = locomotions[0].Sprite;
-    }
+        //locomotionGO1.sprite = locomotions[0].Sprite;
+
+        JoueurStatic.Locomotions = new Sprite[locomotions.Length];
+
+        for (int i = 0; i < locomotions.Length; i++)
+        {
+            JoueurStatic.Locomotions[i] = locomotions[i].Sprite;
+        }
+    } 
 
     private void RandomDim()
     {
@@ -91,28 +191,13 @@ public class MainScript : MonoBehaviour
         Main.Global.TabD.removeImage(dimensions[0]);
         Main.Global.TabD.removeImage(dimensions[1]);
 
-        dimensionGO1.sprite = dimensions[0].Sprite;
-    }
+        //dimensionGO1.sprite = dimensions[0].Sprite;
 
+        JoueurStatic.Dimensions = new Sprite[dimensions.Length];
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        joueur = new Joueur();
-        joueur.Numero = position;        
-        text.text = "Joueur : " + position.ToString();
-
-        RandomDim();
-        
-        RandomLoco();
-
-        RandomEqui();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        text.text = "Joueur : " + position.ToString();
+        for (int i = 0; i < dimensions.Length; i++)
+        {
+            JoueurStatic.Dimensions[i] = dimensions[i].Sprite;
+        }
     }
 }

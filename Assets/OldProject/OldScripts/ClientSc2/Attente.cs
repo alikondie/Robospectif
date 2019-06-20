@@ -12,36 +12,27 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_choix_persos;
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_pres_robot;
-    public Text text;
+    [SerializeField] Text text;
 
-    private int position;
-
-    short waitID = 1006;
-    public static NetworkClient client;
-    public static Joueur joueur;
+    short debatID = 1006;
 
     // Start is called before the first frame update
     void Start()
     {
-        joueur = Valider.joueur;
-        client = Valider.client;
-        position = Valider.position;
-        text.text = "Joueur : " + joueur.Numero.ToString();
-        client.RegisterHandler(waitID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(debatID, onWaitReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)
     {
         int fini = netMsg.ReadMessage<MyNetworkMessage>().message;
-        if (position == fini)
+        canvas_pres_robot.SetActive(false);
+        if (JoueurStatic.Numero == fini)
         {
             //SceneManager.LoadScene("Scene_ChoixJetons");
-            canvas_pres_robot.SetActive(false);
             canvas_choix_jetons.SetActive(true);
         }
         else
         {
-            canvas_pres_robot.SetActive(false);
             canvas_choix_persos.SetActive(true);
             //SceneManager.LoadScene("scene3");
         }
@@ -51,5 +42,10 @@ public class Attente : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
     }
 }

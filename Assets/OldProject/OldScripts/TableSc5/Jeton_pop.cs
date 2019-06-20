@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Jeton_pop : MonoBehaviour
 {
@@ -10,25 +11,30 @@ public class Jeton_pop : MonoBehaviour
     private Vector3 curScreenPoint;
     private Vector3 positionInit;
 
-    public List<GameObject> joueurs;
-    public List<GameObject> cartes;    
-
-    public static int[] nb_bonus;
-    public static int[] nb_malus;
+    private List<GameObject> joueurs;
+    private List<GameObject> cartes;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.SetActive(false);
         Transform canva = this.transform.parent.parent.parent;
-        for (int i = 1; i < canva.childCount - 1; i++)
+        joueurs = new List<GameObject>();
+        cartes = new List<GameObject>();
+        for (int i = 3; i < canva.childCount; i++)
         {
+            for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
+            {
+                canva.GetChild(i).GetChild(2).GetChild(j).gameObject.SetActive(false);
+            }
+
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
         }
-        positionInit = transform.position;
-        nb_bonus = new int[6];
-        nb_malus = new int[6];
+        positionInit = this.transform.position;
+    }
+
+    void OnEnable()
+    {
     }
 
 
@@ -43,21 +49,20 @@ public class Jeton_pop : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-
         if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
         {
             this.gameObject.SetActive(false);
 
             int index = cartes.IndexOf(collision.gameObject);
             
-            if (Pile.piles[index] < 8)
+            if (Tour.Piles[index] < 8)
             {
-                joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.GetComponent<SpriteRenderer>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
-                joueurs[index].transform.GetChild(2).GetChild(Pile.piles[index]).gameObject.SetActive(true);
-                Pile.piles[index]++;
+                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
+                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
+                Tour.Piles[index]++;
             }
         }
+        this.transform.position = positionInit;
 
     }
 

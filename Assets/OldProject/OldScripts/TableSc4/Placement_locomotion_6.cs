@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Placement_locomotion_6 : MonoBehaviour
 {
-    public GameObject locomotion;
+    [SerializeField] GameObject locomotion;
     private float x_position_locomotion;
     private float y_position_locomotion;
 

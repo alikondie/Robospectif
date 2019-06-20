@@ -11,23 +11,21 @@ public class script_LogosEnvironnement : MonoBehaviour
     private int[] choixZone; // TABLEAU A RECUPERER 
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_pres_perso;
-    public Button button;
-    private int position;
-    public Image perso;
+    [SerializeField] Button button;
+    [SerializeField] Image perso;
     private string persoSprite;
-    public Text text;
-
-    public static NetworkClient client;
+    [SerializeField] Text text;
+    
     short persosID = 1007;
 
-    public GameObject rural;
-    public Material couleurRural;
-    public GameObject periUrbain;
-    public Material couleurPeriUrbain;
-    public GameObject urbain;
-    public Material couleurUrbain;
+    [SerializeField] GameObject rural;
+    [SerializeField] Material couleurRural;
+    [SerializeField] GameObject periUrbain;
+    [SerializeField] Material couleurPeriUrbain;
+    [SerializeField] GameObject urbain;
+    [SerializeField] Material couleurUrbain;
 
-    public Material couleurChoisie;
+    [SerializeField] Material couleurChoisie;
 
 
     private bool zoneToucher1;
@@ -43,9 +41,14 @@ public class script_LogosEnvironnement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        client = Valider.client;
-        position = selectUser.positionStatic;
-        text.text = "Joueur : " + position;
+
+        button.onClick.AddListener(() => ButtonClicked());
+        button.gameObject.SetActive(false);
+    }
+
+    private void ButtonClicked()
+    {
+        MyPersoMessage msg = new MyPersoMessage();
         string spriteString = perso.sprite.ToString();
         string s = "";
         for (int i = 0; i < spriteString.Length - 21; i++)
@@ -53,13 +56,22 @@ public class script_LogosEnvironnement : MonoBehaviour
             s = s + spriteString[i];
         }
         persoSprite = s;
+        msg.numero = JoueurStatic.Numero;
+        msg.image = persoSprite;
+        msg.choixZone0 = choixZone[0];
+        msg.choixZone1 = choixZone[1];
+        JoueurStatic.Client.Send(persosID, msg);
+        canvas_pres_perso.SetActive(false);
+        canvas_choix_jetons.SetActive(true);
+        //SceneManager.LoadScene("Scene_ChoixJetons");
+    }
 
+    void OnEnable()
+    {
+        text.text = "Joueur : " + JoueurStatic.Numero;
         choixZone = new int[2];
         choixZone[0] = 0;
         choixZone[1] = 0;
-
-        button.onClick.AddListener(() => ButtonClicked());
-        button.gameObject.SetActive(false);
 
         rural.GetComponent<Image>().material = couleurRural;
         periUrbain.GetComponent<Image>().material = couleurPeriUrbain;
@@ -69,20 +81,6 @@ public class script_LogosEnvironnement : MonoBehaviour
         zoneToucher3 = false;
 
         nombreChoix = 0;
-
-    }
-
-    private void ButtonClicked()
-    {
-        MyPersoMessage msg = new MyPersoMessage();
-        msg.numero = position;
-        msg.image = persoSprite;
-        msg.choixZone0 = choixZone[0];
-        msg.choixZone1 = choixZone[1];
-        client.Send(persosID, msg);
-        canvas_pres_perso.SetActive(false);
-        canvas_choix_jetons.SetActive(true);
-        //SceneManager.LoadScene("Scene_ChoixJetons");
     }
 
     void Update()

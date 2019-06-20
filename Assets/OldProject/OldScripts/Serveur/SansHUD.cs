@@ -14,18 +14,14 @@ public class SansHUD : NetworkManager
 {
     [SerializeField] GameObject canvas_serveur;
     [SerializeField] GameObject canvas_client;
-    public NetworkManager manager;
-    public Scene sceneServeur;
-    public Scene sceneClient;
-    public static NetworkClient myclient;
+    [SerializeField] NetworkManager manager;
+    private NetworkClient myclient;
     short messageID = 1000;
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
-    public UnityEngine.UI.Text conText;
     public static short clientID = 123;
-    public NetworkConnection id;
-    public bool conceptionTerminee;
+    private bool conceptionTerminee;
     public static int premierFini;
     private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
@@ -38,6 +34,7 @@ public class SansHUD : NetworkManager
         if(ipv4 == Ip_serveur) 
         {
             Partie.Initialize();
+            Debug.Log(Partie.Joueurs.Capacity);
             manager.StartServer(); // Connection Serveur
             RegisterHandlers();
             Debug.Log("Serveur connecté");
@@ -48,6 +45,7 @@ public class SansHUD : NetworkManager
             Debug.Log("client");
             myclient = new NetworkClient();
             myclient.Connect(Ip_serveur, 7777);
+            JoueurStatic.Client = myclient;
             canvas_serveur.SetActive(false);
             canvas_client.SetActive(true);
         } 
@@ -75,8 +73,6 @@ public class SansHUD : NetworkManager
             premierFini = netMsg.ReadMessage<MyNetworkMessage>().message;
 
             Partie.JoueurCourant = premierFini;
-
-            Debug.Log("premier joueur : " + premierFini);
             EnAttenteCT.premierFini(premierFini);
             envoiChrono(premierFini);
             conceptionTerminee = true;
@@ -106,7 +102,6 @@ public class SansHUD : NetworkManager
         {
             s = s + dim[i];
         }
-        Debug.Log(s);
         dim = s;
 
         s = "";
@@ -114,7 +109,6 @@ public class SansHUD : NetworkManager
         {
             s = s + loco[i];
         }
-        Debug.Log(s);
         loco = s;
 
         s = "";
@@ -122,7 +116,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi1[i];
         }
-        Debug.Log(s);
         equi1 = s;
 
         s = "";
@@ -130,7 +123,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi2[i];
         }
-        Debug.Log(s);
         equi2 = s;
 
         s = "";
@@ -138,7 +130,6 @@ public class SansHUD : NetworkManager
         {
             s = s + equi3[i];
         }
-        Debug.Log(s);
         equi3 = s;
 
         Sprite[] images = new Sprite[5];
@@ -159,16 +150,14 @@ public class SansHUD : NetworkManager
         Initialisation.get(images, z);
     }
 
+    // connexion d'un joueur sur un des boutons du client
     void OnMessageReceived(NetworkMessage message)
     {
         int id = message.ReadMessage<MyNetworkMessage>().message;
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = id;
         NetworkServer.SendToAll(messageID, msg);
-        Debug.Log("id_serveur : " + id);
-        Text_Connexion.recupInfoJoueur(id);
-
-        
+        Text_Connexion.recupInfoJoueur(id);        
     }
 
  

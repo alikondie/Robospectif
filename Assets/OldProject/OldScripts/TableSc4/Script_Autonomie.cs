@@ -1,21 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class Script_Autonomie : MonoBehaviour
 {
     // ---------- ATTRIBUTS ----------
-    public int positionJoueur;
+    private int positionJoueur;
 
-    public int[] positions;
-
-    public GameObject volant;
+    [SerializeField] GameObject volant;
 
     private bool autonomie; // ou  public int autonomie; (avec 0 ou 1)
 
     //Déplacement sourie
-    public SpriteRenderer spriteRdr;
+    [SerializeField] SpriteRenderer spriteRdr;
     private float positionSouris;
     private Vector3 positionVollant;
 
@@ -49,19 +48,16 @@ public class Script_Autonomie : MonoBehaviour
     {
         // Position du joueur
         positionJoueur = Partie.JoueurCourant;
-        
-        positions = Text_Connexion.positions;
 
         int pos = -1;
-
+        
         for (int i = 0; i < 6; i++)
         {
-            if (positions[i] == positionJoueur)
+            if (Partie.Positions[i] == positionJoueur)
             {
                 pos = i + 1;
             }
         }
-
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
@@ -159,7 +155,9 @@ public class Script_Autonomie : MonoBehaviour
 
             Vector3 move = mousePos - mouseStartPos;
             positionVollant = playerStartPos + move;
-
+            Debug.Log("position volant : " + positionVollant);
+            Debug.Log("position playerStartPos : " + playerStartPos);
+            Debug.Log("position move : " + move);
             if (SENS == 1 || SENS == 3)
             {
                 if (positionVollant.x <= (positionDebutX + ecart) && positionVollant.x >= (positionDebutX - ecart))

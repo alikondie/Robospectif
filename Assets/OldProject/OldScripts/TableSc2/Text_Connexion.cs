@@ -11,22 +11,19 @@ public class Text_Connexion : MonoBehaviour
     [SerializeField] GameObject canvas_joueurs;
     [SerializeField] GameObject canvas_attente_choix_cartes;
 
-    public GameObject text_Position_1;      // Texte a la 1er position (En Bas a Gauche)
-    public GameObject text_Position_2;      // Texte a la 2eme position (En Bas a Droite)
-    public GameObject text_Position_3;      // Texte a la 3eme position (A Droite)
-    public GameObject text_Position_4;      // Texte a la 4eme position (En Haut a Droite)
-    public GameObject text_Position_5;      // Texte a la 5eme position (En Haut a Gauche)
-    public GameObject text_Position_6;      // Texte a la 6eem position (A Gauche)
+    [SerializeField] GameObject text_Position_1;      // Texte a la 1er position (En Bas a Gauche)
+    [SerializeField] GameObject text_Position_2;      // Texte a la 2eme position (En Bas a Droite)
+    [SerializeField] GameObject text_Position_3;      // Texte a la 3eme position (A Droite)
+    [SerializeField] GameObject text_Position_4;      // Texte a la 4eme position (En Haut a Droite)
+    [SerializeField] GameObject text_Position_5;      // Texte a la 5eme position (En Haut a Gauche)
+    [SerializeField] GameObject text_Position_6;      // Texte a la 6eem position (A Gauche)
 
     // ---------- CONSTANTES ----------
 
     private int numJoueur;      // Pour affecter un numero de joueur (1 - 6)
     private Text affichageJoueur;   // Pour convertir de GameObjecte à Text
     private GameObject[] tabText = new GameObject[6];   //Tableau qui contient tout les GameObject "text_Position"
-    public int[] tabNum ;   //Tableau qui contient tout la position et le numero de joueurs 
     private int infoAndroid;
-
-    public static int[] positions;
 
     // Recuperation scene d'avant
     public static int nbJoueur ;  // Le nombre de joueur dans la partie (de 4 à 6)
@@ -38,7 +35,6 @@ public class Text_Connexion : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        positions = Button_ready_next_scene.envoi;
 
         infoAndroid = 0;
         estDebut = false;
@@ -52,7 +48,7 @@ public class Text_Connexion : MonoBehaviour
         tabText = new GameObject[] { text_Position_1, text_Position_2, text_Position_3, text_Position_4, text_Position_5, text_Position_6 };
 
         // Initialisé les textes à "Non Connecté".
-        InitAffichageTextJoueur(positions);
+        InitAffichageTextJoueur(Partie.Positions);
 
     }
 
@@ -124,7 +120,7 @@ public class Text_Connexion : MonoBehaviour
         int pos = -1;
         for (int j = 0; j < 6; j++)
         {
-            if (i == positions[j])
+            if (i == Partie.Positions[j])
             {
                 pos = j+1;
             }
@@ -146,12 +142,12 @@ public class Text_Connexion : MonoBehaviour
             infoAndroid = PlayerPrefs.GetInt("monInfoJoueur");
         }
 
-        for (int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < Partie.Positions.Length; i++)
         {
-            if ( (positions[i] != 0) && estConnecte(positions[i], infoAndroid)){
+            if ( (Partie.Positions[i] != 0) && estConnecte(Partie.Positions[i], infoAndroid)){
                 affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white;
-                affichageJoueur.text = "Joueur" + positions[i] + "\n" + "<color=blue> Connecté </color>";
+                affichageJoueur.text = "Joueur" + Partie.Positions[i] + "\n" + "<color=blue> Connecté </color>";
             }
         }
     }

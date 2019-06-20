@@ -6,15 +6,13 @@ using UnityEngine.UI;
 
 public class EnvoyerJeton : MonoBehaviour
 {
-    public Image image;
-    public Button button;
-    NetworkClient client;
+    [SerializeField] Image image;
+    [SerializeField] Button button;
     short jeton = 1010;
 
     // Start is called before the first frame update
     void Start()
     {
-        client = SansHUD.myclient;
         button.onClick.AddListener(() => envoyer());
     }
 
@@ -27,7 +25,7 @@ public class EnvoyerJeton : MonoBehaviour
     public void envoyer()
     {
         MyJetonMessage msg = new MyJetonMessage();
-        msg.joueur = selectUser.positionStatic;
+        msg.joueur = JoueurStatic.Numero;
         string s = image.sprite.ToString();
         string msgs = "";
         for (int i = 0; i < s.Length - 21; i++)
@@ -35,6 +33,6 @@ public class EnvoyerJeton : MonoBehaviour
             msgs = msgs + s[i];
         }
         msg.sprite = msgs;
-        client.Send(jeton, msg);
+        JoueurStatic.Client.Send(jeton, msg);
     }
 }

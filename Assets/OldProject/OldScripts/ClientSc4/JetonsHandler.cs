@@ -8,20 +8,19 @@ using UnityEngine.SceneManagement;
 
 public class JetonsHandler : MonoBehaviour
 {
-    public static NetworkClient client;
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] GameObject canvas_vainqueur;
 
-    public Text text;
+    [SerializeField] Text text;
 
-    short waitID = 1006;
+    short vainqueurID = 1008;
 
-    public Button usageVert;
-    public Button usageRouge;
-    public Button societeVert;
-    public Button societeRouge;
-    public Button planeteVert;
-    public Button planeteRouge;
+    [SerializeField] Button usageVert;
+    [SerializeField] Button usageRouge;
+    [SerializeField] Button societeVert;
+    [SerializeField] Button societeRouge;
+    [SerializeField] Button planeteVert;
+    [SerializeField] Button planeteRouge;
 
     private int usageCompteur;
     private int societeCompteur;
@@ -29,14 +28,9 @@ public class JetonsHandler : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        text.text = "Joueur " + selectUser.positionStatic;
-        client = Valider.client;
-        client.RegisterHandler(waitID, OnWaitReceived);
+    {        
+        JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
 
-        usageCompteur = 0;
-        societeCompteur = 0;
-        planeteCompteur = 0;
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       
         societeVert.onClick.AddListener(() => OnSocieteClicked());       
@@ -87,5 +81,14 @@ public class JetonsHandler : MonoBehaviour
             planeteVert.gameObject.SetActive(false);
             planeteRouge.gameObject.SetActive(false);
         }
+    }
+
+    void OnEnable()
+    {
+        text.text = "Joueur " + JoueurStatic.Numero;
+
+        usageCompteur = 0;
+        societeCompteur = 0;
+        planeteCompteur = 0;
     }
 }
