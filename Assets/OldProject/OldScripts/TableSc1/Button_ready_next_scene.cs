@@ -53,7 +53,10 @@ public class Button_ready_next_scene : MonoBehaviour
         indices[i] = (indices[i] + 1) % 2;
         
         hands[i].GetComponent<Animator>().SetTrigger("Shake");
-        hands[i].gameObject.GetComponent<Image>().color = Color.green;
+        if (hands[i].gameObject.GetComponent<Image>().color == Color.green)
+            hands[i].gameObject.GetComponent<Image>().color = Color.white;
+        else
+            hands[i].gameObject.GetComponent<Image>().color = Color.green;
 
         MiseAJourText();
     }

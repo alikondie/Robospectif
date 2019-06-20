@@ -49,6 +49,9 @@ public class MainScript : MonoBehaviour
         var v = netMsg.ReadMessage<MyCardMessage>();
         if (v.num == JoueurStatic.Numero)
         {
+            JoueurStatic.Dimensions = new Sprite[2];
+            JoueurStatic.Locomotions = new Sprite[2];
+            JoueurStatic.Equipements = new Sprite[6];
             JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("image/Dimension/" + v.dim1);
             JoueurStatic.Dimensions[1] = Resources.Load<Sprite>("image/Dimension/" + v.dim2);
             JoueurStatic.Locomotions[0] = Resources.Load<Sprite>("image/Locomotion/" + v.loco1);
