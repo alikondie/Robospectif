@@ -106,7 +106,7 @@ public class Main : MonoBehaviour
     public class Image
     {
         private int id;
-        private Sprite sprite;
+        public Sprite sprite;
 
 
         public Image(int id, Sprite sprite)
