@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.Networking;
-using System.Collections;
-using System.Collections.Generic;
 
 public class MainScript : MonoBehaviour
 {
@@ -67,30 +65,7 @@ public class MainScript : MonoBehaviour
             JoueurStatic.Dimensions = new Sprite[2];
             JoueurStatic.Locomotions = new Sprite[2];
             JoueurStatic.Equipements = new Sprite[6];
-
-            List<Sprite> sprites = Main.Global.TabD.SpritesList();
-
-            JoueurStatic.Dimensions[0] = sprites.Find(im => im == v.dim1);
-            JoueurStatic.Dimensions[1] = sprites.Find(im => im == v.dim2);
-            JoueurStatic.Locomotions[0] = sprites.Find(im => im == v.loco1);
-            JoueurStatic.Locomotions[1] = sprites.Find(im => im == v.loco2);
-            JoueurStatic.Equipements[0] = sprites.Find(im => im == v.equi1);
-            JoueurStatic.Equipements[1] = sprites.Find(im => im == v.equi2);
-            JoueurStatic.Equipements[2] = sprites.Find(im => im == v.equi3);
-            JoueurStatic.Equipements[3] = sprites.Find(im => im == v.equi4);
-            JoueurStatic.Equipements[4] = sprites.Find(im => im == v.equi5);
-            JoueurStatic.Equipements[5] = sprites.Find(im => im == v.equi6);
-            JoueurStatic.Persos[0] = sprites.Find(im => im == v.perso1);
-            JoueurStatic.Persos[1] = sprites.Find(im => im == v.perso2);
-            JoueurStatic.Persos[2] = sprites.Find(im => im == v.perso3);
-            JoueurStatic.Persos[3] = sprites.Find(im => im == v.perso4);
-            JoueurStatic.Persos[4] = sprites.Find(im => im == v.perso5);
-            JoueurStatic.Persos[5] = sprites.Find(im => im == v.perso6);
-
-
-
-
-            /*JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("image/Dimension/" + v.dim1);
+            JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("image/Dimension/" + v.dim1);
             JoueurStatic.Dimensions[1] = Resources.Load<Sprite>("image/Dimension/" + v.dim2);
             JoueurStatic.Locomotions[0] = Resources.Load<Sprite>("image/Locomotion/" + v.loco1);
             JoueurStatic.Locomotions[1] = Resources.Load<Sprite>("image/Locomotion/" + v.loco2);
@@ -105,12 +80,12 @@ public class MainScript : MonoBehaviour
             JoueurStatic.Persos[2] = Resources.Load<Sprite>("image/Personnages/" + v.perso3);
             JoueurStatic.Persos[3] = Resources.Load<Sprite>("image/Personnages/" + v.perso4);
             JoueurStatic.Persos[4] = Resources.Load<Sprite>("image/Personnages/" + v.perso5);
-            JoueurStatic.Persos[5] = Resources.Load<Sprite>("image/Personnages/" + v.perso6);*/
+            JoueurStatic.Persos[5] = Resources.Load<Sprite>("image/Personnages/" + v.perso6);
 
             dimensionGO[0].GetComponent<Image>().sprite = JoueurStatic.Dimensions[0];
             locomotionGO[0].GetComponent<Image>().sprite = JoueurStatic.Locomotions[0];
             for (int i = 0; i < 3; i++)
-                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[i];
+                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[1];
 
             foreach (GameObject i in dimensionGO)
             {
