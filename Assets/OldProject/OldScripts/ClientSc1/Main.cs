@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+
+    public Sprite[] personnages;
+    public Sprite[] locomotions;
+    public Sprite[] dimensions;
+    public Sprite[] equipements;
+
     public class Player
     {
         private int id;
@@ -172,13 +178,14 @@ public class Main : MonoBehaviour
         }
     }
 
-    public class Global
+    [Serializable]
+    public class Global 
     {
         private static Player player;
-        private static TabImage tabL;
-        private static TabImage tabD;
-        private static TabImage tabE;
-        private static TabImage tabP;
+        public static TabImage tabL;
+        public static TabImage tabD;
+        public static TabImage tabE;
+        public static TabImage tabP;
         public static Player[] tabPlayer;
         private static int nbjoueur;
 
@@ -277,52 +284,73 @@ public class Main : MonoBehaviour
     private void initializePerso()
     {
         tab = new TabImage();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < personnages.Length; i++)
         {
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Agathe")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Antonio")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Aurelie")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Bob")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Camille")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Christine")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Corinne")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/David")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Denis")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Dimitri")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Dominik")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Eleonore")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Elise")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Frederic")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Gaetan")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Jacques")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Johanna")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/John")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Judith")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Julio")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Laura")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Luc")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Marie")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Mathilde")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Mohammed")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nadege")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nathalie")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nicolas")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Patrick")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Philippe")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Rose")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Sarah")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Thierry")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Tom")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Veronique")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Yvette")));
+            tab.addImage(new Image(tab.Taille, personnages[i]));
+           
         }
+        for (int i = 0; i < personnages.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, personnages[i]));
+
+        }
+        /*  for (int i = 0; i < 2; i++)
+          {
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Agathe")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Antonio")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Aurelie")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Bob")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Camille")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Christine")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Corinne")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/David")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Denis")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Dimitri")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Dominik")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Eleonore")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Elise")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Frederic")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Gaetan")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Jacques")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Johanna")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/John")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Judith")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Julio")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Laura")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Luc")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Marie")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Mathilde")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Mohammed")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nadege")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nathalie")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Nicolas")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Patrick")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Philippe")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Rose")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Sarah")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Thierry")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Tom")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Veronique")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Personnages/Yvette")));
+          }*/
+
         Global.TabP = tab;
     }
 
     private void initializeLoco()
     {
         tab = new TabImage();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < locomotions.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, locomotions[i]));
+
+        }
+        for (int i = 0; i < locomotions.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, locomotions[i]));
+
+        }
+        /*for (int i = 0; i < 2; i++)
         {
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Ailes")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Ballon")));
@@ -333,7 +361,7 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Rampant")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Rebondir")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Locomotion/Roues")));
-        }
+        }*/
         Global.TabL = tab;
 
     }
@@ -342,7 +370,17 @@ public class Main : MonoBehaviour
     private void initializeDi()
     {
         tab = new TabImage();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < dimensions.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, dimensions[i]));
+
+        }
+        for (int i = 0; i < dimensions.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, dimensions[i]));
+
+        }
+     /*   for (int i = 0; i < 2; i++)
         {
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/GrandeCapacite")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/GrandVehiculeLourd")));
@@ -353,52 +391,62 @@ public class Main : MonoBehaviour
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/VehiculeIntermediaire")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/VehiculeLeger")));
             tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Dimension/VehiculeLourd")));
-        }
+        }*/
         Global.TabD = tab;
 
     }
     public void initializeEqui()
     {
         tab = new TabImage();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < equipements.Length; i++)
         {
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/AppelUrgence")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/BrasArticules")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CameraThermique")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CanonPeinture")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CarrosserieReflechissante")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CentraleRecyclage")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CoffreBlinde")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CommandeVocale")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/ConnexionVPN")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Couchettes")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Cuisine")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/DetecteurFumeeGaz")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Eoliennes")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/EquipementsFitness")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/FlotteDecentralisee")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/FuseeDetresse")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Imprimante3D")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/KitReparation")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/KitSoinsUrgence")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/LaboratoireAnalyses")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Minibar")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/OutillageChantier")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/PanneauxSolaires")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/PanneauxVideos")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/ProjectionHolographique")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/RampeAcces")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SiegeEjectable")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Sonar")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SondesMesures")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/StationJeu")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/StudioEnregistrement")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SystemeArrosage")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SystemeEcoute")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Toboggan")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/TVSatellite")));
-            tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Ventouses")));
+            tab.addImage(new Image(tab.Taille, equipements[i]));
+
         }
+        for (int i = 0; i < equipements.Length; i++)
+        {
+            tab.addImage(new Image(tab.Taille, equipements[i]));
+
+        }
+        /*  for (int i = 0; i < 2; i++)
+          {
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/AppelUrgence")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/BrasArticules")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CameraThermique")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CanonPeinture")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CarrosserieReflechissante")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CentraleRecyclage")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CoffreBlinde")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/CommandeVocale")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/ConnexionVPN")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Couchettes")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Cuisine")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/DetecteurFumeeGaz")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Eoliennes")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/EquipementsFitness")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/FlotteDecentralisee")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/FuseeDetresse")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Imprimante3D")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/KitReparation")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/KitSoinsUrgence")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/LaboratoireAnalyses")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Minibar")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/OutillageChantier")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/PanneauxSolaires")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/PanneauxVideos")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/ProjectionHolographique")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/RampeAcces")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SiegeEjectable")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Sonar")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SondesMesures")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/StationJeu")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/StudioEnregistrement")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SystemeArrosage")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/SystemeEcoute")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Toboggan")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/TVSatellite")));
+              tab.addImage(new Image(tab.Taille, Resources.Load<Sprite>("image/Equipements/Ventouses")));
+          }*/
         Global.TabE = tab;
 
     }
