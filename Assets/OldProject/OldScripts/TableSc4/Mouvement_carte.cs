@@ -27,6 +27,7 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log("down");
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         initialPos = gameObject.transform.position;
         offset = initialPos - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -34,6 +35,7 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        Debug.Log("drag");
         if (!IsTheMousInTargetCollider())
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
