@@ -40,7 +40,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     {
         // Position du joueur
         //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        int pos = 3;
+        int pos = 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
@@ -145,7 +145,6 @@ public class Script_Autonomie_clean : MonoBehaviour
 
         if(isClicked)
         {
-            Debug.Log("clicked");
             Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
             SteeringWheelMotion(newPosition);
         }
