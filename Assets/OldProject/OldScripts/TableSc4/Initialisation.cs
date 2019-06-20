@@ -23,27 +23,29 @@ public class Initialisation : MonoBehaviour
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
+    private Vector2[] posCards;
+
     [SerializeField] GameObject Plateau;
 
-    private GameObject[,] cartes;
-    [SerializeField] GameObject[] cartes1;
-    [SerializeField] GameObject[] cartes2;
+    //private GameObject[,] cartes;
+    [SerializeField] GameObject cartes;
+    /*[SerializeField] GameObject[] cartes2;
     [SerializeField] GameObject[] cartes3;
     [SerializeField] GameObject[] cartes4;
     [SerializeField] GameObject[] cartes5;
-    [SerializeField] GameObject[] cartes6;
+    [SerializeField] GameObject[] cartes6;*/
 
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(() => ButtonClicked());        
+        button.onClick.AddListener(() => ButtonClicked());
     }
 
     void OnEnable()
     {
         #region cards array
-        cartes = new GameObject[6,cartes1.Length];
+        /*cartes = new GameObject[6,cartes1.Length];
         
         for (int j = 0; j < cartes1.Length; j++)
         {
@@ -73,28 +75,28 @@ public class Initialisation : MonoBehaviour
         for (int j = 0; j < cartes6.Length; j++)
         {
             cartes[5, j] = cartes6[j];
-        }
+        }*/
         #endregion
+        posCards = new Vector2[6];
+        posCards[0] = new Vector2(560, 190);
+        posCards[1] = new Vector2(1360, 190);
+        posCards[2] = new Vector2(1730, 540);
+        posCards[3] = new Vector2(1360, 890);
+        posCards[4] = new Vector2(560, 890);
+        posCards[5] = new Vector2(190, 540);
         //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        pos = 5;
+        pos = 6;
         Rotate(pos);
         #region players cards display
-        for (int i = 0; i < 6; i++)
+        foreach (Joueur j in Partie.Joueurs)
         {
-            if (i == (pos-1))
+            if (j.Numero == Partie.JoueurCourant)
             {
-                for (int j = 0; j < 5; j++)
-                {
-                    cartes[i, j].GetComponent<SpriteRenderer>().sprite = images[i, j];
-                    cartes[i, j].SetActive(true);
-                }
-            }
-            else
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    cartes[i, j].SetActive(false);
-                }
+                cartes.transform.GetChild(0).GetComponent<Image>().sprite = j.Dim;
+                cartes.transform.GetChild(1).GetComponent<Image>().sprite = j.Equi1;
+                cartes.transform.GetChild(2).GetComponent<Image>().sprite = j.Equi2;
+                cartes.transform.GetChild(3).GetComponent<Image>().sprite = j.Equi3;
+                cartes.transform.GetChild(4).GetComponent<Image>().sprite = j.Loco;
             }
         }
         #endregion
@@ -130,6 +132,7 @@ public class Initialisation : MonoBehaviour
     //function which rotate the canvas depending on the current player who presents the robot
     private void Rotate(int pos)
     {
+        Debug.Log(posCards[pos - 1]);
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         if (pos == 3)
         {
@@ -144,6 +147,8 @@ public class Initialisation : MonoBehaviour
             rotation = Quaternion.Euler(0f, 0f, -90f);
         }
         children.transform.rotation = rotation;
+        cartes.transform.rotation = rotation;
+        cartes.transform.position = posCards[pos - 1];
     }
 
 }
