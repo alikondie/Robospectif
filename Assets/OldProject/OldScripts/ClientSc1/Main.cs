@@ -106,7 +106,7 @@ public class Main : MonoBehaviour
     public class Image
     {
         private int id;
-        public Sprite sprite;
+        private Sprite sprite;
 
 
         public Image(int id, Sprite sprite)
@@ -132,6 +132,7 @@ public class Main : MonoBehaviour
     {
         private int taille;
         private List<Image> tabsprite;
+        private List<Sprite> sprites;
 
 
         public TabImage()
@@ -164,6 +165,17 @@ public class Main : MonoBehaviour
             set => tabsprite = value;
         }
 
+        public List<Sprite> SpritesList()
+        {
+            List<Sprite> sprites = new List<Sprite>();
+            foreach (Image im in tabsprite)
+            {
+                sprites.Add(im.Sprite);
+            }
+
+            return (sprites);
+        }
+
         public Image getImageind(int i)
         {
             return this.tabsprite[i];
@@ -178,7 +190,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    [Serializable]
+
     public class Global 
     {
         private static Player player;
