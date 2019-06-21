@@ -20,6 +20,7 @@ public class ConceptionTerminer : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
+        rejectedCards = new List<string>();
         rejectedCardsContent = new StringBuilder();
         rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
         string filePath = "C:\\Users\\taki.yamani\\Desktop\\rejected_cards.csv";
