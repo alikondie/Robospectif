@@ -18,7 +18,7 @@ public class Button_ready_next_scene : MonoBehaviour
     private int[] indices;
     private int[] positions;
     short positionsID = 1005;
-    private string Ip_serveur = "172.21.232.220";
+    private string Ip_serveur = "172.21.232.218";
 
     // Start is called before the first frame update
     void Start()

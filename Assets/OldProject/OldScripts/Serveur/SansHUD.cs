@@ -24,7 +24,7 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
 
     void Start()
@@ -59,6 +59,7 @@ public class SansHUD : NetworkManager
         NetworkServer.RegisterHandler(messageID, OnMessageReceived);
         NetworkServer.RegisterHandler(imageID, onImageReceived);
         NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
+        NetworkServer.RegisterHandler(rejectedCardsID, OnRejectedCardsReceived);
         //NetworkServer.RegisterHandler(1005, onTestReceived);
     }
 
@@ -88,8 +89,10 @@ public class SansHUD : NetworkManager
         NetworkServer.SendToAll(chronoID, message);
     }
     #region recuperation des données
+
     private void OnRejectedCardsReceived(NetworkMessage netMsg)
     {
+        print("got here");
         RejectedCardsMessage rejectedCards = netMsg.ReadMessage<RejectedCardsMessage>();
         string fileLine = "J" + rejectedCards.num + ";" + rejectedCards.dim + ";" + rejectedCards.loco + ";" + rejectedCards.equi1 + ";" + rejectedCards.equi2 + ";" + rejectedCards.equi3;
         ConceptionTerminer.rejectedCards.Add(fileLine);
