@@ -154,7 +154,9 @@ public class Valider : MonoBehaviour
                 }
             }
         }
-        
+
+        JoueurStatic.Client.Send(rejectedCardsID, rejectedCards);
+
         #endregion
 
 
