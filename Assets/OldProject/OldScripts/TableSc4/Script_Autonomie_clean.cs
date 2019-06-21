@@ -182,5 +182,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         return ((SENS == 1 || SENS == 3) && Input.mousePosition.x <= (positionDebutX + epsilon) && Input.mousePosition.x >= (positionDebutX - epsilon)) ||
                ((SENS == 2 || SENS == 4) && Input.mousePosition.y <= (positionDebutY + epsilon) && Input.mousePosition.y >= (positionDebutY - epsilon));
     }
+
+
     #endregion
 }
