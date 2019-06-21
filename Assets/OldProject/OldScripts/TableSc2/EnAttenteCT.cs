@@ -13,6 +13,7 @@ public class EnAttenteCT : MonoBehaviour
     private int nbJoueur; //Nb Joueurs
     private static int premierJoueurFini; //numero du 1er joueur a avoir fini sa conception 
     private static bool estPremier;
+    public static List<string> rejectedCards;
 
     // ---------- METHODES ----------
 
@@ -20,6 +21,7 @@ public class EnAttenteCT : MonoBehaviour
     void Start()
     {
         // Initialise du boolean
+        rejectedCards = new List<string>();
         estPremier = false;
 
         // Recuperation du Nombre de joueur:

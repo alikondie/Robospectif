@@ -12,7 +12,7 @@ public class ConceptionTerminer : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     private int nbJoueur; //Nb Joueurs
     private static int nbJoueurConceptionTerminer; //Conteur du nombre de joueurs a avoir Terminer leur conception
-    public static List<string> rejectedCards;
+    
     StringBuilder rejectedCardsContent;
 
     // ---------- METHODES ----------
@@ -20,11 +20,11 @@ public class ConceptionTerminer : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        rejectedCards = new List<string>();
+        
         rejectedCardsContent = new StringBuilder();
         rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-        string filePath = "C:\\Users\\taki.yamani\\Desktop\\rejected_cards.csv";
-        File.AppendAllText(filePath, rejectedCardsContent.ToString());
+        
+        
         // Initialise le compteur
         nbJoueurConceptionTerminer = 1;
 
@@ -40,11 +40,12 @@ public class ConceptionTerminer : MonoBehaviour
         {
             //for(int i)
             //SceneManager.LoadScene(nomSceneDemander);
-            foreach(string line in rejectedCards)
+            foreach(string line in EnAttenteCT.rejectedCards)
             {
                 rejectedCardsContent.AppendLine(line);
             }
-
+            string filePath = "C:\\Users\\taki.yamani\\Desktop\\rejected_cards.csv";
+            File.AppendAllText(filePath, rejectedCardsContent.ToString());
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }

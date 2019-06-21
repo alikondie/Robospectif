@@ -23,6 +23,7 @@ public class Valider : MonoBehaviour
     short conceptionID = 1002;
     short chronoID = 1003;
     short rejectedCardsID = 1020;
+    public static List<string> rejectedCards;
 
 
     // Start is called before the first frame update
@@ -130,7 +131,8 @@ public class Valider : MonoBehaviour
         }
 
         string[] chosenEquipements = { robot.equi1, robot.equi2, robot.equi3 };
-        string[] equipements = { JoueurStatic.Equipements[0].ToString(), JoueurStatic.Equipements[1].ToString(), JoueurStatic.Equipements[2].ToString(), JoueurStatic.Equipements[3].ToString(), JoueurStatic.Equipements[4].ToString(), JoueurStatic.Equipements[5].ToString() };
+        
+        string[] equipements = { JoueurStatic.Equipements[0].name, JoueurStatic.Equipements[1].name, JoueurStatic.Equipements[2].name, JoueurStatic.Equipements[3].name, JoueurStatic.Equipements[4].name, JoueurStatic.Equipements[5].name };
         
         for(int i = 0; i < 6; i++)
         {
