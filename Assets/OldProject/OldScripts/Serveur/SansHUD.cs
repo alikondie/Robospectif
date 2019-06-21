@@ -20,6 +20,7 @@ public class SansHUD : NetworkManager
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
+    short rejectedCardsID = 1020;
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
@@ -86,6 +87,14 @@ public class SansHUD : NetworkManager
         message.message = premierFini;
         NetworkServer.SendToAll(chronoID, message);
     }
+    #region recuperation des données
+    private void OnRejectedCardsReceived(NetworkMessage netMsg)
+    {
+        RejectedCardsMessage rejectedCards = netMsg.ReadMessage<RejectedCardsMessage>();
+        string fileLine = "J" + rejectedCards.num + ";" + rejectedCards.dim + ";" + rejectedCards.loco + ";" + rejectedCards.equi1 + ";" + rejectedCards.equi2 + ";" + rejectedCards.equi3;
+        ConceptionTerminer.rejectedCards.Add(fileLine);
+    }
+    #endregion
 
     private void onImageReceived(NetworkMessage netMsg)
     {

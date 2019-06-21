@@ -36,6 +36,7 @@ public class EnAttenteCT : MonoBehaviour
             //Debug.Log(Resources.Load<Sprite>("image/Dimension/" + j.Dimensions[0].ToString().Substring(0, j.Dimensions[0].ToString().Length - 21)));
             msg.dim1 = j.Dimensions[0].ToString().Substring(0, j.Dimensions[0].ToString().Length - 21);
             msg.dim2 = j.Dimensions[1].ToString().Substring(0, j.Dimensions[1].ToString().Length - 21);
+
             //Debug.Log(j.Locomotions[0].ToString().Substring(0, j.Locomotions[0].ToString().Length - 21));
             //Debug.Log(Resources.Load<Sprite>("image/Locomotion/" + j.Locomotions[0].ToString().Substring(0, j.Locomotions[0].ToString().Length - 21)));
             msg.loco1 = j.Locomotions[0].ToString().Substring(0, j.Locomotions[0].ToString().Length - 21);
