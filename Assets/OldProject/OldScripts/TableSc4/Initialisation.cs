@@ -85,7 +85,7 @@ public class Initialisation : MonoBehaviour
         posCards[4] = new Vector2(560, 890);
         posCards[5] = new Vector2(190, 540);
         //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        pos = 4;
+        pos = 1;
         Rotate(pos);
        /* #region players cards display
         foreach (Joueur j in Partie.Joueurs)

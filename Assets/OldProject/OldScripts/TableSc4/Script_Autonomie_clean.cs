@@ -8,6 +8,8 @@ public class Script_Autonomie_clean : MonoBehaviour
 {
     #region attributs
     [SerializeField] GameObject volant;
+    [SerializeField] Image Attention;
+    [SerializeField] Image Autonomie;
 
     //Déplacement souris
     [SerializeField] Image sprite;
@@ -17,6 +19,13 @@ public class Script_Autonomie_clean : MonoBehaviour
     private float positionDebutY;
     private float positionDebutZ;
     private int epsilon = 275;
+
+    private int position;
+
+    private int tailleTxtMin = 15;
+    private int tailleTxtMax = 25;
+    private Vector2 tailleCadreMin = new Vector2(25, 15);
+    private Vector2 tailleCadreMax = new Vector2(30, 20);
 
 
     //Deplacement 
@@ -38,6 +47,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region main functions
     void Start()
     {
+        position = 0;
         // Position du joueur
         //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         int pos = 1;
@@ -158,6 +168,44 @@ public class Script_Autonomie_clean : MonoBehaviour
     private void OnMouseUp()
     {
         isClicked = false;
+        if (SENS == 1 || SENS == 3)
+        {
+            if (Autonomie.transform.position.x - Input.mousePosition.x > Input.mousePosition.x - Attention.transform.position.x)
+                position = 1;
+            else if (Autonomie.transform.position.x - Input.mousePosition.x < Input.mousePosition.x - Attention.transform.position.x)
+                position = 2;
+        }
+        else
+        {
+            if (Autonomie.transform.position.y - Input.mousePosition.y > Input.mousePosition.y - Attention.transform.position.y)
+                position = 1;
+            else if (Autonomie.transform.position.y - Input.mousePosition.y < Input.mousePosition.y - Attention.transform.position.y)
+                position = 2;
+        } 
+
+        switch (position)
+        {
+            case 1:
+                Attention.rectTransform.sizeDelta = tailleCadreMax;
+                Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+                Autonomie.rectTransform.sizeDelta = tailleCadreMin;
+                Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
+                if (SENS == 1 || SENS == 3)
+                    volant.transform.position = new Vector3(positionDebutX - epsilon, volant.transform.position.y);
+                else
+                    volant.transform.position = new Vector3(volant.transform.position.x, positionDebutY - epsilon);
+                break;
+            case 2:
+                Attention.rectTransform.sizeDelta = tailleCadreMin;
+                Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
+                Autonomie.rectTransform.sizeDelta = tailleCadreMax;
+                Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+                if (SENS == 1 || SENS == 3)
+                    volant.transform.position = new Vector3(positionDebutX + epsilon, volant.transform.position.y);
+                else
+                    volant.transform.position = new Vector3(volant.transform.position.x, positionDebutY + epsilon);
+                break;
+        }
     }
 
     private void SteeringWheelMotion(Vector3 newPosition)
