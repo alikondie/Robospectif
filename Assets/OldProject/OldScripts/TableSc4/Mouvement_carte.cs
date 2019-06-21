@@ -37,7 +37,6 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log("drag");
         if (!IsTheMousInTargetCollider())
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
