@@ -8,7 +8,9 @@ public class Mouvement_carte : MonoBehaviour
     private Vector3 initialPos;
     private Vector3 offset;
     private Vector3 curPosition;
-    [SerializeField] GameObject target;
+    [SerializeField] GameObject[] targettable;
+    [SerializeField] GameObject[] equipmentcards;
+    private GameObject currenttarget;
     private bool is_static;
 
     #region unused start and update
@@ -42,28 +44,57 @@ public class Mouvement_carte : MonoBehaviour
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
+        else if (equipmentcards.Length > 0)
+        {
+            CheckIfAlreadyCards();
+        }
         else
         {
-            gameObject.transform.position = target.transform.position;
+            gameObject.transform.position = currenttarget.transform.position;
         }
     }
     
-    //private void OnCollisionEnter2D(Collision2D collision/*, GameObject selected_card, GameObject type_card_location*/)
-    //{
-    //    if (gameObject.tag == collision.gameObject.tag)
-    //    {
-    //        is_static = true;
-    //        gameObject.transform.position = collision.gameObject.transform.position;
-    //    }
-    //}
-
     private bool IsTheMousInTargetCollider()
     {
-        float scale_x = target.GetComponent<BoxCollider2D>().bounds.extents.x;
-        float scale_y = target.GetComponent<BoxCollider2D>().bounds.extents.y;
-        return Input.mousePosition.x > target.transform.position.x - scale_x &&
-               Input.mousePosition.x < target.transform.position.x + scale_x &&
-               Input.mousePosition.y < target.transform.position.y + scale_y &&
-               Input.mousePosition.y < target.transform.position.y + scale_y;
+        foreach (GameObject target in targettable)
+        {
+            float scale_x = target.GetComponent<BoxCollider2D>().bounds.extents.x;
+            float scale_y = target.GetComponent<BoxCollider2D>().bounds.extents.y;
+
+            if (Input.mousePosition.x > target.transform.position.x - scale_x &&
+                Input.mousePosition.x < target.transform.position.x + scale_x &&
+                Input.mousePosition.y < target.transform.position.y + scale_y &&
+                Input.mousePosition.y > target.transform.position.y - scale_y)
+            {
+                currenttarget = target;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void CheckIfAlreadyCards()
+    {
+        List<GameObject> cardstack = new List<GameObject>();
+        foreach (GameObject equipment in equipmentcards)
+        {
+            if (equipment.transform.position == currenttarget.transform.position)
+            {
+                cardstack.Add(equipment);
+            }
+        }
+        RelocateCards(cardstack);
+    }
+
+    private void RelocateCards(List<GameObject> stack)
+    {
+        int decalage = 0;
+        foreach(GameObject card in stack)
+        {
+            Debug.Log(card);
+            card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+            decalage++;
+        }
+        gameObject.transform.position = new Vector3(currenttarget.transform.position.x, currenttarget.transform.position.y + decalage* currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, currenttarget.transform.position.z);
     }
 }
