@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -209,7 +210,7 @@ public class Mouvement_carte : MonoBehaviour
 
     private void GetSens()
     {
-        int pos = 1;
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         switch (pos)
         {
             case 1:

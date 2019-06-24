@@ -49,8 +49,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     {
         position = 0;
         // Position du joueur
-        //int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        int pos = 1;
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
         switch (pos)
