@@ -2603,7 +2603,7 @@ PrefabInstance:
     - target: {fileID: 7896333963878693367, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896333963878693361, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -6279,7 +6279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_plateau_vehicule: {fileID: 462435499}
-  canvas_debat: {fileID: 1190432594}
+  canvas_pres_persos: {fileID: 0}
   children: {fileID: 936918647}
   button: {fileID: 1283612658}
   Plateau: {fileID: 355192895}
@@ -7237,7 +7237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Terminer le d\xE9bat"
+  m_Text: "Commencer le d\xE9bat"
 --- !u!222 &531474750
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24081,7 +24081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1753731207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24094,6 +24094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e5b408f01a7034c9aeec97c3899f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas_pres_persos: {fileID: 1753731206}
+  canvas_debat: {fileID: 1190432594}
   persos: []
   button: {fileID: 795055067}
 --- !u!114 &1753731208

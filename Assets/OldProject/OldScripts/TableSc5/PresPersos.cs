@@ -49,8 +49,7 @@ public class PresPersos : MonoBehaviour
     {
         if (nbRecu == Partie.Joueurs.Count - 1)
         {
-            canvas_pres_persos.SetActive(false);
-            canvas_debat.SetActive(false);
+            button.gameObject.SetActive(true);
         }
     }
     #endregion
@@ -59,7 +58,11 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-        throw new NotImplementedException();
+
+        Tour.PersosDebat = persoSprites;
+        Tour.ZonesDebat = zones;
+        canvas_pres_persos.SetActive(false);
+        canvas_debat.SetActive(false);
     }
 
     private void OnPersoReceived(NetworkMessage netMsg)
