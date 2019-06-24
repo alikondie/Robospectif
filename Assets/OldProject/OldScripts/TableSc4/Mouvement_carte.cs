@@ -40,7 +40,6 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log("c est bon!!!");
         if (!IsTheMousInTargetCollider())
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -59,9 +58,10 @@ public class Mouvement_carte : MonoBehaviour
                 CheckIfAlreadyCards();
             }
         }
-        else
+        else if (currenttarget != null)
         {
             gameObject.transform.position = currenttarget.transform.position;
+            gameObject.layer = 2;
         }
     }
     
