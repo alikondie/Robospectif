@@ -21,8 +21,8 @@ public class ConceptionTerminer : MonoBehaviour
     void Start()
     {
         
-        rejectedCardsContent = new StringBuilder();
-        rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
+        /*rejectedCardsContent = new StringBuilder();
+        rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");*/
         
         
         // Initialise le compteur
@@ -40,12 +40,12 @@ public class ConceptionTerminer : MonoBehaviour
         {
             //for(int i)
             //SceneManager.LoadScene(nomSceneDemander);
-            foreach(string line in EnAttenteCT.rejectedCards)
+           /* foreach(string line in EnAttenteCT.rejectedCards)
             {
                 rejectedCardsContent.AppendLine(line);
             }
             string filePath = "C:\\Users\\taki.yamani\\Desktop\\rejected_cards.csv";
-            File.AppendAllText(filePath, rejectedCardsContent.ToString());
+            File.AppendAllText(filePath, rejectedCardsContent.ToString());*/
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }

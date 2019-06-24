@@ -24,7 +24,7 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
 
     void Start()
@@ -103,47 +103,18 @@ public class SansHUD : NetworkManager
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
-        string dim = objectMessage.dim;
-        string loco = objectMessage.loco;
-        string equi1 = objectMessage.equi1;
-        string equi2 = objectMessage.equi2;
-        string equi3 = objectMessage.equi3;
+        string dims = objectMessage.dim;
+        string locos = objectMessage.loco;
+        string equi1s = objectMessage.equi1;
+        string equi2s = objectMessage.equi2;
+        string equi3s = objectMessage.equi3;
         int numero = objectMessage.num;
         int z = objectMessage.zone;
-        string s = "";
-        for (int i = 0; i < dim.Length - 21; i++)
-        {
-            s = s + dim[i];
-        }
-        dim = s;
-
-        s = "";
-        for (int i = 0; i < loco.Length - 21; i++)
-        {
-            s = s + loco[i];
-        }
-        loco = s;
-
-        s = "";
-        for (int i = 0; i < equi1.Length - 21; i++)
-        {
-            s = s + equi1[i];
-        }
-        equi1 = s;
-
-        s = "";
-        for (int i = 0; i < equi2.Length - 21; i++)
-        {
-            s = s + equi2[i];
-        }
-        equi2 = s;
-
-        s = "";
-        for (int i = 0; i < equi3.Length - 21; i++)
-        {
-            s = s + equi3[i];
-        }
-        equi3 = s;
+        string dim = dims.Substring(dims.Length - 21);
+        string loco = locos.Substring(locos.Length - 21);
+        string equi1 = equi1s.Substring(equi1s.Length - 21);
+        string equi2 = equi2s.Substring(equi2s.Length - 21);
+        string equi3 = equi3s.Substring(equi3s.Length - 21);
 
         Sprite[] images = new Sprite[5];
         images[0] = Resources.Load<Sprite>("image/Locomotion/" + loco);
@@ -151,15 +122,19 @@ public class SansHUD : NetworkManager
         images[2] = Resources.Load<Sprite>("image/Equipements/" + equi1);
         images[3] = Resources.Load<Sprite>("image/Equipements/" + equi2);
         images[4] = Resources.Load<Sprite>("image/Equipements/" + equi3);
-        Joueur j = new Joueur();
-        j.Dim = images[1];
-        j.Loco = images[0];
-        j.Equi1 = images[2];
-        j.Equi2 = images[3];
-        j.Equi3 = images[4];
-        j.Numero = numero;
-        j.Position = z;
-        Partie.AddPlayer(j);
+
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (j.Numero == numero)
+            {
+                j.Dim = Resources.Load<Sprite>("image/Dimension/" + dim);
+                j.Loco = Resources.Load<Sprite>("image/Locomotion/" + loco);
+                j.Equi1 = Resources.Load<Sprite>("image/Equipements/" + equi1);
+                j.Equi2 = Resources.Load<Sprite>("image/Equipements/" + equi2);
+                j.Equi3 = Resources.Load<Sprite>("image/Equipements/" + equi3);
+            }
+        }
+
         Initialisation.get(images, z);
     }
 

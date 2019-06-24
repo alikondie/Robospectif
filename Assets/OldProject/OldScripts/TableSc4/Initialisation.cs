@@ -87,7 +87,7 @@ public class Initialisation : MonoBehaviour
         //pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         pos = 1;
         Rotate(pos);
-       /* #region players cards display
+        #region players cards display
         foreach (Joueur j in Partie.Joueurs)
         {
             if (j.Numero == Partie.JoueurCourant)
@@ -99,7 +99,7 @@ public class Initialisation : MonoBehaviour
                 cartes.transform.GetChild(4).GetComponent<Image>().sprite = j.Loco;
             }
         }
-        #endregion*/
+        #endregion
     }
 
     // Update is called once per frame
@@ -115,7 +115,6 @@ public class Initialisation : MonoBehaviour
         NetworkServer.SendToAll(debatID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_debat.SetActive(true);
-        //SceneManager.LoadScene("Scene5");
     }
 
     public static void get(Sprite[] image, int zone)

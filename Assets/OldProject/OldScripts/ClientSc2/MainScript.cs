@@ -85,7 +85,7 @@ public class MainScript : MonoBehaviour
             dimensionGO[0].GetComponent<Image>().sprite = JoueurStatic.Dimensions[0];
             locomotionGO[0].GetComponent<Image>().sprite = JoueurStatic.Locomotions[0];
             for (int i = 0; i < 3; i++)
-                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[1];
+                equipementGO[i].GetComponent<Image>().sprite = JoueurStatic.Equipements[i];
 
             foreach (GameObject i in dimensionGO)
             {
