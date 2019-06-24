@@ -11,7 +11,7 @@ public class Initialisation : MonoBehaviour
 {
     #region variables
     [SerializeField] GameObject canvas_plateau_vehicule;
-    [SerializeField] GameObject canvas_debat;
+    [SerializeField] GameObject canvas_pres_persos;
     [SerializeField] GameObject children;
 
     private int pos;
@@ -26,14 +26,8 @@ public class Initialisation : MonoBehaviour
     private Vector2[] posCards;
 
     [SerializeField] GameObject Plateau;
-
-    //private GameObject[,] cartes;
+    
     [SerializeField] GameObject cartes;
-    /*[SerializeField] GameObject[] cartes2;
-    [SerializeField] GameObject[] cartes3;
-    [SerializeField] GameObject[] cartes4;
-    [SerializeField] GameObject[] cartes5;
-    [SerializeField] GameObject[] cartes6;*/
 
     #endregion
     // Start is called before the first frame update
@@ -92,11 +86,11 @@ public class Initialisation : MonoBehaviour
         {
             if (j.Numero == Partie.JoueurCourant)
             {
-                cartes.transform.GetChild(0).GetComponent<Image>().sprite = j.Dim;
-                cartes.transform.GetChild(1).GetComponent<Image>().sprite = j.Equi1;
-                cartes.transform.GetChild(2).GetComponent<Image>().sprite = j.Equi2;
-                cartes.transform.GetChild(3).GetComponent<Image>().sprite = j.Equi3;
-                cartes.transform.GetChild(4).GetComponent<Image>().sprite = j.Loco;
+                cartes.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = j.Dim;
+                cartes.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = j.Equi1;
+                cartes.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = j.Equi2;
+                cartes.transform.GetChild(3).gameObject.GetComponent<Image>().sprite = j.Equi3;
+                cartes.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = j.Loco;
             }
         }
         #endregion
@@ -114,7 +108,7 @@ public class Initialisation : MonoBehaviour
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(debatID, msg);
         canvas_plateau_vehicule.SetActive(false);
-        canvas_debat.SetActive(true);
+        canvas_pres_persos.SetActive(true);
     }
 
     public static void get(Sprite[] image, int zone)
