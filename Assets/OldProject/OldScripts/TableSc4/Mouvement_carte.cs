@@ -40,20 +40,24 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        Debug.Log("c est bon!!!");
         if (!IsTheMousInTargetCollider())
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
-        else if (equipmentcards.Length > 0)
+        if (equipmentcards.Length > 0)
         {
-            if(checkifintarget == 1)
+            decalage = 0;
+            if (checkifintarget == 1)
             {
                 CheckIfAlreadyCards();
             }
             else if (checkifnomoreintarget == 0)
-            { }
+            {
+                CheckIfAlreadyCards();
+            }
         }
         else
         {
@@ -89,8 +93,8 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            if (equipment.transform.position.y >= currenttarget.transform.position.y - currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.y <= currenttarget.transform.position.y + currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+            if (equipment.transform.position.y >= currenttarget.transform.position.y - 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                equipment.transform.position.y <= currenttarget.transform.position.y + 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
                 equipment.transform.position.x == currenttarget.transform.position.x)
             {
                 decalage++;
@@ -139,7 +143,6 @@ public class Mouvement_carte : MonoBehaviour
         {
             gameObject.transform.position = currenttarget.transform.position;
         }
-        decalage = 0;
     }
 
     private void RelocateCardsWhencardleaves(List<GameObject> stack)
@@ -148,29 +151,65 @@ public class Mouvement_carte : MonoBehaviour
         {
             foreach (GameObject card in stack)
             {
-                if (sens == 1)
-                {
-                    card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-                }
-                else if (sens == 2)
-                {
-                    card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-                }
-                else if (sens == 3)
-                {
-                    card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-                }
-                else
-                {
-                    card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-                }
+                MoveCard(card);
             }
         }
     }
 
+    private void MoveCard(GameObject card)
+    {
+        if (sens == 1 || sens == 3)
+        {
+            if (card.transform.position.y > currenttarget.transform.position.y)
+            {
+                card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+            }
+            else if(card.transform.position.y < currenttarget.transform.position.y)
+            {
+                card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+            }
+            else if(gameObject.transform.position.y > currenttarget.transform.position.y)
+            {
+                card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+            }
+            else
+            {
+                card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+            }
+        }
+        else /*if (sens == 2)*/
+        {
+            if (card.transform.position.x > currenttarget.transform.position.x)
+            {
+                card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
+            }
+            else if (card.transform.position.x < currenttarget.transform.position.x)
+            {
+                card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
+            }
+            else if (gameObject.transform.position.x > currenttarget.transform.position.x)
+            {
+                card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
+            }
+            else
+            {
+                card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
+            }
+        }
+        //else if (sens == 3)
+        //{
+        //    if()
+        //    card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+        //}
+        //else
+        //{
+        //    card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
+        //}
+    }
+
     private void GetSens()
     {
-        int pos = 5;
+        int pos = 1;
         switch (pos)
         {
             case 1:
