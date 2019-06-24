@@ -42,6 +42,14 @@ public class PresPersos : MonoBehaviour
 
         nbRecu = 0;
 
+        foreach (GameObject g in persos)
+        {
+            for (int i = 0; i < g.transform.childCount; i++)
+            {
+                g.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
         button.gameObject.SetActive(false);
     }
 	
@@ -62,7 +70,7 @@ public class PresPersos : MonoBehaviour
         Tour.PersosDebat = persoSprites;
         Tour.ZonesDebat = zones;
         canvas_pres_persos.SetActive(false);
-        canvas_debat.SetActive(false);
+        canvas_debat.SetActive(true);
     }
 
     private void OnPersoReceived(NetworkMessage netMsg)

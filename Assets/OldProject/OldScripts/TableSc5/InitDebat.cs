@@ -88,16 +88,20 @@ public class InitDebat : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
+            persos[i].transform.GetChild(3).gameObject.SetActive(false);
+            persos[i].transform.GetChild(4).gameObject.SetActive(false);
+            persos[i].transform.GetChild(5).gameObject.SetActive(false);
+
             if (Tour.PersosDebat[i] != null)
             {
                 persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
                 persos[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 0] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0] + 2).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 1] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1] + 2).gameObject.SetActive(true);
             } else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
-
-            persos[i].transform.GetChild(3).gameObject.SetActive(false);
-            persos[i].transform.GetChild(4).gameObject.SetActive(false);
-            persos[i].transform.GetChild(5).gameObject.SetActive(false);
             for (int j = 1; j <= 2; j++)
             {
                 foreach (Transform child in persos[i].transform.GetChild(j))
@@ -116,15 +120,10 @@ public class InitDebat : MonoBehaviour
         int pos = v.joueur;
         string s = "Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
-        for (int j = 0; j < 6; j++)
-        {
-            if (Partie.Positions[j] == pos)
-            {
-                jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
-                jetons[j][index[j]].gameObject.SetActive(true);
-                index[j]++;
-            }
-        }
+        int j = Array.IndexOf(Partie.Positions, pos);
+        jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
+        jetons[j][index[j]].gameObject.SetActive(true);
+        index[j]++;
     }
 
     private void ButtonClicked()

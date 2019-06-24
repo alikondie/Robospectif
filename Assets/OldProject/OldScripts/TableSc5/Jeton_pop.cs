@@ -22,10 +22,10 @@ public class Jeton_pop : MonoBehaviour
         cartes = new List<GameObject>();
         for (int i = 3; i < canva.childCount; i++)
         {
-            for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
+            /*for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
             {
                 canva.GetChild(i).GetChild(2).GetChild(j).gameObject.SetActive(false);
-            }
+            }*/
 
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
