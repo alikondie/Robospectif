@@ -18,7 +18,7 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
-    short debatID = 1006;
+    short presID = 1011;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
@@ -38,39 +38,6 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
-        #region cards array
-        /*cartes = new GameObject[6,cartes1.Length];
-        
-        for (int j = 0; j < cartes1.Length; j++)
-        {
-            cartes[0, j] = cartes1[j];
-        }
-
-        for (int j = 0; j < cartes2.Length; j++)
-        {
-            cartes[1, j] = cartes2[j];
-        }
-
-        for (int j = 0; j < cartes3.Length; j++)
-        {
-            cartes[2, j] = cartes3[j];
-        }
-
-        for (int j = 0; j < cartes4.Length; j++)
-        {
-            cartes[3, j] = cartes4[j];
-        }
-
-        for (int j = 0; j < cartes5.Length; j++)
-        {
-            cartes[4, j] = cartes5[j];
-        }
-
-        for (int j = 0; j < cartes6.Length; j++)
-        {
-            cartes[5, j] = cartes6[j];
-        }*/
-        #endregion
         posCards = new Vector2[6];
         posCards[0] = new Vector2(560, 190);
         posCards[1] = new Vector2(1360, 190);
@@ -104,8 +71,8 @@ public class Initialisation : MonoBehaviour
     private void ButtonClicked()
     {
         MyNetworkMessage msg = new MyNetworkMessage();
-        msg.message = Partie.JoueurCourant;
-        NetworkServer.SendToAll(debatID, msg);
+        //msg.message = Partie.JoueurCourant;
+        NetworkServer.SendToAll(presID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
     }

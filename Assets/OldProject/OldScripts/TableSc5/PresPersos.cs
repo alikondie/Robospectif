@@ -8,6 +8,7 @@ using System;
 public class PresPersos : MonoBehaviour
 {
     #region Properties
+    short debatID = 1006;
     short persosID = 1007;
     private Sprite[] persoSprites;
     private int[,] zones;
@@ -31,34 +32,33 @@ public class PresPersos : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
-        NetworkServer.RegisterHandler(persosID, OnPersoReceived);
     }
 
     void OnEnable()
     {
-        persoSprites = new Sprite[] { null, null, null, null, null, null };
-
-        zones = new int[6, 2];
-
-        nbRecu = 0;
-
-        foreach (GameObject g in persos)
+        for (int i = 0; i < 6; i++)
         {
-            for (int i = 0; i < g.transform.childCount; i++)
-            {
-                g.transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+            persos[i].transform.GetChild(3).gameObject.SetActive(false);
+            persos[i].transform.GetChild(4).gameObject.SetActive(false);
+            persos[i].transform.GetChild(5).gameObject.SetActive(false);
 
-        button.gameObject.SetActive(false);
+            if (Tour.PersosDebat[i] != null)
+            {
+                persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
+                persos[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 0] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0] + 2).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 1] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1] + 2).gameObject.SetActive(true);
+            }
+            else
+                persos[i].transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 	
     void Update()
     {
-        if (nbRecu == Partie.Joueurs.Count - 1)
-        {
-            button.gameObject.SetActive(true);
-        }
+
     }
     #endregion
 
@@ -66,39 +66,8 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-
-        Tour.PersosDebat = persoSprites;
-        Tour.ZonesDebat = zones;
         canvas_pres_persos.SetActive(false);
         canvas_debat.SetActive(true);
-    }
-
-    private void OnPersoReceived(NetworkMessage netMsg)
-    {
-        var v = netMsg.ReadMessage<MyPersoMessage>();
-        int i = v.numero;
-        string s = v.image;
-        string spriteString = "image/Personnages/" + s;
-        int zone1 = v.choixZone0;
-        int zone2 = v.choixZone1;
-        zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;
-        zones[Array.IndexOf(Partie.Positions, i), 1] = zone2;
-        Sprite sp = Resources.Load<Sprite>(spriteString);
-        for (int j = 0; j < 6; j++)
-        {
-            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != Partie.JoueurCourant))
-            {
-                persoSprites[j] = sp;
-                persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;
-                if (zone1 != 0)
-                    persos[j].transform.GetChild(zone1).gameObject.SetActive(true);
-                if (zone2 != 0)
-                    persos[j].transform.GetChild(zone2).gameObject.SetActive(true);
-                persos[j].transform.GetChild(0).gameObject.SetActive(true);
-
-            }
-        }
-        nbRecu++;
     }
     #endregion
 
