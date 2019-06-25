@@ -39,6 +39,8 @@ public class ConceptionTerminer : MonoBehaviour
     {
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
+            #region recup_données
+            rejectedCardsContent = new StringBuilder();
             //for(int i)
             //SceneManager.LoadScene(nomSceneDemander);
             /*   foreach(string line in EnAttenteCT.rejectedCards)
@@ -77,7 +79,7 @@ public class ConceptionTerminer : MonoBehaviour
                     }
 
                     string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
-                    string[] equipements = { j.Equipements[0].name, JoueurStatic.Equipements[1].name, JoueurStatic.Equipements[2].name, JoueurStatic.Equipements[3].name, JoueurStatic.Equipements[4].name, JoueurStatic.Equipements[5].name };
+                    string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
 
                     for (int i = 0; i < 6; i++)
                     {
@@ -108,6 +110,8 @@ public class ConceptionTerminer : MonoBehaviour
             }
             //}
             File.AppendAllText(filePath, rejectedCardsContent.ToString());
+
+            #endregion
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }
