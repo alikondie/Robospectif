@@ -9,7 +9,6 @@ public class PresPersos : MonoBehaviour
 {
     #region Properties
     short debatID = 1006;
-    short persosID = 1007;
     private Sprite[] persoSprites;
     private int[,] zones;
     private int nbRecu;
@@ -66,6 +65,8 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
+        MyStringMessage msg = new MyStringMessage();
+        NetworkServer.SendToAll(debatID, msg);
         canvas_pres_persos.SetActive(false);
         canvas_debat.SetActive(true);
     }

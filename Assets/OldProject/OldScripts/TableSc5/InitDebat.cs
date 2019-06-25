@@ -22,8 +22,6 @@ public class InitDebat : MonoBehaviour
 
     private Vector2[] positionsButton;
 
-    short persosID = 1007;
-
     short vainqueurID = 1008;
 
     private Sprite[] persoSprites;

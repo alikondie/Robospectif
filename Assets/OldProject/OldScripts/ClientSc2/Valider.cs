@@ -22,8 +22,6 @@ public class Valider : MonoBehaviour
     short idMessage = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
-    short rejectedCardsID = 1020;
-    public static List<string> rejectedCards;
 
 
     // Start is called before the first frame update
@@ -104,11 +102,9 @@ public class Valider : MonoBehaviour
         robot.num = JoueurStatic.Numero;
         robot.zone = JoueurStatic.Position;
         JoueurStatic.Client.Send(idMessage, robot);
-
-        // RandomPerso();
+        
         canvas_choix_cartes.SetActive(false);
         canvas_pres_robot.SetActive(true);
-        //SceneManager.LoadScene("scene2bis"); 
     }
 
     // Update is called once per frame

@@ -34,7 +34,6 @@ public class SansHUD : NetworkManager
         if(ipv4 == Ip_serveur) 
         {
             Partie.Initialize();
-            Debug.Log(Partie.Joueurs.Capacity);
             manager.StartServer(); // Connection Serveur
             RegisterHandlers();
             Debug.Log("Serveur connecté");
