@@ -47,9 +47,9 @@ public class PresPersos : MonoBehaviour
                 persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
                 persos[i].transform.GetChild(0).gameObject.SetActive(true);
                 if (Tour.ZonesDebat[i, 0] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0] + 2).gameObject.SetActive(true);
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
                 if (Tour.ZonesDebat[i, 1] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1] + 2).gameObject.SetActive(true);
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
             }
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);

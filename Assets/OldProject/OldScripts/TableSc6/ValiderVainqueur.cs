@@ -48,7 +48,7 @@ public class ValiderVainqueur : MonoBehaviour
         {
             if (joueurs[i].transform.GetChild(2).gameObject.activeSelf)
             {
-                vainqueur = i + 1;
+                vainqueur = i;
                 button.gameObject.SetActive(true);
             }
         }
@@ -67,12 +67,15 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void ButtonClicked()
     {
+        Debug.Log("vainqueur = " + vainqueur);
         int nb = Partie.Joueurs.Count;
-        for (int i = 0; i < nb; i++)
+        int i = Array.IndexOf(Partie.Positions, vainqueur);
+        foreach(Joueur j in Partie.Joueurs)
         {
-            if (Partie.Joueurs[i].Position == vainqueur)
+            Debug.Log(j.Position);
+            if (j.Position == vainqueur)
             {
-                Partie.Joueurs[i].NbCouronnes++;
+                j.NbCouronnes++;
             }
         }
         canvas_choix_vainqueur.SetActive(false);
