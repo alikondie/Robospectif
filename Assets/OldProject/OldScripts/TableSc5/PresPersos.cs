@@ -40,6 +40,7 @@ public class PresPersos : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
+            persos[i].transform.GetChild(0).gameObject.SetActive(false);
             persos[i].transform.GetChild(1).gameObject.SetActive(false);
             persos[i].transform.GetChild(2).gameObject.SetActive(false);
             persos[i].transform.GetChild(3).gameObject.SetActive(false);
@@ -47,18 +48,19 @@ public class PresPersos : MonoBehaviour
             if (Tour.PersosDebat[i] != null)
             {
                 persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
-                persos[i].transform.GetChild(0).gameObject.SetActive(true);
+               /* persos[i].transform.GetChild(0).gameObject.SetActive(true);
                 if (Tour.ZonesDebat[i, 0] != 0)
                     persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
                 if (Tour.ZonesDebat[i, 1] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);*/
             }
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
         //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
 
-        presentateur = (Partie.JoueurCourant - 1)%Partie.Joueurs.Count + 1;
+        presentateur = GetNextPres(Partie.JoueurCourant);
+        Debug.Log(Partie.JoueurCourant);
         Debug.Log("pres = " + presentateur);
     }
 	
@@ -82,19 +84,10 @@ public class PresPersos : MonoBehaviour
                 if (Tour.ZonesDebat[i, 1] != 0)
                     persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
             }
-            else
-            {
-                for (int j = 0; j < persos[i].transform.childCount; j++)
-                {
-                    persos[i].transform.GetChild(j).gameObject.SetActive(false);
-                }
-            }
         }
 
-        if (((presentateur + 1)%Partie.Joueurs.Count + 1) == Partie.JoueurCourant)
+        if (GetNextPres(presentateur) == Partie.JoueurCourant)
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
-        else
-            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
     }
     #endregion
 
@@ -105,7 +98,7 @@ public class PresPersos : MonoBehaviour
         Debug.Log("pres = " + presentateur);
         if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant")
         {
-            presentateur = (presentateur + 1) % Partie.Joueurs.Count + 1;
+            presentateur = GetNextPres(presentateur);
         }
         else
         {
@@ -114,6 +107,16 @@ public class PresPersos : MonoBehaviour
             canvas_pres_persos.SetActive(false);
             canvas_debat.SetActive(true);
         }        
+    }
+
+    private int GetNextPres(int i)
+    {
+        int res;
+        if (i - 1 <= 0)
+            res = Partie.Joueurs.Count;
+        else
+            res = i - 1;
+        return res;
     }
     #endregion
 
