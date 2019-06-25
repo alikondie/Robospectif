@@ -67,12 +67,10 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void ButtonClicked()
     {
-        Debug.Log("vainqueur = " + vainqueur);
         int nb = Partie.Joueurs.Count;
         int i = Array.IndexOf(Partie.Positions, vainqueur);
         foreach(Joueur j in Partie.Joueurs)
         {
-            Debug.Log(j.Position);
             if (j.Position == vainqueur)
             {
                 j.NbCouronnes++;
