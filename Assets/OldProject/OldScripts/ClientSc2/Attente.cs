@@ -10,16 +10,16 @@ public class Attente : MonoBehaviour
 {
 
     [SerializeField] GameObject canvas_choix_persos;
-    [SerializeField] GameObject canvas_choix_jetons;
+    [SerializeField] GameObject canvas_persos_table;
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
 
-    short debatID = 1006;
+    short presID = 1011;
 
     // Start is called before the first frame update
     void Start()
     {
-        JoueurStatic.Client.RegisterHandler(debatID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(presID, onWaitReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)
@@ -29,7 +29,7 @@ public class Attente : MonoBehaviour
         if (JoueurStatic.Numero == fini)
         {
             //SceneManager.LoadScene("Scene_ChoixJetons");
-            canvas_choix_jetons.SetActive(true);
+            canvas_persos_table.SetActive(true);
         }
         else
         {

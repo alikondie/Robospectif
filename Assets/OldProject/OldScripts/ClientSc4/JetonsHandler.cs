@@ -42,16 +42,34 @@ public class JetonsHandler : MonoBehaviour
     private void OnPlaneteClicked()
     {
         planeteCompteur++;
+
+        if (planeteCompteur >= 2)
+        {
+            planeteVert.gameObject.SetActive(false);
+            planeteRouge.gameObject.SetActive(false);
+        }
     }
 
     private void OnSocieteClicked()
     {
         societeCompteur++;
+
+        if (societeCompteur >= 2)
+        {
+            societeVert.gameObject.SetActive(false);
+            societeRouge.gameObject.SetActive(false);
+        }
     }
 
     private void OnUsageClicked()
     {
         usageCompteur++;
+
+        if (usageCompteur >= 2)
+        {
+            usageVert.gameObject.SetActive(false);
+            usageRouge.gameObject.SetActive(false);
+        }
     }
 
     private void OnWaitReceived(NetworkMessage netMsg)
@@ -64,23 +82,6 @@ public class JetonsHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (usageCompteur >= 2)
-        {
-            usageVert.gameObject.SetActive(false);
-            usageRouge.gameObject.SetActive(false);
-        }
-
-        if (societeCompteur >= 2)
-        {
-            societeVert.gameObject.SetActive(false);
-            societeRouge.gameObject.SetActive(false);
-        }
-
-        if (planeteCompteur >= 2)
-        {
-            planeteVert.gameObject.SetActive(false);
-            planeteRouge.gameObject.SetActive(false);
-        }
     }
 
     void OnEnable()
@@ -88,7 +89,15 @@ public class JetonsHandler : MonoBehaviour
         text.text = "Joueur " + JoueurStatic.Numero;
 
         usageCompteur = 0;
+        usageVert.gameObject.SetActive(true);
+        usageRouge.gameObject.SetActive(true);
+
         societeCompteur = 0;
+        societeVert.gameObject.SetActive(true);
+        societeRouge.gameObject.SetActive(true);
+
         planeteCompteur = 0;
+        planeteVert.gameObject.SetActive(true);
+        planeteRouge.gameObject.SetActive(true);
     }
 }

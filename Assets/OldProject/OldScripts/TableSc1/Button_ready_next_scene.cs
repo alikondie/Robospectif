@@ -18,7 +18,7 @@ public class Button_ready_next_scene : MonoBehaviour
     private int[] indices;
     private int[] positions;
     short positionsID = 1005;
-    private string Ip_serveur = "172.21.232.218";
+    private string Ip_serveur = "172.21.232.220";
 
     // Start is called before the first frame update
     void Start()
@@ -151,7 +151,6 @@ public class Button_ready_next_scene : MonoBehaviour
 
     private Sprite[] RandomDim()
     {
-        Debug.Log(Main.Global.TabD.Taille);
         int x = 0, y = 0;
         Main.TabImage tab = Main.Global.TabD;
         while (tab.getImageind(x).Sprite.Equals(tab.getImageind(y).Sprite))

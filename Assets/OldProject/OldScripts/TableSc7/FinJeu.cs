@@ -24,7 +24,7 @@ public class FinJeu : MonoBehaviour
             zones[Partie.Joueurs[i].Position].transform.GetChild(0).gameObject.SetActive(true);
             for (int j = 0; j < Partie.Joueurs[i].NbCouronnes; j++)
             {
-                zones[Partie.Joueurs[i].Position + 1].transform.GetChild(j + 1).gameObject.SetActive(true);
+                zones[Partie.Joueurs[i].Position].transform.GetChild(j + 1).gameObject.SetActive(true);
             }
         }
     }
