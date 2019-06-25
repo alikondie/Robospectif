@@ -44,13 +44,9 @@ public class ConceptionTerminer : MonoBehaviour
             rejectedCardsContent = new StringBuilder();
             //for(int i)
             //SceneManager.LoadScene(nomSceneDemander);
-            /*   foreach(string line in EnAttenteCT.rejectedCards)
-               {
-                   rejectedCardsContent.AppendLine(line);
-               }*/
                
             rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-            string filePath = "rejected_cards_" +DateTime.Now+".csv";
+            string filePath = "donnees\\cartes_rejetees_le_" +DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") +"h"+ DateTime.Now.ToString("mm") + "m" +DateTime.Now.ToString("ss") + "s" + ".csv";
              
 
             foreach (Joueur j in Partie.Joueurs)
