@@ -14,7 +14,7 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
 
-    short presID = 1010;
+    short presID = 1011;
 
     // Start is called before the first frame update
     void Start()

@@ -40,76 +40,76 @@ public class ConceptionTerminer : MonoBehaviour
         
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
-            #region recup_données
-            rejectedCardsContent = new StringBuilder();
-            //for(int i)
-            //SceneManager.LoadScene(nomSceneDemander);
+            //#region recup_données
+            //rejectedCardsContent = new StringBuilder();
+            ////for(int i)
+            ////SceneManager.LoadScene(nomSceneDemander);
                
-            rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-            string filePath = "donnees\\cartes_rejetees_le_" +DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") +"h"+ DateTime.Now.ToString("mm") + "m" +DateTime.Now.ToString("ss") + "s" + ".csv";
+            //rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
+            //string filePath = "donnees\\cartes_rejetees_le_" +DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") +"h"+ DateTime.Now.ToString("mm") + "m" +DateTime.Now.ToString("ss") + "s" + ".csv";
              
 
-            foreach (Joueur j in Partie.Joueurs)
-            {
-                    string numero = "J " + j.Numero;
-                    string locomotion = "";
-                    string dimension = "";
-                    string equi1 = "";
-                    string equi2 = "";
-                    string equi3 = "";
+            //foreach (Joueur j in Partie.Joueurs)
+            //{
+            //        string numero = "J " + j.Numero;
+            //        string locomotion = "";
+            //        string dimension = "";
+            //        string equi1 = "";
+            //        string equi2 = "";
+            //        string equi3 = "";
 
-                    foreach (Sprite loc in j.Locomotions)
-                    {
-                        if (loc != j.Loco)
-                        {
-                            locomotion = loc.name;
-                            break;
-                        }
-                    }
+            //        foreach (Sprite loc in j.Locomotions)
+            //        {
+            //            if (loc != j.Loco)
+            //            {
+            //                locomotion = loc.name;
+            //                break;
+            //            }
+            //        }
 
-                    foreach (Sprite dim in j.Dimensions)
-                    {
-                        if (dim != j.Dim)
-                        {
-                            dimension = dim.name;
-                            break;
-                        }
-                    }
+            //        foreach (Sprite dim in j.Dimensions)
+            //        {
+            //            if (dim != j.Dim)
+            //            {
+            //                dimension = dim.name;
+            //                break;
+            //            }
+            //        }
 
-                    string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
-                    string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
+            //        string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
+            //        string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
 
-                    for (int i = 0; i < 6; i++)
-                    {
-                        // equipements doesn't exist in chosenEquipements, take it to rejected cards
-                        if (Array.IndexOf(chosenEquipements, equipements[i]) <= -1)
-                        {
-                            if (string.IsNullOrEmpty(equi1))
-                            {
-                                equi1 = equipements[i];
-                                continue;
-                            }
-                            else if (string.IsNullOrEmpty(equi2))
-                            {
-                                equi2 = equipements[i];
-                                continue;
-                            }
-                            else
-                            {
-                                equi3 = equipements[i];
-                                break;
-                            }
-                        }
-                    }
+            //        for (int i = 0; i < 6; i++)
+            //        {
+            //            // equipements doesn't exist in chosenEquipements, take it to rejected cards
+            //            if (Array.IndexOf(chosenEquipements, equipements[i]) <= -1)
+            //            {
+            //                if (string.IsNullOrEmpty(equi1))
+            //                {
+            //                    equi1 = equipements[i];
+            //                    continue;
+            //                }
+            //                else if (string.IsNullOrEmpty(equi2))
+            //                {
+            //                    equi2 = equipements[i];
+            //                    continue;
+            //                }
+            //                else
+            //                {
+            //                    equi3 = equipements[i];
+            //                    break;
+            //                }
+            //            }
+            //        }
 
-                    string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
-                    rejectedCardsContent.AppendLine(line);
+            //        string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
+            //        rejectedCardsContent.AppendLine(line);
 
-            }
             //}
-            File.AppendAllText(filePath, rejectedCardsContent.ToString());
+            ////}
+            //File.AppendAllText(filePath, rejectedCardsContent.ToString());
 
-            #endregion
+            //#endregion
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }

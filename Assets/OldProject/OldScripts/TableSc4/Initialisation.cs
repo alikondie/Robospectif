@@ -71,7 +71,7 @@ public class Initialisation : MonoBehaviour
     private void ButtonClicked()
     {
         MyNetworkMessage msg = new MyNetworkMessage();
-        //msg.message = Partie.JoueurCourant;
+        msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(presID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);

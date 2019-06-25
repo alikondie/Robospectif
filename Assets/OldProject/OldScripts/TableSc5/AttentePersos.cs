@@ -9,7 +9,7 @@ public class AttentePersos : MonoBehaviour
 {
     [SerializeField] GameObject canvas_attente_persos;
     [SerializeField] GameObject canvas_pres_persos;
-    short persosID;
+    short persosID = 1007;
     private Sprite[] persoSprites;
     private int[,] zones;
     private int nbRecu;
