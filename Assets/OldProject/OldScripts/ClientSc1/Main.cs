@@ -272,6 +272,8 @@ public class Main : MonoBehaviour
     void Start()
     {
 
+
+
         Global g = new Global();
         initializeLoco();
         initializeDi();

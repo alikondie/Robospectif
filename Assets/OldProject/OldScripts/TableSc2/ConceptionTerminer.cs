@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Xml.Linq;
 using System.IO;
 using System.Text;
+using System;
 
 public class ConceptionTerminer : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ConceptionTerminer : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     private int nbJoueur; //Nb Joueurs
     private static int nbJoueurConceptionTerminer; //Conteur du nombre de joueurs a avoir Terminer leur conception
-    public static List<string> rejectedCards;
+    
     StringBuilder rejectedCardsContent;
 
     // ---------- METHODES ----------
@@ -20,11 +21,11 @@ public class ConceptionTerminer : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        rejectedCards = new List<string>();
-        rejectedCardsContent = new StringBuilder();
-        rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-        string filePath = "C:\\Users\\taki.yamani\\Desktop\\rejected_cards.csv";
-        File.AppendAllText(filePath, rejectedCardsContent.ToString());
+        
+        /*rejectedCardsContent = new StringBuilder();
+        rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");*/
+        
+        
         // Initialise le compteur
         nbJoueurConceptionTerminer = 1;
 
@@ -36,15 +37,83 @@ public class ConceptionTerminer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
+            #region recup_données
+            rejectedCardsContent = new StringBuilder();
             //for(int i)
             //SceneManager.LoadScene(nomSceneDemander);
-            foreach(string line in rejectedCards)
-            {
-                rejectedCardsContent.AppendLine(line);
-            }
+            /*   foreach(string line in EnAttenteCT.rejectedCards)
+               {
+                   rejectedCardsContent.AppendLine(line);
+               }*/
+               
+            rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
+            string filePath = "rejected_cards_" +DateTime.Now+".csv";
+             
 
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                    string numero = "J " + j.Numero;
+                    string locomotion = "";
+                    string dimension = "";
+                    string equi1 = "";
+                    string equi2 = "";
+                    string equi3 = "";
+
+                    foreach (Sprite loc in j.Locomotions)
+                    {
+                        if (loc != j.Loco)
+                        {
+                            locomotion = loc.name;
+                            break;
+                        }
+                    }
+
+                    foreach (Sprite dim in j.Dimensions)
+                    {
+                        if (dim != j.Dim)
+                        {
+                            dimension = dim.name;
+                            break;
+                        }
+                    }
+
+                    string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
+                    string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
+
+                    for (int i = 0; i < 6; i++)
+                    {
+                        // equipements doesn't exist in chosenEquipements, take it to rejected cards
+                        if (Array.IndexOf(chosenEquipements, equipements[i]) <= -1)
+                        {
+                            if (string.IsNullOrEmpty(equi1))
+                            {
+                                equi1 = equipements[i];
+                                continue;
+                            }
+                            else if (string.IsNullOrEmpty(equi2))
+                            {
+                                equi2 = equipements[i];
+                                continue;
+                            }
+                            else
+                            {
+                                equi3 = equipements[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
+                    rejectedCardsContent.AppendLine(line);
+
+            }
+            //}
+            File.AppendAllText(filePath, rejectedCardsContent.ToString());
+
+            #endregion
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }

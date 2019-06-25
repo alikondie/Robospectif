@@ -20,7 +20,6 @@ public class SansHUD : NetworkManager
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
-    short rejectedCardsID = 1020;
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
@@ -59,7 +58,6 @@ public class SansHUD : NetworkManager
         NetworkServer.RegisterHandler(messageID, OnMessageReceived);
         NetworkServer.RegisterHandler(imageID, onImageReceived);
         NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
-        NetworkServer.RegisterHandler(rejectedCardsID, OnRejectedCardsReceived);
         //NetworkServer.RegisterHandler(1005, onTestReceived);
     }
 
@@ -88,61 +86,22 @@ public class SansHUD : NetworkManager
         message.message = premierFini;
         NetworkServer.SendToAll(chronoID, message);
     }
-    #region recuperation des données
-
-    private void OnRejectedCardsReceived(NetworkMessage netMsg)
-    {
-        print("got here");
-        RejectedCardsMessage rejectedCards = netMsg.ReadMessage<RejectedCardsMessage>();
-        string fileLine = "J" + rejectedCards.num + ";" + rejectedCards.dim + ";" + rejectedCards.loco + ";" + rejectedCards.equi1 + ";" + rejectedCards.equi2 + ";" + rejectedCards.equi3;
-        ConceptionTerminer.rejectedCards.Add(fileLine);
-    }
-    #endregion
 
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
-        string dim = objectMessage.dim;
-        string loco = objectMessage.loco;
-        string equi1 = objectMessage.equi1;
-        string equi2 = objectMessage.equi2;
-        string equi3 = objectMessage.equi3;
+        string dims = objectMessage.dim;
+        string locos = objectMessage.loco;
+        string equi1s = objectMessage.equi1;
+        string equi2s = objectMessage.equi2;
+        string equi3s = objectMessage.equi3;
         int numero = objectMessage.num;
         int z = objectMessage.zone;
-        string s = "";
-        for (int i = 0; i < dim.Length - 21; i++)
-        {
-            s = s + dim[i];
-        }
-        dim = s;
-
-        s = "";
-        for (int i = 0; i < loco.Length - 21; i++)
-        {
-            s = s + loco[i];
-        }
-        loco = s;
-
-        s = "";
-        for (int i = 0; i < equi1.Length - 21; i++)
-        {
-            s = s + equi1[i];
-        }
-        equi1 = s;
-
-        s = "";
-        for (int i = 0; i < equi2.Length - 21; i++)
-        {
-            s = s + equi2[i];
-        }
-        equi2 = s;
-
-        s = "";
-        for (int i = 0; i < equi3.Length - 21; i++)
-        {
-            s = s + equi3[i];
-        }
-        equi3 = s;
+        string dim = dims.Substring(0, dims.Length - 21);
+        string loco = locos.Substring(0, locos.Length - 21);
+        string equi1 = equi1s.Substring(0, equi1s.Length - 21);
+        string equi2 = equi2s.Substring(0, equi2s.Length - 21);
+        string equi3 = equi3s.Substring(0, equi3s.Length - 21);
 
         Sprite[] images = new Sprite[5];
         images[0] = Resources.Load<Sprite>("image/Locomotion/" + loco);
@@ -150,15 +109,19 @@ public class SansHUD : NetworkManager
         images[2] = Resources.Load<Sprite>("image/Equipements/" + equi1);
         images[3] = Resources.Load<Sprite>("image/Equipements/" + equi2);
         images[4] = Resources.Load<Sprite>("image/Equipements/" + equi3);
-        Joueur j = new Joueur();
-        j.Dim = images[1];
-        j.Loco = images[0];
-        j.Equi1 = images[2];
-        j.Equi2 = images[3];
-        j.Equi3 = images[4];
-        j.Numero = numero;
-        j.Position = z;
-        Partie.AddPlayer(j);
+
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (j.Numero == numero)
+            {
+                j.Dim = Resources.Load<Sprite>("image/Dimension/" + dim);
+                j.Loco = Resources.Load<Sprite>("image/Locomotion/" + loco);
+                j.Equi1 = Resources.Load<Sprite>("image/Equipements/" + equi1);
+                j.Equi2 = Resources.Load<Sprite>("image/Equipements/" + equi2);
+                j.Equi3 = Resources.Load<Sprite>("image/Equipements/" + equi3);
+            }
+        }
+
         Initialisation.get(images, z);
     }
 

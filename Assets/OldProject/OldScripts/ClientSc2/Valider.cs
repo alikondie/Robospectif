@@ -23,6 +23,7 @@ public class Valider : MonoBehaviour
     short conceptionID = 1002;
     short chronoID = 1003;
     short rejectedCardsID = 1020;
+    public static List<string> rejectedCards;
 
 
     // Start is called before the first frame update
@@ -103,62 +104,6 @@ public class Valider : MonoBehaviour
         robot.num = JoueurStatic.Numero;
         robot.zone = JoueurStatic.Position;
         JoueurStatic.Client.Send(idMessage, robot);
-
-        #region recuperation des données
-        // Récupération des cartes rejetées 
-        RejectedCardsMessage rejectedCards = new RejectedCardsMessage();
-
-        rejectedCards.num = JoueurStatic.Numero;
-        rejectedCards.zone = JoueurStatic.Position;
-
-        //
-        foreach (Sprite loc in JoueurStatic.Locomotions)
-        {
-            if (loc != JoueurStatic.Loco) { 
-                rejectedCards.loco = loc.name;
-                break;
-            }
-        }
-
-        foreach (Sprite dim in JoueurStatic.Dimensions)
-        {
-            if (dim != JoueurStatic.Dim)
-            {
-                rejectedCards.dim = dim.name;
-                break;
-            }
-        }
-
-        string[] chosenEquipements = { robot.equi1, robot.equi2, robot.equi3 };
-        string[] equipements = { JoueurStatic.Equipements[0].ToString(), JoueurStatic.Equipements[1].ToString(), JoueurStatic.Equipements[2].ToString(), JoueurStatic.Equipements[3].ToString(), JoueurStatic.Equipements[4].ToString(), JoueurStatic.Equipements[5].ToString() };
-        
-        for(int i = 0; i < 6; i++)
-        {
-            // equipements doesn't exist in chosenEquipements, take it to rejected cards
-            if(Array.IndexOf(chosenEquipements,equipements[i]) <= -1)
-            {
-                if (string.IsNullOrEmpty(rejectedCards.equi1))
-                {
-                    rejectedCards.equi1 = equipements[i];
-                    continue;
-                }
-                else if (string.IsNullOrEmpty(rejectedCards.equi2))
-                {
-                    rejectedCards.equi2 = equipements[i];
-                    continue;
-                }
-                else
-                {
-                    rejectedCards.equi3 = equipements[i];
-                    break;
-                }
-            }
-        }
-
-        JoueurStatic.Client.Send(rejectedCardsID, rejectedCards);
-
-        #endregion
-
 
         // RandomPerso();
         canvas_choix_cartes.SetActive(false);
