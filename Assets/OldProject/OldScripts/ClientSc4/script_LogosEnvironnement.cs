@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class script_LogosEnvironnement : MonoBehaviour
 {
     private int[] choixZone; // TABLEAU A RECUPERER 
-    [SerializeField] GameObject canvas_choix_jetons;
+    [SerializeField] GameObject canvas_persos_table;
     [SerializeField] GameObject canvas_pres_perso;
     [SerializeField] Button button;
     [SerializeField] Image perso;
@@ -50,19 +50,14 @@ public class script_LogosEnvironnement : MonoBehaviour
     {
         MyPersoMessage msg = new MyPersoMessage();
         string spriteString = perso.sprite.ToString();
-        string s = "";
-        for (int i = 0; i < spriteString.Length - 21; i++)
-        {
-            s = s + spriteString[i];
-        }
-        persoSprite = s;
+        persoSprite = spriteString.Substring(0, spriteString.Length - 21);
         msg.numero = JoueurStatic.Numero;
         msg.image = persoSprite;
         msg.choixZone0 = choixZone[0];
         msg.choixZone1 = choixZone[1];
         JoueurStatic.Client.Send(persosID, msg);
         canvas_pres_perso.SetActive(false);
-        canvas_choix_jetons.SetActive(true);
+        canvas_persos_table.SetActive(true);
         //SceneManager.LoadScene("Scene_ChoixJetons");
     }
 

@@ -4455,7 +4455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725388e2f88abfc47a6935a6a9f57419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_choix_jetons: {fileID: 1365945322}
+  canvas_persos_table: {fileID: 1925831024}
   canvas_pres_perso: {fileID: 1031067871}
   button: {fileID: 1432711779}
   perso: {fileID: 2127272498}
@@ -7820,7 +7820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1925831025
 MonoBehaviour:
   m_ObjectHideFlags: 0
