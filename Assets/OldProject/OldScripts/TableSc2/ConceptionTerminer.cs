@@ -37,6 +37,7 @@ public class ConceptionTerminer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
             #region recup_données
@@ -47,8 +48,9 @@ public class ConceptionTerminer : MonoBehaviour
                {
                    rejectedCardsContent.AppendLine(line);
                }*/
+               
             rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-            string filePath = "rejected_cards.csv";
+            string filePath = "rejected_cards_" +DateTime.Now+".csv";
              
 
             foreach (Joueur j in Partie.Joueurs)
