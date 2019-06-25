@@ -100,8 +100,12 @@ public class Mouvement_carte : MonoBehaviour
             {
                 decalage++;
                 cardstack.Add(equipment);
+                
+
             }
+            
         }
+       // AssignEquipmentsTypes(currenttarget, cardstack);
         if (checkifnomoreintarget == -1)
         {
             RelocateCardsWhencardincoming(cardstack);
@@ -233,4 +237,25 @@ public class Mouvement_carte : MonoBehaviour
                 break;
         }
     }
+/*
+    private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments)
+    {
+        List<string> equipmentStrings = new List<string>();
+        foreach(GameObject e in equipments)
+        {
+            equipmentStrings.Add(e.name);
+        }
+       switch (target.name)
+       {
+            case ("boxcollider equipment manual"):
+                Initialisation.manualEquipmentCards = equipmentStrings;
+                break;
+            case ("boxcollider equipment programmable"):
+                Initialisation.programmableEquipmentCards = equipmentStrings;
+                break;
+            case ("boxcollider equipment automatique"):
+                Initialisation.autoEquipmentCards = equipmentStrings;
+                break;
+        }
+    }*/
 }
