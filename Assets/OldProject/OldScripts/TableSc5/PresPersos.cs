@@ -12,6 +12,9 @@ public class PresPersos : MonoBehaviour
     private Sprite[] persoSprites;
     private int[,] zones;
     private int nbRecu;
+
+    private int presentateur;
+    private Joueur pres;
     #endregion
 
     #region Inputs
@@ -53,11 +56,45 @@ public class PresPersos : MonoBehaviour
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
+        //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+
+        presentateur = (Partie.JoueurCourant - 1)%Partie.Joueurs.Count + 1;
+        Debug.Log("pres = " + presentateur);
     }
 	
     void Update()
     {
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (presentateur == j.Numero)
+            {
+                pres = j;
+            }
+        }
 
+        for (int i = 0; i < persos.Length; i++)
+        {
+            if (pres.Position == i)
+            {
+                persos[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 0] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 1] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
+            }
+            else
+            {
+                for (int j = 0; j < persos[i].transform.childCount; j++)
+                {
+                    persos[i].transform.GetChild(j).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (((presentateur + 1)%Partie.Joueurs.Count + 1) == Partie.JoueurCourant)
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+        else
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
     }
     #endregion
 
@@ -65,10 +102,18 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-        MyStringMessage msg = new MyStringMessage();
-        NetworkServer.SendToAll(debatID, msg);
-        canvas_pres_persos.SetActive(false);
-        canvas_debat.SetActive(true);
+        Debug.Log("pres = " + presentateur);
+        if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant")
+        {
+            presentateur = (presentateur + 1) % Partie.Joueurs.Count + 1;
+        }
+        else
+        {
+            MyStringMessage msg = new MyStringMessage();
+            NetworkServer.SendToAll(debatID, msg);
+            canvas_pres_persos.SetActive(false);
+            canvas_debat.SetActive(true);
+        }        
     }
     #endregion
 
