@@ -75,9 +75,9 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*print(manualEquipmentCards);
-        print(programmableEquipmentCards);
-        print(autoEquipmentCards);*/
+        print("manualEquipmentCards: " + manualEquipmentCards == null ? 0 : manualEquipmentCards.Count);
+        print("programmableEquipmentCards: " + programmableEquipmentCards == null ? 0 : programmableEquipmentCards.Count);
+        print("autoEquipmentCards: " + autoEquipmentCards == null ? 0 : autoEquipmentCards.Count);
     }
 
     private void ButtonClicked()
