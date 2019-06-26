@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mouvement_carte : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class Mouvement_carte : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnEnable()
+    {
+        gameObject.layer = 5;
+        currenttarget = null;
     }
     #endregion
 
@@ -114,14 +121,18 @@ public class Mouvement_carte : MonoBehaviour
             }
             
         }
-       // AssignEquipmentsTypes(currenttarget, cardstack);
+        
         if (checkifnomoreintarget == -1)
         {
+            List<GameObject> allCardStack = new List<GameObject>();
+            allCardStack.Add(this.gameObject);
             RelocateCardsWhencardincoming(cardstack);
+            AssignEquipmentsTypes(currenttarget, allCardStack);
         }
         else
         {
             RelocateCardsWhencardleaves(cardstack);
+            AssignEquipmentsTypes(currenttarget, cardstack);
         }
     }
 
@@ -252,18 +263,21 @@ public class Mouvement_carte : MonoBehaviour
         List<string> equipmentStrings = new List<string>();
         foreach(GameObject e in equipments)
         {
-            equipmentStrings.Add(e.name);
+            equipmentStrings.Add(e.GetComponent<Image>().sprite.name);
         }
        switch (target.name)
        {
             case ("boxcollider equipment manual"):
                 Initialisation.manualEquipmentCards = equipmentStrings;
+                
                 break;
             case ("boxcollider equipment programmable"):
                 Initialisation.programmableEquipmentCards = equipmentStrings;
+                
                 break;
             case ("boxcollider equipment automatique"):
                 Initialisation.autoEquipmentCards = equipmentStrings;
+                
                 break;
         }
     }
