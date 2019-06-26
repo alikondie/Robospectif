@@ -73,20 +73,14 @@ public class Button_ready_next_scene : MonoBehaviour
         {
             nb += indices[i];
             if (indices[i] == 1)
-                PlayerPrefs.SetInt("LaPosition" + (i+1), nb);
+                PlayerPrefs.SetInt("LaPosition" + (i + 1), nb);
+            else
+                PlayerPrefs.SetInt("LaPosition" + (i + 1), 0);
         }
         if (nb >= 1)
             this.gameObject.SetActive(true);
         else
             this.gameObject.SetActive(false);
-        
-        for (int i = 0; i < indices.Length; i++)
-        {
-            if (indices[i] == 1)
-            {
-
-            }
-        }
 
         nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur
