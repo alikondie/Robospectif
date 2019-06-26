@@ -237,7 +237,7 @@ public class Mouvement_carte : MonoBehaviour
                 break;
         }
     }
-/*
+
     private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments)
     {
         List<string> equipmentStrings = new List<string>();
@@ -257,5 +257,5 @@ public class Mouvement_carte : MonoBehaviour
                 Initialisation.autoEquipmentCards = equipmentStrings;
                 break;
         }
-    }*/
+    }
 }
