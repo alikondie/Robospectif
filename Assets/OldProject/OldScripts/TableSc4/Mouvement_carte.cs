@@ -94,14 +94,23 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            if (equipment.transform.position.y >= currenttarget.transform.position.y - 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.y <= currenttarget.transform.position.y + 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.x == currenttarget.transform.position.x)
+            bool test;
+            if (sens == 1 || sens == 3) {
+                test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
+            }
+            else
+            {
+                test = equipment.transform.position.x >= currenttarget.transform.position.x - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
+                equipment.transform.position.x <= currenttarget.transform.position.x + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
+                Math.Round(equipment.transform.position.y) == Math.Round(currenttarget.transform.position.y);
+            }
+
+            if(test)
             {
                 decalage++;
                 cardstack.Add(equipment);
-                
-
             }
             
         }

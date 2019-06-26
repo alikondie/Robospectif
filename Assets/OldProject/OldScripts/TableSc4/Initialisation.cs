@@ -69,9 +69,9 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(manualEquipmentCards);
+        /*print(manualEquipmentCards);
         print(programmableEquipmentCards);
-        print(autoEquipmentCards);
+        print(autoEquipmentCards);*/
     }
 
     private void ButtonClicked()

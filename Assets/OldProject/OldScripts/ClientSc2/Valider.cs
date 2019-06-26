@@ -42,47 +42,6 @@ public class Valider : MonoBehaviour
         }
     }
 
-    private void RandomPerso()
-    {
-        Main.TabImage tab = Main.Global.TabP;
-        int[] indices = { 0, 0, 0, 0, 0, 0 };
-        bool allDiff = false;
-        while (!allDiff)
-        {
-            for (int i = 0; i < indices.Length; i++)
-            {
-                indices[i] = Random.Range(0, tab.Taille - 1);
-            }
-            allDiff = true;
-            for (int i = 0; i < indices.Length - 1; i++)
-            {
-                for (int j = i + 1; j < indices.Length; j++)
-                {
-                    if (tab.getImageind(indices[i]).Sprite.Equals(tab.getImageind(indices[j]).Sprite))
-                    {
-                        allDiff = false;
-                    }
-                }
-            }
-        }
-        personnages = new Main.Image[6];
-        for (int i = 0; i < personnages.Length; i++)
-        {
-            personnages[i] = tab.getImageind(indices[i]);
-        }
-
-        for (int i = 0; i < personnages.Length; i++)
-        {
-            Main.Global.TabP.removeImage(personnages[i]);
-        }
-
-        for (int i = 0; i < personnages.Length; i++)
-        {
-            JoueurStatic.Persos[i] = personnages[i].Sprite;
-        }
-
-    }
-
     private void ButtonClicked()
     {
         JoueurStatic.Dim = dim.sprite;

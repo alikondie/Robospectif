@@ -22,6 +22,7 @@ public class PresPersos : MonoBehaviour
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject[] persos;
     [SerializeField] Button button;
+    [SerializeField] Text text;
 	#endregion
 	
 	#region Go or components
@@ -57,11 +58,9 @@ public class PresPersos : MonoBehaviour
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
-        //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
 
         presentateur = GetNextPres(Partie.JoueurCourant);
-        Debug.Log(Partie.JoueurCourant);
-        Debug.Log("pres = " + presentateur);
     }
 	
     void Update()
@@ -88,6 +87,8 @@ public class PresPersos : MonoBehaviour
 
         if (GetNextPres(presentateur) == Partie.JoueurCourant)
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+
+        text.text = "Le joueur " + presentateur + " présente son personnage";
     }
     #endregion
 
@@ -95,7 +96,6 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-        Debug.Log("pres = " + presentateur);
         if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant")
         {
             presentateur = GetNextPres(presentateur);
