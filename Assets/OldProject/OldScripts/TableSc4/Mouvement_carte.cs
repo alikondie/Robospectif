@@ -18,12 +18,13 @@ public class Mouvement_carte : MonoBehaviour
     private int checkifintarget;
     private int decalage;
     private int checkifnomoreintarget;
+    private bool test;
 
     #region unused start and update
     // Start is called before the first frame update
     void Start()
     {
-        GetSens();
+        
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Mouvement_carte : MonoBehaviour
 
     void OnEnable()
     {
+        GetSens();
         gameObject.layer = 5;
         currenttarget = null;
     }
@@ -101,7 +103,6 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            bool test;
             if (sens == 1 || sens == 3) {
                 test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
                 equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&

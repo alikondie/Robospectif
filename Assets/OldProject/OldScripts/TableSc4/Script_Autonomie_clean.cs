@@ -47,7 +47,6 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region main functions
     void Start()
     {
-        position = 0;
         // Position du joueur
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
@@ -156,6 +155,11 @@ public class Script_Autonomie_clean : MonoBehaviour
             SteeringWheelMotion(newPosition);
         }
     }
+
+    void OnEnable()
+    {
+        position = 0;
+    }
     #endregion
 
     #region helping and check functions
@@ -184,6 +188,8 @@ public class Script_Autonomie_clean : MonoBehaviour
 
         switch (position)
         {
+            case 0:
+                break;
             case 1:
                 Attention.rectTransform.sizeDelta = tailleCadreMax;
                 Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
