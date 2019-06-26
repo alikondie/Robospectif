@@ -18,6 +18,10 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
+ /*   public static List<string> manualEquipmentCards;
+    public static List<string> programmableEquipmentCards;
+    public static List<string> autoEquipmentCards;*/
+
     short presID = 1011;
 
     public static int indice = 0;
