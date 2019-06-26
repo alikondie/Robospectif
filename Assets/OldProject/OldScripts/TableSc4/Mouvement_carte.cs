@@ -30,6 +30,12 @@ public class Mouvement_carte : MonoBehaviour
     {
         
     }
+
+    void OnEnable()
+    {
+        gameObject.layer = 5;
+        currenttarget = null;
+    }
     #endregion
 
     private void OnMouseDown()
