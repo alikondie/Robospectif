@@ -18,6 +18,10 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
+    public static List<string> manualEquipmentCards;
+    public static List<string> programmableEquipmentCards;
+    public static List<string> autoEquipmentCards;
+
     short presID = 1011;
 
     public static int indice = 0;
@@ -65,7 +69,9 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*print(manualEquipmentCards);
+        print(programmableEquipmentCards);
+        print(autoEquipmentCards);*/
     }
 
     private void ButtonClicked()

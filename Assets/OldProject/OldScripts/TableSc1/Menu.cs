@@ -23,6 +23,6 @@ public class Menu : MonoBehaviour
 
     private void ButtonClicked()
     {
-        SceneManager.LoadScene("standard_game");
+        SceneManager.LoadScene("standard_game_server");
     }
 }

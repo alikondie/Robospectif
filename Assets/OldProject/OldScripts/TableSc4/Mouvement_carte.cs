@@ -94,14 +94,27 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            if (equipment.transform.position.y >= currenttarget.transform.position.y - 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.y <= currenttarget.transform.position.y + 2*currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.x == currenttarget.transform.position.x)
+            bool test;
+            if (sens == 1 || sens == 3) {
+                test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
+            }
+            else
+            {
+                test = equipment.transform.position.x >= currenttarget.transform.position.x - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
+                equipment.transform.position.x <= currenttarget.transform.position.x + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
+                Math.Round(equipment.transform.position.y) == Math.Round(currenttarget.transform.position.y);
+            }
+
+            if(test)
             {
                 decalage++;
                 cardstack.Add(equipment);
             }
+            
         }
+       // AssignEquipmentsTypes(currenttarget, cardstack);
         if (checkifnomoreintarget == -1)
         {
             RelocateCardsWhencardincoming(cardstack);
@@ -230,6 +243,27 @@ public class Mouvement_carte : MonoBehaviour
                 break;
             case 6:
                 sens = 4;
+                break;
+        }
+    }
+
+    private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments)
+    {
+        List<string> equipmentStrings = new List<string>();
+        foreach(GameObject e in equipments)
+        {
+            equipmentStrings.Add(e.name);
+        }
+       switch (target.name)
+       {
+            case ("boxcollider equipment manual"):
+                Initialisation.manualEquipmentCards = equipmentStrings;
+                break;
+            case ("boxcollider equipment programmable"):
+                Initialisation.programmableEquipmentCards = equipmentStrings;
+                break;
+            case ("boxcollider equipment automatique"):
+                Initialisation.autoEquipmentCards = equipmentStrings;
                 break;
         }
     }
