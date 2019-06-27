@@ -47,6 +47,14 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region main functions
     void Start()
     {
+
+
+    }
+
+    void OnEnable()
+    {
+        position = 0;
+        volant.GetComponent<RectTransform>().localPosition = new Vector3(0, -20, -23);
         // Position du joueur
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
@@ -80,7 +88,6 @@ public class Script_Autonomie_clean : MonoBehaviour
         sprite = volant.GetComponent<Image>();
 
         isClicked = false;
-
     }
 
 
@@ -154,11 +161,6 @@ public class Script_Autonomie_clean : MonoBehaviour
             Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
             SteeringWheelMotion(newPosition);
         }
-    }
-
-    void OnEnable()
-    {
-        position = 0;
     }
     #endregion
 
