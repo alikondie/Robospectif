@@ -10,6 +10,7 @@ public class Script_Autonomie_clean : MonoBehaviour
     [SerializeField] GameObject volant;
     [SerializeField] Image Attention;
     [SerializeField] Image Autonomie;
+    [SerializeField] Button button;
 
     //Déplacement souris
     [SerializeField] Image sprite;
@@ -55,6 +56,13 @@ public class Script_Autonomie_clean : MonoBehaviour
     {
         position = 0;
         volant.GetComponent<RectTransform>().localPosition = new Vector3(0, -20, -23);
+
+        button.gameObject.SetActive(false);
+
+        Attention.rectTransform.sizeDelta = tailleCadreMax;
+        Autonomie.rectTransform.sizeDelta = tailleCadreMax;
+        Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+        Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
         // Position du joueur
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
@@ -94,6 +102,10 @@ public class Script_Autonomie_clean : MonoBehaviour
     // Méthode de mise a jour
     private void Update()
     {
+        if (position > 0)
+        {
+            button.gameObject.SetActive(true);
+        }
         #region partie chelou
         if (Input.GetMouseButtonUp(0) && toucher)
         {
