@@ -197,6 +197,10 @@ public class Script_Autonomie_clean : MonoBehaviour
                 Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
                 Autonomie.rectTransform.sizeDelta = tailleCadreMin;
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
+
+                // recolte données
+                print("Attention Requise");
+                Initialisation.autonomie = "Attention Requise";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX - epsilon, volant.transform.position.y);
                 else
@@ -207,6 +211,10 @@ public class Script_Autonomie_clean : MonoBehaviour
                 Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
                 Autonomie.rectTransform.sizeDelta = tailleCadreMax;
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+
+                // recolte données
+                print("Autonome");
+                Initialisation.autonomie = "Autonome";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX + epsilon, volant.transform.position.y);
                 else

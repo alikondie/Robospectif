@@ -21,9 +21,10 @@ public class ConceptionTerminer : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-        
-        /*rejectedCardsContent = new StringBuilder();
-        rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");*/
+
+        //ejectedCardsContent = new StringBuilder();
+        SansHUD.data.AppendLine("Cartes rejetees");
+        SansHUD.data.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
         
         
         // Initialise le compteur
@@ -40,76 +41,76 @@ public class ConceptionTerminer : MonoBehaviour
         
         if(nbJoueurConceptionTerminer == nbJoueur)
         {
-            //#region recup_données
-            //rejectedCardsContent = new StringBuilder();
-            ////for(int i)
-            ////SceneManager.LoadScene(nomSceneDemander);
-               
+            #region recup_données
+            rejectedCardsContent = new StringBuilder();
+            //for(int i)
+            //SceneManager.LoadScene(nomSceneDemander);
+
             //rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-            //string filePath = "donnees\\cartes_rejetees_le_" +DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") +"h"+ DateTime.Now.ToString("mm") + "m" +DateTime.Now.ToString("ss") + "s" + ".csv";
-             
+            //string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
 
-            //foreach (Joueur j in Partie.Joueurs)
-            //{
-            //        string numero = "J " + j.Numero;
-            //        string locomotion = "";
-            //        string dimension = "";
-            //        string equi1 = "";
-            //        string equi2 = "";
-            //        string equi3 = "";
 
-            //        foreach (Sprite loc in j.Locomotions)
-            //        {
-            //            if (loc != j.Loco)
-            //            {
-            //                locomotion = loc.name;
-            //                break;
-            //            }
-            //        }
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                string numero = "J " + j.Numero;
+                string locomotion = "";
+                string dimension = "";
+                string equi1 = "";
+                string equi2 = "";
+                string equi3 = "";
 
-            //        foreach (Sprite dim in j.Dimensions)
-            //        {
-            //            if (dim != j.Dim)
-            //            {
-            //                dimension = dim.name;
-            //                break;
-            //            }
-            //        }
+                foreach (Sprite loc in j.Locomotions)
+                {
+                    if (loc != j.Loco)
+                    {
+                        locomotion = loc.name;
+                        break;
+                    }
+                }
 
-            //        string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
-            //        string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
+                foreach (Sprite dim in j.Dimensions)
+                {
+                    if (dim != j.Dim)
+                    {
+                        dimension = dim.name;
+                        break;
+                    }
+                }
 
-            //        for (int i = 0; i < 6; i++)
-            //        {
-            //            // equipements doesn't exist in chosenEquipements, take it to rejected cards
-            //            if (Array.IndexOf(chosenEquipements, equipements[i]) <= -1)
-            //            {
-            //                if (string.IsNullOrEmpty(equi1))
-            //                {
-            //                    equi1 = equipements[i];
-            //                    continue;
-            //                }
-            //                else if (string.IsNullOrEmpty(equi2))
-            //                {
-            //                    equi2 = equipements[i];
-            //                    continue;
-            //                }
-            //                else
-            //                {
-            //                    equi3 = equipements[i];
-            //                    break;
-            //                }
-            //            }
-            //        }
+                string[] chosenEquipements = { j.Equi1.name, j.Equi2.name, j.Equi3.name };
+                string[] equipements = { j.Equipements[0].name, j.Equipements[1].name, j.Equipements[2].name, j.Equipements[3].name, j.Equipements[4].name, j.Equipements[5].name };
 
-            //        string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
-            //        rejectedCardsContent.AppendLine(line);
+                for (int i = 0; i < 6; i++)
+                {
+                    // equipements doesn't exist in chosenEquipements, take it to rejected cards
+                    if (Array.IndexOf(chosenEquipements, equipements[i]) <= -1)
+                    {
+                        if (string.IsNullOrEmpty(equi1))
+                        {
+                            equi1 = equipements[i];
+                            continue;
+                        }
+                        else if (string.IsNullOrEmpty(equi2))
+                        {
+                            equi2 = equipements[i];
+                            continue;
+                        }
+                        else
+                        {
+                            equi3 = equipements[i];
+                            break;
+                        }
+                    }
+                }
 
+                string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
+                SansHUD.data.AppendLine(line);
+
+            }
             //}
-            ////}
             //File.AppendAllText(filePath, rejectedCardsContent.ToString());
 
-            //#endregion
+            #endregion
             canvas_sablier.SetActive(false);
             canvas_plateau_vehicule.SetActive(true);
         }
