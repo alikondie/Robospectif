@@ -46,6 +46,7 @@ public class InitDebat : MonoBehaviour
     {
         SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
         persosAndDebate = new Dictionary<string, string>();
+      //  FillPersoDict();
         //givenJetons = new Dictionary<string,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
         jetons = new List<GameObject>[6];
 
@@ -157,12 +158,12 @@ public class InitDebat : MonoBehaviour
         NetworkServer.SendToAll(vainqueurID, wait);
 
 
-        GameObject p = persos[0].transform.Find("Jetons").gameObject;
+        //GameObject p = persos[0].transform.Find("Jetons").gameObject;
 
-        foreach(GameObject pers in persos)
+    /*    foreach(GameObject pers in persos)
         {
             FillPersoData(pers);
-        }
+        }*/
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
     }
