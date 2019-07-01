@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -18,6 +19,13 @@ public class Initialisation : MonoBehaviour
 
     [SerializeField] Button button;
 
+    public static List<string> manualEquipmentCards;
+    public static List<string> programmableEquipmentCards;
+    public static List<string> autoEquipmentCards;
+    public static string autonomie;
+
+
+
     short presID = 1011;
 
     public static int indice = 0;
@@ -29,15 +37,27 @@ public class Initialisation : MonoBehaviour
     
     [SerializeField] GameObject cartes;
 
+    string currentTurnData = "";
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
+        
+        
+        SansHUD.data.AppendLine("Tour no° "+ Partie.Tour);
+        SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
+        
     }
 
     void OnEnable()
     {
+        int x = -4;
+        for (int i = 0; i < cartes.transform.childCount; i++)
+        {
+            cartes.transform.GetChild(i).GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
+            x += 2;
+        }
         posCards = new Vector2[6];
         posCards[0] = new Vector2(560, 190);
         posCards[1] = new Vector2(1360, 190);
@@ -70,11 +90,47 @@ public class Initialisation : MonoBehaviour
 
     private void ButtonClicked()
     {
+        
+        
+        #region recup données
+         
+            currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
+            currentTurnData += autonomie + ";";
+
+            if (manualEquipmentCards != null)
+            {
+                foreach (string s in manualEquipmentCards)
+
+                    currentTurnData += "M " + s + ";";
+            }
+            if (programmableEquipmentCards != null)
+            {
+                foreach (string s in programmableEquipmentCards)
+
+                    currentTurnData += "P " + s + ";";
+            }
+            if (autoEquipmentCards != null)
+            {
+                foreach (string s in autoEquipmentCards)
+
+                    currentTurnData += "A " + s + ";";
+            }
+            // suppression du dernier point-virgule
+            currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
+            SansHUD.data.AppendLine(currentTurnData);
+            //print(SansHUD.data.ToString());
+           // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
+
+           // File.AppendAllText(filePath, SansHUD.data.ToString());
+        
+        #endregion
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(presID, msg);
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
+
+
     }
 
     public static void get(Sprite[] image, int zone)

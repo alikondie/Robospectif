@@ -18,7 +18,6 @@ public class Button_ready_next_scene : MonoBehaviour
     private int[] indices;
     private int[] positions;
     short positionsID = 1005;
-    private string Ip_serveur = "172.21.232.220";
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +39,6 @@ public class Button_ready_next_scene : MonoBehaviour
         hands[3].onClick.AddListener(() => onHandClicked(3));
         hands[4].onClick.AddListener(() => onHandClicked(4));
         hands[5].onClick.AddListener(() => onHandClicked(5));
-        string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4);
-        if (ipv4 != Ip_serveur)
-        {
-            canvas_mains.SetActive(false);
-            canvas_joueurs.SetActive(true);
-        }
     }
 
     private void onHandClicked(int i)
@@ -73,20 +66,14 @@ public class Button_ready_next_scene : MonoBehaviour
         {
             nb += indices[i];
             if (indices[i] == 1)
-                PlayerPrefs.SetInt("LaPosition" + (i+1), nb);
+                PlayerPrefs.SetInt("LaPosition" + (i + 1), nb);
+            else
+                PlayerPrefs.SetInt("LaPosition" + (i + 1), 0);
         }
         if (nb >= 1)
             this.gameObject.SetActive(true);
         else
             this.gameObject.SetActive(false);
-        
-        for (int i = 0; i < indices.Length; i++)
-        {
-            if (indices[i] == 1)
-            {
-
-            }
-        }
 
         nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur

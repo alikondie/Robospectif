@@ -7,6 +7,7 @@ using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
+using System.Text;
 
 class RegisterHostMessage : MessageBase { public float message; }
 
@@ -23,12 +24,14 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
+    // recolte de données main script
+    public static StringBuilder data;
 
     void Start()
     {
-
+        
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
         if(ipv4 == Ip_serveur) 
@@ -47,7 +50,9 @@ public class SansHUD : NetworkManager
             JoueurStatic.Client = myclient;
             canvas_serveur.SetActive(false);
             canvas_client.SetActive(true);
-        } 
+        }
+
+        data = new StringBuilder();
     }
 
 
