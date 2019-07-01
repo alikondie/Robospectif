@@ -106,67 +106,7 @@ public class Script_Autonomie_clean : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
-        #region partie chelou
-        if (Input.GetMouseButtonUp(0) && toucher)
-        {
-            if (SENS == 1 || SENS == 3)
-            {
-                if (volant.transform.position.x <= positionDebutX)
-                {
-                    volant.transform.position = new Vector3((positionDebutX - epsilon), positionDebutY, positionDebutZ);
-                    if (SENS == 1)
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                        
-                }
-                else
-                {
-                    volant.transform.position = new Vector3((positionDebutX + epsilon), positionDebutY, positionDebutZ);
-                    if (SENS == 1)
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                }
-            }
-            else
-            {
-                if (volant.transform.position.y <= positionDebutY)
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY - epsilon), positionDebutZ);
-                    if (SENS == 2)
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-
-                }
-                else
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY + epsilon), positionDebutZ);
-                    if (SENS == 2)
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                }
-            }
-        }
-        #endregion
+      
 
         if(isClicked)
         {
