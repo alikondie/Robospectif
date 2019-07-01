@@ -12,14 +12,16 @@ public class Mouvement_carte : MonoBehaviour
     private Vector3 curPosition;
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
+    [SerializeField] GameObject pres_terminee;
     private GameObject currenttarget;
-    private bool is_static;
     private int sens;
     private int checkifintarget;
     private int decalage;
     private int checkifnomoreintarget;
+    private bool was_in_target = false;
     private bool test;
 
+    private int nbCartePosees;
     #region unused start and update
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class Mouvement_carte : MonoBehaviour
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
+
         if (equipmentcards.Length > 0)
         {
             decalage = 0;
@@ -70,6 +73,11 @@ public class Mouvement_carte : MonoBehaviour
         }
         else if (currenttarget != null)
         {
+            if(!was_in_target)
+            {
+                Initialisation.IncrementeNbCartePosees();
+                was_in_target = true;
+            }
             gameObject.transform.position = currenttarget.transform.position;
             gameObject.layer = 2;
         }
@@ -127,14 +135,19 @@ public class Mouvement_carte : MonoBehaviour
         {
             List<GameObject> allCardStack = new List<GameObject>();
             allCardStack.Add(this.gameObject);
+            if (!was_in_target)
+            {
+                was_in_target = true;
+                Initialisation.IncrementeNbCartePosees();
+            }
             RelocateCardsWhencardincoming(cardstack);
-            print("incoming cards " + allCardStack.Count);
             AssignEquipmentsTypes(currenttarget, allCardStack,true);
         }
         else
         {
+            was_in_target = false;
+            Initialisation.DecrementeNbCartePosees();
             RelocateCardsWhencardleaves(cardstack);
-            print("leaving cards " + cardstack.Count);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
         }
     }
@@ -237,6 +250,7 @@ public class Mouvement_carte : MonoBehaviour
 
     private void GetSens()
     {
+        //int pos = 1;
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         switch (pos)
         {
