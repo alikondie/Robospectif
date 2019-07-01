@@ -6,10 +6,13 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
 
-    public Sprite[] personnages;
-    public Sprite[] locomotions;
-    public Sprite[] dimensions;
-    public Sprite[] equipements;
+    [SerializeField] Sprite[] personnages;
+    [SerializeField] Sprite[] locomotions;
+    [SerializeField] Sprite[] dimensions;
+    [SerializeField] Sprite[] equipements;
+
+    [SerializeField] Sprite[] dimensionsUrbain;
+    [SerializeField] Sprite[] locomotionsUrbain;
 
     public class Player
     {
@@ -302,15 +305,27 @@ public class Main : MonoBehaviour
     private void initializeLoco()
     {
         tab = new TabImage();
-        for (int i = 0; i < locomotions.Length; i++)
-        {
-            tab.addImage(new Image(tab.Taille, locomotions[i]));
 
+        if (Partie.Type == "standard")
+        {
+            for (int i = 1; i <= 2; i++)
+            {
+                foreach (Sprite s in locomotions)
+                {
+                    tab.addImage(new Image(tab.Taille, s));
+
+                }
+            }
         }
-        for (int i = 0; i < locomotions.Length; i++)
+        else /* mode urbain */
         {
-            tab.addImage(new Image(tab.Taille, locomotions[i]));
-
+            for (int i = 1; i <= 3; i++)
+            {
+                foreach (Sprite s in locomotionsUrbain)
+                {
+                    tab.addImage(new Image(tab.Taille, s));
+                }
+            }
         }
         Global.TabL = tab;
 
@@ -320,20 +335,32 @@ public class Main : MonoBehaviour
     private void initializeDi()
     {
         tab = new TabImage();
-        for (int i = 0; i < dimensions.Length; i++)
+        if (Partie.Type == "standard")
         {
-            tab.addImage(new Image(tab.Taille, dimensions[i]));
+            for (int i = 1; i <= 2; i++)
+            {
+                foreach (Sprite s in dimensions)
+                {
+                    tab.addImage(new Image(tab.Taille, s));
 
+                }
+            }
         }
-        for (int i = 0; i < dimensions.Length; i++)
+        else /* mode urbain */
         {
-            tab.addImage(new Image(tab.Taille, dimensions[i]));
-
+            for (int i = 1; i <= 3; i++)
+            {
+                foreach (Sprite s in dimensionsUrbain)
+                {
+                    tab.addImage(new Image(tab.Taille, s));
+                }
+            }
         }
         Global.TabD = tab;
 
     }
-    public void initializeEqui()
+
+    private void initializeEqui()
     {
         tab = new TabImage();
         for (int i = 0; i < equipements.Length; i++)

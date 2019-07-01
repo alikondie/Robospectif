@@ -24,7 +24,7 @@ public class Initialisation : MonoBehaviour
     public static List<string> autoEquipmentCards;
     public static string autonomie;
 
-
+    private static int nbCartePosees;
 
     short presID = 1011;
 
@@ -42,12 +42,8 @@ public class Initialisation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(() => ButtonClicked());
-        
-        
-        SansHUD.data.AppendLine("Tour no° "+ Partie.Tour);
+        SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
         SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
-        
     }
 
     void OnEnable()
@@ -85,7 +81,16 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("nbcartesposees : " + nbCartePosees);
+        if (nbCartePosees == 5)
+        {
+            button.onClick.AddListener(() => ButtonClicked());
+            button.gameObject.SetActive(true);
+        }
+        else
+        {
+            button.gameObject.SetActive(false);
+        }
     }
 
     private void ButtonClicked()
@@ -165,4 +170,15 @@ public class Initialisation : MonoBehaviour
         cartes.transform.position = posCards[pos - 1];
     }
 
+    #region fonctions utilisees en externe
+    public static void IncrementeNbCartePosees()
+    {
+        nbCartePosees++;
+    }
+
+    public static void DecrementeNbCartePosees()
+    {
+        nbCartePosees--;
+    }
+    #endregion
 }
