@@ -1830,6 +1830,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 482982476}
   - {fileID: 1854023512}
+  pres_terminee: {fileID: 0}
 --- !u!1 &106270147
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,6 +6339,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 1854023512}
   - {fileID: 90595429}
+  pres_terminee: {fileID: 0}
 --- !u!224 &482982481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12311,7 +12313,7 @@ MonoBehaviour:
   m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 172.21.232.220
+  m_NetworkAddress: 172.21.232.218
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
@@ -12379,7 +12381,7 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  canvas_serveur: {fileID: 0}
+  canvas_serveur: {fileID: 178269499}
   canvas_client: {fileID: 0}
   manager: {fileID: 903383415}
 --- !u!114 &903383416
@@ -15212,6 +15214,7 @@ MonoBehaviour:
   targettable:
   - {fileID: 1800724332}
   equipmentcards: []
+  pres_terminee: {fileID: 0}
 --- !u!1 &1097076252
 GameObject:
   m_ObjectHideFlags: 0
@@ -17279,6 +17282,7 @@ MonoBehaviour:
   targettable:
   - {fileID: 886499670}
   equipmentcards: []
+  pres_terminee: {fileID: 0}
 --- !u!1 &1190432594
 GameObject:
   m_ObjectHideFlags: 0
@@ -24796,7 +24800,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3e15af369b0d2b14e8db598ec0d4fd35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ac448f870a4927443aabc96bfea46190, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25576,6 +25580,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 482982476}
   - {fileID: 90595429}
+  pres_terminee: {fileID: 0}
 --- !u!224 &1854023517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28488,7 +28493,6 @@ MonoBehaviour:
   volant: {fileID: 2037960717}
   Attention: {fileID: 190847938}
   Autonomie: {fileID: 1965995480}
-  button: {fileID: 992661230}
   sprite: {fileID: 2037960719}
 --- !u!58 &2037960722
 CircleCollider2D:
