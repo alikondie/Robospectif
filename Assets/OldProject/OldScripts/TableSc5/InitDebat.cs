@@ -72,7 +72,6 @@ public class InitDebat : MonoBehaviour
             button.transform.Rotate(Vector3.forward * 270);*/
 
         button.onClick.AddListener(() => ButtonClicked());
-        //NetworkServer.RegisterHandler(persosID, onPersoReceived);
 
     }
 
@@ -116,7 +115,7 @@ public class InitDebat : MonoBehaviour
     {
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
-        string s = "Jetons/" + v.sprite;
+        string s = "FR/Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         int j = Array.IndexOf(Partie.Positions, pos);
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
@@ -145,35 +144,6 @@ public class InitDebat : MonoBehaviour
 
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
-        //SceneManager.LoadScene("Scene_6");
-    }
-
-    private void onPersoReceived(NetworkMessage netMsg)
-    {
-        var v = netMsg.ReadMessage<MyPersoMessage>();
-        int i = v.numero;
-        string s = v.image;
-        string spriteString = "image/Personnages/" + s;
-        int zone1 = v.choixZone0;
-        int zone2 = v.choixZone1;
-        zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;
-        zones[Array.IndexOf(Partie.Positions, i), 1] = zone2;
-        Sprite sp = Resources.Load<Sprite>(spriteString);
-        for (int j = 0; j < 6; j++)
-        {
-            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != Partie.JoueurCourant))
-            {
-                persoSprites[j] = sp;
-                persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;
-                if (zone1 != 0)
-                    persos[j].transform.GetChild(zone1 + 2).gameObject.SetActive(true);
-                if (zone2 != 0)
-                    persos[j].transform.GetChild(zone2 + 2).gameObject.SetActive(true);
-                persos[j].transform.GetChild(0).gameObject.SetActive(true);
-
-            }
-        }
-        nbRecu++;
     }
 
     // Update is called once per frame
