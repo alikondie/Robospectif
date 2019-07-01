@@ -35,7 +35,7 @@ public class AttentePersos : MonoBehaviour
         var v = netMsg.ReadMessage<MyPersoMessage>();
         int i = v.numero;
         string s = v.image;
-        string spriteString = "image/Personnages/" + s;
+        string spriteString = "FR/Personnages/" + s;
         int zone1 = v.choixZone0;
         int zone2 = v.choixZone1;
         zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;

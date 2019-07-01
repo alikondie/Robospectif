@@ -382,6 +382,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 1719245041}
   - {fileID: 936927888}
+  pres_terminee: {fileID: 1761848300}
 --- !u!222 &505896628
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -615,7 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_plateau_vehicule: {fileID: 701243162}
-  canvas_debat: {fileID: 0}
+  canvas_pres_persos: {fileID: 0}
   children: {fileID: 417286810}
   button: {fileID: 1761848301}
   Plateau: {fileID: 2057932072}
@@ -821,6 +822,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 1719245041}
   - {fileID: 505896623}
+  pres_terminee: {fileID: 1761848300}
 --- !u!222 &936927893
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1109,6 +1111,7 @@ MonoBehaviour:
   targettable:
   - {fileID: 1653180181}
   equipmentcards: []
+  pres_terminee: {fileID: 1761848300}
 --- !u!222 &1329965830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1507,6 +1510,7 @@ MonoBehaviour:
   equipmentcards:
   - {fileID: 505896623}
   - {fileID: 936927888}
+  pres_terminee: {fileID: 1761848300}
 --- !u!222 &1719245046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1935,6 +1939,7 @@ MonoBehaviour:
   targettable:
   - {fileID: 1102307977}
   equipmentcards: []
+  pres_terminee: {fileID: 1761848300}
 --- !u!224 &1810236026
 RectTransform:
   m_ObjectHideFlags: 0

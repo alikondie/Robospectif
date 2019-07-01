@@ -12,18 +12,21 @@ public class Mouvement_carte : MonoBehaviour
     private Vector3 curPosition;
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
+    [SerializeField] GameObject pres_terminee;
     private GameObject currenttarget;
-    private bool is_static;
     private int sens;
     private int checkifintarget;
     private int decalage;
     private int checkifnomoreintarget;
+    private bool was_in_target = false;
+    private bool test;
 
+    private int nbCartePosees;
     #region unused start and update
     // Start is called before the first frame update
     void Start()
     {
-        GetSens();
+        
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class Mouvement_carte : MonoBehaviour
 
     void OnEnable()
     {
+        GetSens();
         gameObject.layer = 5;
         currenttarget = null;
     }
@@ -54,6 +58,7 @@ public class Mouvement_carte : MonoBehaviour
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
+
         if (equipmentcards.Length > 0)
         {
             decalage = 0;
@@ -68,6 +73,11 @@ public class Mouvement_carte : MonoBehaviour
         }
         else if (currenttarget != null)
         {
+            if(!was_in_target)
+            {
+                Initialisation.IncrementeNbCartePosees();
+                was_in_target = true;
+            }
             gameObject.transform.position = currenttarget.transform.position;
             gameObject.layer = 2;
         }
@@ -101,7 +111,6 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            bool test;
             if (sens == 1 || sens == 3) {
                 test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
                 equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
@@ -126,13 +135,20 @@ public class Mouvement_carte : MonoBehaviour
         {
             List<GameObject> allCardStack = new List<GameObject>();
             allCardStack.Add(this.gameObject);
+            if (!was_in_target)
+            {
+                was_in_target = true;
+                Initialisation.IncrementeNbCartePosees();
+            }
             RelocateCardsWhencardincoming(cardstack);
-            AssignEquipmentsTypes(currenttarget, allCardStack);
+            AssignEquipmentsTypes(currenttarget, allCardStack,true);
         }
         else
         {
+            was_in_target = false;
+            Initialisation.DecrementeNbCartePosees();
             RelocateCardsWhencardleaves(cardstack);
-            AssignEquipmentsTypes(currenttarget, cardstack);
+            AssignEquipmentsTypes(currenttarget, cardstack,false);
         }
     }
 
@@ -234,6 +250,7 @@ public class Mouvement_carte : MonoBehaviour
 
     private void GetSens()
     {
+        //int pos = 1;
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         switch (pos)
         {
@@ -258,27 +275,85 @@ public class Mouvement_carte : MonoBehaviour
         }
     }
 
-    private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments)
+    private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments,bool isIncoming)
     {
         List<string> equipmentStrings = new List<string>();
-        foreach(GameObject e in equipments)
+        foreach (GameObject e in equipments)
         {
             equipmentStrings.Add(e.GetComponent<Image>().sprite.name);
         }
-       switch (target.name)
-       {
+        if (!isIncoming) { 
+
+           switch (target.name)
+           {
+                case ("boxcollider equipment manual"):
+                    Initialisation.manualEquipmentCards = equipmentStrings;
+                    foreach (string s in Initialisation.manualEquipmentCards)
+                        print("man "+s);
+                    break;
+                case ("boxcollider equipment programmable"):
+                    Initialisation.programmableEquipmentCards = equipmentStrings;
+                    foreach (string s in Initialisation.programmableEquipmentCards)
+                        print("prog "+s);
+                    break;
+                case ("boxcollider equipment automatique"):
+                    Initialisation.autoEquipmentCards = equipmentStrings;
+                    foreach (string s in Initialisation.autoEquipmentCards)
+                        print("auto "+s);
+
+                    break;
+            }
+    /*          int me = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
+              int pe = Initialisation.programmableEquipmentCards == null ? 0 : Initialisation.programmableEquipmentCards.Count;
+              int ae = Initialisation.autoEquipmentCards == null ? 0 : Initialisation.autoEquipmentCards.Count;
+              print("manualEquipmentCards: " + me);
+              print("programmableEquipmentCards: " + pe);
+              print("autoEquipmentCards: " + ae);*/
+            return;
+        }
+
+        switch (target.name)
+        {
             case ("boxcollider equipment manual"):
-                Initialisation.manualEquipmentCards = equipmentStrings;
-                
+                if (Initialisation.manualEquipmentCards == null)
+                    Initialisation.manualEquipmentCards = equipmentStrings;
+
+                else
+                    Initialisation.manualEquipmentCards.AddRange(equipmentStrings);
+
+                //debug
+                foreach (string s in Initialisation.manualEquipmentCards)
+                    print("man " + s);
                 break;
-            case ("boxcollider equipment programmable"):
-                Initialisation.programmableEquipmentCards = equipmentStrings;
                 
+            case ("boxcollider equipment programmable"):
+                if(Initialisation.programmableEquipmentCards == null)
+                    Initialisation.programmableEquipmentCards = equipmentStrings;
+
+                else
+                    Initialisation.programmableEquipmentCards.AddRange(equipmentStrings);
+
+                foreach (string s in Initialisation.programmableEquipmentCards)
+                    print("prog " + s);
                 break;
             case ("boxcollider equipment automatique"):
-                Initialisation.autoEquipmentCards = equipmentStrings;
-                
+                if (Initialisation.autoEquipmentCards == null)
+                    Initialisation.autoEquipmentCards = equipmentStrings;
+
+                else
+                    Initialisation.autoEquipmentCards.AddRange(equipmentStrings);
+
+
+                foreach (string s in Initialisation.autoEquipmentCards)
+                    print("auto " + s);
                 break;
+                
         }
+     /*   int m = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
+        int p = Initialisation.programmableEquipmentCards == null ? 0 : Initialisation.programmableEquipmentCards.Count;
+        int a = Initialisation.autoEquipmentCards == null ? 0 : Initialisation.autoEquipmentCards.Count;
+        print("manualEquipmentCards: " + m);
+        print("programmableEquipmentCards: " + p);
+        print("autoEquipmentCards: " + a);*/
     }
 }

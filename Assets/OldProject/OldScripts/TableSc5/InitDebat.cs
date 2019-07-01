@@ -13,6 +13,15 @@ public class InitDebat : MonoBehaviour
 
     private List<GameObject>[] jetons;
     private int[] index;
+
+    // ça c'est pour trouver les jetons de chaque joueurs en utilisant les strings de leur images (persos) comme un lien, puisque c'est le seul lien entre les gameobject dans l'editeur et les infos dans le serveur.
+    // comme ça on va trouver les jetons et les foutre dans le dict de persosAndDebate.
+
+    private Dictionary<string, string> persosAndDebate;
+    private Dictionary<string, GameObject> persosAndJetons;
+    // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
+    private Dictionary<string, int[]> givenJetons;
+
     GameObject objet;
     short jeton = 1010;
 
@@ -30,9 +39,14 @@ public class InitDebat : MonoBehaviour
 
     private int nbRecu;
 
+    //sp = sm = ep = em = up = um = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+        persosAndDebate = new Dictionary<string, string>();
+        //givenJetons = new Dictionary<string,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
         jetons = new List<GameObject>[6];
 
         for (int i = 0; i < jetons.Length; i++)
@@ -72,7 +86,6 @@ public class InitDebat : MonoBehaviour
             button.transform.Rotate(Vector3.forward * 270);*/
 
         button.onClick.AddListener(() => ButtonClicked());
-        //NetworkServer.RegisterHandler(persosID, onPersoReceived);
 
     }
 
@@ -116,7 +129,7 @@ public class InitDebat : MonoBehaviour
     {
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
-        string s = "Jetons/" + v.sprite;
+        string s = "FR/Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         int j = Array.IndexOf(Partie.Positions, pos);
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
@@ -143,37 +156,15 @@ public class InitDebat : MonoBehaviour
         MyNetworkMessage wait = new MyNetworkMessage();
         NetworkServer.SendToAll(vainqueurID, wait);
 
+
+        GameObject p = persos[0].transform.Find("Jetons").gameObject;
+
+        foreach(GameObject pers in persos)
+        {
+            FillPersoData(pers);
+        }
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
-        //SceneManager.LoadScene("Scene_6");
-    }
-
-    private void onPersoReceived(NetworkMessage netMsg)
-    {
-        var v = netMsg.ReadMessage<MyPersoMessage>();
-        int i = v.numero;
-        string s = v.image;
-        string spriteString = "image/Personnages/" + s;
-        int zone1 = v.choixZone0;
-        int zone2 = v.choixZone1;
-        zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;
-        zones[Array.IndexOf(Partie.Positions, i), 1] = zone2;
-        Sprite sp = Resources.Load<Sprite>(spriteString);
-        for (int j = 0; j < 6; j++)
-        {
-            if ((Partie.Positions[j] == i) && (Partie.Positions[j] != Partie.JoueurCourant))
-            {
-                persoSprites[j] = sp;
-                persos[j].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = sp;
-                if (zone1 != 0)
-                    persos[j].transform.GetChild(zone1 + 2).gameObject.SetActive(true);
-                if (zone2 != 0)
-                    persos[j].transform.GetChild(zone2 + 2).gameObject.SetActive(true);
-                persos[j].transform.GetChild(0).gameObject.SetActive(true);
-
-            }
-        }
-        nbRecu++;
     }
 
     // Update is called once per frame
@@ -182,6 +173,110 @@ public class InitDebat : MonoBehaviour
         if (nbRecu == Partie.Joueurs.Count - 1)
         {
             button.gameObject.SetActive(true);
+        }
+    }
+
+    private void FillPersoDict()
+    {
+        persosAndJetons = new Dictionary<string, GameObject>();
+        givenJetons = new Dictionary<string, int[]>();
+        for (int i = 3; i < 9; i++)
+        {
+            GameObject currentPerso = gameObject.transform.GetChild(i).gameObject;
+            string name = currentPerso.transform.GetChild(0).GetComponent<Image>().sprite.name;
+            persosAndJetons.Add(name, currentPerso);
+            givenJetons.Add(name, new int[] { 0, 0, 0, 0, 0, 0 });
+        }
+        
+    }
+
+    private void FillPersoData(GameObject perso)
+    {
+        if (!perso.activeSelf)
+            return;
+
+        int number = Array.IndexOf(persos, perso);
+        string environment = "";
+        string character = perso.transform.GetChild(0).gameObject.GetComponent<Image>().sprite.name;
+
+        // environnement
+        if (perso.transform.GetChild(3).gameObject.activeSelf)
+            environment += "Campagne,";
+        if (perso.transform.GetChild(4).gameObject.activeSelf)
+            environment += "Banlieue,";
+        if (perso.transform.GetChild(5).gameObject.activeSelf)
+            environment += "Ville";
+
+
+        // société +-, environement +-, usage +-
+        int sp, sm, ep, em, up, um;
+        sp = sm = ep = em = up = um = 0;
+        string jetonValue;
+        foreach(KeyValuePair<string,GameObject> p in persosAndJetons)
+        {
+            GameObject pileJetons = p.Value.transform.GetChild(2).gameObject;
+            for(int i = 0 ; i < 8; i++)
+            {
+                jetonValue = pileJetons.transform.GetChild(i).GetComponent<Image>().sprite.name;
+                switch (jetonValue)
+                {
+                    case "Jeton Rouge Planète 2":
+                        em++;
+                        break;
+                    case "Jeton Rouge Société 2":
+                        sm++;
+                        break;
+                    case "Jeton Rouge Usage 2":
+                        um++;
+                        break;
+                    case "Jeton Vert Société 2":
+                        sp++;
+                        break;
+                    case "Jeton Vert Usage 2":
+                        up++;
+                        break;
+                    case "Jeton Vert Planète 2":
+                        ep++;
+                        break;
+                }
+                
+            }
+            
+           
+            //Donnée Finale
+
+            persosAndDebate[p.Key] += number+";"+ character + ";" + environment + ";" +sp+";"+sm+";"+givenJetons[character][0]+";"+ givenJetons[character][1]+";" + ep + ";" + em + ";" + givenJetons[character][2] + ";" + givenJetons[character][3] + ";"
+                                    + up + ";" + um + ";" + givenJetons[character][4] + ";" + givenJetons[character][5] + ";";
+
+            print(persosAndDebate[p.Key]);
+        }
+    }
+
+    // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)
+    public void AddGivenJeton(string perso, GameObject jeton)
+    {
+        string jetonValue = jeton.GetComponent<Image>().sprite.name;
+        switch (jetonValue)
+        // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
+        {
+            case "Jeton Rouge Planète 2":
+                givenJetons[perso][3]++;
+                break;
+            case "Jeton Rouge Société 2":
+                givenJetons[perso][1]++;
+                break;
+            case "Jeton Rouge Usage 2":
+                givenJetons[perso][5]++;
+                break;
+            case "Jeton Vert Société 2":
+                givenJetons[perso][0]++;
+                break;
+            case "Jeton Vert Usage 2":
+                givenJetons[perso][4]++;
+                break;
+            case "Jeton Vert Planète 2":
+                givenJetons[perso][2]++;
+                break;
         }
     }
 }

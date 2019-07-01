@@ -47,8 +47,19 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region main functions
     void Start()
     {
+    }
+
+    void OnEnable()
+    {
         position = 0;
+        volant.GetComponent<RectTransform>().localPosition = new Vector3(0, -20, -23);
+
+        Attention.rectTransform.sizeDelta = tailleCadreMax;
+        Autonomie.rectTransform.sizeDelta = tailleCadreMax;
+        Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+        Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
         // Position du joueur
+        //int pos = 1;
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
@@ -81,75 +92,12 @@ public class Script_Autonomie_clean : MonoBehaviour
         sprite = volant.GetComponent<Image>();
 
         isClicked = false;
-
     }
 
 
     // Méthode de mise a jour
     private void Update()
     {
-        #region partie chelou
-        if (Input.GetMouseButtonUp(0) && toucher)
-        {
-            if (SENS == 1 || SENS == 3)
-            {
-                if (volant.transform.position.x <= positionDebutX)
-                {
-                    volant.transform.position = new Vector3((positionDebutX - epsilon), positionDebutY, positionDebutZ);
-                    if (SENS == 1)
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                        
-                }
-                else
-                {
-                    volant.transform.position = new Vector3((positionDebutX + epsilon), positionDebutY, positionDebutZ);
-                    if (SENS == 1)
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                }
-            }
-            else
-            {
-                if (volant.transform.position.y <= positionDebutY)
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY - epsilon), positionDebutZ);
-                    if (SENS == 2)
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-
-                }
-                else
-                {
-                    volant.transform.position = new Vector3(positionDebutX, (positionDebutY + epsilon), positionDebutZ);
-                    if (SENS == 2)
-                    {
-                        Script_Conduite.dimentionTexteConduite(1);
-                    }
-                    else
-                    {
-                        Script_Conduite.dimentionTexteConduite(0);
-                    }
-                }
-            }
-        }
-        #endregion
-
         if(isClicked)
         {
             Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
@@ -184,11 +132,16 @@ public class Script_Autonomie_clean : MonoBehaviour
 
         switch (position)
         {
+            case 0:
+                break;
             case 1:
                 Attention.rectTransform.sizeDelta = tailleCadreMax;
                 Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
                 Autonomie.rectTransform.sizeDelta = tailleCadreMin;
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
+
+                // recolte données
+                Initialisation.autonomie = "Attention Requise";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX - epsilon, volant.transform.position.y);
                 else
@@ -199,6 +152,9 @@ public class Script_Autonomie_clean : MonoBehaviour
                 Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
                 Autonomie.rectTransform.sizeDelta = tailleCadreMax;
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
+
+                // recolte données
+                Initialisation.autonomie = "Autonome";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX + epsilon, volant.transform.position.y);
                 else
