@@ -19,6 +19,7 @@ public class InitDebat : MonoBehaviour
 
     private Dictionary<string, string> persosAndDebate;
     private Dictionary<string, GameObject> persosAndJetons;
+    // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
     private Dictionary<string, int[]> givenJetons;
 
     GameObject objet;
@@ -158,7 +159,10 @@ public class InitDebat : MonoBehaviour
 
         GameObject p = persos[0].transform.Find("Jetons").gameObject;
 
-
+        foreach(GameObject pers in persos)
+        {
+            FillPersoData(pers);
+        }
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
     }
@@ -175,17 +179,35 @@ public class InitDebat : MonoBehaviour
     private void FillPersoDict()
     {
         persosAndJetons = new Dictionary<string, GameObject>();
-        for(int i = 3; i < 9; i++)
+        givenJetons = new Dictionary<string, int[]>();
+        for (int i = 3; i < 9; i++)
         {
             GameObject currentPerso = gameObject.transform.GetChild(i).gameObject;
             string name = currentPerso.transform.GetChild(0).GetComponent<Image>().sprite.name;
             persosAndJetons.Add(name, currentPerso);
+            givenJetons.Add(name, new int[] { 0, 0, 0, 0, 0, 0 });
         }
         
     }
 
-    private void FindReceivedJetons(GameObject perso)
+    private void FillPersoData(GameObject perso)
     {
+        if (!perso.activeSelf)
+            return;
+
+        int number = Array.IndexOf(persos, perso);
+        string environment = "";
+        string character = perso.transform.GetChild(0).gameObject.GetComponent<Image>().sprite.name;
+
+        // environnement
+        if (perso.transform.GetChild(3).gameObject.activeSelf)
+            environment += "Campagne,";
+        if (perso.transform.GetChild(4).gameObject.activeSelf)
+            environment += "Banlieue,";
+        if (perso.transform.GetChild(5).gameObject.activeSelf)
+            environment += "Ville";
+
+
         // société +-, environement +-, usage +-
         int sp, sm, ep, em, up, um;
         sp = sm = ep = em = up = um = 0;
@@ -219,8 +241,42 @@ public class InitDebat : MonoBehaviour
                 }
                 
             }
+            
+           
+            //Donnée Finale
 
-            persosAndDebate[p.Key] += ";";
+            persosAndDebate[p.Key] += number+";"+ character + ";" + environment + ";" +sp+";"+sm+";"+givenJetons[character][0]+";"+ givenJetons[character][1]+";" + ep + ";" + em + ";" + givenJetons[character][2] + ";" + givenJetons[character][3] + ";"
+                                    + up + ";" + um + ";" + givenJetons[character][4] + ";" + givenJetons[character][5] + ";";
+
+            print(persosAndDebate[p.Key]);
+        }
+    }
+
+    // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)
+    public void AddGivenJeton(string perso, GameObject jeton)
+    {
+        string jetonValue = jeton.GetComponent<Image>().sprite.name;
+        switch (jetonValue)
+        // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
+        {
+            case "Jeton Rouge Planète 2":
+                givenJetons[perso][3]++;
+                break;
+            case "Jeton Rouge Société 2":
+                givenJetons[perso][1]++;
+                break;
+            case "Jeton Rouge Usage 2":
+                givenJetons[perso][5]++;
+                break;
+            case "Jeton Vert Société 2":
+                givenJetons[perso][0]++;
+                break;
+            case "Jeton Vert Usage 2":
+                givenJetons[perso][4]++;
+                break;
+            case "Jeton Vert Planète 2":
+                givenJetons[perso][2]++;
+                break;
         }
     }
 }
