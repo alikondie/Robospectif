@@ -10,7 +10,6 @@ public class Script_Autonomie_clean : MonoBehaviour
     [SerializeField] GameObject volant;
     [SerializeField] Image Attention;
     [SerializeField] Image Autonomie;
-    [SerializeField] Button button;
 
     //Déplacement souris
     [SerializeField] Image sprite;
@@ -48,8 +47,6 @@ public class Script_Autonomie_clean : MonoBehaviour
     #region main functions
     void Start()
     {
-
-
     }
 
     void OnEnable()
@@ -57,13 +54,12 @@ public class Script_Autonomie_clean : MonoBehaviour
         position = 0;
         volant.GetComponent<RectTransform>().localPosition = new Vector3(0, -20, -23);
 
-        button.gameObject.SetActive(false);
-
         Attention.rectTransform.sizeDelta = tailleCadreMax;
         Autonomie.rectTransform.sizeDelta = tailleCadreMax;
         Attention.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
         Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
         // Position du joueur
+        //int pos = 1;
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         // Definie l'orientation et la postion de la partie Conduit
         // En fonction de la position du joueur
@@ -102,12 +98,6 @@ public class Script_Autonomie_clean : MonoBehaviour
     // Méthode de mise a jour
     private void Update()
     {
-        if (position > 0)
-        {
-            button.gameObject.SetActive(true);
-        }
-      
-
         if(isClicked)
         {
             Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, volant.transform.position.z);
@@ -151,7 +141,6 @@ public class Script_Autonomie_clean : MonoBehaviour
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMin;
 
                 // recolte données
-                print("Attention Requise");
                 Initialisation.autonomie = "Attention Requise";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX - epsilon, volant.transform.position.y);
@@ -165,7 +154,6 @@ public class Script_Autonomie_clean : MonoBehaviour
                 Autonomie.transform.GetChild(0).GetComponent<Text>().fontSize = tailleTxtMax;
 
                 // recolte données
-                print("Autonome");
                 Initialisation.autonomie = "Autonome";
                 if (SENS == 1 || SENS == 3)
                     volant.transform.position = new Vector3(positionDebutX + epsilon, volant.transform.position.y);
