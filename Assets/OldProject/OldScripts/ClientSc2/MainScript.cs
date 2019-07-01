@@ -62,8 +62,6 @@ public class MainScript : MonoBehaviour
             JoueurStatic.Dimensions = new Sprite[2];
             JoueurStatic.Locomotions = new Sprite[2];
             JoueurStatic.Equipements = new Sprite[6];
-            Debug.Log(v.dim1);
-            Debug.Log(Resources.Load<Sprite>("FR/Dimension/" + v.dim1));
             JoueurStatic.Dimensions[0] = Resources.Load<Sprite>("FR/Dimension/" + v.dim1);
             JoueurStatic.Dimensions[1] = Resources.Load<Sprite>("FR/Dimension/" + v.dim2);
             JoueurStatic.Locomotions[0] = Resources.Load<Sprite>("FR/Locomotion/" + v.loco1);
