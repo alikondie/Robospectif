@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Jeton_pop : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Jeton_pop : MonoBehaviour
 
     private List<GameObject> joueurs;
     private List<GameObject> cartes;
+
+    short goID = 1013;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +55,8 @@ public class Jeton_pop : MonoBehaviour
         if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
         {
             this.gameObject.SetActive(false);
+            MyJetonMessage msg = new MyJetonMessage();
+            NetworkServer.SendToAll(goID, msg);
 
             int index = cartes.IndexOf(collision.gameObject);
             

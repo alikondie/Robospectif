@@ -15,6 +15,7 @@ public class InitDebat : MonoBehaviour
     private int[] index;
     GameObject objet;
     short jeton = 1010;
+    short stopID = 1012;
 
     [SerializeField] Button button;
 
@@ -113,6 +114,8 @@ public class InitDebat : MonoBehaviour
 
     private void onJetonReceived(NetworkMessage netMsg)
     {
+        MyJetonMessage msg = new MyJetonMessage;
+        NetworkServer.SendToAll(stopID, msg);
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
         string s = "FR/Jetons/" + v.sprite;

@@ -15,6 +15,9 @@ public class JetonsHandler : MonoBehaviour
 
     short vainqueurID = 1008;
 
+    short stopID = 1012;
+    short goID = 1013;
+
     [SerializeField] Button usageVert;
     [SerializeField] Button usageRouge;
     [SerializeField] Button societeVert;
@@ -30,6 +33,8 @@ public class JetonsHandler : MonoBehaviour
     void Start()
     {        
         JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
+        JoueurStatic.Client.RegisterHandler(stopID, OnStopReceived);
+        JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       
@@ -37,6 +42,35 @@ public class JetonsHandler : MonoBehaviour
         societeRouge.onClick.AddListener(() => OnSocieteClicked());       
         planeteVert.onClick.AddListener(() => OnPlaneteClicked());       
         planeteRouge.onClick.AddListener(() => OnPlaneteClicked());       
+    }
+
+    private void OnGoReceived(NetworkMessage netMsg)
+    {
+        if (usageCompteur < 2)
+        {
+            usageVert.gameObject.SetActive(true);
+            usageRouge.gameObject.SetActive(true);
+        }
+        if (societeCompteur < 2)
+        {
+            societeVert.gameObject.SetActive(true);
+            societeRouge.gameObject.SetActive(true);
+        }
+        if (planeteCompteur < 2)
+        {
+            planeteVert.gameObject.SetActive(true);
+            planeteRouge.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnStopReceived(NetworkMessage netMsg)
+    {
+        usageVert.gameObject.SetActive(false);
+        usageRouge.gameObject.SetActive(false);
+        societeVert.gameObject.SetActive(false);
+        societeRouge.gameObject.SetActive(false);
+        planeteVert.gameObject.SetActive(false);
+        planeteRouge.gameObject.SetActive(false);
     }
 
     private void OnPlaneteClicked()
