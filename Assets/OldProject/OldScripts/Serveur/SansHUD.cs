@@ -35,15 +35,12 @@ public class SansHUD : NetworkManager
         var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
         foreach (var ip in host.AddressList)
         {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            {
                 nbDeviceConnected++;
                 Debug.Log("ip : " + ip.ToString());
-            }
         }
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        if(ipv4 == Ip_serveur) 
+        if(nbDeviceConnected == 1) 
         {
             Partie.Initialize();
             manager.StartServer(); // Connection Serveur

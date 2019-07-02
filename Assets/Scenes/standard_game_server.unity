@@ -12382,7 +12382,8 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   canvas_serveur: {fileID: 178269499}
-  canvas_client: {fileID: 0}
+  canvas_client: {fileID: 7193206705955183922, guid: 529d8d73016909243977708c2afec217,
+    type: 3}
   manager: {fileID: 903383415}
 --- !u!114 &903383416
 MonoBehaviour:
