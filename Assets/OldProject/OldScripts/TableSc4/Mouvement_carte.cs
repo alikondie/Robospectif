@@ -59,7 +59,7 @@ public class Mouvement_carte : MonoBehaviour
             transform.position = curPosition;
         }
 
-        if (equipmentcards.Length > 0)
+        if (targettable.Length >= 2)
         {
             decalage = 0;
             if (checkifintarget == 1)
