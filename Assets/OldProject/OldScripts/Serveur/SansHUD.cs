@@ -26,7 +26,6 @@ public class SansHUD : NetworkManager
     public static int premierFini;
     private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
-    private int nbDeviceConnected;
     // recolte de données main script
     public static StringBuilder data;
 
@@ -35,12 +34,14 @@ public class SansHUD : NetworkManager
         var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
         foreach (var ip in host.AddressList)
         {
-                nbDeviceConnected++;
-                Debug.Log("ip : " + ip.ToString());
+            manager.StartClient(); // Connection Smartphone
+            myclient = new NetworkClient();
+            myclient.Connect(System.Net.Dns.GetHostName(), 7777);
+            Debug.Log(System.Net.Dns.GetHostName());
         }
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        if(nbDeviceConnected == 1) 
+        if(ipv4 == Ip_serveur) 
         {
             Partie.Initialize();
             manager.StartServer(); // Connection Serveur
