@@ -47,8 +47,8 @@ public class InitDebat : MonoBehaviour
     {
         SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
         persosAndDebate = new Dictionary<int, string>();
-      //  FillPersoDict();
-        //givenJetons = new Dictionary<string,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
+        FillPersoDict();
+        //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
         jetons = new List<GameObject>[6];
 
         for (int i = 0; i < jetons.Length; i++)
@@ -191,7 +191,11 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Add(i, currentPerso);
             givenJetons.Add(i, new int[] { 0, 0, 0, 0, 0, 0 });
         }
-        
+     /*   foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
+        {
+            print(p.Value);
+        }*/
+
     }
 
     private void FillPersoData(GameObject perso)
@@ -216,9 +220,12 @@ public class InitDebat : MonoBehaviour
         int sp, sm, ep, em, up, um;
         sp = sm = ep = em = up = um = 0;
         string jetonValue;
-        foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
-        {
-            GameObject pileJetons = p.Value.transform.GetChild(2).gameObject;
+
+        int keyIndex = perso.transform.GetSiblingIndex();
+        GameObject p = persosAndJetons[keyIndex];
+       // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
+       // {
+            GameObject pileJetons = p.transform.GetChild(2).gameObject;
             for(int i = 0 ; i < 8; i++)
             {
                 if (!pileJetons.activeSelf)
@@ -252,11 +259,11 @@ public class InitDebat : MonoBehaviour
 
             //Donnée Finale
 
-            persosAndDebate[p.Key] += number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[p.Key][0]+";"+ givenJetons[p.Key][1]+";" + ep + ";" + em + ";" + givenJetons[p.Key][2] + ";" + givenJetons[p.Key][3] + ";"
-                                    + up + ";" + um + ";" + givenJetons[p.Key][4] + ";" + givenJetons[p.Key][5] + ";";
+            persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
+                                    + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
-            print(persosAndDebate[p.Key]);
-        }
+            print( persosAndDebate[keyIndex]);
+      //  }
     }
 
     // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)
