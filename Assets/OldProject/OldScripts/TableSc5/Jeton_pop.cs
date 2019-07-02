@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Jeton_pop : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Jeton_pop : MonoBehaviour
 
     private List<GameObject> joueurs;
     private List<GameObject> cartes;
+
+    short goID = 1013;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +55,8 @@ public class Jeton_pop : MonoBehaviour
         if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
         {
             this.gameObject.SetActive(false);
+            MyJetonMessage msg = new MyJetonMessage();
+            NetworkServer.SendToAll(goID, msg);
 
             int index = cartes.IndexOf(collision.gameObject);
             
@@ -61,7 +66,7 @@ public class Jeton_pop : MonoBehaviour
                 joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
                 // recup donnée envoyer le jeton à partir de la fct AddGivenJeton
                 GameObject jeton = joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject;
-                joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(this.gameObject.GetComponent<Image>().sprite.name,jeton);
+                joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index,jeton);
 
                 Tour.Piles[index]++;
             }

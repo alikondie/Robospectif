@@ -82,7 +82,7 @@ public class Initialisation : MonoBehaviour
     void Update()
     {
         Debug.Log("nbcartesposees : " + nbCartePosees);
-        if (nbCartePosees == 5)
+        if (nbCartePosees == 6)
         {
             button.onClick.AddListener(() => ButtonClicked());
             button.gameObject.SetActive(true);
