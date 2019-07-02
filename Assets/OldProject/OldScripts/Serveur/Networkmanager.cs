@@ -9,143 +9,68 @@ using System;
 using UnityEngine.UI;
 using System.Text;
 
-class RegisterHostMessage : MessageBase { public float message; }
-
-public class SansHUD : NetworkManager
+public class Networkmanager : NetworkManager
 {
-    [SerializeField] GameObject canvas_serveur;
-    [SerializeField] GameObject canvas_client;
-    [SerializeField] NetworkManager manager;
     private NetworkClient myclient;
-    short messageID = 1000;
-    short imageID = 1001;
-    short conceptionID = 1002;
-    short chronoID = 1003;
-    public static short clientID = 123;
-    private bool conceptionTerminee;
-    public static int premierFini;
-    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
-    public static string spriteString;
-    private int nbDeviceConnected;
-    // recolte de données main script
-    public static StringBuilder data;
+
 
     void Start()
     {
+        Debug.Log("niniufniueu" +System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable());
+        Debug.Log("niunefiurbvyubuybv "+ System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()));
         var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
         foreach (var ip in host.AddressList)
         {
             if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
             {
-                nbDeviceConnected++;
-                Debug.Log("ip : " + ip.ToString());
+                Debug.Log("ip : "+ ip.ToString());
             }
         }
-        conceptionTerminee = false;
-        string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        if(ipv4 == Ip_serveur) 
-        {
-            Partie.Initialize();
-            manager.StartServer(); // Connection Serveur
-            RegisterHandlers();
-            Debug.Log("Serveur connecté");
-        }
-        else 
-        {
-            manager.StartClient(); // Connection Smartphone
-            Debug.Log("client");
-            myclient = new NetworkClient();
-            myclient.Connect(Ip_serveur, 7777);
-            JoueurStatic.Client = myclient;
-            canvas_serveur.SetActive(false);
-            canvas_client.SetActive(true);
-        }
 
-        data = new StringBuilder();
+        //string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
+        //if(ipv4 == Ip_serveur) 
+        //{
+        //    Partie.Initialize();
+        //    manager.StartServer(); // Connection Serveur
+        //    RegisterHandlers();
+        //    Debug.Log("Serveur connecté");
+        //}
+        //else 
+        //{
+        //    manager.StartClient(); // Connection Smartphone
+        //    Debug.Log("client");
+        //    myclient = new NetworkClient();
+        //    myclient.Connect(Ip_serveur, 7777);
+        //    JoueurStatic.Client = myclient;
+        //    canvas_serveur.SetActive(false);
+        //    canvas_client.SetActive(true);
+        //}
     }
 
 
-    private void RegisterHandlers()
-    {
-        NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
-        NetworkServer.RegisterHandler(messageID, OnMessageReceived);
-        NetworkServer.RegisterHandler(imageID, onImageReceived);
-        NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
-        //NetworkServer.RegisterHandler(1005, onTestReceived);
-    }
+    //private void RegisterHandlers()
+    //{
+    //    NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
+    //    NetworkServer.RegisterHandler(messageID, OnMessageReceived);
+    //    NetworkServer.RegisterHandler(imageID, onImageReceived);
+    //    NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
+    //}
 
     private void onTestReceived(NetworkMessage netMsg)
     {
         var v = netMsg.ReadMessage<MyImageMessage>();
     }
 
-    private void onConceptionReceived(NetworkMessage netMsg)
-    {
-        if (!conceptionTerminee)
-        {
-            premierFini = netMsg.ReadMessage<MyNetworkMessage>().message;
-
-            Partie.JoueurCourant = premierFini;
-            EnAttenteCT.premierFini(premierFini);
-            envoiChrono(premierFini);
-            conceptionTerminee = true;
-        }
-        ConceptionTerminer.finiMaConception();
-    }
-
-    private void envoiChrono(int premierFini)
-    {
-        MyNetworkMessage message = new MyNetworkMessage();
-        message.message = premierFini;
-        NetworkServer.SendToAll(chronoID, message);
-    }
-
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
-        string dims = objectMessage.dim;
-        string locos = objectMessage.loco;
-        string equi1s = objectMessage.equi1;
-        string equi2s = objectMessage.equi2;
-        string equi3s = objectMessage.equi3;
-        int numero = objectMessage.num;
-        int z = objectMessage.zone;
-        string dim = dims.Substring(0, dims.Length - 21);
-        string loco = locos.Substring(0, locos.Length - 21);
-        string equi1 = equi1s.Substring(0, equi1s.Length - 21);
-        string equi2 = equi2s.Substring(0, equi2s.Length - 21);
-        string equi3 = equi3s.Substring(0, equi3s.Length - 21);
-
-        Sprite[] images = new Sprite[5];
-        images[0] = Resources.Load<Sprite>("FR/Locomotion/" + loco);
-        images[1] = Resources.Load<Sprite>("FR/Dimension/" + dim);
-        images[2] = Resources.Load<Sprite>("FR/Equipements/" + equi1);
-        images[3] = Resources.Load<Sprite>("FR/Equipements/" + equi2);
-        images[4] = Resources.Load<Sprite>("FR/Equipements/" + equi3);
-
-        foreach (Joueur j in Partie.Joueurs)
-        {
-            if (j.Numero == numero)
-            {
-                j.Dim = Resources.Load<Sprite>("FR/Dimension/" + dim);
-                j.Loco = Resources.Load<Sprite>("FR/Locomotion/" + loco);
-                j.Equi1 = Resources.Load<Sprite>("FR/Equipements/" + equi1);
-                j.Equi2 = Resources.Load<Sprite>("FR/Equipements/" + equi2);
-                j.Equi3 = Resources.Load<Sprite>("FR/Equipements/" + equi3);
-            }
-        }
-
-        Initialisation.get(images, z);
+        
     }
 
     // connexion d'un joueur sur un des boutons du client
     void OnMessageReceived(NetworkMessage message)
     {
-        int id = message.ReadMessage<MyNetworkMessage>().message;
-        MyNetworkMessage msg = new MyNetworkMessage();
-        msg.message = id;
-        NetworkServer.SendToAll(messageID, msg);
-        Text_Connexion.recupInfoJoueur(id);        
+            
     }
 
  

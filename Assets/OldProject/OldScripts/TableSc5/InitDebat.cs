@@ -129,7 +129,7 @@ public class InitDebat : MonoBehaviour
 
     private void onJetonReceived(NetworkMessage netMsg)
     {
-        MyJetonMessage msg = new MyJetonMessage;
+        MyJetonMessage msg = new MyJetonMessage();
         NetworkServer.SendToAll(stopID, msg);
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
