@@ -8638,6 +8638,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_position_joueur
       objectReference: {fileID: 0}
+    - target: {fileID: 7193206705955183922, guid: 529d8d73016909243977708c2afec217,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7193206705955183924, guid: 529d8d73016909243977708c2afec217,
         type: 3}
       propertyPath: m_LocalPosition.x
