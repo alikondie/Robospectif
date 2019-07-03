@@ -16707,6 +16707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas_attente_persos: {fileID: 1160972299}
   canvas_pres_persos: {fileID: 1753731206}
+  text: {fileID: 724355821}
 --- !u!1 &1168384041
 GameObject:
   m_ObjectHideFlags: 0
@@ -25162,6 +25163,7 @@ MonoBehaviour:
   - {fileID: 979389230}
   - {fileID: 162282605}
   - {fileID: 435519943}
+  text: {fileID: 0}
 --- !u!114 &1844340071
 MonoBehaviour:
   m_ObjectHideFlags: 0

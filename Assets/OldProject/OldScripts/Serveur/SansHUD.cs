@@ -108,21 +108,21 @@ public class SansHUD : NetworkManager
         string equi3 = equi3s.Substring(0, equi3s.Length - 21);
 
         Sprite[] images = new Sprite[5];
-        images[0] = Resources.Load<Sprite>("FR/Locomotion/" + loco);
-        images[1] = Resources.Load<Sprite>("FR/Dimension/" + dim);
-        images[2] = Resources.Load<Sprite>("FR/Equipements/" + equi1);
-        images[3] = Resources.Load<Sprite>("FR/Equipements/" + equi2);
-        images[4] = Resources.Load<Sprite>("FR/Equipements/" + equi3);
+        images[0] = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + loco);
+        images[1] = Resources.Load<Sprite>(Partie.Langue + "/Dimension/" + dim);
+        images[2] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi1);
+        images[3] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi2);
+        images[4] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi3);
 
         foreach (Joueur j in Partie.Joueurs)
         {
             if (j.Numero == numero)
             {
-                j.Dim = Resources.Load<Sprite>("FR/Dimension/" + dim);
-                j.Loco = Resources.Load<Sprite>("FR/Locomotion/" + loco);
-                j.Equi1 = Resources.Load<Sprite>("FR/Equipements/" + equi1);
-                j.Equi2 = Resources.Load<Sprite>("FR/Equipements/" + equi2);
-                j.Equi3 = Resources.Load<Sprite>("FR/Equipements/" + equi3);
+                j.Dim = Resources.Load<Sprite>(Partie.Langue + "/Dimension/" + dim);
+                j.Loco = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + loco);
+                j.Equi1 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi1);
+                j.Equi2 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi2);
+                j.Equi3 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi3);
             }
         }
 

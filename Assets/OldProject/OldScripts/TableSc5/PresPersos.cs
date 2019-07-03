@@ -58,7 +58,7 @@ public class PresPersos : MonoBehaviour
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
-        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
 
         presentateur = GetNextPres(Partie.JoueurCourant);
     }
@@ -86,9 +86,9 @@ public class PresPersos : MonoBehaviour
         }
 
         if (GetNextPres(presentateur) == Partie.JoueurCourant)
-            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
 
-        text.text = "Le joueur " + presentateur + " présente son personnage";
+        text.text = "Player " + presentateur + " presents their character";
     }
     #endregion
 
@@ -96,7 +96,7 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-        if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant")
+        if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player")
         {
             presentateur = GetNextPres(presentateur);
         }

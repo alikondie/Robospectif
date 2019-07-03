@@ -93,6 +93,11 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = "End debate";
+
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
         index = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -133,7 +138,7 @@ public class InitDebat : MonoBehaviour
         NetworkServer.SendToAll(stopID, msg);
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
-        string s = "FR/Jetons/" + v.sprite;
+        string s = Partie.Langue + "/Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         int j = Array.IndexOf(Partie.Positions, pos);
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;

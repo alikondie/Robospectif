@@ -9,6 +9,7 @@ public class AttentePersos : MonoBehaviour
 {
     [SerializeField] GameObject canvas_attente_persos;
     [SerializeField] GameObject canvas_pres_persos;
+    [SerializeField] Text text;
     short persosID = 1007;
     private Sprite[] persoSprites;
     private int[,] zones;
@@ -23,6 +24,11 @@ public class AttentePersos : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Langue == "FR")
+            text.text = "Choisissez votre\npersonnage !";
+        else
+            text.text = "Chose your\ncharacter !";
+
         persoSprites = new Sprite[] { null, null, null, null, null, null };
 
         zones = new int[6, 2];
