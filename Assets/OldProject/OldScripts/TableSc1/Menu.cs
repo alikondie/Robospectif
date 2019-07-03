@@ -9,6 +9,10 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] Button standard;
     [SerializeField] Button urbain;
+    [SerializeField] Button expert;
+
+    [SerializeField] Button france;
+    [SerializeField] Button english;
 
 
     // Start is called before the first frame update
@@ -17,6 +21,26 @@ public class Menu : MonoBehaviour
         Partie.Initialize();
         standard.onClick.AddListener(() => StandardClicked());
         urbain.onClick.AddListener(() => UrbainClicked());
+        france.onClick.AddListener(() => FranceClicked());
+        english.onClick.AddListener(() => EnglishClicked());
+    }
+
+    private void EnglishClicked()
+    {
+        Partie.Langue = "EN";
+        standard.transform.GetChild(0).GetComponent<Text>().text = "Creative Mode";
+        urbain.transform.GetChild(0).GetComponent<Text>().text = "Creative Mode";
+        urbain.transform.GetChild(1).GetComponent<Text>().text = "Urban";
+        expert.transform.GetChild(0).GetComponent<Text>().text = "Expert Mode";
+    }
+
+    private void FranceClicked()
+    {
+        Partie.Langue = "FR";
+        standard.transform.GetChild(0).GetComponent<Text>().text = "Mode Créatif";
+        urbain.transform.GetChild(0).GetComponent<Text>().text = "Mode Créatif";
+        urbain.transform.GetChild(1).GetComponent<Text>().text = "Urbain";
+        expert.transform.GetChild(0).GetComponent<Text>().text = "Mode Expert";
     }
 
     // Update is called once per frame

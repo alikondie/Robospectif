@@ -83,7 +83,10 @@ public class Text_Connexion : MonoBehaviour
                 //Ecrie dans la partie Text
                 affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white; //Couleur de tout le texte 
-                affichageJoueur.text = "Joueur " + numJoueur + "\n" + "<color=red> Pas Connecté </color>";
+                if (Partie.Langue == "FR")
+                    affichageJoueur.text = "Joueur " + numJoueur + "\n" + "<color=red> Pas Connecté </color>";
+                else
+                    affichageJoueur.text = "Player " + numJoueur + "\n" + "<color=red> Not connected </color>";
 
                 numJoueur++;    //Incrementation du numero de Joueur
             }
@@ -147,7 +150,10 @@ public class Text_Connexion : MonoBehaviour
             if ( (Partie.Positions[i] != 0) && estConnecte(Partie.Positions[i], infoAndroid)){
                 affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white;
-                affichageJoueur.text = "Joueur" + Partie.Positions[i] + "\n" + "<color=blue> Connecté </color>";
+                if (Partie.Langue == "FR")
+                    affichageJoueur.text = "Joueur " + Partie.Positions[i] + "\n" + "<color=blue> Connecté </color>";
+                else
+                    affichageJoueur.text = "Player " + Partie.Positions[i] + "\n" + "<color=blue> Connected </color>";
             }
         }
     }

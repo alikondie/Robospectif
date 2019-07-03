@@ -11,6 +11,7 @@ public class MyPositionsMessage : MessageBase
     public int position4;
     public int position5;
     public int position6;
+    public string langue;
 
     // Start is called before the first frame update
     void Start()

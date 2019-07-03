@@ -5,6 +5,7 @@ using UnityEngine;
 public class Partie
 {
     private static string type;
+    private static string langue;
     private static List<Joueur> joueurs;
     private static int tour;
     private static int joueurCourant;
@@ -45,6 +46,7 @@ public class Partie
         set => positions = value;
     }
     public static string Type { get => type; set => type = value; }
+    public static string Langue { get => langue; set => langue = value; }
 
     // Start is called before the first frame update
     void Start()

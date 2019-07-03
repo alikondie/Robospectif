@@ -22,6 +22,11 @@ public class Button_ready_next_scene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Partie.Langue == "FR")
+            this.transform.GetChild(0).GetComponent<Text>().text = "C'est parti";
+        else
+            this.transform.GetChild(0).GetComponent<Text>().text = "Let's play";
+
         for (int i = 0; i < hands.Length; i++)
         {
             PlayerPrefs.SetInt("LaPosition" + (i + 1), 0);
@@ -75,7 +80,10 @@ public class Button_ready_next_scene : MonoBehaviour
         else
             this.gameObject.SetActive(false);
 
-        nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
+        if (Partie.Langue == "FR")
+            nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
+        else
+            nb_joueurs.text = nb + " players are registered";
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur
     }
 
@@ -126,6 +134,7 @@ public class Button_ready_next_scene : MonoBehaviour
         message.position4 = positions[3];
         message.position5 = positions[4];
         message.position6 = positions[5];
+        message.langue = Partie.Langue;
         NetworkServer.SendToAll(positionsID, message);
 
         // --------------------------

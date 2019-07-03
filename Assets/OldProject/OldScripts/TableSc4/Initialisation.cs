@@ -48,6 +48,14 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = "Presentation done";
+
+        children.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Plateau");
+        children.transform.GetChild(0).transform.GetChild(7).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Conduite/Conduite");
+
         int x = -4;
         for (int i = 0; i < cartes.transform.childCount; i++)
         {
