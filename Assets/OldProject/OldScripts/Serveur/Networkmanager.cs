@@ -8,53 +8,63 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
 using System.Text;
+using System.Net;
+using System.Net.Sockets;
 
 public class Networkmanager : NetworkManager
 {
-    private NetworkClient myclient;
+    [SerializeField] GameObject canvas_serveur;
+    [SerializeField] GameObject canvas_client;
+    [SerializeField] NetworkManager manager;
+    [SerializeField] NetworkDiscovery Netserver;
 
+    private NetworkClient myclient;
+    short messageID = 1000;
+    short imageID = 1001;
+    short conceptionID = 1002;
+    short chronoID = 1003;
+    private string Ip_serveur;
 
     void Start()
     {
-        Debug.Log("niniufniueu" +System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable());
-        Debug.Log("niunefiurbvyubuybv "+ System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()));
-        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-        foreach (var ip in host.AddressList)
+        //Debug.Log("niniufniueu" + System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable());
+        //Debug.Log("niunefiurbvyubuybv " + System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()));
+        //var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+        //foreach (var ip in host.AddressList)
+        //{
+        //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+        //    {
+        //        Debug.Log("ip : " + ip.ToString());
+        //    }
+        //}
+        Debug.Log("ip server : " + Ip_serveur);
+        string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
+        if (Netserver.isServer)
         {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            {
-                Debug.Log("ip : "+ ip.ToString());
-            }
+            Ip_serveur = ipv4;
+            Partie.Initialize();
+            manager.StartServer(); // Connection Serveur
+            RegisterHandlers();
+            Debug.Log("Serveur connecté");
         }
-
-        //string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        //if(ipv4 == Ip_serveur) 
-        //{
-        //    Partie.Initialize();
-        //    manager.StartServer(); // Connection Serveur
-        //    RegisterHandlers();
-        //    Debug.Log("Serveur connecté");
-        //}
-        //else 
-        //{
-        //    manager.StartClient(); // Connection Smartphone
-        //    Debug.Log("client");
-        //    myclient = new NetworkClient();
-        //    myclient.Connect(Ip_serveur, 7777);
-        //    JoueurStatic.Client = myclient;
-        //    canvas_serveur.SetActive(false);
-        //    canvas_client.SetActive(true);
-        //}
+        else
+        {
+            manager.StartClient(); // Connection Smartphone
+            Debug.Log("client");
+            myclient = new NetworkClient();
+            myclient.Connect(Ip_serveur, 7777);
+            JoueurStatic.Client = myclient;
+            canvas_serveur.SetActive(false);
+            canvas_client.SetActive(true);
+        }
     }
 
 
-    //private void RegisterHandlers()
-    //{
-    //    NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
-    //    NetworkServer.RegisterHandler(messageID, OnMessageReceived);
-    //    NetworkServer.RegisterHandler(imageID, onImageReceived);
-    //    NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
-    //}
+    private void RegisterHandlers()
+    {
+        NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
+        NetworkServer.RegisterHandler(messageID, OnMessageReceived);
+    }
 
     private void onTestReceived(NetworkMessage netMsg)
     {
@@ -64,16 +74,16 @@ public class Networkmanager : NetworkManager
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
-        
+
     }
 
     // connexion d'un joueur sur un des boutons du client
     void OnMessageReceived(NetworkMessage message)
     {
-            
+
     }
 
- 
+
 
 
     public void OnCommandSent(NetworkMessage netMsg)
@@ -90,20 +100,20 @@ public class Networkmanager : NetworkManager
         NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
     }
 
-    
-   void OnClientConnected(NetworkMessage message)
+
+    void OnClientConnected(NetworkMessage message)
     {
         Debug.Log("Client connecté");
     }
-    
+
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        
+
         var player = (GameObject)GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-        
+
 
         Debug.Log("Client has requested to get his player added to the game");
 
@@ -145,7 +155,7 @@ public class Networkmanager : NetworkManager
     }
 
 
-    
+
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
@@ -264,8 +274,96 @@ public class Networkmanager : NetworkManager
 
 
 
+
+
+
+
+
+    //#region test
+    //private int server_port = 5000;
+    //private string server_ip;
+
+    //// multicast
+    //private int startup_port = 5100;
+    //private IPAddress group_address = IPAddress.Parse("127.0.0.1");
+    //private UdpClient udp_client;
+    //private IPEndPoint remote_end;
+
+
+    //void Start()
+    //{
+    //    // loaded elsewhere
+    //    //if (Loader.IsPC)
+    //    //    StartGameServer();
+    //    //else
+    //        StartGameClient();
+    //}
+
+    //void StartGameServer()
+    //{
+    //    // the Unity3d way to become a server
+    //    //NetworkConnectionError init_status = Network.InitializeServer(10, server_port, false);
+    //    //Debug.Log("status: " + init_status);
+
+    //    //StartCoroutine(StartBroadcast());
+    //}
+
+    //void StartGameClient()
+    //{
+    //    // multicast receive setup
+    //    remote_end = new IPEndPoint(IPAddress.Any, startup_port);
+    //    udp_client = new UdpClient(remote_end);
+    //    udp_client.JoinMulticastGroup(group_address);
+
+    //    // async callback for multicast
+    //    udp_client.BeginReceive(new AsyncCallback(ServerLookup), null);
+
+    //    StartCoroutine(MakeConnection());
+    //}
+
+    //IEnumerator MakeConnection()
+    //{
+    //    // continues after we get server's address
+    //    while (string.IsNullOrEmpty(server_ip))
+    //        yield return null;
+
+    //    while (Network.peerType == NetworkPeerType.Disconnected)
+    //    {
+    //        Debug.Log("connecting: " + server_ip + ":" + server_port);
+
+    //        // the Unity3d way to connect to a server
+    //        NetworkConnectionError error;
+    //        error = Network.Connect(server_ip, server_port);
+    //        Debug.Log("status: " + error);
+    //        yield return new WaitForSeconds(1);
+    //    }
+    //}
+
+    ///******* broadcast functions *******/
+    //void ServerLookup(IAsyncResult ar)
+    //{
+    //    // receivers package and identifies IP
+    //    var receiveBytes = udp_client.EndReceive(ar, ref remote_end);
+
+    //    server_ip = remote_end.Address.ToString();
+    //    Debug.Log("Server: " + server_ip);
+    //}
+
+    //IEnumerator StartBroadcast()
+    //{
+    //    // multicast send setup
+    //    udp_client = new UdpClient();
+    //    udp_client.JoinMulticastGroup(group_address);
+    //    remote_end = new IPEndPoint(group_address, startup_port);
+
+    //    // sends multicast
+    //    while (true)
+    //    {
+    //        var buffer = Encoding.ASCII.GetBytes("GameServer");
+    //        udp_client.Send(buffer, buffer.Length, remote_end);
+
+    //        yield return new WaitForSeconds(1);
+    //    }
+    //}
+    //#endregion
 }
-
-
-
-
