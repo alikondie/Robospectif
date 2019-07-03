@@ -41,22 +41,22 @@ public class Networkmanager : NetworkManager
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
         if (Netserver.isServer)
         {
+            Debug.Log("Serveur connecté");
             Ip_serveur = ipv4;
             Partie.Initialize();
             manager.StartServer(); // Connection Serveur
             RegisterHandlers();
-            Debug.Log("Serveur connecté");
         }
-        else
-        {
-            manager.StartClient(); // Connection Smartphone
-            Debug.Log("client");
-            myclient = new NetworkClient();
-            myclient.Connect(Ip_serveur, 7777);
-            JoueurStatic.Client = myclient;
-            canvas_serveur.SetActive(false);
-            canvas_client.SetActive(true);
-        }
+        //else
+        //{
+        //    manager.StartClient(); // Connection Smartphone
+        //    Debug.Log("client");
+        //    myclient = new NetworkClient();
+        //    myclient.Connect(Ip_serveur, 7777);
+        //    JoueurStatic.Client = myclient;
+        //    canvas_serveur.SetActive(false);
+        //    canvas_client.SetActive(true);
+        //}
     }
 
 
