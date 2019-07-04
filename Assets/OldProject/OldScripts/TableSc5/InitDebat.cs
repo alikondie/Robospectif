@@ -138,7 +138,7 @@ public class InitDebat : MonoBehaviour
         NetworkServer.SendToAll(stopID, msg);
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
-        string s = Partie.Langue + "/Jetons/" + v.sprite;
+        string s = Partie.Langue +  "/Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         int j = Array.IndexOf(Partie.Positions, pos);
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
@@ -239,22 +239,22 @@ public class InitDebat : MonoBehaviour
                 jetonValue = pileJetons.transform.GetChild(i).GetComponent<Image>().sprite.name;
                 switch (jetonValue)
                 {
-                    case "Jeton Rouge Planète 2":
+                    case "planeteRouge":
                         em++;
                         break;
-                    case "Jeton Rouge Société 2":
+                    case "societeRouge":
                         sm++;
                         break;
-                    case "Jeton Rouge Usage 2":
+                    case "usageRouge":
                         um++;
                         break;
-                    case "Jeton Vert Société 2":
+                    case "societeVert":
                         sp++;
                         break;
-                    case "Jeton Vert Usage 2":
+                    case "usageVert":
                         up++;
                         break;
-                    case "Jeton Vert Planète 2":
+                    case "planeteVert":
                         ep++;
                         break;
                 }
