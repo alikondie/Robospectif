@@ -14,6 +14,7 @@ public class MainScript : MonoBehaviour
     [SerializeField] GameObject[] dimensionGO;
     [SerializeField] GameObject[] locomotionGO;
     [SerializeField] GameObject[] equipementGO;
+    [SerializeField] Text[] choix;
     private Main.Image[] dimensions;
     private Main.Image[] locomotions;
     private Main.Image[] equipements;
@@ -51,7 +52,23 @@ public class MainScript : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            button.transform.GetChild(0).GetComponent<Text>().text = "Valider";
+            for (int i = 0; i < choix.Length; i++)
+            {
+                choix[i].text = "Choix " + (i + 1);
+            }
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            button.transform.GetChild(0).GetComponent<Text>().text = "Confirm";
+            for (int i = 0; i < choix.Length; i++)
+            {
+                choix[i].text = "Choice " + (i + 1);
+            }
+        }
     }
 
     private void OnCardsReceived(NetworkMessage netMsg)

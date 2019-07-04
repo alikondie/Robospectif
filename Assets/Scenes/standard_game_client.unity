@@ -417,7 +417,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66438301}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9720}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1365945327}
@@ -996,6 +996,10 @@ MonoBehaviour:
   - {fileID: 20376782}
   - {fileID: 276773809}
   - {fileID: 789222624}
+  choix:
+  - {fileID: 183463156}
+  - {fileID: 1498818437}
+  - {fileID: 1861577325}
 --- !u!114 &160886057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,6 +2366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 53423674}
+  central: {fileID: 798680758}
 --- !u!114 &450419838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,6 +2858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1067049204}
+  button: {fileID: 1317530024}
   personnagesGO:
   - {fileID: 957804907}
   - {fileID: 1691076351}
@@ -6146,6 +6152,7 @@ MonoBehaviour:
   canvas_vainqueur: {fileID: 1299814206}
   canvas_pres_robot: {fileID: 1319778006}
   text: {fileID: 1832006254}
+  central: {fileID: 1963564975}
 --- !u!1 &1317530022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6345,6 +6352,7 @@ MonoBehaviour:
   canvas_persos_table: {fileID: 1925831024}
   canvas_pres_robot: {fileID: 1319778006}
   text: {fileID: 347864273}
+  central: {fileID: 707797120}
 --- !u!1 &1361888088
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,6 +7845,7 @@ MonoBehaviour:
   canvas_persos_table: {fileID: 1925831024}
   canvas_choix_jetons: {fileID: 1365945322}
   text: {fileID: 1213091404}
+  central: {fileID: 1956302004}
 --- !u!114 &1925831026
 MonoBehaviour:
   m_ObjectHideFlags: 0

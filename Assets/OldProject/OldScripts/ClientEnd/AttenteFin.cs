@@ -12,6 +12,7 @@ public class AttenteFin : MonoBehaviour
     [SerializeField] GameObject canvas_vainqueur;
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
+    [SerializeField] Text central;
 
     private int position;
 
@@ -42,7 +43,15 @@ public class AttenteFin : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            central.text = "Attente du choix du\ncréateur du robot";
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero.ToString();
+            central.text = "Waiting for the robot\ncreator's choice";
+        }
     }
 
     // Update is called once per frame

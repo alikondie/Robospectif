@@ -120,7 +120,17 @@ public class JetonsHandler : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur " + JoueurStatic.Numero;
+        if (JoueurStatic.Langue == "FR")
+            text.text = "Joueur " + JoueurStatic.Numero;
+        else
+            text.text = "Player " + JoueurStatic.Numero;
+
+        usageVert.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/usageVert");
+        usageRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/usageRouge");
+        societeVert.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/societeVert");
+        societeRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/societeRouge");
+        planeteVert.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/planeteVert");
+        planeteRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/planeteRouge");
 
         usageCompteur = 0;
         usageVert.gameObject.SetActive(true);

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Fin : MonoBehaviour
 {
     [SerializeField] Text text;
+    [SerializeField] Text central;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,15 @@ public class Fin : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero;
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero;
+            central.text = "Fin de la partie";
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            central.text = "Game over";
+        }
     }
 
     // Update is called once per frame
