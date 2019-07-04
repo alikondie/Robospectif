@@ -58,7 +58,10 @@ public class PresPersos : MonoBehaviour
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
-        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+        else
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
 
         presentateur = GetNextPres(Partie.JoueurCourant);
     }
@@ -86,9 +89,14 @@ public class PresPersos : MonoBehaviour
         }
 
         if (GetNextPres(presentateur) == Partie.JoueurCourant)
-            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
-
-        text.text = "Player " + presentateur + " presents their character";
+            if (Partie.Langue == "FR")
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+            else
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
+        if (Partie.Langue == "FR")
+            text.text = "Le joueur " + presentateur + " présente son personnage";
+        else
+            text.text = "Player " + presentateur + " presents their character";
     }
     #endregion
 
@@ -96,7 +104,7 @@ public class PresPersos : MonoBehaviour
 
     private void ButtonClicked()
     {
-        if (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player")
+        if ((button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player") || (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant"))
         {
             presentateur = GetNextPres(presentateur);
         }

@@ -19,6 +19,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         Partie.Initialize();
+        Partie.Langue = "FR";
         standard.onClick.AddListener(() => StandardClicked());
         urbain.onClick.AddListener(() => UrbainClicked());
         france.onClick.AddListener(() => FranceClicked());

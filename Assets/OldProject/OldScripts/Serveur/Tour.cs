@@ -9,6 +9,7 @@ public class Tour
     private static bool[,] activesDebat;
     private static int[,] zonesDebat;
     private static int[] piles;
+    private static int nbCartesPosees;
 
     public static Sprite[] PersosDebat
     {
@@ -39,6 +40,7 @@ public class Tour
         get => piles;
         set => piles = value;
     }
+    public static int NbCartesPosees { get => nbCartesPosees; set => nbCartesPosees = value; }
 
     // Start is called before the first frame update
     void Start()

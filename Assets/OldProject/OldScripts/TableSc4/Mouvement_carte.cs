@@ -75,7 +75,8 @@ public class Mouvement_carte : MonoBehaviour
         {
             if(!was_in_target)
             {
-                Initialisation.IncrementeNbCartePosees();
+                Tour.NbCartesPosees++;
+                Debug.Log("incremente");
                 was_in_target = true;
             }
             gameObject.transform.position = currenttarget.transform.position;
@@ -138,7 +139,8 @@ public class Mouvement_carte : MonoBehaviour
             if (!was_in_target)
             {
                 was_in_target = true;
-                Initialisation.IncrementeNbCartePosees();
+                Tour.NbCartesPosees++;
+                Debug.Log("incremente");
             }
             RelocateCardsWhencardincoming(cardstack);
             AssignEquipmentsTypes(currenttarget, allCardStack,true);
@@ -146,7 +148,8 @@ public class Mouvement_carte : MonoBehaviour
         else
         {
             was_in_target = false;
-            Initialisation.DecrementeNbCartePosees();
+            Tour.NbCartesPosees--;
+            Debug.Log("decremente");
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
         }
