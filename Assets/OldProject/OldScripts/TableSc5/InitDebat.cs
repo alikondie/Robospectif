@@ -269,7 +269,7 @@ public class InitDebat : MonoBehaviour
             persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
-        persosAndDebate.Clear();
+            persosAndDebate.Clear();
 
             print( persosAndDebate[keyIndex]);
       //  }
