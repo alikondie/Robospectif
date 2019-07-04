@@ -168,10 +168,10 @@ public class InitDebat : MonoBehaviour
 
         //GameObject p = persos[0].transform.Find("Jetons").gameObject;
 
-        foreach(GameObject pers in persos)
+   /*     foreach(GameObject pers in persos)
         {
             FillPersoData(pers);
-        }
+        }*/
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
     }
