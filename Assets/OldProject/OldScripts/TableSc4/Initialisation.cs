@@ -46,7 +46,7 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
-        Tour.NbCartesPosees = 0;
+        //Tour.NbCartesPosees = 0;
 
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
