@@ -270,6 +270,8 @@ public class InitDebat : MonoBehaviour
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
             persosAndDebate.Clear();
+            persosAndJetons.Clear();
+            givenJetons.Clear();
 
             print( persosAndDebate[keyIndex]);
       //  }
