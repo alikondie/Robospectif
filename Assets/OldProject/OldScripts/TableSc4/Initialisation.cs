@@ -48,6 +48,8 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
+        nbCartePosees = 0;
+
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
         else
