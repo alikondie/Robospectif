@@ -205,10 +205,12 @@ public class InitDebat : MonoBehaviour
 
     private void FillPersoData(GameObject perso)
     {
-        if (!perso.activeSelf)
+        int number = Array.IndexOf(persos, perso);
+
+        if (number >= Partie.Joueurs.Count)
             return;
 
-        int number = Array.IndexOf(persos, perso);
+
         string environment = "";
         string character = perso.transform.GetChild(0).gameObject.GetComponent<Image>().sprite.name;
 
@@ -266,6 +268,8 @@ public class InitDebat : MonoBehaviour
 
             persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
+
+        persosAndDebate.Clear();
 
             print( persosAndDebate[keyIndex]);
       //  }
