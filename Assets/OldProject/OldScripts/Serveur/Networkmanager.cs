@@ -10,42 +10,37 @@ using UnityEngine.UI;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 public class Networkmanager : NetworkManager
 {
-    [SerializeField] GameObject canvas_serveur;
-    [SerializeField] GameObject canvas_client;
-    [SerializeField] NetworkManager manager;
-    [SerializeField] NetworkDiscovery Netserver;
+    [SerializeField] GameObject Netserver;
+    [SerializeField] GameObject Netclient;
+    [SerializeField] NetServer Nets;
+    [SerializeField] NetClient Netc;
 
     private NetworkClient myclient;
     short messageID = 1000;
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
-    private string Ip_serveur;
+    private int serverPort = 7777; 
 
     void Start()
     {
-        //Debug.Log("niniufniueu" + System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable());
-        //Debug.Log("niunefiurbvyubuybv " + System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()));
-        //var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-        //foreach (var ip in host.AddressList)
-        //{
-        //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-        //    {
-        //        Debug.Log("ip : " + ip.ToString());
-        //    }
-        //}
-        Debug.Log("ip server : " + Ip_serveur);
+        Debug.Log("fduibzuyibiuybf " + !PortInUse(serverPort));
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        if (Netserver.isServer)
+        if (!PortInUse(serverPort))
         {
-            Debug.Log("Serveur connecté");
-            Ip_serveur = ipv4;
             Partie.Initialize();
-            manager.StartServer(); // Connection Serveur
             RegisterHandlers();
+            Netserver.SetActive(true);
+            Debug.Log("ca va dans server");
+        }
+        else
+        {
+            Debug.Log("ca va dans client");
+            Netclient.SetActive(true);
         }
         //else
         //{
@@ -59,6 +54,11 @@ public class Networkmanager : NetworkManager
         //}
     }
 
+    private void Update()
+    {
+        Debug.Log("c est serveur : " + Nets.isServer);
+        Debug.Log("c est client : " + Netc.isServer);
+    }
 
     private void RegisterHandlers()
     {
@@ -274,96 +274,26 @@ public class Networkmanager : NetworkManager
 
 
 
+    public static bool PortInUse(int port)
+    {
+        bool inUse = false;
+
+        IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
+        IPEndPoint[] ipEndPoints = ipProperties.GetActiveTcpListeners();
 
 
+        foreach (IPEndPoint endPoint in ipEndPoints)
+        {
+            if (endPoint.Port == port)
+            {
+                inUse = true;
+                break;
+            }
+        }
 
 
-
-    //#region test
-    //private int server_port = 5000;
-    //private string server_ip;
-
-    //// multicast
-    //private int startup_port = 5100;
-    //private IPAddress group_address = IPAddress.Parse("127.0.0.1");
-    //private UdpClient udp_client;
-    //private IPEndPoint remote_end;
+        return inUse;
+    }
 
 
-    //void Start()
-    //{
-    //    // loaded elsewhere
-    //    //if (Loader.IsPC)
-    //    //    StartGameServer();
-    //    //else
-    //        StartGameClient();
-    //}
-
-    //void StartGameServer()
-    //{
-    //    // the Unity3d way to become a server
-    //    //NetworkConnectionError init_status = Network.InitializeServer(10, server_port, false);
-    //    //Debug.Log("status: " + init_status);
-
-    //    //StartCoroutine(StartBroadcast());
-    //}
-
-    //void StartGameClient()
-    //{
-    //    // multicast receive setup
-    //    remote_end = new IPEndPoint(IPAddress.Any, startup_port);
-    //    udp_client = new UdpClient(remote_end);
-    //    udp_client.JoinMulticastGroup(group_address);
-
-    //    // async callback for multicast
-    //    udp_client.BeginReceive(new AsyncCallback(ServerLookup), null);
-
-    //    StartCoroutine(MakeConnection());
-    //}
-
-    //IEnumerator MakeConnection()
-    //{
-    //    // continues after we get server's address
-    //    while (string.IsNullOrEmpty(server_ip))
-    //        yield return null;
-
-    //    while (Network.peerType == NetworkPeerType.Disconnected)
-    //    {
-    //        Debug.Log("connecting: " + server_ip + ":" + server_port);
-
-    //        // the Unity3d way to connect to a server
-    //        NetworkConnectionError error;
-    //        error = Network.Connect(server_ip, server_port);
-    //        Debug.Log("status: " + error);
-    //        yield return new WaitForSeconds(1);
-    //    }
-    //}
-
-    ///******* broadcast functions *******/
-    //void ServerLookup(IAsyncResult ar)
-    //{
-    //    // receivers package and identifies IP
-    //    var receiveBytes = udp_client.EndReceive(ar, ref remote_end);
-
-    //    server_ip = remote_end.Address.ToString();
-    //    Debug.Log("Server: " + server_ip);
-    //}
-
-    //IEnumerator StartBroadcast()
-    //{
-    //    // multicast send setup
-    //    udp_client = new UdpClient();
-    //    udp_client.JoinMulticastGroup(group_address);
-    //    remote_end = new IPEndPoint(group_address, startup_port);
-
-    //    // sends multicast
-    //    while (true)
-    //    {
-    //        var buffer = Encoding.ASCII.GetBytes("GameServer");
-    //        udp_client.Send(buffer, buffer.Length, remote_end);
-
-    //        yield return new WaitForSeconds(1);
-    //    }
-    //}
-    //#endregion
 }

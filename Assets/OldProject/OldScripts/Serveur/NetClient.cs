@@ -6,8 +6,9 @@ using UnityEngine.Networking;
 public class NetClient : NetworkDiscovery
 {
 
-    void Start()
+    private void OnEnable()
     {
+        Debug.Log("client ok!!!!!");
         startClient();
     }
 
