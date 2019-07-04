@@ -282,22 +282,22 @@ public class InitDebat : MonoBehaviour
         switch (jetonValue)
         // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
         {
-            case "Jeton Rouge Planète 2":
+            case "planeteRouge":
                 givenJetons[numJoueur][3]++;
                 break;
-            case "Jeton Rouge Société 2":
+            case "societeRouge":
                 givenJetons[numJoueur][1]++;
                 break;
-            case "Jeton Rouge Usage 2":
+            case "usageRouge":
                 givenJetons[numJoueur][5]++;
                 break;
-            case "Jeton Vert Société 2":
+            case "societeVert":
                 givenJetons[numJoueur][0]++;
                 break;
-            case "Jeton Vert Usage 2":
+            case "usageVert":
                 givenJetons[numJoueur][4]++;
                 break;
-            case "Jeton Vert Planète 2":
+            case "planeteVert":
                 givenJetons[numJoueur][2]++;
                 break;
         }
