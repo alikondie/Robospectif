@@ -32,7 +32,7 @@ public class NetServer : NetworkDiscovery
 
     int minPort = 10000;
     int maxPort = 10010;
-    int defaultPort = 7777;
+    int defaultPort = 80;
 
     //Creates a server then returns the port the server is created with. Returns -1 if server is not created
     private int CreateServer()

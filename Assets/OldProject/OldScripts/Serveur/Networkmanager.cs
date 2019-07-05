@@ -28,7 +28,7 @@ public class Networkmanager : NetworkManager
 
     void Start()
     {
-        Debug.Log("fduibzuyibiuybf " + !PortInUse(serverPort));
+        Debug.Log("fduibzuyibiuybf " + !PortInUse(80));
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
         if (!PortInUse(serverPort))
         {
