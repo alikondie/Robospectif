@@ -79,6 +79,7 @@ public class Init : MonoBehaviour
             }
         }
         JoueurStatic.Langue = message.langue;
+        JoueurStatic.Type = message.type;
         if (JoueurStatic.Langue == "FR")
             this.transform.GetChild(7).GetComponent<Text>().text = "Choisissez le numéro de joueur\ncorrespondant à votre position";
         else
