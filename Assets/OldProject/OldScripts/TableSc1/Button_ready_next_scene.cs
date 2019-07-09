@@ -135,6 +135,7 @@ public class Button_ready_next_scene : MonoBehaviour
         message.position5 = positions[4];
         message.position6 = positions[5];
         message.langue = Partie.Langue;
+        message.type = Partie.Type;
         NetworkServer.SendToAll(positionsID, message);
 
         // --------------------------
