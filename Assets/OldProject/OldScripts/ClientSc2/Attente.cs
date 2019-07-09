@@ -13,6 +13,7 @@ public class Attente : MonoBehaviour
     [SerializeField] GameObject canvas_persos_table;
     [SerializeField] GameObject canvas_pres_robot;
     [SerializeField] Text text;
+    [SerializeField] Text central;
 
     short presID = 1011;
 
@@ -46,6 +47,15 @@ public class Attente : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            central.text = "Présentation du robot";
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero.ToString();
+            central.text = "Robot presentation";
+        }
+
     }
 }

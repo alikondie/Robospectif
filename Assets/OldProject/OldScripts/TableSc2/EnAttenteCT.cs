@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EnAttenteCT : MonoBehaviour
 {
@@ -29,7 +30,12 @@ public class EnAttenteCT : MonoBehaviour
 
     void OnEnable()
     {
-        foreach(Joueur j in Partie.Joueurs)
+        if (Partie.Langue == "FR")
+            this.transform.GetChild(1).GetComponent<Text>().text = "Choisissez vos cartes !";
+        else
+            this.transform.GetChild(1).GetComponent<Text>().text = "Chose your cards !";
+
+        foreach (Joueur j in Partie.Joueurs)
         {
             MyCardMessage msg = new MyCardMessage();
             //Debug.Log(j.Dimensions[0].ToString().Substring(0, j.Dimensions[0].ToString().Length - 21));

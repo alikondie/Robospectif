@@ -78,6 +78,12 @@ public class Init : MonoBehaviour
                 i++;
             }
         }
+        JoueurStatic.Langue = message.langue;
+        JoueurStatic.Type = message.type;
+        if (JoueurStatic.Langue == "FR")
+            this.transform.GetChild(7).GetComponent<Text>().text = "Choisissez le numéro de joueur\ncorrespondant à votre position";
+        else
+            this.transform.GetChild(7).GetComponent<Text>().text = "Chose the player number that\ncorresponds to your position";
         nbJoueurs = i;
     }
 

@@ -24,8 +24,6 @@ public class Initialisation : MonoBehaviour
     public static List<string> autoEquipmentCards;
     public static string autonomie;
 
-    private static int nbCartePosees;
-
     short presID = 1011;
 
     public static int indice = 0;
@@ -48,6 +46,16 @@ public class Initialisation : MonoBehaviour
 
     void OnEnable()
     {
+        //Tour.NbCartesPosees = 0;
+
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = "Presentation done";
+
+        children.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Plateau");
+        children.transform.GetChild(0).transform.GetChild(7).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Conduite/Conduite");
+
         int x = -4;
         for (int i = 0; i < cartes.transform.childCount; i++)
         {
@@ -81,8 +89,8 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("nbcartesposees : " + nbCartePosees);
-        if (nbCartePosees == 6)
+        Debug.Log("nbcartesposees : " + Tour.NbCartesPosees);
+        if (Tour.NbCartesPosees == 6)
         {
             button.onClick.AddListener(() => ButtonClicked());
             button.gameObject.SetActive(true);
@@ -169,16 +177,4 @@ public class Initialisation : MonoBehaviour
         cartes.transform.rotation = rotation;
         cartes.transform.position = posCards[pos - 1];
     }
-
-    #region fonctions utilisees en externe
-    public static void IncrementeNbCartePosees()
-    {
-        nbCartePosees++;
-    }
-
-    public static void DecrementeNbCartePosees()
-    {
-        nbCartePosees--;
-    }
-    #endregion
 }

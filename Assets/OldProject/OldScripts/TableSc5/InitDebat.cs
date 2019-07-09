@@ -47,8 +47,8 @@ public class InitDebat : MonoBehaviour
     {
         SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
         persosAndDebate = new Dictionary<int, string>();
-      //  FillPersoDict();
-        //givenJetons = new Dictionary<string,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
+        FillPersoDict();
+        //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
         jetons = new List<GameObject>[6];
 
         for (int i = 0; i < jetons.Length; i++)
@@ -93,6 +93,11 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = "End debate";
+
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
         index = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -133,7 +138,7 @@ public class InitDebat : MonoBehaviour
         NetworkServer.SendToAll(stopID, msg);
         var v = netMsg.ReadMessage<MyJetonMessage>();
         int pos = v.joueur;
-        string s = "FR/Jetons/" + v.sprite;
+        string s = Partie.Langue +  "/Jetons/" + v.sprite;
         Sprite jeton_actuel = Resources.Load<Sprite>(s);
         int j = Array.IndexOf(Partie.Positions, pos);
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
@@ -163,10 +168,10 @@ public class InitDebat : MonoBehaviour
 
         //GameObject p = persos[0].transform.Find("Jetons").gameObject;
 
-        foreach(GameObject pers in persos)
+   /*     foreach(GameObject pers in persos)
         {
             FillPersoData(pers);
-        }
+        }*/
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
     }
@@ -191,15 +196,21 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Add(i, currentPerso);
             givenJetons.Add(i, new int[] { 0, 0, 0, 0, 0, 0 });
         }
-        
+     /*   foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
+        {
+            print(p.Value);
+        }*/
+
     }
 
     private void FillPersoData(GameObject perso)
     {
-        if (!perso.activeSelf)
+        int number = Array.IndexOf(persos, perso);
+
+        if (number >= Partie.Joueurs.Count)
             return;
 
-        int number = Array.IndexOf(persos, perso);
+
         string environment = "";
         string character = perso.transform.GetChild(0).gameObject.GetComponent<Image>().sprite.name;
 
@@ -216,9 +227,12 @@ public class InitDebat : MonoBehaviour
         int sp, sm, ep, em, up, um;
         sp = sm = ep = em = up = um = 0;
         string jetonValue;
-        foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
-        {
-            GameObject pileJetons = p.Value.transform.GetChild(2).gameObject;
+
+        int keyIndex = perso.transform.GetSiblingIndex();
+        GameObject p = persosAndJetons[keyIndex];
+       // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
+       // {
+            GameObject pileJetons = p.transform.GetChild(2).gameObject;
             for(int i = 0 ; i < 8; i++)
             {
                 if (!pileJetons.activeSelf)
@@ -227,22 +241,22 @@ public class InitDebat : MonoBehaviour
                 jetonValue = pileJetons.transform.GetChild(i).GetComponent<Image>().sprite.name;
                 switch (jetonValue)
                 {
-                    case "Jeton Rouge Planète 2":
+                    case "planeteRouge":
                         em++;
                         break;
-                    case "Jeton Rouge Société 2":
+                    case "societeRouge":
                         sm++;
                         break;
-                    case "Jeton Rouge Usage 2":
+                    case "usageRouge":
                         um++;
                         break;
-                    case "Jeton Vert Société 2":
+                    case "societeVert":
                         sp++;
                         break;
-                    case "Jeton Vert Usage 2":
+                    case "usageVert":
                         up++;
                         break;
-                    case "Jeton Vert Planète 2":
+                    case "planeteVert":
                         ep++;
                         break;
                 }
@@ -252,11 +266,16 @@ public class InitDebat : MonoBehaviour
 
             //Donnée Finale
 
-            persosAndDebate[p.Key] += number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[p.Key][0]+";"+ givenJetons[p.Key][1]+";" + ep + ";" + em + ";" + givenJetons[p.Key][2] + ";" + givenJetons[p.Key][3] + ";"
-                                    + up + ";" + um + ";" + givenJetons[p.Key][4] + ";" + givenJetons[p.Key][5] + ";";
+            persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
+                                    + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
-            print(persosAndDebate[p.Key]);
-        }
+            persosAndDebate.Clear();
+            persosAndJetons.Clear();
+            givenJetons.Clear();
+
+            //print( persosAndDebate[keyIndex]);
+            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
+      //  }
     }
 
     // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)
@@ -266,22 +285,22 @@ public class InitDebat : MonoBehaviour
         switch (jetonValue)
         // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
         {
-            case "Jeton Rouge Planète 2":
+            case "planeteRouge":
                 givenJetons[numJoueur][3]++;
                 break;
-            case "Jeton Rouge Société 2":
+            case "societeRouge":
                 givenJetons[numJoueur][1]++;
                 break;
-            case "Jeton Rouge Usage 2":
+            case "usageRouge":
                 givenJetons[numJoueur][5]++;
                 break;
-            case "Jeton Vert Société 2":
+            case "societeVert":
                 givenJetons[numJoueur][0]++;
                 break;
-            case "Jeton Vert Usage 2":
+            case "usageVert":
                 givenJetons[numJoueur][4]++;
                 break;
-            case "Jeton Vert Planète 2":
+            case "planeteVert":
                 givenJetons[numJoueur][2]++;
                 break;
         }

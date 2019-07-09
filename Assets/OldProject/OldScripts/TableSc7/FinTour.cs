@@ -19,6 +19,17 @@ public class FinTour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Partie.Langue == "FR")
+        {
+            prochain.transform.GetChild(0).GetComponent<Text>().text = "Continuer la partie";
+            fin.transform.GetChild(0).GetComponent<Text>().text = "Terminer la partie";
+        }
+        else
+        {
+
+            prochain.transform.GetChild(0).GetComponent<Text>().text = "Continue the game";
+            fin.transform.GetChild(0).GetComponent<Text>().text = "End the game";
+        }
         prochain.onClick.AddListener(() => ProchainClicked());
         fin.onClick.AddListener(() => FinClicked());
     }

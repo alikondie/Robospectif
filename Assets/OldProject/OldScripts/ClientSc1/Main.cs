@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+    [SerializeField] Sprite[] acteursFR;
+    [SerializeField] Sprite[] personnagesFR;
+    [SerializeField] Sprite[] locomotionsFR;
+    [SerializeField] Sprite[] dimensionsFR;
+    [SerializeField] Sprite[] equipementsFR;
 
-    [SerializeField] Sprite[] personnages;
-    [SerializeField] Sprite[] locomotions;
-    [SerializeField] Sprite[] dimensions;
-    [SerializeField] Sprite[] equipements;
+    [SerializeField] Sprite[] dimensionsUrbainFR;
+    [SerializeField] Sprite[] locomotionsUrbainFR;
 
-    [SerializeField] Sprite[] dimensionsUrbain;
-    [SerializeField] Sprite[] locomotionsUrbain;
+    [SerializeField] Sprite[] acteursEN;
+    [SerializeField] Sprite[] personnagesEN;
+    [SerializeField] Sprite[] locomotionsEN;
+    [SerializeField] Sprite[] dimensionsEN;
+    [SerializeField] Sprite[] equipementsEN;
+
+    [SerializeField] Sprite[] dimensionsUrbainEN;
+    [SerializeField] Sprite[] locomotionsUrbainEN;
 
     public class Player
     {
@@ -188,6 +197,7 @@ public class Main : MonoBehaviour
         private static TabImage tabD;
         private static TabImage tabE;
         private static TabImage tabP;
+        private static TabImage tabA;
         private static Player[] tabPlayer;
         private static int nbjoueur;
 
@@ -267,6 +277,12 @@ public class Main : MonoBehaviour
             get => tabP;
             set => tabP = value;
         }
+
+        public static TabImage TabA
+        {
+            get => tabA;
+            set => tabA = value;
+        }
     }
 
     private TabImage tab;
@@ -281,22 +297,65 @@ public class Main : MonoBehaviour
         initializeLoco();
         initializeDi();
         initializeEqui();
-        initializePerso();
+        if (Partie.Type != "expert")
+            initializePerso();
+        else
+            initializeActeur();
 
+    }
+
+    private void initializeActeur()
+    {
+        tab = new TabImage();
+
+        if (Partie.Langue == "FR")
+        {
+            for (int i = 0; i < acteursFR.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, acteursFR[i]));
+
+            }
+        }
+        else
+        {
+            for (int i = 0; i < acteursEN.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, acteursEN[i]));
+
+            }
+        }
+
+        Global.TabA = tab;
     }
 
     private void initializePerso()
     {
         tab = new TabImage();
-        for (int i = 0; i < personnages.Length; i++)
-        {
-            tab.addImage(new Image(tab.Taille, personnages[i]));
-           
-        }
-        for (int i = 0; i < personnages.Length; i++)
-        {
-            tab.addImage(new Image(tab.Taille, personnages[i]));
 
+        if (Partie.Langue == "FR")
+        {
+            for (int i = 0; i < personnagesFR.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, personnagesFR[i]));
+
+            }
+            for (int i = 0; i < personnagesFR.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, personnagesFR[i]));
+
+            }
+        } else
+        {
+            for (int i = 0; i < personnagesEN.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, personnagesEN[i]));
+
+            }
+            for (int i = 0; i < personnagesEN.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, personnagesEN[i]));
+
+            }
         }
 
         Global.TabP = tab;
@@ -306,24 +365,50 @@ public class Main : MonoBehaviour
     {
         tab = new TabImage();
 
-        if (Partie.Type == "standard")
+        if (Partie.Langue == "FR")
         {
-            for (int i = 1; i <= 2; i++)
+            if (Partie.Type == "standard")
             {
-                foreach (Sprite s in locomotions)
+                for (int i = 1; i <= 2; i++)
                 {
-                    tab.addImage(new Image(tab.Taille, s));
+                    foreach (Sprite s in locomotionsFR)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
 
+                    }
                 }
             }
-        }
-        else /* mode urbain */
-        {
-            for (int i = 1; i <= 3; i++)
+            else /* mode urbain */
             {
-                foreach (Sprite s in locomotionsUrbain)
+                for (int i = 1; i <= 3; i++)
                 {
-                    tab.addImage(new Image(tab.Taille, s));
+                    foreach (Sprite s in locomotionsUrbainFR)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+                    }
+                }
+            }
+        } else
+        {
+            if (Partie.Type == "standard")
+            {
+                for (int i = 1; i <= 2; i++)
+                {
+                    foreach (Sprite s in locomotionsEN)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+
+                    }
+                }
+            }
+            else /* mode urbain */
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    foreach (Sprite s in locomotionsUrbainEN)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+                    }
                 }
             }
         }
@@ -335,24 +420,51 @@ public class Main : MonoBehaviour
     private void initializeDi()
     {
         tab = new TabImage();
-        if (Partie.Type == "standard")
-        {
-            for (int i = 1; i <= 2; i++)
-            {
-                foreach (Sprite s in dimensions)
-                {
-                    tab.addImage(new Image(tab.Taille, s));
 
+        if (Partie.Langue == "FR")
+        {
+            if (Partie.Type == "standard")
+            {
+                for (int i = 1; i <= 2; i++)
+                {
+                    foreach (Sprite s in dimensionsFR)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+
+                    }
                 }
             }
-        }
-        else /* mode urbain */
-        {
-            for (int i = 1; i <= 3; i++)
+            else /* mode urbain */
             {
-                foreach (Sprite s in dimensionsUrbain)
+                for (int i = 1; i <= 3; i++)
                 {
-                    tab.addImage(new Image(tab.Taille, s));
+                    foreach (Sprite s in dimensionsUrbainFR)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+                    }
+                }
+            }
+        } else
+        {
+            if (Partie.Type == "standard")
+            {
+                for (int i = 1; i <= 2; i++)
+                {
+                    foreach (Sprite s in dimensionsEN)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+
+                    }
+                }
+            }
+            else /* mode urbain */
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    foreach (Sprite s in dimensionsUrbainEN)
+                    {
+                        tab.addImage(new Image(tab.Taille, s));
+                    }
                 }
             }
         }
@@ -363,15 +475,37 @@ public class Main : MonoBehaviour
     private void initializeEqui()
     {
         tab = new TabImage();
-        for (int i = 0; i < equipements.Length; i++)
-        {
-            tab.addImage(new Image(tab.Taille, equipements[i]));
 
-        }
-        for (int i = 0; i < equipements.Length; i++)
+        if (Partie.Langue == "FR")
         {
-            tab.addImage(new Image(tab.Taille, equipements[i]));
+            for (int i = 0; i < equipementsFR.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, equipementsFR[i]));
 
+            }
+            if (Partie.Type != "expert")
+            {
+                for (int i = 0; i < equipementsFR.Length; i++)
+                {
+                    tab.addImage(new Image(tab.Taille, equipementsFR[i]));
+
+                }
+            }
+        } else
+        {
+            for (int i = 0; i < equipementsEN.Length; i++)
+            {
+                tab.addImage(new Image(tab.Taille, equipementsEN[i]));
+
+            }
+            if (Partie.Type != "expert")
+            {
+                for (int i = 0; i < equipementsEN.Length; i++)
+                {
+                    tab.addImage(new Image(tab.Taille, equipementsEN[i]));
+
+                }
+            }
         }
         Global.TabE = tab;
 

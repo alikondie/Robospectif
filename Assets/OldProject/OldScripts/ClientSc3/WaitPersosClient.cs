@@ -10,6 +10,7 @@ public class WaitPersosClient : MonoBehaviour
     [SerializeField] GameObject canvas_persos_table;
     [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] Text text;
+    [SerializeField] Text central;
 
     short debatID = 1006;
 
@@ -28,7 +29,15 @@ public class WaitPersosClient : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero.ToString();
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            central.text = "Présentation des\npersonnages";
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            central.text = "Characters\npresentation";
+        }
     }
 
     private void OnDebatReceived(NetworkMessage netMsg)

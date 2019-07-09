@@ -63,7 +63,15 @@ public class script_LogosEnvironnement : MonoBehaviour
 
     void OnEnable()
     {
-        text.text = "Joueur : " + JoueurStatic.Numero;
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero;
+            button.transform.GetChild(0).GetComponent<Text>().text = "Valider";
+        } else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            button.transform.GetChild(0).GetComponent<Text>().text = "Confirm";
+        }
         choixZone = new int[2];
         choixZone[0] = 0;
         choixZone[1] = 0;

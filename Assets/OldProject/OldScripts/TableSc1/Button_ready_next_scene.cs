@@ -22,6 +22,11 @@ public class Button_ready_next_scene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Partie.Langue == "FR")
+            this.transform.GetChild(0).GetComponent<Text>().text = "C'est parti";
+        else
+            this.transform.GetChild(0).GetComponent<Text>().text = "Let's play";
+
         for (int i = 0; i < hands.Length; i++)
         {
             PlayerPrefs.SetInt("LaPosition" + (i + 1), 0);
@@ -75,7 +80,10 @@ public class Button_ready_next_scene : MonoBehaviour
         else
             this.gameObject.SetActive(false);
 
-        nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
+        if (Partie.Langue == "FR")
+            nb_joueurs.text = "Il y a " + nb + " joueurs enregistrés";
+        else
+            nb_joueurs.text = nb + " players are registered";
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur
     }
 
@@ -111,11 +119,34 @@ public class Button_ready_next_scene : MonoBehaviour
                 Joueur j = new Joueur();
                 j.Numero = Partie.Positions[i];
                 j.Position = i;
-                j.Dimensions = RandomDim();
-                j.Locomotions = RandomLoco();
-                j.Equipements = RandomEqui();
-                j.Persos = RandomPerso();
+                if (Partie.Type != "expert")
+                {
+                    j.Dimensions = RandomDim();
+                    j.Locomotions = RandomLoco();
+                    j.Equipements = RandomEqui();
+                    j.Persos = RandomPerso();
+                }
                 Partie.AddPlayer(j);
+            }
+        }
+
+        int pub;
+        int priv;
+
+        if (Partie.Type == "expert")
+        {
+            pub = Random.Range(1, Partie.Joueurs.Count);
+            if (pub == Partie.Joueurs.Count)
+                priv = 1;
+            else
+                priv = pub + 1;
+
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (pub == j.Numero)
+                    j.IsPublic = true;
+                else if (priv == j.Numero)
+                    j.IsPrive = true;
             }
         }
 
@@ -126,6 +157,8 @@ public class Button_ready_next_scene : MonoBehaviour
         message.position4 = positions[3];
         message.position5 = positions[4];
         message.position6 = positions[5];
+        message.langue = Partie.Langue;
+        message.type = Partie.Type;
         NetworkServer.SendToAll(positionsID, message);
 
         // --------------------------

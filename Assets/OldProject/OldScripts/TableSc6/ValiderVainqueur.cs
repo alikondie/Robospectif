@@ -74,8 +74,10 @@ public class ValiderVainqueur : MonoBehaviour
             if (j.Position == vainqueur)
             {
                 j.NbCouronnes++;
+               // SansHUD.data.AppendLine("Vainqueur: J " + j.Numero);
             }
         }
+        
         canvas_choix_vainqueur.SetActive(false);
         if (nb != Partie.Tour)
         {
@@ -99,6 +101,10 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void OnEnable()
     {
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = "Valider";
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = "Confirm";
         button.gameObject.SetActive(false);
         foreach (GameObject joueur in joueurs)
         {

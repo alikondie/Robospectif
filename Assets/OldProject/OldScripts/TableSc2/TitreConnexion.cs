@@ -17,7 +17,10 @@ public class TitreConnexion : MonoBehaviour
     {
         Text textTitre = titreScene.GetComponent<Text>();
         textTitre.color = Color.white; //Couleur de tout le texte 
-        textTitre.text = "Connectez-vous à " +  "\n" + " la table ! ";
+        if (Partie.Langue == "FR")
+            textTitre.text = "Connectez-vous à " + "\n" + " la table ! ";
+        else
+            textTitre.text = "Connect to the table !";
     }
 
     // Méthode de Mise A Jour
@@ -30,7 +33,10 @@ public class TitreConnexion : MonoBehaviour
         {
             Text textTitre = titreScene.GetComponent<Text>();
             textTitre.color = Color.white; //Couleur de tout le texte 
-            textTitre.text = "Tous les joueurs sont " + "\n" + " connectés à la table ! ";
+            if (Partie.Langue == "FR")
+                textTitre.text = "Tous les joueurs sont " + "\n" + " connectés à la table ! ";
+            else
+                textTitre.text = "Every player is " + "\n" + "connected to the table !";
         }
     }
 

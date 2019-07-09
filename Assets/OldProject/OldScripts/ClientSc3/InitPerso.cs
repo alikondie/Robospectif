@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InitPerso : MonoBehaviour
 {
     [SerializeField] Text text;
+    [SerializeField] Text button;
     [SerializeField] Image[] personnagesGO;
     [SerializeField] Image[] ticks;
     private int nbJoueurs = Init.nbJoueurs;
@@ -31,7 +32,16 @@ public class InitPerso : MonoBehaviour
             ticks[i].gameObject.SetActive(false);
         }
 
-        text.text = "Joueur : " + JoueurStatic.Numero;
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero;
+            button.text = "Valider";
+        }
+        else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            button.text = "Confirm";
+        }
 
         for (int i = 0; i < JoueurStatic.Persos.Length; i++)
         {
