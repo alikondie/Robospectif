@@ -74,8 +74,10 @@ public class ValiderVainqueur : MonoBehaviour
             if (j.Position == vainqueur)
             {
                 j.NbCouronnes++;
+                SansHUD.data.AppendLine("Vainqueur: J " + j.Numero);
             }
         }
+        
         canvas_choix_vainqueur.SetActive(false);
         if (nb != Partie.Tour)
         {
