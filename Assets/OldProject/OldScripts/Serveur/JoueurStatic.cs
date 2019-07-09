@@ -20,6 +20,7 @@ public class JoueurStatic
     private static bool[] persosChoisis;
     private static int nbCouronnes;
     private static string langue;
+    private static string type;
 #pragma warning disable CS0618 // Le type ou le membre est obsolète
     private static NetworkClient client;
 #pragma warning restore CS0618 // Le type ou le membre est obsolète
@@ -94,4 +95,5 @@ public class JoueurStatic
     public static Sprite[] Dimensions { get => dimensions; set => dimensions = value; }
     public static Sprite[] Equipements { get => equipements; set => equipements = value; }
     public static string Langue { get => langue; set => langue = value; }
+    public static string Type { get => type; set => type = value; }
 }

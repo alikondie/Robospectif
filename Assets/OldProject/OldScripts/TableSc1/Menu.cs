@@ -22,8 +22,15 @@ public class Menu : MonoBehaviour
         Partie.Langue = "FR";
         standard.onClick.AddListener(() => StandardClicked());
         urbain.onClick.AddListener(() => UrbainClicked());
+        expert.onClick.AddListener(() => ExpertClicked());
         france.onClick.AddListener(() => FranceClicked());
         english.onClick.AddListener(() => EnglishClicked());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
     private void EnglishClicked()
@@ -44,12 +51,6 @@ public class Menu : MonoBehaviour
         expert.transform.GetChild(0).GetComponent<Text>().text = "Mode Expert";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void StandardClicked()
     {
         Partie.Type = "standard";
@@ -60,5 +61,11 @@ public class Menu : MonoBehaviour
     {
         Partie.Type = "urbain";
         SceneManager.LoadScene("standard_game_server");
+    }
+
+    private void ExpertClicked()
+    {
+        Partie.Type = "expert";
+        SceneManager.LoadScene("expert_game_server");
     }
 }

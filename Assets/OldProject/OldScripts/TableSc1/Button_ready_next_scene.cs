@@ -122,9 +122,18 @@ public class Button_ready_next_scene : MonoBehaviour
                 j.Dimensions = RandomDim();
                 j.Locomotions = RandomLoco();
                 j.Equipements = RandomEqui();
-                j.Persos = RandomPerso();
+                if (Partie.Type != "expert")
+                    j.Persos = RandomPerso();
                 Partie.AddPlayer(j);
             }
+        }
+
+        int pub;
+
+        if (Partie.Type == "expert")
+        {
+            pub = Random.Range(0, Partie.Joueurs.Count - 1);
+
         }
 
         MyPositionsMessage message = new MyPositionsMessage();
@@ -135,6 +144,7 @@ public class Button_ready_next_scene : MonoBehaviour
         message.position5 = positions[4];
         message.position6 = positions[5];
         message.langue = Partie.Langue;
+        message.type = Partie.Type;
         NetworkServer.SendToAll(positionsID, message);
 
         // --------------------------

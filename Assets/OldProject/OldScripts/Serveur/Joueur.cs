@@ -16,6 +16,8 @@ public class Joueur
     private Sprite[] equipements;
     private Sprite[] persos;
     private bool[] persosChoisis;
+    private bool isPrive;
+    private bool isPublic;
     private int nbCouronnes;
 
 
@@ -58,4 +60,6 @@ public class Joueur
     public Sprite[] Dimensions { get => dimensions; set => dimensions = value; }
     public Sprite[] Locomotions { get => locomotions; set => locomotions = value; }
     public Sprite[] Equipements { get => equipements; set => equipements = value; }
+    public bool IsPrive { get => isPrive; set => isPrive = value; }
+    public bool IsPublic { get => isPublic; set => isPublic = value; }
 }
