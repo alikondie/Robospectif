@@ -119,11 +119,34 @@ public class Button_ready_next_scene : MonoBehaviour
                 Joueur j = new Joueur();
                 j.Numero = Partie.Positions[i];
                 j.Position = i;
-                j.Dimensions = RandomDim();
-                j.Locomotions = RandomLoco();
-                j.Equipements = RandomEqui();
-                j.Persos = RandomPerso();
+                if (Partie.Type != "expert")
+                {
+                    j.Dimensions = RandomDim();
+                    j.Locomotions = RandomLoco();
+                    j.Equipements = RandomEqui();
+                    j.Persos = RandomPerso();
+                }
                 Partie.AddPlayer(j);
+            }
+        }
+
+        int pub;
+        int priv;
+
+        if (Partie.Type == "expert")
+        {
+            pub = Random.Range(1, Partie.Joueurs.Count);
+            if (pub == Partie.Joueurs.Count)
+                priv = 1;
+            else
+                priv = pub + 1;
+
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (pub == j.Numero)
+                    j.IsPublic = true;
+                else if (priv == j.Numero)
+                    j.IsPrive = true;
             }
         }
 
