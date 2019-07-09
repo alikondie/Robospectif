@@ -130,6 +130,8 @@ public class Button_ready_next_scene : MonoBehaviour
             }
         }
 
+        MyPositionsMessage message = new MyPositionsMessage();
+
         int pub;
         int priv;
 
@@ -149,8 +151,6 @@ public class Button_ready_next_scene : MonoBehaviour
                     j.IsPrive = true;
             }
         }
-
-        MyPositionsMessage message = new MyPositionsMessage();
         message.position1 = positions[0];
         message.position2 = positions[1];
         message.position3 = positions[2];

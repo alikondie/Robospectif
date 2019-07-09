@@ -59,7 +59,6 @@ public class Text_Connexion : MonoBehaviour
         AfficheJoueurConnecter();
         if (nbJoueursConnectes == nbJoueur)
         {       
-            //SceneManager.LoadScene("Scene_3");
             canvas_joueurs.SetActive(false);
             canvas_attente_choix_cartes.SetActive(true);
         }

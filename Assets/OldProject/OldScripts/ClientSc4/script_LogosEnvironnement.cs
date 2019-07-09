@@ -88,7 +88,7 @@ public class script_LogosEnvironnement : MonoBehaviour
 
     void Update()
     {
-        perso.sprite = ChoixPerso.perso;
+        perso.sprite = JoueurStatic.Actif;
         if (zoneToucher1)
         {
             choixZone[0] = 1;

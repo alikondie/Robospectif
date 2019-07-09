@@ -7,6 +7,7 @@ public class JoueurStatic
 {
     private static int numero;
     private static int position;
+    private static int nbJoueurs;
     private static Sprite loco;
     private static Sprite[] locomotions;
     private static Sprite dim;
@@ -18,9 +19,13 @@ public class JoueurStatic
     private static Sprite[] robot;
     private static Sprite[] persos;
     private static bool[] persosChoisis;
+    private static Sprite[] acteurs;
+    private static Sprite actif;
     private static int nbCouronnes;
     private static string langue;
     private static string type;
+    private static bool isPrive;
+    private static bool isPublic;
 #pragma warning disable CS0618 // Le type ou le membre est obsolète
     private static NetworkClient client;
 #pragma warning restore CS0618 // Le type ou le membre est obsolète
@@ -96,4 +101,9 @@ public class JoueurStatic
     public static Sprite[] Equipements { get => equipements; set => equipements = value; }
     public static string Langue { get => langue; set => langue = value; }
     public static string Type { get => type; set => type = value; }
+    public static Sprite[] Acteurs { get => acteurs; set => acteurs = value; }
+    public static Sprite Actif { get => actif; set => actif = value; }
+    public static int NbJoueurs { get => nbJoueurs; set => nbJoueurs = value; }
+    public static bool IsPrive { get => isPrive; set => isPrive = value; }
+    public static bool IsPublic { get => isPublic; set => isPublic = value; }
 }
