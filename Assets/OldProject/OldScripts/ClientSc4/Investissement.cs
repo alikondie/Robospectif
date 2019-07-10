@@ -12,13 +12,18 @@ public class Investissement : MonoBehaviour
     [SerializeField] GameObject verts;
     [SerializeField] GameObject rouges;
     [SerializeField] Image decideur;
+    [SerializeField] GameObject canvas_jetons;
+    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_fin;
 
     short publicID = 1016;
+    short nextID = 1015;
 
     // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(publicID, OnPublicReceived);
+        JoueurStatic.Client.RegisterHandler(nextID, OnWaitReceived);
     }
 
     // Update is called once per frame
@@ -95,6 +100,21 @@ public class Investissement : MonoBehaviour
             {
                 verts.transform.GetChild(i).gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void OnWaitReceived(NetworkMessage netMsg)
+    {
+        string msg = netMsg.ReadMessage<MyStringMessage>().s;
+        if (msg.Equals("next"))
+        {
+            canvas_jetons.SetActive(false);
+            canvas_choix_cartes.SetActive(true);
+        }
+        else
+        {
+            canvas_jetons.SetActive(false);
+            canvas_fin.SetActive(true);
         }
     }
 }
