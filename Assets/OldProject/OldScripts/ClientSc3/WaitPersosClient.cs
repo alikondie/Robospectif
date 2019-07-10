@@ -13,12 +13,23 @@ public class WaitPersosClient : MonoBehaviour
     [SerializeField] Text central;
 
     short debatID = 1006;
+    private string fr;
+    private string en;
 
 
     // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(debatID, OnDebatReceived);
+        if (JoueurStatic.Type == "expert")
+        {
+            fr = "acteurs";
+            en = "Roles";
+        } else
+        {
+            fr = "personnages";
+            en = "Characters";
+        }
     }
 
     // Update is called once per frame
@@ -32,11 +43,11 @@ public class WaitPersosClient : MonoBehaviour
         if (JoueurStatic.Langue == "FR")
         {
             text.text = "Joueur " + JoueurStatic.Numero.ToString();
-            central.text = "Présentation des\npersonnages";
+            central.text = "Présentation des\n" + fr;
         } else
         {
             text.text = "Player " + JoueurStatic.Numero;
-            central.text = "Characters\npresentation";
+            central.text = en + "\npresentation";
         }
     }
 

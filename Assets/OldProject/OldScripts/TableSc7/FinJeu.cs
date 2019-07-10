@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +43,10 @@ public class FinJeu : MonoBehaviour
                 zones[Partie.Joueurs[i].Position].transform.GetChild(j + 1).gameObject.SetActive(true);
             }
         }
+
+      /*   string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
+
+         File.AppendAllText(filePath, SansHUD.data.ToString());*/
     }
 
     // Update is called once per frame

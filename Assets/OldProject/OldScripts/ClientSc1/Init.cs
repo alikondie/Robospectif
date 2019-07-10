@@ -7,7 +7,6 @@ using System;
 
 public class Init : MonoBehaviour
 {
-
     [SerializeField] GameObject canvas_choix_cartes;
     [SerializeField] GameObject canvas_position_joueurs;
     short messageID = 1000;
@@ -15,7 +14,6 @@ public class Init : MonoBehaviour
     [SerializeField] Button[] buttons;
     [SerializeField] Text[] texts;
     public int[] positions;
-    public static int nbJoueurs;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +82,7 @@ public class Init : MonoBehaviour
             this.transform.GetChild(7).GetComponent<Text>().text = "Choisissez le numéro de joueur\ncorrespondant à votre position";
         else
             this.transform.GetChild(7).GetComponent<Text>().text = "Chose the player number that\ncorresponds to your position";
-        nbJoueurs = i;
+        JoueurStatic.NbJoueurs = i;
     }
 
     // Update is called once per frame

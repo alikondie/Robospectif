@@ -273,7 +273,8 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Clear();
             givenJetons.Clear();
 
-            print( persosAndDebate[keyIndex]);
+            //print( persosAndDebate[keyIndex]);
+            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
       //  }
     }
 

@@ -110,7 +110,6 @@ public class JetonsHandler : MonoBehaviour
     {
         canvas_choix_jetons.SetActive(false);
         canvas_vainqueur.SetActive(true);
-        //SceneManager.LoadScene("scenePreEnd");
     }
 
     // Update is called once per frame
