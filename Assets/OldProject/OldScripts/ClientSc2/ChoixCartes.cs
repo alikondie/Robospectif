@@ -10,6 +10,7 @@ public class ChoixCartes : MonoBehaviour
 
     [SerializeField] GameObject canvas_choix_cartes;
     [SerializeField] GameObject canvas_choix_acteur;
+    [SerializeField] GameObject canvas_attente_acteur;
     [SerializeField] Text joueur;
     [SerializeField] Text choix;
     [SerializeField] Text attente;
@@ -64,7 +65,11 @@ public class ChoixCartes : MonoBehaviour
         JoueurStatic.Acteurs[2] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a3);
 
         canvas_choix_cartes.SetActive(false);
-        canvas_choix_acteur.SetActive(false);
+
+        if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
+            canvas_attente_acteur.SetActive(true);
+        else
+            canvas_choix_acteur.SetActive(true);
     }
 
     private void OnDecideurReceived(NetworkMessage netMsg)
