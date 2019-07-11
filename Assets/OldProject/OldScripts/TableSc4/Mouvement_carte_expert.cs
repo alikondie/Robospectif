@@ -22,7 +22,9 @@ public class Mouvement_carte_expert : MonoBehaviour
     private bool was_in_target = false;
     private bool test;
 
-    private int nbCartePosees;
+    private bool isnbequipmentmax;
+    private bool isalreadylocomotionordimension;
+
     #region unused start and update
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     void OnEnable()
     {
+        isnbequipmentmax = false;
+        isalreadylocomotionordimension = false;
         gameObject.layer = 5;
         currenttarget = null;
     }
@@ -52,29 +56,42 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!IsTheMousInTargetCollider() || CheckIfOtherCardIsInTarget())
+        if (targettable.Length >= 3)
         {
-            currenttarget = null;
+            isnbequipmentmax = CheckIfEveryEquipment();
+        }
+
+        else
+        {
+            isalreadylocomotionordimension = CheckIfOtherCardIsInTarget();
+        }
+        if (!IsTheMousInTargetCollider() || isalreadylocomotionordimension || isnbequipmentmax)
+        {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
 
+
         if (targettable.Length >= 3)
         {
-            decalage = 0;
-            if (checkifintarget == 1)
+            if (!isnbequipmentmax)
             {
-                CheckIfAlreadyCards();
-            }
-            else if (checkifnomoreintarget == 0)
-            {
-                CheckIfAlreadyCards();
+                decalage = 0;
+                if (checkifintarget == 1)
+                {
+                    CheckIfAlreadyCards();
+                }
+                else if (checkifnomoreintarget == 0)
+                {
+                    CheckIfAlreadyCards();
+                }
             }
         }
-        else if (currenttarget != null)
+        
+        else if (currenttarget != null && !isalreadylocomotionordimension)
         {
-            if(!was_in_target)
+            if (!was_in_target)
             {
                 Tour.NbCartesPosees++;
                 was_in_target = true;
@@ -223,6 +240,26 @@ public class Mouvement_carte_expert : MonoBehaviour
         return retour;
     }
 
+    private bool CheckIfEveryEquipment()
+    {
+        int nb_equipmentsposees = 0;
+        foreach (GameObject equipment in equipmentcards)
+        {
+            foreach (GameObject currenttarget in targettable)
+            {
+                test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                       equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                       Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
+
+                if (test)
+                {
+                    nb_equipmentsposees++;
+                }
+            }
+        }
+        return nb_equipmentsposees >= 3;
+    }
+
     #region data
     private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments,bool isIncoming)
     {
@@ -237,19 +274,12 @@ public class Mouvement_carte_expert : MonoBehaviour
            {
                 case ("boxcollider equipment manual"):
                     Initialisation.manualEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.manualEquipmentCards)
-                        print("man "+s);
                     break;
                 case ("boxcollider equipment programmable"):
                     Initialisation.programmableEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.programmableEquipmentCards)
-                        print("prog "+s);
                     break;
                 case ("boxcollider equipment automatique"):
                     Initialisation.autoEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.autoEquipmentCards)
-                        print("auto "+s);
-
                     break;
             }
     /*          int me = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
@@ -269,10 +299,6 @@ public class Mouvement_carte_expert : MonoBehaviour
 
                 else
                     Initialisation.manualEquipmentCards.AddRange(equipmentStrings);
-
-                //debug
-                foreach (string s in Initialisation.manualEquipmentCards)
-                    print("man " + s);
                 break;
                 
             case ("boxcollider equipment programmable"):
@@ -281,9 +307,6 @@ public class Mouvement_carte_expert : MonoBehaviour
 
                 else
                     Initialisation.programmableEquipmentCards.AddRange(equipmentStrings);
-
-                foreach (string s in Initialisation.programmableEquipmentCards)
-                    print("prog " + s);
                 break;
             case ("boxcollider equipment automatique"):
                 if (Initialisation.autoEquipmentCards == null)
@@ -291,10 +314,6 @@ public class Mouvement_carte_expert : MonoBehaviour
 
                 else
                     Initialisation.autoEquipmentCards.AddRange(equipmentStrings);
-
-
-                foreach (string s in Initialisation.autoEquipmentCards)
-                    print("auto " + s);
                 break;
                 
         }
