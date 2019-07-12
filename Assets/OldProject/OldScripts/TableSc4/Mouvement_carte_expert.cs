@@ -24,6 +24,7 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     private bool isnbequipmentmax;
     private bool isalreadylocomotionordimension;
+    private bool ismouseintarget;
 
     #region unused start and update
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     void OnEnable()
     {
+        ismouseintarget = false;
         isnbequipmentmax = false;
         isalreadylocomotionordimension = false;
         gameObject.layer = 5;
@@ -56,6 +58,8 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        Debug.Log(Tour.NbCartesPosees);
+        ismouseintarget = IsTheMousInTargetCollider();
         if (targettable.Length >= 3)
         {
             isnbequipmentmax = CheckIfEveryEquipment();
@@ -65,11 +69,16 @@ public class Mouvement_carte_expert : MonoBehaviour
         {
             isalreadylocomotionordimension = CheckIfOtherCardIsInTarget();
         }
-        if (!IsTheMousInTargetCollider() || isalreadylocomotionordimension || isnbequipmentmax)
+        if (!ismouseintarget || isalreadylocomotionordimension || isnbequipmentmax)
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
+            if(was_in_target && targettable.Length < 3)
+            {
+                Tour.NbCartesPosees--;
+                was_in_target = false;
+            }
         }
 
 
@@ -89,7 +98,7 @@ public class Mouvement_carte_expert : MonoBehaviour
             }
         }
         
-        else if (currenttarget != null && !isalreadylocomotionordimension)
+        else if (currenttarget != null && !isalreadylocomotionordimension && ismouseintarget)
         {
             if (!was_in_target)
             {
