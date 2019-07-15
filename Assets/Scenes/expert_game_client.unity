@@ -2330,9 +2330,6 @@ MonoBehaviour:
   ticks:
   - {fileID: 361187545}
   - {fileID: 344128549}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!222 &747278112
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3008,9 +3005,6 @@ MonoBehaviour:
   ticks:
   - {fileID: 344128549}
   - {fileID: 1147523979}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!61 &957804905
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5709,9 +5703,6 @@ MonoBehaviour:
   ticks:
   - {fileID: 361187545}
   - {fileID: 1147523979}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!222 &1691076350
 CanvasRenderer:
   m_ObjectHideFlags: 0
