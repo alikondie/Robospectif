@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_attente: {fileID: 174302760}
-  canvas_persos: {fileID: 1925831024}
+  canvas_persos: {fileID: 1365945322}
   joueur: {fileID: 1622379264}
   central: {fileID: 1741521304}
   decideur: {fileID: 1188789083}
