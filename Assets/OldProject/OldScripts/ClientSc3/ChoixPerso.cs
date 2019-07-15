@@ -42,7 +42,7 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
         if (tickCurrent.gameObject.activeSelf)
         {
             Debug.Log(image.sprite);
-            if (Partie.Type == "expert")
+            if (JoueurStatic.Type == "expert")
             {
                 JoueurStatic.Actif = image.sprite;
             }
