@@ -56,13 +56,16 @@ public class ChoixCartes : MonoBehaviour
     private void OnConceptionReceived(NetworkMessage netMsg)
     {
         var message = netMsg.ReadMessage<MyActeurMessage>();
-        string a1 = message.acteur1;
-        string a2 = message.acteur2;
-        string a3 = message.acteur3;
-        JoueurStatic.Acteurs = new Sprite[3];
-        JoueurStatic.Acteurs[0] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a1);
-        JoueurStatic.Acteurs[1] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a2);
-        JoueurStatic.Acteurs[2] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a3);
+        if (message.numero == JoueurStatic.Numero)
+        {
+            string a1 = message.acteur1;
+            string a2 = message.acteur2;
+            string a3 = message.acteur3;
+            JoueurStatic.Acteurs = new Sprite[3];
+            JoueurStatic.Acteurs[0] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a1);
+            JoueurStatic.Acteurs[1] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a2);
+            JoueurStatic.Acteurs[2] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a3);
+        }
 
         canvas_choix_cartes.SetActive(false);
 

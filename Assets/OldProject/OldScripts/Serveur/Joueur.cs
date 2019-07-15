@@ -15,6 +15,7 @@ public class Joueur
     private Sprite equi3;
     private Sprite[] equipements;
     private Sprite[] persos;
+    private Sprite[] acteurs;
     private bool[] persosChoisis;
     private int nbCouronnes;
     private bool isPrive;
@@ -62,4 +63,5 @@ public class Joueur
     public Sprite[] Equipements { get => equipements; set => equipements = value; }
     public bool IsPrive { get => isPrive; set => isPrive = value; }
     public bool IsPublic { get => isPublic; set => isPublic = value; }
+    public Sprite[] Acteurs { get => acteurs; set => acteurs = value; }
 }

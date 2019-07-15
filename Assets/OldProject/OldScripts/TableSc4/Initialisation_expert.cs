@@ -31,7 +31,9 @@ public class Initialisation_expert : MonoBehaviour
     public static List<string> autoEquipmentCards;
     public static string autonomie;
 
+    short conceptionID = 1002;
     short presID = 1011;
+    short decideurID = 1014;
 
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
@@ -52,6 +54,18 @@ public class Initialisation_expert : MonoBehaviour
     void OnEnable()
     {
         //Tour.NbCartesPosees = 0;
+        if (Partie.Type == "expert")
+        {
+            MyDecideurMessage msg = new MyDecideurMessage();
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (j.IsPrive)
+                    msg.priv = j.Numero;
+                else if (j.IsPublic)
+                    msg.pub = j.Numero;
+            }
+            NetworkServer.SendToAll(decideurID, msg);
+        }
 
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
@@ -89,42 +103,78 @@ public class Initialisation_expert : MonoBehaviour
     private void ButtonClicked()
     {
         #region recup données
-         
-            currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
-            currentTurnData += autonomie + ";";
+        /*
+           currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
+           currentTurnData += autonomie + ";";
 
-            if (manualEquipmentCards != null)
-            {
-                foreach (string s in manualEquipmentCards)
+           if (manualEquipmentCards != null)
+           {
+               foreach (string s in manualEquipmentCards)
 
-                    currentTurnData += "M " + s + ";";
-            }
-            if (programmableEquipmentCards != null)
-            {
-                foreach (string s in programmableEquipmentCards)
+                   currentTurnData += "M " + s + ";";
+           }
+           if (programmableEquipmentCards != null)
+           {
+               foreach (string s in programmableEquipmentCards)
 
-                    currentTurnData += "P " + s + ";";
-            }
-            if (autoEquipmentCards != null)
-            {
-                foreach (string s in autoEquipmentCards)
+                   currentTurnData += "P " + s + ";";
+           }
+           if (autoEquipmentCards != null)
+           {
+               foreach (string s in autoEquipmentCards)
 
-                    currentTurnData += "A " + s + ";";
-            }
-            // suppression du dernier point-virgule
-            currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
-            SansHUD.data.AppendLine(currentTurnData);
-            //print(SansHUD.data.ToString());
-           // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
+                   currentTurnData += "A " + s + ";";
+           }
+           // suppression du dernier point-virgule
+           currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
+           SansHUD.data.AppendLine(currentTurnData);
+           //print(SansHUD.data.ToString());
+          // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
 
-           // File.AppendAllText(filePath, SansHUD.data.ToString());
-        
+          // File.AppendAllText(filePath, SansHUD.data.ToString());
+       */
         #endregion
-        MyNetworkMessage msg = new MyNetworkMessage();
-        msg.message = Partie.JoueurCourant;
-        NetworkServer.SendToAll(presID, msg);
+        if (Partie.Type == "expert")
+        {
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (!j.IsPrive && !j.IsPublic)
+                {
+                    RandomActeur(j);
+                }
+            }
+        }
+        else
+        {
+            MyNetworkMessage msg = new MyNetworkMessage();
+            msg.message = Partie.JoueurCourant;
+            NetworkServer.SendToAll(presID, msg);
+        }
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
+    }
+
+    private void RandomActeur(Joueur j)
+    {
+        int x = 0, y = 0, z = 0;
+        Main.TabImage tab = Main.Global.TabA;
+        while (tab.getImageind(x).Sprite.Equals(tab.getImageind(y).Sprite) || tab.getImageind(x).Sprite.Equals(tab.getImageind(z).Sprite) || tab.getImageind(y).Sprite.Equals(tab.getImageind(z).Sprite))
+        {
+            x = Random.Range(0, tab.Taille);
+            y = Random.Range(0, tab.Taille);
+            z = Random.Range(0, tab.Taille);
+        }
+        Main.Image[] acteurs = new Main.Image[2];
+        j.Acteurs[0] = tab.getImageind(x).sprite;
+        j.Acteurs[1] = tab.getImageind(y).sprite;
+        j.Acteurs[2] = tab.getImageind(z).sprite;
+
+        MyActeurMessage msg = new MyActeurMessage();
+        msg.numero = j.Numero;
+        msg.acteur1 = j.Acteurs[0].ToString().Substring(0, j.Acteurs[0].ToString().Length - 21);
+        msg.acteur2 = j.Acteurs[1].ToString().Substring(0, j.Acteurs[1].ToString().Length - 21);
+        msg.acteur3 = j.Acteurs[2].ToString().Substring(0, j.Acteurs[2].ToString().Length - 21);
+        NetworkServer.SendToAll(conceptionID, msg);
     }
 
     #region random
