@@ -14,20 +14,30 @@ public class AttentePersos : MonoBehaviour
     private Sprite[] persoSprites;
     private int[,] zones;
     private int nbRecu;
+    private string fr;
+    private string en;
 
     // Start is called before the first frame update
     void Start()
     {
-    
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+        } else
+        {
+            fr = "personnage";
+            en = "character";
+        }
         NetworkServer.RegisterHandler(persosID, OnPersoReceived);
     }
 
     void OnEnable()
     {
         if (Partie.Langue == "FR")
-            text.text = "Choisissez votre\npersonnage !";
+            text.text = "Choisissez votre\n" + fr;
         else
-            text.text = "Chose your\ncharacter !";
+            text.text = "Chose your\n" + en;
 
         persoSprites = new Sprite[] { null, null, null, null, null, null };
 
@@ -41,12 +51,16 @@ public class AttentePersos : MonoBehaviour
         var v = netMsg.ReadMessage<MyPersoMessage>();
         int i = v.numero;
         string s = v.image;
-        string spriteString = "FR/Personnages/" + s;
+        string spritestring;
+        if (Partie.Type == "expert")
+            spritestring = Partie.Langue + "/Acteurs/" + s;
+        else
+            spritestring = Partie.Langue + "/Personnages/" + s;
         int zone1 = v.choixZone0;
         int zone2 = v.choixZone1;
         zones[Array.IndexOf(Partie.Positions, i), 0] = zone1;
         zones[Array.IndexOf(Partie.Positions, i), 1] = zone2;
-        Sprite sp = Resources.Load<Sprite>(spriteString);
+        Sprite sp = Resources.Load<Sprite>(spritestring);
         int j = Array.IndexOf(Partie.Positions, i);
         if (Partie.Positions[j] != Partie.JoueurCourant)
         {

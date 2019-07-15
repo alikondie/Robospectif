@@ -58,7 +58,6 @@ public class script_LogosEnvironnement : MonoBehaviour
         JoueurStatic.Client.Send(persosID, msg);
         canvas_pres_perso.SetActive(false);
         canvas_persos_table.SetActive(true);
-        //SceneManager.LoadScene("Scene_ChoixJetons");
     }
 
     void OnEnable()
