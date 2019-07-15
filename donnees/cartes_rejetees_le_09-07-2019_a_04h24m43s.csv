@@ -1,0 +1,16 @@
+Cartes rejetees
+Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3
+J 1;PetitRobot;Rampant;RampedAcces;CoffreBlinde;Couchettes
+J 2;GrandeCapacite;Pattes;CarrosserieReflechissante;FlotteDecentralisee;Imprimante3D
+Tour 1
+Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3
+J 1;GrandeCapacite;Rebondir;;M KitDeReparation;P CouteauSuisseNumerique;A EquipementsDeFurtivite
+Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-
+2;Laura;Campagne,;8;0;0;0;0;0;0;0;0;0;0;0;
+Vainqueur: J 2
+Tour 2
+Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3
+J 2;TresGrandeCapacite;Helices;Attention Requise;M ScanneraRayonsX;P KitDeSoinsdUrgence;A KitOlfactif
+Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-
+1;Frederic;Campagne,;8;0;0;0;0;0;0;0;0;0;0;0;
+Vainqueur: J 1

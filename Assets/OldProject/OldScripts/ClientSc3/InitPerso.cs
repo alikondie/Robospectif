@@ -9,7 +9,6 @@ public class InitPerso : MonoBehaviour
     [SerializeField] Text button;
     [SerializeField] Image[] personnagesGO;
     [SerializeField] Image[] ticks;
-    private int nbJoueurs = Init.nbJoueurs;
 
 
 
@@ -43,15 +42,24 @@ public class InitPerso : MonoBehaviour
             button.text = "Confirm";
         }
 
-        for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+        if (JoueurStatic.Type == "expert")
         {
-            personnagesGO[i].sprite = JoueurStatic.Persos[i];
-        }
+            for (int i = 0; i < JoueurStatic.Acteurs.Length; i++)
+            {
+                personnagesGO[i].sprite = JoueurStatic.Acteurs[i];
+            }
+        } else
+        {
+            for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+            {
+                personnagesGO[i].sprite = JoueurStatic.Persos[i];
+            }
 
-        for (int i = 0; i < JoueurStatic.PersosChoisis.Length; i++)
-        {
-            if (JoueurStatic.PersosChoisis[i])
-                personnagesGO[i].gameObject.SetActive(false);
-        }
+            for (int i = 0; i < JoueurStatic.PersosChoisis.Length; i++)
+            {
+                if (JoueurStatic.PersosChoisis[i])
+                    personnagesGO[i].gameObject.SetActive(false);
+            }
+        }        
     }
 }

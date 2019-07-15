@@ -13,6 +13,9 @@ public class PresPersos : MonoBehaviour
     private int[,] zones;
     private int nbRecu;
 
+    private string en;
+    private string fr;
+
     private int presentateur;
     private Joueur pres;
     #endregion
@@ -34,6 +37,15 @@ public class PresPersos : MonoBehaviour
 	#region Unity loop
     void Start()
     {
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+        } else
+        {
+            fr = "personnage";
+            en = "character";
+        }
         button.onClick.AddListener(() => ButtonClicked());
     }
 
@@ -94,9 +106,9 @@ public class PresPersos : MonoBehaviour
             else
                 button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
         if (Partie.Langue == "FR")
-            text.text = "Le joueur " + presentateur + " présente son personnage";
+            text.text = "Le joueur " + presentateur + " présente son " + fr;
         else
-            text.text = "Player " + presentateur + " presents their character";
+            text.text = "Player " + presentateur + " presents their " + en;
     }
     #endregion
 
