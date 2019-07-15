@@ -41,6 +41,9 @@ public class InitDebat : MonoBehaviour
 
     private int nbRecu;
 
+    private int fr;
+    private int en;
+
     //sp = sm = ep = em = up = um = 0;
 
     // Start is called before the first frame update
