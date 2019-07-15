@@ -53,15 +53,6 @@ public class InitDebat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Partie.Type == "expert")
-        {
-            fr = "Fin des investissements privés";
-            en = "Private investments done";
-        } else
-        {
-            fr = "Terminer le débat";
-            en = "End debate";
-        }
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
         //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
@@ -109,6 +100,16 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Type == "expert")
+        {
+            fr = "Fin des investissements privés";
+            en = "Private investments done";
+        }
+        else
+        {
+            fr = "Terminer le débat";
+            en = "End debate";
+        }
         nbClicked = 0;
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = fr;

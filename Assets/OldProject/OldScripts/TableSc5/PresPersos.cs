@@ -38,20 +38,21 @@ public class PresPersos : MonoBehaviour
 	#region Unity loop
     void Start()
     {
-        if (Partie.Type == "expert")
-        {
-            fr = "acteur";
-            en = "role";
-        } else
-        {
-            fr = "personnage";
-            en = "character";
-        }
         button.onClick.AddListener(() => ButtonClicked());
     }
 
     void OnEnable()
     {
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+        }
+        else
+        {
+            fr = "personnage";
+            en = "character";
+        }
         for (int i = 0; i < 6; i++)
         {
             persos[i].transform.GetChild(0).gameObject.SetActive(false);
