@@ -47,6 +47,7 @@ public class Initialisation_expert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        button.onClick.AddListener(() => ButtonClicked());
         SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
         SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
     }
@@ -91,7 +92,6 @@ public class Initialisation_expert : MonoBehaviour
     {
         if (Tour.NbCartesPosees == 6)
         {
-            button.onClick.AddListener(() => ButtonClicked());
             button.gameObject.SetActive(true);
         }
         else
@@ -136,6 +136,7 @@ public class Initialisation_expert : MonoBehaviour
         #endregion
         if (Partie.Type == "expert")
         {
+            Debug.Log(Partie.Joueurs.Count);
             foreach (Joueur j in Partie.Joueurs)
             {
                 if (!j.IsPrive && !j.IsPublic)
@@ -156,18 +157,26 @@ public class Initialisation_expert : MonoBehaviour
 
     private void RandomActeur(Joueur j)
     {
-        int x = 0, y = 0, z = 0;
         Main.TabImage tab = Main.Global.TabA;
-        while (tab.getImageind(x).Sprite.Equals(tab.getImageind(y).Sprite) || tab.getImageind(x).Sprite.Equals(tab.getImageind(z).Sprite) || tab.getImageind(y).Sprite.Equals(tab.getImageind(z).Sprite))
+        int x = Random.Range(0, tab.Taille);
+        int y = Random.Range(0, tab.Taille);
+        int z = Random.Range(0, tab.Taille);
+        Main.Image[] acteurs = new Main.Image[3];
+        acteurs[0] = tab.getImageind(x);
+        acteurs[1] = tab.getImageind(y);
+        acteurs[2] = tab.getImageind(z);
+
+        j.Acteurs = new Sprite[3];
+
+        for (int i = 0; i < acteurs.Length; i++)
         {
-            x = Random.Range(0, tab.Taille);
-            y = Random.Range(0, tab.Taille);
-            z = Random.Range(0, tab.Taille);
+            j.Acteurs[i] = acteurs[i].sprite;
         }
-        Main.Image[] acteurs = new Main.Image[2];
-        j.Acteurs[0] = tab.getImageind(x).sprite;
-        j.Acteurs[1] = tab.getImageind(y).sprite;
-        j.Acteurs[2] = tab.getImageind(z).sprite;
+        
+        for (int k = 0; k < acteurs.Length; k++)
+        {
+            tab.removeImage(acteurs[k]);
+        }        
 
         MyActeurMessage msg = new MyActeurMessage();
         msg.numero = j.Numero;

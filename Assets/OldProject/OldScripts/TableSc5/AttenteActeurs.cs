@@ -13,12 +13,12 @@ public class AttenteActeurs : MonoBehaviour
     [SerializeField] Text central;
     [SerializeField] Image decideur;
 
-    short acteurID = 1017;
+    short debatID = 1006;
 
     // Start is called before the first frame update
     void Start()
     {
-        JoueurStatic.Client.RegisterHandler(acteurID, OnActeurSelected);
+        JoueurStatic.Client.RegisterHandler(debatID, OnActeurSelected);
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class AttenteActeurs : MonoBehaviour
         if (JoueurStatic.Langue == "FR")
         {
             joueur.text = "Joueur " + JoueurStatic.Numero;
-            central.text = "Sélection des\acteurs";
+            central.text = "Sélection des\nacteurs";
         } else
         {
             joueur.text = "Player " + JoueurStatic.Numero;
