@@ -18,6 +18,7 @@ public class PresPersos : MonoBehaviour
 
     private int presentateur;
     private Joueur pres;
+    private Joueur next;
     #endregion
 
     #region Inputs
@@ -74,8 +75,18 @@ public class PresPersos : MonoBehaviour
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
         else
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
-
-        presentateur = GetNextPres(Partie.JoueurCourant);
+        if (Partie.Type == "expert")
+        {
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (j.IsPublic)
+                {
+                    presentateur = GetNextPres(j.Numero);
+                }
+            }
+        }
+        else
+            presentateur = GetNextPres(Partie.JoueurCourant);
     }
 	
     void Update()
@@ -85,6 +96,10 @@ public class PresPersos : MonoBehaviour
             if (presentateur == j.Numero)
             {
                 pres = j;
+            }
+            if (GetNextPres(presentateur) == j.Numero)
+            {
+                next = j;
             }
         }
 
@@ -100,7 +115,7 @@ public class PresPersos : MonoBehaviour
             }
         }
 
-        if (GetNextPres(presentateur) == Partie.JoueurCourant)
+        if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
             if (Partie.Langue == "FR")
                 button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
             else
