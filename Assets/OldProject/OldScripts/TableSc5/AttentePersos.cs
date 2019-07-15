@@ -21,22 +21,23 @@ public class AttentePersos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Partie.Type == "expert")
-        {
-            fr = "acteur";
-            en = "role";
-            nbAttendus = Partie.Joueurs.Count - 2;
-        } else
-        {
-            fr = "personnage";
-            en = "character";
-            nbAttendus = Partie.Joueurs.Count - 1;
-        }
         NetworkServer.RegisterHandler(persosID, OnPersoReceived);
     }
 
     void OnEnable()
     {
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+            nbAttendus = Partie.Joueurs.Count - 2;
+        }
+        else
+        {
+            fr = "personnage";
+            en = "character";
+            nbAttendus = Partie.Joueurs.Count - 1;
+        }
         if (Partie.Langue == "FR")
             text.text = "Choisissez votre\n" + fr;
         else

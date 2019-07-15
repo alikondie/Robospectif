@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class MyActeurMessage : MessageBase
 {
+    public int numero;
     public string acteur1;
     public string acteur2;
     public string acteur3;
