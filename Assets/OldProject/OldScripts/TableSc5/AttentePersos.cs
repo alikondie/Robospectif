@@ -16,6 +16,7 @@ public class AttentePersos : MonoBehaviour
     private int nbRecu;
     private string fr;
     private string en;
+    private int nbAttendus;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,12 @@ public class AttentePersos : MonoBehaviour
         {
             fr = "acteur";
             en = "role";
+            nbAttendus = Partie.Joueurs.Count - 2;
         } else
         {
             fr = "personnage";
             en = "character";
+            nbAttendus = Partie.Joueurs.Count - 1;
         }
         NetworkServer.RegisterHandler(persosID, OnPersoReceived);
     }
@@ -72,8 +75,20 @@ public class AttentePersos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nbRecu == Partie.Joueurs.Count - 1)
+        if (nbRecu == nbAttendus)
         {
+            foreach(Joueur j in Partie.Joueurs)
+            {
+                if (j.IsPrive)
+                {
+                    Debug.Log(j.Position);
+                    persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPrive");
+                } else if (j.IsPublic)
+                {
+                    Debug.Log(j.Position);
+                    persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPublic");
+                }
+            }
             Tour.PersosDebat = persoSprites;
             Tour.ZonesDebat = zones;
             canvas_attente_persos.SetActive(false);
