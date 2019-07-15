@@ -1,0 +1,16 @@
+Cartes rejetees
+Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3
+J 1;VehiculeLourd;Roues;ScanneraRayonsX;AppeldUrgence;LaboratoiredAnalyses
+J 2;GrandeCapacite;Rampant;ScanneraRayonsX;SondesDeMesure;Toboggan
+Tour 1
+Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3
+J 1;PetitRobot;Ballon;Autonome;M EquipementsDeFurtivite;P KitOlfactif;A EquipementsFitness
+Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-
+2;Tom;Banlieue,;8;0;0;0;0;0;0;0;0;0;0;0;
+Vainqueur: J 2
+Tour 2
+Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3
+J 2;PetitRobot;Helices;Autonome;M Imprimante3D;P SynthetiseurDeSons;A AppeldUrgence
+Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-
+1;Julio;Campagne,;8;0;0;0;0;0;0;0;0;0;0;0;
+Vainqueur: J 1

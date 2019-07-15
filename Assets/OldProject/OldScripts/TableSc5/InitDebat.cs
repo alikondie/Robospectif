@@ -21,6 +21,7 @@ public class InitDebat : MonoBehaviour
     private Dictionary<int, GameObject> persosAndJetons;
     // récuperer pour chaque joueur les jetons données l'ordre c'est: SDP SDM EDP EDM UDP UDM
     private Dictionary<int, int[]> givenJetons;
+    private bool isDictsEmpty = true;
 
     GameObject objet;
     short jeton = 1010;
@@ -45,7 +46,7 @@ public class InitDebat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+        
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
         //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
@@ -167,11 +168,15 @@ public class InitDebat : MonoBehaviour
 
 
         //GameObject p = persos[0].transform.Find("Jetons").gameObject;
-
-   /*     foreach(GameObject pers in persos)
+        SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+        foreach (GameObject pers in persos)
         {
             FillPersoData(pers);
-        }*/
+        }
+        persosAndDebate.Clear();
+        persosAndJetons.Clear();
+        givenJetons.Clear();
+        isDictsEmpty = true;
         canvas_debat.SetActive(false);
         canvas_choix_vainqueur.SetActive(true);
     }
@@ -183,6 +188,12 @@ public class InitDebat : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
+
+        if (isDictsEmpty) { 
+            FillPersoDict();
+            isDictsEmpty = false;
+        }
+
     }
 
     private void FillPersoDict()
@@ -196,10 +207,11 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Add(i, currentPerso);
             givenJetons.Add(i, new int[] { 0, 0, 0, 0, 0, 0 });
         }
-     /*   foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
+        foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
         {
-            print(p.Value);
-        }*/
+            print("key "+p.Key+"value "+p.Value);
+
+        }
 
     }
 
@@ -207,7 +219,7 @@ public class InitDebat : MonoBehaviour
     {
         int number = Array.IndexOf(persos, perso);
 
-        if (number >= Partie.Joueurs.Count)
+        if (number >= Partie.Joueurs.Count || number+1 == Partie.JoueurCourant)
             return;
 
 
@@ -229,6 +241,7 @@ public class InitDebat : MonoBehaviour
         string jetonValue;
 
         int keyIndex = perso.transform.GetSiblingIndex();
+        //print
         GameObject p = persosAndJetons[keyIndex];
        // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
        // {
@@ -266,16 +279,16 @@ public class InitDebat : MonoBehaviour
 
             //Donnée Finale
 
-            persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
+            persosAndDebate.Add(keyIndex, number+1 + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
-            persosAndDebate.Clear();
-            persosAndJetons.Clear();
-            givenJetons.Clear();
 
-            //print( persosAndDebate[keyIndex]);
-            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
-      //  }
+
+            print( keyIndex);
+            SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
+
+
+        //  }
     }
 
     // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)

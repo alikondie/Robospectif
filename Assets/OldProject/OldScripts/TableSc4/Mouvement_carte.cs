@@ -305,6 +305,12 @@ public class Mouvement_carte : MonoBehaviour
                         print("auto "+s);
 
                     break;
+                case ("boxcollider attention"):
+                    Initialisation.autonomie = "Attention Requise";
+                    break;
+                case ("boxcollider autonomie"):
+                    Initialisation.autonomie = "Autonome";
+                    break;
             }
     /*          int me = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
               int pe = Initialisation.programmableEquipmentCards == null ? 0 : Initialisation.programmableEquipmentCards.Count;
@@ -320,24 +326,18 @@ public class Mouvement_carte : MonoBehaviour
             case ("boxcollider equipment manual"):
                 if (Initialisation.manualEquipmentCards == null)
                     Initialisation.manualEquipmentCards = equipmentStrings;
-
                 else
                     Initialisation.manualEquipmentCards.AddRange(equipmentStrings);
 
                 //debug
-                foreach (string s in Initialisation.manualEquipmentCards)
-                    print("man " + s);
                 break;
                 
             case ("boxcollider equipment programmable"):
                 if(Initialisation.programmableEquipmentCards == null)
                     Initialisation.programmableEquipmentCards = equipmentStrings;
-
                 else
                     Initialisation.programmableEquipmentCards.AddRange(equipmentStrings);
 
-                foreach (string s in Initialisation.programmableEquipmentCards)
-                    print("prog " + s);
                 break;
             case ("boxcollider equipment automatique"):
                 if (Initialisation.autoEquipmentCards == null)
@@ -346,11 +346,14 @@ public class Mouvement_carte : MonoBehaviour
                 else
                     Initialisation.autoEquipmentCards.AddRange(equipmentStrings);
 
-
-                foreach (string s in Initialisation.autoEquipmentCards)
-                    print("auto " + s);
                 break;
-                
+            case ("boxcollider attention"):
+                Initialisation.autonomie = "Attention Requise";
+                break;
+            case ("boxcollider autonomie"):
+                Initialisation.autonomie = "Autonome";
+                break;
+
         }
      /*   int m = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
         int p = Initialisation.programmableEquipmentCards == null ? 0 : Initialisation.programmableEquipmentCards.Count;

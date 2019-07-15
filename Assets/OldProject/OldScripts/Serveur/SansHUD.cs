@@ -24,7 +24,7 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "192.168.43.40";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
     // recolte de données main script
     public static StringBuilder data;
