@@ -135,9 +135,12 @@ public class Initialisation : MonoBehaviour
             // suppression du dernier point-virgule
             currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
             SansHUD.data.AppendLine(currentTurnData);
-            manualEquipmentCards.Clear();
-            programmableEquipmentCards.Clear();
-            autoEquipmentCards.Clear();
+            if (manualEquipmentCards != null)
+                manualEquipmentCards.Clear();
+            if (programmableEquipmentCards != null)
+                programmableEquipmentCards.Clear();
+            if (autoEquipmentCards != null)
+                autoEquipmentCards.Clear();
         // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
 
         // File.AppendAllText(filePath, SansHUD.data.ToString());

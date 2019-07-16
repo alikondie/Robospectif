@@ -73,26 +73,7 @@ public class InitDebat : MonoBehaviour
 
         NetworkServer.RegisterHandler(jeton, onJetonReceived);
 
-
-        positionsButton = new Vector2[6];
-        positionsButton[0] = new Vector2(-3, (float)-3.75);
-        positionsButton[1] = new Vector2(3, (float)-3.75);
-        positionsButton[2] = new Vector2(7, 0);
-        positionsButton[3] = new Vector2(3, (float)3.75);
-        positionsButton[4] = new Vector2(-3, (float)3.75);
-        positionsButton[5] = new Vector2(-7, 0);
-
-
-        //button.transform.position = positionsButton[pos-1];
-
-       /* if (pos == 3)
-            button.transform.Rotate(Vector3.forward * 90);
-
-        if ((pos == 4) || (pos == 5))
-            button.transform.Rotate(Vector3.forward * 180);
-
-        if (pos == 6)
-            button.transform.Rotate(Vector3.forward * 270);*/
+        button.transform.position = persos[Array.IndexOf(Partie.Positions, Partie.JoueurCourant)].transform.position;
 
         button.onClick.AddListener(() => ButtonClicked());
 
