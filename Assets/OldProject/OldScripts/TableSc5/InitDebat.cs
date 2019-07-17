@@ -166,6 +166,19 @@ public class InitDebat : MonoBehaviour
                     button.transform.GetChild(0).GetComponent<Text>().text = "Public investments done";
             } else
             {
+                Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
+                bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
+
+                for (int i = 0; i < persos.Length; i++)
+                {
+                    for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+                    {
+                        sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                        bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                    }
+                }
+                Tour.JetonsDebat = sprites;
+                Tour.ActivesDebat = bools;
                 MyStringMessage msg = new MyStringMessage();
                 NetworkServer.SendToAll(nextID, msg);
                 canvas_debat.SetActive(false);
