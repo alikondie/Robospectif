@@ -174,7 +174,9 @@ public class InitDebat : MonoBehaviour
                     for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
                     {
                         sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                        Debug.Log("sprites[" + i + ", " + j + "] = " + sprites[i, j]);
                         bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                        Debug.Log("bools[" + i + ", " + j + "] = " + bools[i, j]);
                     }
                 }
                 Tour.JetonsDebat = sprites;

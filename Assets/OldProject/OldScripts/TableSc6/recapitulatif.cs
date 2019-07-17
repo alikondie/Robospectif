@@ -80,6 +80,7 @@ public class recapitulatif : MonoBehaviour
 
         foreach (GameObject j in joueurs)
         {
+            Debug.Log(j.name);
             GameObject objects = j.transform.GetChild(1).gameObject;
             int jetoncount = 0;
             GameObject[] listjetons = new GameObject[objects.transform.childCount];
@@ -87,7 +88,7 @@ public class recapitulatif : MonoBehaviour
             {
                 listjetons[i] = objects.transform.GetChild(i).gameObject;
             }
-
+            Debug.Log(Tour.PersosDebat[compteur]);
             if(Tour.PersosDebat[compteur] != null)
             {
                 j.transform.GetChild(0).GetComponent<Image>().sprite = Tour.PersosDebat[compteur];
@@ -105,8 +106,6 @@ public class recapitulatif : MonoBehaviour
 
                 for (int k = 0; k < j.transform.GetChild(1).childCount; k++)
                 {
-                    Debug.Log("compteur = " + compteur + " | k = " + k);
-                    Debug.Log(Tour.JetonsDebat[compteur, k]);
                     j.transform.GetChild(1).GetChild(k).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[compteur, k];
                     j.transform.GetChild(1).GetChild(k).gameObject.SetActive(Tour.ActivesDebat[compteur, k]);
                 }
