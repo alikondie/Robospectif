@@ -114,7 +114,7 @@ public class recapitulatif : MonoBehaviour
             }
 
 
-            for (int k = 0; k < 3; k++)
+            for (int k = 0; k < listjetons.Length; k++)
             {
                 if (listjetons[k].activeSelf)
                 {
@@ -125,6 +125,10 @@ public class recapitulatif : MonoBehaviour
             if (jetoncount < 3)
             {
                 j.SetActive(false);
+            }
+            if (jetoncount != 3)
+            {
+                j.transform.GetChild(2).gameObject.SetActive(false);
             }
             compteur++;
 
