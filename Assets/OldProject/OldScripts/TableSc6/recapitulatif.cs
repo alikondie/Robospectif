@@ -76,12 +76,13 @@ public class recapitulatif : MonoBehaviour
             joueur.SetActive(false);
         }
 
-        GameObject[] objects = (GameObject[])Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pile");
+        //GameObject[] objects = (GameObject[])Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pile");
 
-        foreach (GameObject j in objects)
+        foreach (GameObject j in joueurs)
         {
+            GameObject objects = j.transform.GetChild(1).gameObject;
             int jetoncount = 0;
-            GameObject[] listjetons = j.GetComponents<GameObject>();
+            GameObject[] listjetons = objects.GetComponents<GameObject>();
             for (int k = 0;  3 < k; k++)
             {
                 if(listjetons[k].activeSelf)
@@ -101,17 +102,17 @@ public class recapitulatif : MonoBehaviour
                 {
                     if ((k != zone1) && (k != zone2))
                     {
-                        joueurs[compteur].transform.GetChild(k + 2).gameObject.SetActive(false);
+                        j.transform.GetChild(k + 2).gameObject.SetActive(false);
                     }
                 }
 
 
-                for (int k = 0; k < joueurs[compteur].transform.GetChild(1).childCount; k++)
+                for (int k = 0; k < j.transform.GetChild(1).childCount; k++)
                 {
-                    joueurs[compteur].transform.GetChild(1).GetChild(k).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[compteur, k];
-                    joueurs[compteur].transform.GetChild(1).GetChild(k).gameObject.SetActive(Tour.ActivesDebat[compteur, k]);
+                    j.transform.GetChild(1).GetChild(k).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[compteur, k];
+                    j.transform.GetChild(1).GetChild(k).gameObject.SetActive(Tour.ActivesDebat[compteur, k]);
                 }
-
+                compteur++;
                 j.SetActive(true);
             }
         }
