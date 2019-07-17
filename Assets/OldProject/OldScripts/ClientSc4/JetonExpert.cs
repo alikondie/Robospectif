@@ -24,7 +24,8 @@ public class JetonExpert : MonoBehaviour
     private void OnButtonClicked()
     {
         MyJetonMessage msg = new MyJetonMessage();
-        msg.sprite = this.name.Substring(0, 1);
+        string s = this.GetComponent<Image>().sprite.ToString();
+        msg.sprite = s.Substring(0, s.Length - 21);
         msg.joueur = JoueurStatic.Numero;
         JoueurStatic.Client.Send(jeton, msg);
         this.gameObject.SetActive(false);
