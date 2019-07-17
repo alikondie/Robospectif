@@ -73,14 +73,14 @@ public class InitDebat : MonoBehaviour
 
         NetworkServer.RegisterHandler(jeton, onJetonReceived);
 
-        button.transform.position = persos[Array.IndexOf(Partie.Positions, Partie.JoueurCourant)].transform.position;
-
         button.onClick.AddListener(() => ButtonClicked());
 
     }
 
     void OnEnable()
     {
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
+
         if (Partie.Type == "expert")
         {
             fr = "Fin des investissements privés";
@@ -90,7 +90,15 @@ public class InitDebat : MonoBehaviour
         {
             fr = "Terminer le débat";
             en = "End debate";
+            button.transform.position = persos[pos].transform.position;
+            switch (pos)
+            {
+                case 1: case 2:
+   //                 button.transform.rotation = null;
+                    break;
+            }
         }
+
         nbClicked = 0;
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = fr;
@@ -100,8 +108,6 @@ public class InitDebat : MonoBehaviour
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
         index = new int[] { 0, 0, 0, 0, 0, 0 };
-
-        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
 
         for (int i = 0; i < 6; i++)
         {

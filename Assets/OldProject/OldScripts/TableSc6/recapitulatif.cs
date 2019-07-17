@@ -82,7 +82,12 @@ public class recapitulatif : MonoBehaviour
         {
             GameObject objects = j.transform.GetChild(1).gameObject;
             int jetoncount = 0;
-            GameObject[] listjetons = objects.GetComponents<GameObject>();
+            GameObject[] listjetons = new GameObject[objects.transform.childCount];
+            for (int i = 0; i < listjetons.Length; i++)
+            {
+                listjetons[i] = objects.transform.GetChild(i).gameObject;
+            }
+
             for (int k = 0;  3 < k; k++)
             {
                 if(listjetons[k].activeSelf)
