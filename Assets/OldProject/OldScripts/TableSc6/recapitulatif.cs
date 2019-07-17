@@ -109,6 +109,7 @@ public class recapitulatif : MonoBehaviour
                     Debug.Log(Tour.JetonsDebat[compteur, k]);
                     j.transform.GetChild(1).GetChild(k).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[compteur, k];
                     j.transform.GetChild(1).GetChild(k).gameObject.SetActive(Tour.ActivesDebat[compteur, k]);
+                    listjetons[k].SetActive(Tour.ActivesDebat[compteur, k]);
                 }
             }
 
