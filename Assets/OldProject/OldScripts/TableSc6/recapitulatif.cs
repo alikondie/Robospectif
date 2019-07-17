@@ -88,18 +88,9 @@ public class recapitulatif : MonoBehaviour
                 listjetons[i] = objects.transform.GetChild(i).gameObject;
             }
 
-            for (int k = 0;  3 < k; k++)
-            {
-                if(listjetons[k].activeSelf)
-                {
-                    jetoncount++;
-                }
-            }
-
-            if(jetoncount == 3)
+            if(Tour.PersosDebat[compteur] != null)
             {
                 j.transform.GetChild(0).GetComponent<Image>().sprite = Tour.PersosDebat[compteur];
-
 
                 int zone1 = Tour.ZonesDebat[compteur, 0];
                 int zone2 = Tour.ZonesDebat[compteur, 1];
@@ -117,9 +108,22 @@ public class recapitulatif : MonoBehaviour
                     j.transform.GetChild(1).GetChild(k).gameObject.GetComponent<Image>().sprite = Tour.JetonsDebat[compteur, k];
                     j.transform.GetChild(1).GetChild(k).gameObject.SetActive(Tour.ActivesDebat[compteur, k]);
                 }
-                compteur++;
+            }
+
+
+            for (int k = 0; 3 < k; k++)
+            {
+                if (listjetons[k].activeSelf)
+                {
+                    jetoncount++;
+                }
+            }
+
+            if (jetoncount == 3)
+            {
                 j.SetActive(true);
             }
+            compteur++;
 
             Debug.Log("joueur " + compteur + " possède " + jetoncount + " jetons");
 
