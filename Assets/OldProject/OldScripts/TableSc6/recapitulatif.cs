@@ -120,6 +120,9 @@ public class recapitulatif : MonoBehaviour
                 compteur++;
                 j.SetActive(true);
             }
+
+            Debug.Log("joueur " + compteur + " possède " + jetoncount + " jetons");
+
         }
     }
 }
