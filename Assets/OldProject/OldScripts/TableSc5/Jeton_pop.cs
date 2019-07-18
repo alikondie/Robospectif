@@ -54,7 +54,7 @@ public class Jeton_pop : MonoBehaviour
     {
 
         Sprite s = collision.gameObject.GetComponent<Image>().sprite;
-        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive") && exp)
+        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive"))
         {
             int index = cartes.IndexOf(collision.gameObject);
             if ((Partie.Type != "expert") || (Tour.Piles[index] < 3))
