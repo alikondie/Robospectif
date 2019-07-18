@@ -161,6 +161,14 @@ public class Initialisation_expert : MonoBehaviour
         int x = Random.Range(0, tab.Taille);
         int y = Random.Range(0, tab.Taille);
         int z = Random.Range(0, tab.Taille);
+
+        while ((x == y) || (x == z) || (y == z))
+        {
+            x = Random.Range(0, tab.Taille);
+            y = Random.Range(0, tab.Taille);
+            z = Random.Range(0, tab.Taille);
+        }
+
         Main.Image[] acteurs = new Main.Image[3];
         acteurs[0] = tab.getImageind(x);
         acteurs[1] = tab.getImageind(y);

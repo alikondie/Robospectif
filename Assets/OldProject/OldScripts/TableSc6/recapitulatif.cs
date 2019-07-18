@@ -42,6 +42,8 @@ public class recapitulatif : MonoBehaviour
     private void ButtonClicked()
     {
         int nb = Partie.Joueurs.Count;
+        Debug.Log("jetons verts : " + Partie.NbJetonsVert);
+        Debug.Log("jetons rouges : " + Partie.NbJetonsRouge);
         canvas_choix_vainqueur.SetActive(false);
         if (nb != Partie.Tour)
         {
@@ -80,7 +82,6 @@ public class recapitulatif : MonoBehaviour
 
         foreach (GameObject j in joueurs)
         {
-            Debug.Log(j.name);
             GameObject objects = j.transform.GetChild(1).gameObject;
             int jetoncount = 0;
             GameObject[] listjetons = new GameObject[objects.transform.childCount];
@@ -88,7 +89,6 @@ public class recapitulatif : MonoBehaviour
             {
                 listjetons[i] = objects.transform.GetChild(i).gameObject;
             }
-            Debug.Log(Tour.PersosDebat[compteur]);
             if(Tour.PersosDebat[compteur] != null)
             {
                 j.SetActive(true);
@@ -116,7 +116,7 @@ public class recapitulatif : MonoBehaviour
 
             for (int k = 0; k < listjetons.Length; k++)
             {
-                if (listjetons[k].activeSelf)
+                if (j.activeSelf && listjetons[k].activeSelf)
                 {
                     jetoncount++;
                 }
@@ -136,8 +136,6 @@ public class recapitulatif : MonoBehaviour
                 }
             }
             compteur++;
-
-            Debug.Log("joueur " + compteur + " possède " + jetoncount + " jetons");
 
         }
     }
