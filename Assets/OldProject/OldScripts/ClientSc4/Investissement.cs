@@ -57,6 +57,7 @@ public class Investissement : MonoBehaviour
             int nb = 5;
             if (JoueurStatic.NbJoueurs == 6)
                 nb = 6;
+            Debug.Log("nb = " + nb);
             for (int i = 0; i < nb; i++)
             {
                 verts.transform.GetChild(i).gameObject.SetActive(true);

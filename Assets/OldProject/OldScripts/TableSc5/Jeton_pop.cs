@@ -52,7 +52,9 @@ public class Jeton_pop : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
+        Sprite s = collision.gameObject.GetComponent<Image>().sprite;
+        Debug.Log(s.name);
+        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive"))
         {
             this.gameObject.SetActive(false);
             MyJetonMessage msg = new MyJetonMessage();
