@@ -15,12 +15,14 @@ public class Initialisation_expert : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_pres_persos;
     [SerializeField] GameObject children;
+    private Vector3 position_init_conduite;
     private float[,] position_init_dimension;
     private float[,] position_init_locomotion;
     private float[,] position_init_equipement;
     [SerializeField] GameObject[] dimension;
     [SerializeField] GameObject[] locomotion;
     [SerializeField] GameObject[] equipement;
+    [SerializeField] GameObject conduite;
     private Sprite[] dimensionssprites;
     private Sprite[] locomotionsprites;
     private Sprite[] equipementsprites;
@@ -50,6 +52,7 @@ public class Initialisation_expert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        position_init_conduite = conduite.transform.position;
         position_init_dimension = PositionInitiale(dimension);
         position_init_locomotion = PositionInitiale(locomotion);
         position_init_equipement = PositionInitiale(equipement);
@@ -90,7 +93,7 @@ public class Initialisation_expert : MonoBehaviour
         LoadSprite(locomotion, locomotionsprites);
         LoadSprite(equipement, equipementsprites);
         #endregion
-
+        conduite.transform.position = position_init_conduite;
         LocateCards(dimension,position_init_dimension);
         LocateCards(locomotion,position_init_locomotion);
         LocateCards(equipement, position_init_equipement);
@@ -315,7 +318,5 @@ public class Initialisation_expert : MonoBehaviour
             Vector3 positioninitdimension = new Vector3(positioninit[k, 0], positioninit[k, 1]);
             listecartes[k].transform.position = positioninitdimension;
         }
-
-        
     }
 }
