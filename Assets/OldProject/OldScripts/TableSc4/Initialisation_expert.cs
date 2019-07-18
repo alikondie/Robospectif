@@ -15,6 +15,9 @@ public class Initialisation_expert : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_pres_persos;
     [SerializeField] GameObject children;
+    private float[,] position_init_dimension;
+    private float[,] position_init_locomotion;
+    private float[,] position_init_equipement;
     [SerializeField] GameObject[] dimension;
     [SerializeField] GameObject[] locomotion;
     [SerializeField] GameObject[] equipement;
@@ -47,6 +50,11 @@ public class Initialisation_expert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        position_init_dimension = PositionInitiale(dimension);
+        position_init_locomotion = PositionInitiale(locomotion);
+        position_init_equipement = PositionInitiale(equipement);
+        
+
         button.onClick.AddListener(() => ButtonClicked());
         SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
         SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
@@ -55,18 +63,15 @@ public class Initialisation_expert : MonoBehaviour
     void OnEnable()
     {
         //Tour.NbCartesPosees = 0;
-        if (Partie.Type == "expert")
+        MyDecideurMessage msg = new MyDecideurMessage();
+        foreach (Joueur j in Partie.Joueurs)
         {
-            MyDecideurMessage msg = new MyDecideurMessage();
-            foreach (Joueur j in Partie.Joueurs)
-            {
-                if (j.IsPrive)
-                    msg.priv = j.Numero;
-                else if (j.IsPublic)
-                    msg.pub = j.Numero;
-            }
-            NetworkServer.SendToAll(decideurID, msg);
+            if (j.IsPrive)
+                msg.priv = j.Numero;
+            else if (j.IsPublic)
+                msg.pub = j.Numero;
         }
+        NetworkServer.SendToAll(decideurID, msg);
 
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
@@ -85,6 +90,10 @@ public class Initialisation_expert : MonoBehaviour
         LoadSprite(locomotion, locomotionsprites);
         LoadSprite(equipement, equipementsprites);
         #endregion
+
+        LocateCards(dimension,position_init_dimension);
+        LocateCards(locomotion,position_init_locomotion);
+        LocateCards(equipement, position_init_equipement);
     }
 
     // Update is called once per frame
@@ -287,4 +296,26 @@ public class Initialisation_expert : MonoBehaviour
         }
     }
 
+    private float[,] PositionInitiale(GameObject[] listecarte)
+    {
+        float[,] ret = new float[listecarte.Length, 2];
+        for (int i = 0; i < listecarte.Length; i++)
+        {
+            ret[i, 0] = listecarte[i].transform.position.x;
+            ret[i, 1] = listecarte[i].transform.position.y;
+        }
+
+        return ret;
+    }
+
+    private void LocateCards(GameObject[] listecartes, float[,] positioninit)
+    {
+        for(int k = 0; k < listecartes.Length; k++)
+        {
+            Vector3 positioninitdimension = new Vector3(positioninit[k, 0], positioninit[k, 1]);
+            listecartes[k].transform.position = positioninitdimension;
+        }
+
+        
+    }
 }
