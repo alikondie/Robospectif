@@ -26,7 +26,7 @@ public class Initialisation_expert : MonoBehaviour
     private Sprite[] dimensionssprites;
     private Sprite[] locomotionsprites;
     private Sprite[] equipementsprites;
-
+    private bool start = true;
     private int pos;
 
     [SerializeField] Button button;
@@ -52,12 +52,6 @@ public class Initialisation_expert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        position_init_conduite = conduite.transform.position;
-        position_init_dimension = PositionInitiale(dimension);
-        position_init_locomotion = PositionInitiale(locomotion);
-        position_init_equipement = PositionInitiale(equipement);
-        
-
         button.onClick.AddListener(() => ButtonClicked());
         SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
         SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
@@ -65,6 +59,14 @@ public class Initialisation_expert : MonoBehaviour
 
     void OnEnable()
     {
+        if(start)
+        {
+            start = false;
+            position_init_conduite = conduite.transform.position;
+            position_init_dimension = PositionInitiale(dimension);
+            position_init_locomotion = PositionInitiale(locomotion);
+            position_init_equipement = PositionInitiale(equipement);
+        }
         //Tour.NbCartesPosees = 0;
         MyDecideurMessage msg = new MyDecideurMessage();
         foreach (Joueur j in Partie.Joueurs)
