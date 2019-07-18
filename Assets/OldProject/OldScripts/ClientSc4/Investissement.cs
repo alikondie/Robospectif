@@ -58,10 +58,14 @@ public class Investissement : MonoBehaviour
             if (JoueurStatic.NbJoueurs == 6)
                 nb = 6;
             Debug.Log("nb = " + nb);
+            int compteur = 1;
             for (int i = 0; i < nb; i++)
             {
+                Debug.Log(verts.transform.GetChild(i).gameObject.name);
                 verts.transform.GetChild(i).gameObject.SetActive(true);
+                compteur++;
             }
+            Debug.Log("compteur = " + compteur);
         } else
         {
             central.gameObject.SetActive(true);

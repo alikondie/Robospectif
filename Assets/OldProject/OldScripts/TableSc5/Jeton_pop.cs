@@ -52,15 +52,18 @@ public class Jeton_pop : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        int index = cartes.IndexOf(collision.gameObject);
         Sprite s = collision.gameObject.GetComponent<Image>().sprite;
-        Debug.Log(s.name);
-        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive"))
+        bool exp = true;
+        Debug.Log(Tour.Piles[index]);
+        if (Partie.Type == "expert")
+            exp = Tour.Piles[index] < 4;
+        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive") && exp)
         {
             this.gameObject.SetActive(false);
             MyJetonMessage msg = new MyJetonMessage();
             NetworkServer.SendToAll(goID, msg);
-
-            int index = cartes.IndexOf(collision.gameObject);
             
             if (Tour.Piles[index] < 8)
             {
