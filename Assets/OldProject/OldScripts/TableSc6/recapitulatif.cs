@@ -45,7 +45,15 @@ public class recapitulatif : MonoBehaviour
         Debug.Log("jetons verts : " + Partie.NbJetonsVert);
         Debug.Log("jetons rouges : " + Partie.NbJetonsRouge);
         canvas_choix_vainqueur.SetActive(false);
-        if (nb != Partie.Tour)
+        if (Partie.Joueurs.Count < 6 && Partie.NbJetonsVert < 8  || Partie.Joueurs.Count == 6 && Partie.NbJetonsVert < 9)
+        {
+            MyStringMessage endMsg = new MyStringMessage();
+            endMsg.s = "end";
+            NetworkServer.SendToAll(nextID, endMsg);
+            canvas_fin.SetActive(true);
+        }
+
+        else
         {
             Partie.Tour++;
             Partie.JoueurCourant++;
@@ -54,14 +62,6 @@ public class recapitulatif : MonoBehaviour
                 Partie.JoueurCourant = 1;
             }
             canvas_fin_tour.SetActive(true);
-        }
-
-        else
-        {
-            MyStringMessage endMsg = new MyStringMessage();
-            endMsg.s = "end";
-            NetworkServer.SendToAll(nextID, endMsg);
-            canvas_fin.SetActive(true);
         }
     }
 
@@ -128,6 +128,7 @@ public class recapitulatif : MonoBehaviour
             }
             if (jetoncount >= 3)
             {
+
                 Partie.NbJetonsVert -= 3;
                 if(jetoncount == 4)
                 {
