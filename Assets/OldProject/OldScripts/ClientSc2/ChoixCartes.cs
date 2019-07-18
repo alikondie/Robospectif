@@ -83,17 +83,21 @@ public class ChoixCartes : MonoBehaviour
         if (JoueurStatic.Numero == priv)
         {
             JoueurStatic.IsPrive = true;
+            JoueurStatic.IsPublic = false;
             decideur.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Decideurs/DecideurPrive");
             decideur.SetActive(true);
             attente.gameObject.SetActive(true);
         } else if (JoueurStatic.Numero == pub)
         {
             JoueurStatic.IsPublic = true;
+            JoueurStatic.IsPrive = false;
             decideur.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Decideurs/DecideurPublic");
             decideur.SetActive(true);
             attente.gameObject.SetActive(true);
         } else
         {
+            JoueurStatic.IsPublic = false;
+            JoueurStatic.IsPrive = false;
             choix.gameObject.SetActive(true);
         }
     }

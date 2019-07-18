@@ -56,10 +56,27 @@ public class recapitulatif : MonoBehaviour
         else
         {
             Partie.Tour++;
-            Partie.JoueurCourant++;
-            if (Partie.JoueurCourant > Partie.Joueurs.Count)
+            int newPriv = -1;
+            foreach (Joueur j in Partie.Joueurs)
             {
-                Partie.JoueurCourant = 1;
+                if (j.IsPrive)
+                {
+                    j.IsPrive = false;
+                    j.IsPublic = true;
+                    if (j.Numero == Partie.Joueurs.Count)
+                        newPriv = 1;
+                    else
+                        newPriv = j.Numero + 1;
+                } else if (j.IsPublic)
+                {
+                    j.IsPublic = false;
+                }
+            }
+
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (j.Numero == newPriv)
+                    j.IsPrive = true;
             }
             canvas_fin_tour.SetActive(true);
         }
