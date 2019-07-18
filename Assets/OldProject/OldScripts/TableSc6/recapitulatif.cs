@@ -126,9 +126,14 @@ public class recapitulatif : MonoBehaviour
             {
                 j.SetActive(false);
             }
-            if (jetoncount != 3)
+            if (jetoncount >= 3)
             {
-                j.transform.GetChild(2).gameObject.SetActive(false);
+                Partie.NbJetonsVert -= 3;
+                if(jetoncount == 4)
+                {
+                    j.transform.GetChild(2).gameObject.SetActive(false);
+                    Partie.NbJetonsRouge--;
+                }
             }
             compteur++;
 
