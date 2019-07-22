@@ -44,6 +44,11 @@ public class Investissement : MonoBehaviour
             central.text = "Investments";
         }
 
+        for (int j = 0; j < verts.transform.childCount; j++)
+        {
+            verts.transform.GetChild(j).gameObject.SetActive(true);
+        }
+
         for (int i = 0; i < rouges.transform.childCount; i++)
         {
             rouges.transform.GetChild(i).gameObject.SetActive(false);
@@ -57,9 +62,11 @@ public class Investissement : MonoBehaviour
             int nb = 5;
             if (JoueurStatic.NbJoueurs == 6)
                 nb = 6;
-            for (int i = 0; i < nb; i++)
+            int compteur = 1;
+            for (int i = nb; i < 6; i++)
             {
-                verts.transform.GetChild(i).gameObject.SetActive(true);
+                verts.transform.GetChild(i).gameObject.SetActive(false);
+                compteur++;
             }
         } else
         {

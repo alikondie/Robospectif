@@ -83,6 +83,7 @@ public class Init : MonoBehaviour
         else
             this.transform.GetChild(7).GetComponent<Text>().text = "Chose the player number that\ncorresponds to your position";
         JoueurStatic.NbJoueurs = i;
+        Debug.Log("nbjoueurs = " + JoueurStatic.NbJoueurs);
     }
 
     // Update is called once per frame

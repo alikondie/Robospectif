@@ -21,15 +21,6 @@ public class WaitPersosClient : MonoBehaviour
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(debatID, OnDebatReceived);
-        if (JoueurStatic.Type == "expert")
-        {
-            fr = "acteurs";
-            en = "Roles";
-        } else
-        {
-            fr = "personnages";
-            en = "Characters";
-        }
     }
 
     // Update is called once per frame
@@ -40,6 +31,16 @@ public class WaitPersosClient : MonoBehaviour
 
     void OnEnable()
     {
+        if (JoueurStatic.Type == "expert")
+        {
+            fr = "acteurs";
+            en = "Roles";
+        }
+        else
+        {
+            fr = "personnages";
+            en = "Characters";
+        }
         if (JoueurStatic.Langue == "FR")
         {
             text.text = "Joueur " + JoueurStatic.Numero.ToString();

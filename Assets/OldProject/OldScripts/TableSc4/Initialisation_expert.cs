@@ -15,13 +15,18 @@ public class Initialisation_expert : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_pres_persos;
     [SerializeField] GameObject children;
+    private Vector3 position_init_conduite;
+    private float[,] position_init_dimension;
+    private float[,] position_init_locomotion;
+    private float[,] position_init_equipement;
     [SerializeField] GameObject[] dimension;
     [SerializeField] GameObject[] locomotion;
     [SerializeField] GameObject[] equipement;
+    [SerializeField] GameObject conduite;
     private Sprite[] dimensionssprites;
     private Sprite[] locomotionsprites;
     private Sprite[] equipementsprites;
-
+    private bool start = true;
     private int pos;
 
     [SerializeField] Button button;
@@ -54,19 +59,24 @@ public class Initialisation_expert : MonoBehaviour
 
     void OnEnable()
     {
-        //Tour.NbCartesPosees = 0;
-        if (Partie.Type == "expert")
+        if(start)
         {
-            MyDecideurMessage msg = new MyDecideurMessage();
-            foreach (Joueur j in Partie.Joueurs)
-            {
-                if (j.IsPrive)
-                    msg.priv = j.Numero;
-                else if (j.IsPublic)
-                    msg.pub = j.Numero;
-            }
-            NetworkServer.SendToAll(decideurID, msg);
+            start = false;
+            position_init_conduite = conduite.transform.position;
+            position_init_dimension = PositionInitiale(dimension);
+            position_init_locomotion = PositionInitiale(locomotion);
+            position_init_equipement = PositionInitiale(equipement);
         }
+        //Tour.NbCartesPosees = 0;
+        MyDecideurMessage msg = new MyDecideurMessage();
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (j.IsPrive)
+                msg.priv = j.Numero;
+            else if (j.IsPublic)
+                msg.pub = j.Numero;
+        }
+        NetworkServer.SendToAll(decideurID, msg);
 
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
@@ -85,6 +95,10 @@ public class Initialisation_expert : MonoBehaviour
         LoadSprite(locomotion, locomotionsprites);
         LoadSprite(equipement, equipementsprites);
         #endregion
+        conduite.transform.position = position_init_conduite;
+        LocateCards(dimension,position_init_dimension);
+        LocateCards(locomotion,position_init_locomotion);
+        LocateCards(equipement, position_init_equipement);
     }
 
     // Update is called once per frame
@@ -161,6 +175,14 @@ public class Initialisation_expert : MonoBehaviour
         int x = Random.Range(0, tab.Taille);
         int y = Random.Range(0, tab.Taille);
         int z = Random.Range(0, tab.Taille);
+
+        while ((x == y) || (x == z) || (y == z))
+        {
+            x = Random.Range(0, tab.Taille);
+            y = Random.Range(0, tab.Taille);
+            z = Random.Range(0, tab.Taille);
+        }
+
         Main.Image[] acteurs = new Main.Image[3];
         acteurs[0] = tab.getImageind(x);
         acteurs[1] = tab.getImageind(y);
@@ -180,9 +202,9 @@ public class Initialisation_expert : MonoBehaviour
 
         MyActeurMessage msg = new MyActeurMessage();
         msg.numero = j.Numero;
-        msg.acteur1 = j.Acteurs[0].ToString().Substring(0, j.Acteurs[0].ToString().Length - 21);
-        msg.acteur2 = j.Acteurs[1].ToString().Substring(0, j.Acteurs[1].ToString().Length - 21);
-        msg.acteur3 = j.Acteurs[2].ToString().Substring(0, j.Acteurs[2].ToString().Length - 21);
+        msg.acteur1 = j.Acteurs[0].name;
+        msg.acteur2 = j.Acteurs[1].name;
+        msg.acteur3 = j.Acteurs[2].name;
         NetworkServer.SendToAll(conceptionID, msg);
     }
 
@@ -279,4 +301,24 @@ public class Initialisation_expert : MonoBehaviour
         }
     }
 
+    private float[,] PositionInitiale(GameObject[] listecarte)
+    {
+        float[,] ret = new float[listecarte.Length, 2];
+        for (int i = 0; i < listecarte.Length; i++)
+        {
+            ret[i, 0] = listecarte[i].transform.position.x;
+            ret[i, 1] = listecarte[i].transform.position.y;
+        }
+
+        return ret;
+    }
+
+    private void LocateCards(GameObject[] listecartes, float[,] positioninit)
+    {
+        for(int k = 0; k < listecartes.Length; k++)
+        {
+            Vector3 positioninitdimension = new Vector3(positioninit[k, 0], positioninit[k, 1]);
+            listecartes[k].transform.position = positioninitdimension;
+        }
+    }
 }

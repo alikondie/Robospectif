@@ -94,35 +94,30 @@ public class SansHUD : NetworkManager
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
-        string dims = objectMessage.dim;
-        string locos = objectMessage.loco;
-        string equi1s = objectMessage.equi1;
-        string equi2s = objectMessage.equi2;
-        string equi3s = objectMessage.equi3;
+        Sprite dim = Resources.Load<Sprite>(Partie.Langue + "/Dimension/" + objectMessage.dim);
+        Sprite loco = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + objectMessage.loco);
+        Sprite equi1 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + objectMessage.equi1);
+        Sprite equi2 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + objectMessage.equi2);
+        Sprite equi3 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + objectMessage.equi3);
         int numero = objectMessage.num;
         int z = objectMessage.zone;
-        string dim = dims.Substring(0, dims.Length - 21);
-        string loco = locos.Substring(0, locos.Length - 21);
-        string equi1 = equi1s.Substring(0, equi1s.Length - 21);
-        string equi2 = equi2s.Substring(0, equi2s.Length - 21);
-        string equi3 = equi3s.Substring(0, equi3s.Length - 21);
 
         Sprite[] images = new Sprite[5];
-        images[0] = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + loco);
-        images[1] = Resources.Load<Sprite>(Partie.Langue + "/Dimension/" + dim);
-        images[2] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi1);
-        images[3] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi2);
-        images[4] = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi3);
+        images[0] = loco;
+        images[1] = dim;
+        images[2] = equi1;
+        images[3] = equi2;
+        images[4] = equi3;
 
         foreach (Joueur j in Partie.Joueurs)
         {
             if (j.Numero == numero)
             {
-                j.Dim = Resources.Load<Sprite>(Partie.Langue + "/Dimension/" + dim);
-                j.Loco = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + loco);
-                j.Equi1 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi1);
-                j.Equi2 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi2);
-                j.Equi3 = Resources.Load<Sprite>(Partie.Langue + "/Equipements/" + equi3);
+                j.Dim = dim;
+                j.Loco = loco;
+                j.Equi1 = equi1;
+                j.Equi2 = equi2;
+                j.Equi3 = equi3;
             }
         }
 

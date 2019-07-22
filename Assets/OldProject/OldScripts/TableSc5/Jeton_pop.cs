@@ -52,23 +52,34 @@ public class Jeton_pop : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) )
+        Sprite self = this.GetComponent<Image>().sprite;
+        Debug.Log(self.name);
+        Sprite s = collision.gameObject.GetComponent<Image>().sprite;
+        if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive"))
         {
-            this.gameObject.SetActive(false);
-            MyJetonMessage msg = new MyJetonMessage();
-            NetworkServer.SendToAll(goID, msg);
-
             int index = cartes.IndexOf(collision.gameObject);
-            
-            if (Tour.Piles[index] < 8)
+            bool exp = true;
+            if (self.name == "Jeton Vert")
+                exp = Tour.Piles[index] < 3;
+            else if (self.name == "Jeton Rouge")
+                exp = Tour.Piles[index] == 3;
+            if (exp)
             {
-                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
-                joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
-                // recup donnée envoyer le jeton à partir de la fct AddGivenJeton
-                GameObject jeton = joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject;
-                joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index,jeton);
+                this.gameObject.SetActive(false);
+                MyJetonMessage msg = new MyJetonMessage();
+                NetworkServer.SendToAll(goID, msg);
 
-                Tour.Piles[index]++;
+                if (Tour.Piles[index] < 8)
+                {
+                    Debug.Log(Tour.Piles[index]);
+                    joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
+                    joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
+                    // recup donnée envoyer le jeton à partir de la fct AddGivenJeton
+                    GameObject jeton = joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject;
+                    //joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index,jeton);
+
+                    Tour.Piles[index]++;
+                }
             }
         }
         this.transform.position = positionInit;

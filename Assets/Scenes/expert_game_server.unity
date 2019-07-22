@@ -922,7 +922,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59696300}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 238299177}
@@ -1675,7 +1675,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87230228}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 99.5, y: 99.5, z: 99.5}
   m_Children: []
   m_Father: {fileID: 40481624}
@@ -4136,7 +4136,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300903595}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 99.5, y: 99.5, z: 99.5}
   m_Children: []
   m_Father: {fileID: 1443886319}
@@ -10061,13 +10061,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 746853051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7025a84206aaa354089fee0086e0dc3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e1df1c5e2e3a614eafb9b42f251fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_choix_vainqueur: {fileID: 746853051}
   canvas_fin_tour: {fileID: 607237923}
   canvas_fin: {fileID: 548330519}
-  couronnes: []
   joueurs:
   - {fileID: 40481623}
   - {fileID: 1443886318}
@@ -11279,7 +11278,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876599374}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 99.5, y: 99.5, z: 99.5}
   m_Children: []
   m_Father: {fileID: 2045262883}
@@ -12074,7 +12073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &931088917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12517,7 +12516,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966838068}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 99.5, y: 99.5, z: 99.5}
   m_Children: []
   m_Father: {fileID: 693610392}
@@ -20450,6 +20449,7 @@ MonoBehaviour:
   - {fileID: 1415600830}
   - {fileID: 1089718906}
   - {fileID: 1277198270}
+  conduite: {fileID: 1199295757}
   button: {fileID: 156932958}
   Plateau: {fileID: 1380050224}
   cartes: {fileID: 928142543}
@@ -23306,7 +23306,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701253125}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 99.5, y: 99.5, z: 99.5}
   m_Children: []
   m_Father: {fileID: 1263524334}
@@ -30130,7 +30130,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
+  m_SizeDelta: {x: 320, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2134376146
 GameObject:

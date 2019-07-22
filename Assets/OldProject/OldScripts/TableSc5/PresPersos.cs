@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
+using UnityEditor;
 
 public class PresPersos : MonoBehaviour
 {
@@ -22,9 +23,11 @@ public class PresPersos : MonoBehaviour
     #endregion
 
     #region Inputs
+    [SerializeField] GameObject canvas_pres_vehicule;
     [SerializeField] GameObject canvas_pres_persos;
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject[] persos;
+    [SerializeField] GameObject[] cartes;
     [SerializeField] Button button;
     [SerializeField] Text text;
 	#endregion
@@ -38,20 +41,33 @@ public class PresPersos : MonoBehaviour
 	#region Unity loop
     void Start()
     {
-        if (Partie.Type == "expert")
-        {
-            fr = "acteur";
-            en = "role";
-        } else
-        {
-            fr = "personnage";
-            en = "character";
-        }
         button.onClick.AddListener(() => ButtonClicked());
     }
 
     void OnEnable()
     {
+        canvas_pres_vehicule.SetActive(true);
+        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent< BoxCollider2D>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
+        foreach (GameObject carte in cartes)
+        {
+            carte.GetComponent<BoxCollider2D>().enabled = false;
+            carte.GetComponent<Mouvement_carte>().enabled = false;
+        }
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+        }
+        else
+        {
+            fr = "personnage";
+            en = "character";
+        }
         for (int i = 0; i < 6; i++)
         {
             persos[i].transform.GetChild(0).gameObject.SetActive(false);
@@ -91,6 +107,8 @@ public class PresPersos : MonoBehaviour
 	
     void Update()
     {
+        checkifvehiculeclicked();
+
         foreach (Joueur j in Partie.Joueurs)
         {
             if (presentateur == j.Numero)
@@ -137,6 +155,19 @@ public class PresPersos : MonoBehaviour
         }
         else
         {
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
+            canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
+            canvas_pres_vehicule.SetActive(false);
+            canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+            foreach (GameObject carte in cartes)
+            {
+                carte.GetComponent<BoxCollider2D>().enabled = true;
+                carte.GetComponent<Mouvement_carte>().enabled = true;
+            }
             MyStringMessage msg = new MyStringMessage();
             NetworkServer.SendToAll(debatID, msg);
             canvas_pres_persos.SetActive(false);
@@ -153,6 +184,26 @@ public class PresPersos : MonoBehaviour
             res = i - 1;
         return res;
     }
+
+    private void checkifvehiculeclicked()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Input.mousePosition.x < 1000 && Input.mousePosition.x > 900 && 
+                Input.mousePosition.y < 600 && Input.mousePosition.y > 500 && 
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(10000f, 10000f))
+            {
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+            }
+            else if (Input.mousePosition.x < 1500 && Input.mousePosition.x > 420 && 
+                     Input.mousePosition.y < 1070 && Input.mousePosition.y > 0 &&
+                     canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(1920f, 1080f))
+            {
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+            }
+        }
+    }
+
     #endregion
 
 }
