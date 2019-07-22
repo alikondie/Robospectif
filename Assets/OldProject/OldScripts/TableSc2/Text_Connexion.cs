@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -26,6 +27,8 @@ public class Text_Connexion : MonoBehaviour
     private GameObject[] tabText = new GameObject[6];   //Tableau qui contient tout les GameObject "text_Position"
     private int infoAndroid;
 
+    private static int[] connectes;
+
     // Recuperation scene d'avant
     public static int nbJoueur ;  // Le nombre de joueur dans la partie (de 4 à 6)
     private static bool estDebut;
@@ -36,7 +39,7 @@ public class Text_Connexion : MonoBehaviour
     // Methode d'inisialisation
     void Start()
     {
-
+        connectes = new int[6];
         infoAndroid = 0;
         estDebut = false;
         // Recuperation du Nombre de joueur:
@@ -56,8 +59,8 @@ public class Text_Connexion : MonoBehaviour
     // Méthode de Mise A Jour
     void Update()
     {
-
-        AfficheJoueurConnecter();
+        int[] t = connectes;
+        AfficheJoueurConnecter(t);
         if (nbJoueursConnectes == nbJoueur)
         {       
             canvas_joueurs.SetActive(false);
@@ -120,34 +123,22 @@ public class Text_Connexion : MonoBehaviour
     // Méthode qui recupere l'entier de Joueur (Android)
     public static void recupInfoJoueur(int i)
     {
-        int pos = -1;
-        for (int j = 0; j < 6; j++)
-        {
-            if (i == Partie.Positions[j])
-            {
-                pos = j+1;
-            }
-        }
-        PlayerPrefs.SetInt("monInfoJoueur", pos);
+        Debug.Log("joueur connecte = " + i);
+        int pos = Array.IndexOf(Partie.Positions, i);
+        connectes[pos] = 1;
         estDebut = true;
         nbJoueursConnectes++;
     }
 
 
     // Méthode Affichage de connexion par joueurs
-    void AfficheJoueurConnecter()
+    void AfficheJoueurConnecter(int[] t)
     {
 
         //Recuperer les infos sur la connection du joueurs
-
-        if (estDebut)
+        for (int i = 0; i < t.Length; i++)
         {
-            infoAndroid = PlayerPrefs.GetInt("monInfoJoueur");
-        }
-
-        for (int i = 0; i < Partie.Positions.Length; i++)
-        {
-            if ( (Partie.Positions[i] != 0) && estConnecte(Partie.Positions[i], infoAndroid)){
+            if ( t[i] == 1){
                 affichageJoueur = tabText[i].GetComponent<Text>();
                 affichageJoueur.color = Color.white;
                 if (Partie.Langue == "FR")

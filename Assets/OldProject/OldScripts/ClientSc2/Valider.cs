@@ -53,11 +53,11 @@ public class Valider : MonoBehaviour
         conception.message = JoueurStatic.Numero;
         JoueurStatic.Client.Send(conceptionID, conception);
         MyImageMessage robot = new MyImageMessage();
-        robot.loco= loco.sprite.ToString();
-        robot.dim = dim.sprite.ToString();
-        robot.equi1 = equi0.sprite.ToString();
-        robot.equi2 = equi1.sprite.ToString();
-        robot.equi3 = equi2.sprite.ToString();
+        robot.loco = loco.sprite.name;
+        robot.dim = dim.sprite.name;
+        robot.equi1 = equi0.sprite.name;
+        robot.equi2 = equi1.sprite.name;
+        robot.equi3 = equi2.sprite.name;
         robot.num = JoueurStatic.Numero;
         robot.zone = JoueurStatic.Position;
         JoueurStatic.Client.Send(idMessage, robot);
