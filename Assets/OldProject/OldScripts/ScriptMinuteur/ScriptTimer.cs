@@ -12,6 +12,7 @@ public class ScriptTimer : MonoBehaviour
     [SerializeField] GameObject imgMinuteur;
     public NetworkClient client;
     public static bool doitLancer;
+    public static bool done;
 
     private float debut;
     [SerializeField] private float vitesse;
@@ -23,6 +24,7 @@ public class ScriptTimer : MonoBehaviour
     void Start()
     {
         doitLancer = false;
+        done = false;
         imgMinuteur.SetActive(false);
         debut = 0;
         cercleMinuteur.GetComponent<Image>().fillAmount = debut / 100;
@@ -36,6 +38,12 @@ public class ScriptTimer : MonoBehaviour
         if (doitLancer) {
             imgMinuteur.SetActive(true);
             debut = lancerMinuteur(debut, vitesse, cercleMinuteur);
+            Debug.Log("debut = " + debut);
+        }
+
+        if (debut >= 100)
+        {
+            done = true;
         }
     }
 
