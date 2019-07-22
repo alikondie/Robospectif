@@ -94,6 +94,7 @@ public class SansHUD : NetworkManager
     private void onImageReceived(NetworkMessage netMsg)
     {
         var objectMessage = netMsg.ReadMessage<MyImageMessage>();
+        Debug.Log(objectMessage.dim);
         string dims = objectMessage.dim;
         string locos = objectMessage.loco;
         string equi1s = objectMessage.equi1;
@@ -101,11 +102,11 @@ public class SansHUD : NetworkManager
         string equi3s = objectMessage.equi3;
         int numero = objectMessage.num;
         int z = objectMessage.zone;
-        string dim = dims.Substring(0, dims.Length - 21);
-        string loco = locos.Substring(0, locos.Length - 21);
-        string equi1 = equi1s.Substring(0, equi1s.Length - 21);
-        string equi2 = equi2s.Substring(0, equi2s.Length - 21);
-        string equi3 = equi3s.Substring(0, equi3s.Length - 21);
+        string dim = dims;
+        string loco = locos;
+        string equi1 = equi1s;
+        string equi2 = equi2s;
+        string equi3 = equi3s;
 
         Sprite[] images = new Sprite[5];
         images[0] = Resources.Load<Sprite>(Partie.Langue + "/Locomotion/" + loco);
