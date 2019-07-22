@@ -23,10 +23,13 @@ public class InitDebat : MonoBehaviour
     private Dictionary<int, GameObject> persosAndJetons;
     // récuperer pour chaque joueur les jetons données l'ordre c'est: SDP SDM EDP EDM UDP UDM
     private Dictionary<int, int[]> givenJetons;
+    private bool isDictsEmpty = true;
 
     GameObject objet;
     short jeton = 1010;
     short stopID = 1012;
+    short nextID = 1015;
+    short publicID = 1016;
 
     [SerializeField] Button button;
 
@@ -42,12 +45,16 @@ public class InitDebat : MonoBehaviour
 
     private int nbRecu;
 
+    private string fr;
+    private string en;
+
+    private int nbClicked;
+
     //sp = sm = ep = em = up = um = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
         //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
@@ -68,43 +75,41 @@ public class InitDebat : MonoBehaviour
 
         NetworkServer.RegisterHandler(jeton, onJetonReceived);
 
-
-        positionsButton = new Vector2[6];
-        positionsButton[0] = new Vector2(-3, (float)-3.75);
-        positionsButton[1] = new Vector2(3, (float)-3.75);
-        positionsButton[2] = new Vector2(7, 0);
-        positionsButton[3] = new Vector2(3, (float)3.75);
-        positionsButton[4] = new Vector2(-3, (float)3.75);
-        positionsButton[5] = new Vector2(-7, 0);
-
-
-        //button.transform.position = positionsButton[pos-1];
-
-       /* if (pos == 3)
-            button.transform.Rotate(Vector3.forward * 90);
-
-        if ((pos == 4) || (pos == 5))
-            button.transform.Rotate(Vector3.forward * 180);
-
-        if (pos == 6)
-            button.transform.Rotate(Vector3.forward * 270);*/
-
         button.onClick.AddListener(() => ButtonClicked());
 
     }
 
     void OnEnable()
     {
-        if (Partie.Langue == "FR")
-            button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
+        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
+
+        if (Partie.Type == "expert")
+        {
+            fr = "Fin des investissements privés";
+            en = "Private investments done";
+        }
         else
-            button.transform.GetChild(0).GetComponent<Text>().text = "End debate";
+        {
+            fr = "Terminer le débat";
+            en = "End debate";
+            button.transform.position = persos[pos].transform.position;
+            switch (pos)
+            {
+                case 1: case 2:
+   //                 button.transform.rotation = null;
+                    break;
+            }
+        }
+
+        nbClicked = 0;
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = fr;
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = en;
 
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
         index = new int[] { 0, 0, 0, 0, 0, 0 };
-
-        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
 
         for (int i = 0; i < 6; i++)
         {
@@ -150,32 +155,73 @@ public class InitDebat : MonoBehaviour
 
     private void ButtonClicked()
     {
-        Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
-        bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
-
-        for (int i = 0; i < persos.Length; i++)
+        if (Partie.Type == "expert")
         {
-            for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+            if (nbClicked == 0)
             {
-                sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
-                bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                MyStringMessage msg = new MyStringMessage();
+                NetworkServer.SendToAll(publicID, msg);
+                nbClicked++;
+                if (Partie.Langue == "FR")
+                    button.transform.GetChild(0).GetComponent<Text>().text = "Fin des investissements publics";
+                else
+                    button.transform.GetChild(0).GetComponent<Text>().text = "Public investments done";
+            } else
+            {
+                Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
+                bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
+
+                for (int i = 0; i < persos.Length; i++)
+                {
+                    for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+                    {
+                        sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                        Debug.Log("sprites[" + i + ", " + j + "] = " + sprites[i, j]);
+                        bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                        Debug.Log("bools[" + i + ", " + j + "] = " + bools[i, j]);
+                    }
+                }
+                Tour.JetonsDebat = sprites;
+                Tour.ActivesDebat = bools;
+                MyStringMessage msg = new MyStringMessage();
+                NetworkServer.SendToAll(nextID, msg);
+                canvas_debat.SetActive(false);
+                canvas_choix_vainqueur.SetActive(true);
             }
         }
-        Tour.JetonsDebat = sprites;
-        Tour.ActivesDebat = bools;
-
-        MyNetworkMessage wait = new MyNetworkMessage();
-        NetworkServer.SendToAll(vainqueurID, wait);
-
-
-        //GameObject p = persos[0].transform.Find("Jetons").gameObject;
-
-   /*     foreach(GameObject pers in persos)
+        else
         {
-            FillPersoData(pers);
-        }*/
-        canvas_debat.SetActive(false);
-        canvas_choix_vainqueur.SetActive(true);
+            Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
+            bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
+
+            for (int i = 0; i < persos.Length; i++)
+            {
+                for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+                {
+                    sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                    bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                }
+            }
+            Tour.JetonsDebat = sprites;
+            Tour.ActivesDebat = bools;
+
+            MyNetworkMessage wait = new MyNetworkMessage();
+            NetworkServer.SendToAll(vainqueurID, wait);
+
+
+            //GameObject p = persos[0].transform.Find("Jetons").gameObject;
+            SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+            foreach (GameObject pers in persos)
+            {
+                FillPersoData(pers);
+            }
+            persosAndDebate.Clear();
+            persosAndJetons.Clear();
+            givenJetons.Clear();
+            isDictsEmpty = true;
+            canvas_debat.SetActive(false);
+            canvas_choix_vainqueur.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -185,6 +231,12 @@ public class InitDebat : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
+
+        if (isDictsEmpty) { 
+            FillPersoDict();
+            isDictsEmpty = false;
+        }
+
     }
 
     private void FillPersoDict()
@@ -198,10 +250,11 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Add(i, currentPerso);
             givenJetons.Add(i, new int[] { 0, 0, 0, 0, 0, 0 });
         }
-     /*   foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
+        foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
         {
-            print(p.Value);
-        }*/
+            print("key "+p.Key+"value "+p.Value);
+
+        }
 
     }
 
@@ -209,7 +262,7 @@ public class InitDebat : MonoBehaviour
     {
         int number = Array.IndexOf(persos, perso);
 
-        if (number >= Partie.Joueurs.Count)
+        if (number >= Partie.Joueurs.Count || number+1 == Partie.JoueurCourant)
             return;
 
 
@@ -231,6 +284,7 @@ public class InitDebat : MonoBehaviour
         string jetonValue;
 
         int keyIndex = perso.transform.GetSiblingIndex();
+        //print
         GameObject p = persosAndJetons[keyIndex];
        // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
        // {
@@ -268,16 +322,16 @@ public class InitDebat : MonoBehaviour
 
             //Donnée Finale
 
-            persosAndDebate.Add(keyIndex, number + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
+            persosAndDebate.Add(keyIndex, number+1 + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
-            persosAndDebate.Clear();
-            persosAndJetons.Clear();
-            givenJetons.Clear();
 
-            //print( persosAndDebate[keyIndex]);
-            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
-      //  }
+
+            print( keyIndex);
+            SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
+
+
+        //  }
     }
 
     // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)

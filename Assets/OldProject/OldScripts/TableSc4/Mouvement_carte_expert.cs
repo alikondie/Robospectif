@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mouvement_carte : MonoBehaviour
+public class Mouvement_carte_expert : MonoBehaviour
 {
     private Vector3 screenPoint;
     private Vector3 initialPos;
@@ -12,16 +12,20 @@ public class Mouvement_carte : MonoBehaviour
     private Vector3 curPosition;
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
+    [SerializeField] GameObject[] dimensioncard;
+    [SerializeField] GameObject[] locomotioncard;
     [SerializeField] GameObject pres_terminee;
     private GameObject currenttarget;
-    private int sens;
     private int checkifintarget;
     private int decalage;
     private int checkifnomoreintarget;
     private bool was_in_target = false;
     private bool test;
 
-    private int nbCartePosees;
+    private bool isnbequipmentmax;
+    private bool isalreadylocomotionordimension;
+    private bool ismouseintarget;
+
     #region unused start and update
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,9 @@ public class Mouvement_carte : MonoBehaviour
 
     void OnEnable()
     {
-        GetSens();
+        ismouseintarget = false;
+        isnbequipmentmax = false;
+        isalreadylocomotionordimension = false;
         gameObject.layer = 5;
         currenttarget = null;
     }
@@ -52,35 +58,54 @@ public class Mouvement_carte : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!IsTheMousInTargetCollider())
+        Debug.Log(Tour.NbCartesPosees);
+        ismouseintarget = IsTheMousInTargetCollider();
+        if (targettable.Length >= 3)
+        {
+            isnbequipmentmax = CheckIfEveryEquipment();
+        }
+
+        else
+        {
+            isalreadylocomotionordimension = CheckIfOtherCardIsInTarget();
+        }
+        if (!ismouseintarget || isalreadylocomotionordimension || isnbequipmentmax)
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
+            if(was_in_target && targettable.Length < 3)
+            {
+                Tour.NbCartesPosees--;
+                was_in_target = false;
+            }
         }
 
-        if (targettable.Length >= 2)
+
+        if (targettable.Length >= 3)
         {
-            decalage = 0;
-            if (checkifintarget == 1)
+            if (!isnbequipmentmax)
             {
-                CheckIfAlreadyCards();
-            }
-            else if (checkifnomoreintarget == 0)
-            {
-                CheckIfAlreadyCards();
+                decalage = 0;
+                if (checkifintarget == 1)
+                {
+                    CheckIfAlreadyCards();
+                }
+                else if (checkifnomoreintarget == 0)
+                {
+                    CheckIfAlreadyCards();
+                }
             }
         }
-        else if (currenttarget != null)
+        
+        else if (currenttarget != null && !isalreadylocomotionordimension && ismouseintarget)
         {
-            if(!was_in_target)
+            if (!was_in_target)
             {
                 Tour.NbCartesPosees++;
-                Debug.Log("incremente");
                 was_in_target = true;
             }
             gameObject.transform.position = currenttarget.transform.position;
-            gameObject.layer = 2;
         }
     }
     
@@ -112,17 +137,9 @@ public class Mouvement_carte : MonoBehaviour
         List<GameObject> cardstack = new List<GameObject>();
         foreach (GameObject equipment in equipmentcards)
         {
-            if (sens == 1 || sens == 3) {
-                test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
-                Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
-            }
-            else
-            {
-                test = equipment.transform.position.x >= currenttarget.transform.position.x - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
-                equipment.transform.position.x <= currenttarget.transform.position.x + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x &&
-                Math.Round(equipment.transform.position.y) == Math.Round(currenttarget.transform.position.y);
-            }
+            test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                   equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                   Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
 
             if(test)
             {
@@ -140,7 +157,6 @@ public class Mouvement_carte : MonoBehaviour
             {
                 was_in_target = true;
                 Tour.NbCartesPosees++;
-                Debug.Log("incremente");
             }
             RelocateCardsWhencardincoming(cardstack);
             AssignEquipmentsTypes(currenttarget, allCardStack,true);
@@ -149,7 +165,6 @@ public class Mouvement_carte : MonoBehaviour
         {
             was_in_target = false;
             Tour.NbCartesPosees--;
-            Debug.Log("decremente");
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
         }
@@ -161,26 +176,8 @@ public class Mouvement_carte : MonoBehaviour
         {
             foreach (GameObject card in stack)
             {
-                if (sens == 1)
-                {
-                    card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-                    gameObject.transform.position = new Vector3(currenttarget.transform.position.x, currenttarget.transform.position.y - decalage * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, currenttarget.transform.position.z);
-                }
-                else if (sens == 2)
-                {
-                    card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-                    gameObject.transform.position = new Vector3(currenttarget.transform.position.x - decalage * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, currenttarget.transform.position.y, currenttarget.transform.position.z);
-                }
-                else if (sens == 3)
-                {
-                    card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-                    gameObject.transform.position = new Vector3(currenttarget.transform.position.x, currenttarget.transform.position.y + decalage * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, currenttarget.transform.position.z);
-                }
-                else
-                {
-                    card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-                    gameObject.transform.position = new Vector3(currenttarget.transform.position.x + decalage * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, currenttarget.transform.position.y, currenttarget.transform.position.z);
-                }
+                card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+                gameObject.transform.position = new Vector3(currenttarget.transform.position.x, currenttarget.transform.position.y - decalage * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, currenttarget.transform.position.z);
             }
         }
         else
@@ -202,82 +199,77 @@ public class Mouvement_carte : MonoBehaviour
 
     private void MoveCard(GameObject card)
     {
-        if (sens == 1 || sens == 3)
+        if (card.transform.position.y > currenttarget.transform.position.y)
         {
-            if (card.transform.position.y > currenttarget.transform.position.y)
-            {
-                card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-            }
-            else if(card.transform.position.y < currenttarget.transform.position.y)
-            {
-                card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-            }
-            else if(gameObject.transform.position.y > currenttarget.transform.position.y)
-            {
-                card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-            }
-            else
-            {
-                card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-            }
+            card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
         }
-        else /*if (sens == 2)*/
+        else if(card.transform.position.y < currenttarget.transform.position.y)
         {
-            if (card.transform.position.x > currenttarget.transform.position.x)
-            {
-                card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-            }
-            else if (card.transform.position.x < currenttarget.transform.position.x)
-            {
-                card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-            }
-            else if (gameObject.transform.position.x > currenttarget.transform.position.x)
-            {
-                card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-            }
-            else
-            {
-                card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-            }
+            card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
         }
-        //else if (sens == 3)
-        //{
-        //    if()
-        //    card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-        //}
-        //else
-        //{
-        //    card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-        //}
+        else if(gameObject.transform.position.y > currenttarget.transform.position.y)
+        {
+            card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+        }
+        else
+        {
+            card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
+        }
     }
 
-    private void GetSens()
+    private bool CheckIfOtherCardIsInTarget()
     {
-        //int pos = 1;
-        int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
-        switch (pos)
+        bool retour = false;
+        if((dimensioncard.Length == 0 && locomotioncard.Length == 0) || currenttarget == null)
         {
-            case 1:
-                sens = 1;
-                break;
-            case 2:
-                sens = 1;
-                break;
-            case 3:
-                sens = 2;
-                break;
-            case 4:
-                sens = 3;
-                break;
-            case 5:
-                sens = 3;
-                break;
-            case 6:
-                sens = 4;
-                break;
+            retour = true;
         }
+        else if (dimensioncard.Length != 0)
+        {
+            foreach (GameObject carte in dimensioncard)
+            {
+                if(carte.transform.position == currenttarget.transform.position)
+                {
+                    retour = true;
+                    break;
+                }
+            }
+        }
+        else if (locomotioncard.Length != 0)
+        {
+            foreach (GameObject carte in locomotioncard)
+            {
+                if(carte.transform.position == currenttarget.transform.position)
+                {
+                    retour = true;
+                    break;
+                }
+            }
+        }
+        return retour;
     }
 
+    private bool CheckIfEveryEquipment()
+    {
+        int nb_equipmentsposees = 0;
+        foreach (GameObject equipment in equipmentcards)
+        {
+            foreach (GameObject currenttarget in targettable)
+            {
+                test = equipment.transform.position.y >= currenttarget.transform.position.y - 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                       equipment.transform.position.y <= currenttarget.transform.position.y + 2 * currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y &&
+                       Math.Round(equipment.transform.position.x) == Math.Round(currenttarget.transform.position.x);
+
+                if (test)
+                {
+                    nb_equipmentsposees++;
+                }
+            }
+        }
+        return nb_equipmentsposees >= 3;
+    }
+
+    #region data
     private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments,bool isIncoming)
     {
         List<string> equipmentStrings = new List<string>();
@@ -291,25 +283,12 @@ public class Mouvement_carte : MonoBehaviour
            {
                 case ("boxcollider equipment manual"):
                     Initialisation.manualEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.manualEquipmentCards)
-                        print("man "+s);
                     break;
                 case ("boxcollider equipment programmable"):
                     Initialisation.programmableEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.programmableEquipmentCards)
-                        print("prog "+s);
                     break;
                 case ("boxcollider equipment automatique"):
                     Initialisation.autoEquipmentCards = equipmentStrings;
-                    foreach (string s in Initialisation.autoEquipmentCards)
-                        print("auto "+s);
-
-                    break;
-                case ("boxcollider attention"):
-                    Initialisation.autonomie = "Attention Requise";
-                    break;
-                case ("boxcollider autonomie"):
-                    Initialisation.autonomie = "Autonome";
                     break;
             }
     /*          int me = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
@@ -326,18 +305,17 @@ public class Mouvement_carte : MonoBehaviour
             case ("boxcollider equipment manual"):
                 if (Initialisation.manualEquipmentCards == null)
                     Initialisation.manualEquipmentCards = equipmentStrings;
+
                 else
                     Initialisation.manualEquipmentCards.AddRange(equipmentStrings);
-
-                //debug
                 break;
                 
             case ("boxcollider equipment programmable"):
                 if(Initialisation.programmableEquipmentCards == null)
                     Initialisation.programmableEquipmentCards = equipmentStrings;
+
                 else
                     Initialisation.programmableEquipmentCards.AddRange(equipmentStrings);
-
                 break;
             case ("boxcollider equipment automatique"):
                 if (Initialisation.autoEquipmentCards == null)
@@ -345,15 +323,8 @@ public class Mouvement_carte : MonoBehaviour
 
                 else
                     Initialisation.autoEquipmentCards.AddRange(equipmentStrings);
-
                 break;
-            case ("boxcollider attention"):
-                Initialisation.autonomie = "Attention Requise";
-                break;
-            case ("boxcollider autonomie"):
-                Initialisation.autonomie = "Autonome";
-                break;
-
+                
         }
      /*   int m = Initialisation.manualEquipmentCards == null ? 0 : Initialisation.manualEquipmentCards.Count;
         int p = Initialisation.programmableEquipmentCards == null ? 0 : Initialisation.programmableEquipmentCards.Count;
@@ -362,4 +333,5 @@ public class Mouvement_carte : MonoBehaviour
         print("programmableEquipmentCards: " + p);
         print("autoEquipmentCards: " + a);*/
     }
+    #endregion
 }

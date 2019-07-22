@@ -9,11 +9,15 @@ public class Partie
     private static List<Joueur> joueurs;
     private static int tour;
     private static int joueurCourant;
+    private static int nbJetonsVert;
+    private static int nbJetonsRouge;
     private static int[] positions;
 
     public static void Initialize()
     {
         tour = 1;
+        nbJetonsVert = 36;
+        nbJetonsRouge = 12;
         joueurs = new List<Joueur>();
     }
 
@@ -32,6 +36,18 @@ public class Partie
     {
         get => tour;
         set => tour = value;
+    }
+
+    public static int NbJetonsVert
+    {
+        get => nbJetonsVert;
+        set => nbJetonsVert = value;
+    }
+
+    public static int NbJetonsRouge
+    {
+        get => nbJetonsRouge;
+        set => nbJetonsRouge = value;
     }
 
     public static int JoueurCourant

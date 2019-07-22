@@ -13,7 +13,6 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
     [SerializeField] Image image;
     [SerializeField] Image tickCurrent;
     [SerializeField] Button button;
-    public static Sprite perso;
     [SerializeField] Image[] ticks;
 
     // Start is called before the first frame update
@@ -43,15 +42,21 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
         if (tickCurrent.gameObject.activeSelf)
         {
             Debug.Log(image.sprite);
-            for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+            if (JoueurStatic.Type == "expert")
             {
-                if (JoueurStatic.Persos[i] == image.sprite)
-                    JoueurStatic.PersosChoisis[i] = true;
+                JoueurStatic.Actif = image.sprite;
             }
-            perso = image.sprite;
+            else
+            {
+                for (int i = 0; i < JoueurStatic.Persos.Length; i++)
+                {
+                    if (JoueurStatic.Persos[i] == image.sprite)
+                        JoueurStatic.PersosChoisis[i] = true;
+                }
+                JoueurStatic.Actif = image.sprite;
+            }
         }
         canvas_choix_persos.SetActive(false);
         canvas_pres_perso.SetActive(true);
-        //SceneManager.LoadScene("scene4");
     }
 }

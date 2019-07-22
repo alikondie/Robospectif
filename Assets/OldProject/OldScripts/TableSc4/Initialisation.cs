@@ -30,6 +30,8 @@ public class Initialisation : MonoBehaviour
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
+
+
     private Vector2[] posCards;
 
     [SerializeField] GameObject Plateau;
@@ -41,8 +43,8 @@ public class Initialisation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
-        SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
+
+        button.onClick.AddListener(() => ButtonClicked());
     }
 
     void OnEnable()
@@ -93,7 +95,7 @@ public class Initialisation : MonoBehaviour
         Debug.Log("nbcartesposees : " + Tour.NbCartesPosees);
         if (Tour.NbCartesPosees == 6)
         {
-            button.onClick.AddListener(() => ButtonClicked());
+            
             button.gameObject.SetActive(true);
         }
         else
@@ -104,10 +106,12 @@ public class Initialisation : MonoBehaviour
 
     private void ButtonClicked()
     {
-        
-        
+
+
         #region recup données
-         
+
+            SansHUD.data.AppendLine("Tour " + Partie.Tour);
+            SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
             currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
             currentTurnData += autonomie + ";";
 
@@ -132,15 +136,20 @@ public class Initialisation : MonoBehaviour
             // suppression du dernier point-virgule
             currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
             SansHUD.data.AppendLine(currentTurnData);
-            //print(SansHUD.data.ToString());
-           // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
+            if (manualEquipmentCards != null)
+                manualEquipmentCards.Clear();
+            if (programmableEquipmentCards != null)
+                programmableEquipmentCards.Clear();
+            if (autoEquipmentCards != null)
+                autoEquipmentCards.Clear();
+        // string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";
 
-           // File.AppendAllText(filePath, SansHUD.data.ToString());
-        
+        // File.AppendAllText(filePath, SansHUD.data.ToString());
         #endregion
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(presID, msg);
+        
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
 

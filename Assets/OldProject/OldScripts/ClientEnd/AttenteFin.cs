@@ -33,13 +33,11 @@ public class AttenteFin : MonoBehaviour
         {
             canvas_vainqueur.SetActive(false);
             canvas_pres_robot.SetActive(true);
-            //SceneManager.LoadScene("scene2bis");
         }
         else
         {
             canvas_vainqueur.SetActive(false);
             canvas_fin_partie.SetActive(true);
-            //SceneManager.LoadScene("FinTel");
         }
     }
 

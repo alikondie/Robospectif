@@ -6,15 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LogoScene.unity
-    guid: aa246c9c210bd634eb54017479f93d48
+    path: Assets/Scenes/expert_game_client.unity
+    guid: 29b37cfb95854b94f988c8cbbad2604f
   - enabled: 1
-    path: Assets/Scenes/standard_game_server.unity
-    guid: 65e4fb0493dfbaa4caee60b043c03bfd
-  - enabled: 1
-    path: Assets/Scenes/standard_game_client.unity
-    guid: 6d102f1bc7e6ded49b6aa574ba8adf2e
-  - enabled: 1
-    path: Assets/Scenes/menu.unity
-    guid: e878c9cb7f1e5f844af280a1eb0a4597
+    path: Assets/Scenes/expert_game_server.unity
+    guid: 58cffca5d7cd71b4f8936e8786afa07c
   m_configObjects: {}

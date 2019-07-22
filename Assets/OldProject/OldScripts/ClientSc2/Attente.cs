@@ -31,13 +31,11 @@ public class Attente : MonoBehaviour
         canvas_pres_robot.SetActive(false);
         if (JoueurStatic.Numero == fini)
         {
-            //SceneManager.LoadScene("Scene_ChoixJetons");
             canvas_persos_table.SetActive(true);
         }
         else
         {
             canvas_choix_persos.SetActive(true);
-            //SceneManager.LoadScene("scene3");
         }
     }
 
@@ -51,12 +49,29 @@ public class Attente : MonoBehaviour
     {
         if (JoueurStatic.Langue == "FR")
         {
-            text.text = "Joueur " + JoueurStatic.Numero.ToString();
-            central.text = "Présentation du robot";
-        } else
+            if (JoueurStatic.Type != "expert")
+            {
+                text.text = "Joueur " + JoueurStatic.Numero.ToString();
+                central.text = "Présentation du robot";
+            }
+            else
+            {
+                text.text = "Joueur " + JoueurStatic.Numero.ToString();
+                central.text = "Veuillez choisir le robot avec les autres joueurs";
+            }
+        }
+        else
         {
-            text.text = "Player " + JoueurStatic.Numero.ToString();
-            central.text = "Robot presentation";
+            if (JoueurStatic.Type != "expert")
+            {
+                text.text = "Player " + JoueurStatic.Numero.ToString();
+                central.text = "Robot presentation";
+            }
+            else
+            {
+                text.text = "Player " + JoueurStatic.Numero.ToString();
+                central.text = "Robot presentation";
+            }
         }
 
     }

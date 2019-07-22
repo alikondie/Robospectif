@@ -13,8 +13,12 @@ public class PresPersos : MonoBehaviour
     private int[,] zones;
     private int nbRecu;
 
+    private string en;
+    private string fr;
+
     private int presentateur;
     private Joueur pres;
+    private Joueur next;
     #endregion
 
     #region Inputs
@@ -39,6 +43,16 @@ public class PresPersos : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Type == "expert")
+        {
+            fr = "acteur";
+            en = "role";
+        }
+        else
+        {
+            fr = "personnage";
+            en = "character";
+        }
         for (int i = 0; i < 6; i++)
         {
             persos[i].transform.GetChild(0).gameObject.SetActive(false);
@@ -62,8 +76,18 @@ public class PresPersos : MonoBehaviour
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
         else
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
-
-        presentateur = GetNextPres(Partie.JoueurCourant);
+        if (Partie.Type == "expert")
+        {
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (j.IsPublic)
+                {
+                    presentateur = GetNextPres(j.Numero);
+                }
+            }
+        }
+        else
+            presentateur = GetNextPres(Partie.JoueurCourant);
     }
 	
     void Update()
@@ -73,6 +97,10 @@ public class PresPersos : MonoBehaviour
             if (presentateur == j.Numero)
             {
                 pres = j;
+            }
+            if (GetNextPres(presentateur) == j.Numero)
+            {
+                next = j;
             }
         }
 
@@ -88,15 +116,15 @@ public class PresPersos : MonoBehaviour
             }
         }
 
-        if (GetNextPres(presentateur) == Partie.JoueurCourant)
+        if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
             if (Partie.Langue == "FR")
                 button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
             else
                 button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
         if (Partie.Langue == "FR")
-            text.text = "Le joueur " + presentateur + " présente son personnage";
+            text.text = "Le joueur " + presentateur + " présente son " + fr;
         else
-            text.text = "Player " + presentateur + " presents their character";
+            text.text = "Player " + presentateur + " presents their " + en;
     }
     #endregion
 
