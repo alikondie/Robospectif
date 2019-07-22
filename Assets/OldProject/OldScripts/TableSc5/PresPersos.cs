@@ -107,42 +107,41 @@ public class PresPersos : MonoBehaviour
 	
     void Update()
     {
-        Debug.Log("update!!!");
         checkifvehiculeclicked();
 
-        //foreach (Joueur j in Partie.Joueurs)
-        //{
-        //    if (presentateur == j.Numero)
-        //    {
-        //        pres = j;
-        //    }
-        //    if (GetNextPres(presentateur) == j.Numero)
-        //    {
-        //        next = j;
-        //    }
-        //}
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (presentateur == j.Numero)
+            {
+                pres = j;
+            }
+            if (GetNextPres(presentateur) == j.Numero)
+            {
+                next = j;
+            }
+        }
 
-        //for (int i = 0; i < persos.Length; i++)
-        //{
-        //    if (pres.Position == i)
-        //    {
-        //        persos[i].transform.GetChild(0).gameObject.SetActive(true);
-        //        if (Tour.ZonesDebat[i, 0] != 0)
-        //            persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
-        //        if (Tour.ZonesDebat[i, 1] != 0)
-        //            persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
-        //    }
-        //}
+        for (int i = 0; i < persos.Length; i++)
+        {
+            if (pres.Position == i)
+            {
+                persos[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 0] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
+                if (Tour.ZonesDebat[i, 1] != 0)
+                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);
+            }
+        }
 
-        //if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
-        //    if (Partie.Langue == "FR")
-        //        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
-        //    else
-        //        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
-        //if (Partie.Langue == "FR")
-        //    text.text = "Le joueur " + presentateur + " présente son " + fr;
-        //else
-        //    text.text = "Player " + presentateur + " presents their " + en;
+        if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
+            if (Partie.Langue == "FR")
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+            else
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
+        if (Partie.Langue == "FR")
+            text.text = "Le joueur " + presentateur + " présente son " + fr;
+        else
+            text.text = "Player " + presentateur + " presents their " + en;
     }
     #endregion
 
