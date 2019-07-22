@@ -161,9 +161,9 @@ public class InitDebat : MonoBehaviour
                 NetworkServer.SendToAll(publicID, msg);
                 nbClicked++;
                 if (Partie.Langue == "FR")
-                    button.transform.GetChild(0).GetComponent<Text>().text = "Fin des investissements publics";
+                    button.transform.GetChild(0).GetComponent<Text>().text = "Fin des investissements\npublics";
                 else
-                    button.transform.GetChild(0).GetComponent<Text>().text = "Public investments done";
+                    button.transform.GetChild(0).GetComponent<Text>().text = "Public investments\ndone";
             } else
             {
                 Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
