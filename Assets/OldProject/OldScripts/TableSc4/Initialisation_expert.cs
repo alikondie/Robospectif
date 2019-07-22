@@ -202,9 +202,9 @@ public class Initialisation_expert : MonoBehaviour
 
         MyActeurMessage msg = new MyActeurMessage();
         msg.numero = j.Numero;
-        msg.acteur1 = j.Acteurs[0].ToString().Substring(0, j.Acteurs[0].ToString().Length - 21);
-        msg.acteur2 = j.Acteurs[1].ToString().Substring(0, j.Acteurs[1].ToString().Length - 21);
-        msg.acteur3 = j.Acteurs[2].ToString().Substring(0, j.Acteurs[2].ToString().Length - 21);
+        msg.acteur1 = j.Acteurs[0].name;
+        msg.acteur2 = j.Acteurs[1].name;
+        msg.acteur3 = j.Acteurs[2].name;
         NetworkServer.SendToAll(conceptionID, msg);
     }
 
