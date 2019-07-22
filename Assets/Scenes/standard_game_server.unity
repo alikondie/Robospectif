@@ -17432,6 +17432,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas_debat: {fileID: 1190432594}
   canvas_choix_vainqueur: {fileID: 1614783933}
+  cartes:
+  - {fileID: 1095996756}
+  - {fileID: 482982476}
+  - {fileID: 1854023512}
+  - {fileID: 90595429}
+  - {fileID: 1184035639}
+  canvas_pres_vehicule: {fileID: 1891140711}
   button: {fileID: 678533884}
   persos:
   - {fileID: 777645260}

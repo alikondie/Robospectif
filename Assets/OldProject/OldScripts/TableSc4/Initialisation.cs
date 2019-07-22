@@ -58,12 +58,7 @@ public class Initialisation : MonoBehaviour
         children.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Plateau");
         children.transform.GetChild(0).transform.GetChild(7).GetComponent<Image>().sprite = Resources.Load<Sprite>(Partie.Langue + "/Conduite/Conduite");
 
-        int x = -4;
-        for (int i = 0; i < cartes.transform.childCount; i++)
-        {
-            cartes.transform.GetChild(i).GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
-            x += 2;
-        }
+        
         posCards = new Vector2[6];
         posCards[0] = new Vector2(560, 190);
         posCards[1] = new Vector2(1360, 190);

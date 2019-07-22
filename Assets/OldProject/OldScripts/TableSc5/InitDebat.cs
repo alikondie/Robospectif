@@ -10,7 +10,8 @@ public class InitDebat : MonoBehaviour
 {
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
-
+    [SerializeField] GameObject[] cartes;
+    [SerializeField] GameObject canvas_pres_vehicule;
     private List<GameObject>[] jetons;
     private int[] index;
 
@@ -79,6 +80,18 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        canvas_pres_vehicule.SetActive(true);
+        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
+        foreach (GameObject carte in cartes)
+        {
+            carte.GetComponent<BoxCollider2D>().enabled = false;
+            carte.GetComponent<Mouvement_carte>().enabled = false;
+        }
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant);
 
         if (Partie.Type == "expert")
@@ -153,6 +166,25 @@ public class InitDebat : MonoBehaviour
 
     private void ButtonClicked()
     {
+        int x = -4;
+        foreach (GameObject carte in cartes)
+        {
+            carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
+            x += 2;
+        }
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
+        canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
+        canvas_pres_vehicule.SetActive(false);
+        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+        foreach (GameObject carte in cartes)
+        {
+            carte.GetComponent<BoxCollider2D>().enabled = true;
+            carte.GetComponent<Mouvement_carte>().enabled = true;
+        }
         if (Partie.Type == "expert")
         {
             if (nbClicked == 0)
@@ -225,6 +257,7 @@ public class InitDebat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkifvehiculeclicked();
         if (nbRecu == Partie.Joueurs.Count - 1)
         {
             button.gameObject.SetActive(true);
@@ -357,6 +390,25 @@ public class InitDebat : MonoBehaviour
             case "planeteVert":
                 givenJetons[numJoueur][2]++;
                 break;
+        }
+    }
+
+    private void checkifvehiculeclicked()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Input.mousePosition.x < 1000 && Input.mousePosition.x > 900 &&
+                Input.mousePosition.y < 600 && Input.mousePosition.y > 500 &&
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(10000f, 10000f))
+            {
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+            }
+            else if (Input.mousePosition.x < 1500 && Input.mousePosition.x > 420 &&
+                     Input.mousePosition.y < 1070 && Input.mousePosition.y > 0 &&
+                     canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(1920f, 1080f))
+            {
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+            }
         }
     }
 }
