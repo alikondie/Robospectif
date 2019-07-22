@@ -11,6 +11,7 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
     [SerializeField] GameObject[] cartes;
+    [SerializeField] GameObject conduite;
     [SerializeField] GameObject canvas_pres_vehicule;
     private List<GameObject>[] jetons;
     private int[] index;
@@ -166,12 +167,14 @@ public class InitDebat : MonoBehaviour
 
     private void ButtonClicked()
     {
+        conduite.transform.GetComponent<RectTransform>().localPosition = new Vector3((float) 2.75, -5, 0);
         int x = -4;
         foreach (GameObject carte in cartes)
         {
             carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
             x += 2;
         }
+
         canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
         canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
