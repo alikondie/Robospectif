@@ -2725,7 +2725,7 @@ PrefabInstance:
     - target: {fileID: 7896333963878693367, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896333963878693361, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -7198,7 +7198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Commencer le d\xE9bat"
+  m_Text: "d\xE9bat"
 --- !u!222 &531474750
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11091,8 +11091,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 320, y: 60}
+  m_AnchoredPosition: {x: 721, y: 388}
+  m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &800994253
 GameObject:
@@ -23702,6 +23702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e5b408f01a7034c9aeec97c3899f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas_pres_vehicule: {fileID: 1891140711}
   canvas_pres_persos: {fileID: 1753731206}
   canvas_debat: {fileID: 1190432594}
   persos:
@@ -23711,6 +23712,12 @@ MonoBehaviour:
   - {fileID: 1758829901}
   - {fileID: 1366079906}
   - {fileID: 59926127}
+  cartes:
+  - {fileID: 1095996756}
+  - {fileID: 482982476}
+  - {fileID: 1854023512}
+  - {fileID: 90595429}
+  - {fileID: 1184035639}
   button: {fileID: 795055067}
   text: {fileID: 1946910730}
 --- !u!114 &1753731208
@@ -27186,7 +27193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 116}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1946910730
@@ -27222,7 +27229,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Presentation des personnages
+  m_Text: "Usage pour le v\xE9hicule"
 --- !u!222 &1946910731
 CanvasRenderer:
   m_ObjectHideFlags: 0
