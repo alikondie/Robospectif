@@ -28,8 +28,10 @@ public class InitDebat : MonoBehaviour
     GameObject objet;
     short jeton = 1010;
     short stopID = 1012;
+    short goID = 1013;
     short nextID = 1015;
     short publicID = 1016;
+    short presID = 1017;
 
     [SerializeField] Button button;
 
@@ -81,6 +83,7 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        nbClicked = 0;
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
@@ -113,7 +116,6 @@ public class InitDebat : MonoBehaviour
             }
         }
 
-        nbClicked = 0;
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = fr;
         else
@@ -147,8 +149,9 @@ public class InitDebat : MonoBehaviour
                 }
             }
         }
-
-        //button.gameObject.SetActive(false);
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.message = Partie.JoueurCourant;
+        NetworkServer.SendToAll(goID, msg);
     }
 
     private void onJetonReceived(NetworkMessage netMsg)
@@ -224,36 +227,46 @@ public class InitDebat : MonoBehaviour
         }
         else
         {
-            Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
-            bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
-
-            for (int i = 0; i < persos.Length; i++)
+            if (nbClicked == 1)
             {
-                for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+                Sprite[,] sprites = new Sprite[6, persos[0].transform.GetChild(2).childCount];
+                bool[,] bools = new bool[6, persos[0].transform.GetChild(2).childCount];
+
+                for (int i = 0; i < persos.Length; i++)
                 {
-                    sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
-                    bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                    for (int j = 0; j < persos[i].transform.GetChild(2).childCount; j++)
+                    {
+                        sprites[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.GetComponent<Image>().sprite;
+                        bools[i, j] = persos[i].transform.GetChild(2).GetChild(j).gameObject.activeSelf;
+                    }
                 }
+                Tour.JetonsDebat = sprites;
+                Tour.ActivesDebat = bools;
+
+                MyNetworkMessage wait = new MyNetworkMessage();
+                NetworkServer.SendToAll(vainqueurID, wait);
+
+
+                //GameObject p = persos[0].transform.Find("Jetons").gameObject;
+                SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+                foreach (GameObject pers in persos)
+                {
+                    FillPersoData(pers);
+                }
+                persosAndDebate.Clear();
+                persosAndJetons.Clear();
+                givenJetons.Clear();
+                isDictsEmpty = true;
+                canvas_debat.SetActive(false);
+                canvas_choix_vainqueur.SetActive(true);
+                return ;
             }
-            Tour.JetonsDebat = sprites;
-            Tour.ActivesDebat = bools;
-
-            MyNetworkMessage wait = new MyNetworkMessage();
-            NetworkServer.SendToAll(vainqueurID, wait);
-
-
-            //GameObject p = persos[0].transform.Find("Jetons").gameObject;
-            SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
-            foreach (GameObject pers in persos)
-            {
-                FillPersoData(pers);
-            }
-            persosAndDebate.Clear();
-            persosAndJetons.Clear();
-            givenJetons.Clear();
-            isDictsEmpty = true;
-            canvas_debat.SetActive(false);
-            canvas_choix_vainqueur.SetActive(true);
+            MyJetonMessage msg = new MyJetonMessage();
+            NetworkServer.SendToAll(stopID, msg);
+            MyNetworkMessage pres = new MyNetworkMessage();
+            pres.message = Partie.JoueurCourant;
+            NetworkServer.SendToAll(presID, pres);
+            nbClicked++;
         }
     }
 
@@ -261,6 +274,7 @@ public class InitDebat : MonoBehaviour
     void Update()
     {
         checkifvehiculeclicked();
+        
         if (nbRecu == Partie.Joueurs.Count - 1)
         {
             button.gameObject.SetActive(true);
