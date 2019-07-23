@@ -310,7 +310,7 @@ public class InitDebat : MonoBehaviour
     {
         int number = Array.IndexOf(persos, perso);
 
-        if (number >= Partie.Joueurs.Count || number+1 == Partie.JoueurCourant)
+        if (number >= Partie.Joueurs.Count)// || number+1 == Partie.JoueurCourant)
             return;
 
 
@@ -386,6 +386,7 @@ public class InitDebat : MonoBehaviour
     public void AddGivenJeton(int numJoueur, GameObject jeton)
     {
         string jetonValue = jeton.GetComponent<Image>().sprite.name;
+        print("player  number: " + numJoueur);
         switch (jetonValue)
         // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
         {

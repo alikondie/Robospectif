@@ -32,8 +32,16 @@ public class Jeton_pop : MonoBehaviour
 
             joueurs.Add(canva.GetChild(i).gameObject);
             cartes.Add(canva.GetChild(i).GetChild(0).gameObject);
+
+
         }
         positionInit = this.transform.position;
+
+        int index = transform.parent.transform.parent.GetSiblingIndex();
+        print("index is " + index);
+        GameObject jeton = this.gameObject;
+        print("Jeton is " + jeton);
+        joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index, jeton);
     }
 
     void OnEnable()
@@ -76,11 +84,11 @@ public class Jeton_pop : MonoBehaviour
                     joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
                     // recup donnée envoyer le jeton à partir de la fct AddGivenJeton
-                    GameObject jeton = joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject;
-                    //joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index,jeton);
+
 
                     Tour.Piles[index]++;
                 }
+                
             }
         }
         this.transform.position = positionInit;
