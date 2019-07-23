@@ -17,6 +17,7 @@ public class JetonsHandler : MonoBehaviour
     short stopID = 1012;
     short goID = 1013;
     short presID = 1017;
+    short hasstartID = 1018;
 
     [SerializeField] Button usageVert;
     [SerializeField] Button usageRouge;
@@ -32,7 +33,6 @@ public class JetonsHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("debut start");
         JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
         JoueurStatic.Client.RegisterHandler(stopID, OnStopReceived);
         JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
@@ -45,8 +45,11 @@ public class JetonsHandler : MonoBehaviour
         planeteVert.onClick.AddListener(() => OnPlaneteClicked());       
         planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
 
+
+        MyNetworkMessage hasstart = new MyNetworkMessage();
+        JoueurStatic.Client.Send(hasstartID, hasstart);
+
         isPresTime = false;
-        Debug.Log("fin start");
     }
 
     private void OnGoReceived(NetworkMessage netMsg)
