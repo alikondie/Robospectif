@@ -46,8 +46,8 @@ public class JetonsHandler : MonoBehaviour
         planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
 
 
-        MyNetworkMessage hasstart = new MyNetworkMessage();
-        JoueurStatic.Client.Send(hasstartID, hasstart);
+       /* MyNetworkMessage hasstart = new MyNetworkMessage();
+        JoueurStatic.Client.Send(hasstartID, hasstart);*/
 
         isPresTime = false;
     }
@@ -155,6 +155,8 @@ public class JetonsHandler : MonoBehaviour
 
     void OnEnable()
     {
+        MyNetworkMessage hasstart = new MyNetworkMessage();
+        JoueurStatic.Client.Send(hasstartID, hasstart);
         if (JoueurStatic.Langue == "FR")
             text.text = "Joueur " + JoueurStatic.Numero;
         else
