@@ -5436,7 +5436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.75, y: -5.1}
+  m_AnchoredPosition: {x: 2.75, y: -5}
   m_SizeDelta: {x: 2.38, y: 3.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340953091
@@ -17438,6 +17438,7 @@ MonoBehaviour:
   - {fileID: 1854023512}
   - {fileID: 90595429}
   - {fileID: 1184035639}
+  conduite: {fileID: 340953089}
   canvas_pres_vehicule: {fileID: 1891140711}
   button: {fileID: 678533884}
   persos:

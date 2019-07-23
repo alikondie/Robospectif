@@ -123,7 +123,6 @@ public class Text_Connexion : MonoBehaviour
     // Méthode qui recupere l'entier de Joueur (Android)
     public static void recupInfoJoueur(int i)
     {
-        Debug.Log("joueur connecte = " + i);
         int pos = Array.IndexOf(Partie.Positions, i);
         connectes[pos] = 1;
         estDebut = true;

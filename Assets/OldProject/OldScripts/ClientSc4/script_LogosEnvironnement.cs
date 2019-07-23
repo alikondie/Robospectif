@@ -49,8 +49,7 @@ public class script_LogosEnvironnement : MonoBehaviour
     private void ButtonClicked()
     {
         MyPersoMessage msg = new MyPersoMessage();
-        string spriteString = perso.sprite.ToString();
-        persoSprite = spriteString.Substring(0, spriteString.Length - 21);
+        persoSprite = perso.sprite.name;
         msg.numero = JoueurStatic.Numero;
         msg.image = persoSprite;
         msg.choixZone0 = choixZone[0];
