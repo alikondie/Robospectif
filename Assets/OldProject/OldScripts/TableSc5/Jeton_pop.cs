@@ -74,7 +74,8 @@ public class Jeton_pop : MonoBehaviour
             if (exp)
             {
                 this.gameObject.SetActive(false);
-                MyJetonMessage msg = new MyJetonMessage();
+                MyNetworkMessage msg = new MyNetworkMessage();
+                msg.message = Partie.JoueurCourant;
                 NetworkServer.SendToAll(goID, msg);
 
                 if (Tour.Piles[index] < 8)
