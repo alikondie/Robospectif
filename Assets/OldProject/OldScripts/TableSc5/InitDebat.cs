@@ -258,17 +258,11 @@ public class InitDebat : MonoBehaviour
                 persosAndJetons.Clear();
                 givenJetons.Clear();
                 isDictsEmpty = true;
+                ReinitializeCards();
                 canvas_debat.SetActive(false);
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
             }
-            persosAndDebate.Clear();
-            persosAndJetons.Clear();
-            givenJetons.Clear();
-            isDictsEmpty = true;
-            ReinitializeCards();
-            canvas_debat.SetActive(false);
-            canvas_choix_vainqueur.SetActive(true);
             MyJetonMessage msg = new MyJetonMessage();
             NetworkServer.SendToAll(stopID, msg);
             MyNetworkMessage pres = new MyNetworkMessage();
