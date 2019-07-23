@@ -149,9 +149,11 @@ public class InitDebat : MonoBehaviour
                 }
             }
         }
+        Debug.Log("debut onenable");
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(goID, msg);
+        Debug.Log("fin onenable");
     }
 
     private void onJetonReceived(NetworkMessage netMsg)

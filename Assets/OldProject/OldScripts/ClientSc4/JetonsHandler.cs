@@ -31,11 +31,12 @@ public class JetonsHandler : MonoBehaviour
     private bool isPresTime;
     // Start is called before the first frame update
     void Start()
-    {        
+    {
+        Debug.Log("debut start");
         JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
         JoueurStatic.Client.RegisterHandler(stopID, OnStopReceived);
         JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
-        JoueurStatic.Client.RegisterHandler(presID, OnGoReceived);
+        JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       
@@ -45,6 +46,7 @@ public class JetonsHandler : MonoBehaviour
         planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
 
         isPresTime = false;
+        Debug.Log("fin start");
     }
 
     private void OnGoReceived(NetworkMessage netMsg)
