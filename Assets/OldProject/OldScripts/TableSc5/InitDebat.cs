@@ -13,7 +13,7 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject[] cartes;
     [SerializeField] GameObject conduite;
     [SerializeField] GameObject canvas_pres_vehicule;
-    [SerializeField] private Sprite baseSprite;
+    [SerializeField] Sprite baseSprite;
     private List<GameObject>[] jetons;
     private int[] index;
 
