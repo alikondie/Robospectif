@@ -41,6 +41,7 @@ public class InitDebat : MonoBehaviour
     private Vector2[] positionsButton;
 
     short vainqueurID = 1008;
+    short hasstartID = 1018;
 
     private Sprite[] persoSprites;
 
@@ -52,12 +53,14 @@ public class InitDebat : MonoBehaviour
     private string en;
 
     private int nbClicked;
+    private bool clienthasstart;
 
     //sp = sm = ep = em = up = um = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        clienthasstart = false;
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
         //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
@@ -77,6 +80,7 @@ public class InitDebat : MonoBehaviour
         }
 
         NetworkServer.RegisterHandler(jeton, onJetonReceived);
+        NetworkServer.RegisterHandler(hasstartID, onClientStart);
 
         button.onClick.AddListener(() => ButtonClicked());
 
@@ -150,11 +154,8 @@ public class InitDebat : MonoBehaviour
                 }
             }
         }
-        Debug.Log("debut onenable");
-        MyNetworkMessage msg = new MyNetworkMessage();
-        msg.message = Partie.JoueurCourant;
-        NetworkServer.SendToAll(goID, msg);
-        Debug.Log("fin onenable");
+        
+        
     }
 
     private void onJetonReceived(NetworkMessage netMsg)
@@ -169,6 +170,11 @@ public class InitDebat : MonoBehaviour
         jetons[j][index[j]].gameObject.GetComponent<Image>().sprite = jeton_actuel;
         jetons[j][index[j]].gameObject.SetActive(true);
         index[j]++;
+    }
+
+    private void onClientStart(NetworkMessage netMsg)
+    {
+        clienthasstart = true;
     }
 
     private void ButtonClicked()
@@ -277,7 +283,14 @@ public class InitDebat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkifvehiculeclicked();
+        if (clienthasstart)
+        {
+            MyNetworkMessage msg = new MyNetworkMessage();
+            msg.message = Partie.JoueurCourant;
+            NetworkServer.SendToAll(goID, msg);
+            checkifvehiculeclicked();
+            clienthasstart = false;
+        }
         
         if (nbRecu == Partie.Joueurs.Count - 1)
         {
