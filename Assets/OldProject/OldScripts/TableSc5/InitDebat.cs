@@ -13,6 +13,7 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject[] cartes;
     [SerializeField] GameObject conduite;
     [SerializeField] GameObject canvas_pres_vehicule;
+    [SerializeField] private Sprite baseSprite;
     private List<GameObject>[] jetons;
     private int[] index;
 
@@ -252,6 +253,7 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Clear();
             givenJetons.Clear();
             isDictsEmpty = true;
+            ReinitializeCards();
             canvas_debat.SetActive(false);
             canvas_choix_vainqueur.SetActive(true);
         }
@@ -284,11 +286,6 @@ public class InitDebat : MonoBehaviour
             persosAndJetons.Add(i, currentPerso);
             givenJetons.Add(i, new int[] { 0, 0, 0, 0, 0, 0 });
         }
-        foreach (KeyValuePair<int, GameObject> p in persosAndJetons)
-        {
-            print("key "+p.Key+"value "+p.Value);
-
-        }
 
     }
 
@@ -298,11 +295,8 @@ public class InitDebat : MonoBehaviour
 
         if (number >= Partie.Joueurs.Count)// || number+1 == Partie.JoueurCourant)
             return;
-
-
         string environment = "";
         string character = perso.transform.GetChild(0).gameObject.GetComponent<Image>().sprite.name;
-
         // environnement
         if (perso.transform.GetChild(3).gameObject.activeSelf)
             environment += "Campagne,";
@@ -311,6 +305,15 @@ public class InitDebat : MonoBehaviour
         if (perso.transform.GetChild(5).gameObject.activeSelf)
             environment += "Ville";
 
+        if (number +1 == Partie.JoueurCourant)
+        {
+            character = "Concepteur";
+            environment = "Concepteur";
+        }
+
+
+
+
 
         // société +-, environement +-, usage +-
         int sp, sm, ep, em, up, um;
@@ -318,7 +321,7 @@ public class InitDebat : MonoBehaviour
         string jetonValue;
 
         int keyIndex = perso.transform.GetSiblingIndex();
-        //print
+        if(number + 1 != Partie.JoueurCourant) { 
         GameObject p = persosAndJetons[keyIndex];
        // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
        // {
@@ -352,16 +355,16 @@ public class InitDebat : MonoBehaviour
                 }
                 
             }
+        }
 
+        //Donnée Finale
 
-            //Donnée Finale
-
-            persosAndDebate.Add(keyIndex, number+1 + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
+        persosAndDebate.Add(keyIndex, number+1 + ";" + character + ";" + environment + ";" + sp + ";" + sm + ";" + givenJetons[keyIndex][0]+";"+ givenJetons[keyIndex][1]+";" + ep + ";" + em + ";" + givenJetons[keyIndex][2] + ";" + givenJetons[keyIndex][3] + ";"
                                     + up + ";" + um + ";" + givenJetons[keyIndex][4] + ";" + givenJetons[keyIndex][5] + ";");
 
 
 
-            print( keyIndex);
+          
             SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
 
 
@@ -372,7 +375,7 @@ public class InitDebat : MonoBehaviour
     public void AddGivenJeton(int numJoueur, GameObject jeton)
     {
         string jetonValue = jeton.GetComponent<Image>().sprite.name;
-        print("player  number: " + numJoueur);
+        
         switch (jetonValue)
         // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
         {
@@ -394,6 +397,19 @@ public class InitDebat : MonoBehaviour
             case "planeteVert":
                 givenJetons[numJoueur][2]++;
                 break;
+        }
+    }
+
+    private void ReinitializeCards()
+    {
+        
+        foreach(GameObject p in persos)
+        {
+            List<GameObject> jetonSprites = new List<GameObject>();
+            foreach(Transform ch in p.transform.GetChild(2).transform)
+            {
+                ch.GetComponent<Image>().sprite = baseSprite;
+            }
         }
     }
 
