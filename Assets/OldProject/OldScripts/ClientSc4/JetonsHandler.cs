@@ -45,10 +45,6 @@ public class JetonsHandler : MonoBehaviour
         planeteVert.onClick.AddListener(() => OnPlaneteClicked());       
         planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
 
-
-       /* MyNetworkMessage hasstart = new MyNetworkMessage();
-        JoueurStatic.Client.Send(hasstartID, hasstart);*/
-
         isPresTime = false;
     }
 
