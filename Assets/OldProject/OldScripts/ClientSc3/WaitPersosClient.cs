@@ -39,7 +39,7 @@ public class WaitPersosClient : MonoBehaviour
         if (presentateur_changed)
         {
             Debug.Log("on change de presentateur");
-            int attentejoueurcourant = listtourattente[JoueurStatic.Numero - 1];
+            int attentejoueurcourant = listtourattente[JoueurStatic.Numero];
             Debug.Log("il reste " + attentejoueurcourant + " tours");
             if (attentejoueurcourant == 0)
             {
@@ -74,15 +74,16 @@ public class WaitPersosClient : MonoBehaviour
         //    fr = "personnages";
         //    en = "Characters";
         //}
-        //if (JoueurStatic.Langue == "FR")
-        //{
-        //    text.text = "Joueur " + JoueurStatic.Numero.ToString();
-        //    central.text = "Présentation des\n" + fr;
-        //} else
-        //{
-        //    text.text = "Player " + JoueurStatic.Numero;
-        //    central.text = en + "\npresentation";
-        //}
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            //central.text = "Présentation des\n" + fr;
+        }
+        else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            //central.text = en + "\npresentation";
+        }
     }
 
     private void ButtonClicked()
