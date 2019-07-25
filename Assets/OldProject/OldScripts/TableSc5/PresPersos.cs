@@ -253,17 +253,17 @@ public class PresPersos : MonoBehaviour
     {
         int[] list_par_ordre_passage = new int[listtourattente.Length];
         int compteur = 0;
-        for (int k = presentateur; k < listtourattente.Length + presentateur; k++)
+        for (int k = presentateur; k > presentateur - listtourattente.Length; k--)
         {
-            if(k < listtourattente.Length)
+            if(k > 0)
             {
-                list_par_ordre_passage[k - presentateur] = k;
+                list_par_ordre_passage[compteur] = k;
             }
             else
             {
-                list_par_ordre_passage[k - presentateur] = compteur;
-                compteur++;
+                list_par_ordre_passage[compteur] = k + listtourattente.Length;
             }
+            compteur++;
         }
 
         for (int k = 0; k < list_par_ordre_passage.Length; k++)
