@@ -74,15 +74,16 @@ public class WaitPersosClient : MonoBehaviour
         //    fr = "personnages";
         //    en = "Characters";
         //}
-        //if (JoueurStatic.Langue == "FR")
-        //{
-        //    text.text = "Joueur " + JoueurStatic.Numero.ToString();
-        //    central.text = "Présentation des\n" + fr;
-        //} else
-        //{
-        //    text.text = "Player " + JoueurStatic.Numero;
-        //    central.text = en + "\npresentation";
-        //}
+        if (JoueurStatic.Langue == "FR")
+        {
+            text.text = "Joueur " + JoueurStatic.Numero.ToString();
+            //central.text = "Présentation des\n" + fr;
+        }
+        else
+        {
+            text.text = "Player " + JoueurStatic.Numero;
+            //central.text = en + "\npresentation";
+        }
     }
 
     private void ButtonClicked()
