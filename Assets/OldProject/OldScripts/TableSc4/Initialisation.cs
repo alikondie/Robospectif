@@ -86,7 +86,6 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("nbcartesposees : " + Tour.NbCartesPosees);
         if (Tour.NbCartesPosees == 6)
         {
             

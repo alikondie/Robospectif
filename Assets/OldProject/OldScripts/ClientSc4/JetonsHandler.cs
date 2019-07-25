@@ -14,9 +14,10 @@ public class JetonsHandler : MonoBehaviour
     [SerializeField] Text text;
 
     short vainqueurID = 1008;
-
     short stopID = 1012;
     short goID = 1013;
+    short presID = 1017;
+    short hasstartID = 1018;
 
     [SerializeField] Button usageVert;
     [SerializeField] Button usageRouge;
@@ -28,38 +29,48 @@ public class JetonsHandler : MonoBehaviour
     private int usageCompteur;
     private int societeCompteur;
     private int planeteCompteur;
-
+    private bool isPresTime;
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
         JoueurStatic.Client.RegisterHandler(stopID, OnStopReceived);
         JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
+        JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked());       
         usageRouge.onClick.AddListener(() => OnUsageClicked());       
         societeVert.onClick.AddListener(() => OnSocieteClicked());       
         societeRouge.onClick.AddListener(() => OnSocieteClicked());       
         planeteVert.onClick.AddListener(() => OnPlaneteClicked());       
-        planeteRouge.onClick.AddListener(() => OnPlaneteClicked());       
+        planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
+
+        isPresTime = false;
     }
 
     private void OnGoReceived(NetworkMessage netMsg)
     {
-        if (usageCompteur < 2)
+        if(!isPresTime && JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
         {
-            usageVert.gameObject.SetActive(true);
-            usageRouge.gameObject.SetActive(true);
+            OnStopReceived(netMsg);
         }
-        if (societeCompteur < 2)
+        else if (!isPresTime || JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
         {
-            societeVert.gameObject.SetActive(true);
-            societeRouge.gameObject.SetActive(true);
-        }
-        if (planeteCompteur < 2)
-        {
-            planeteVert.gameObject.SetActive(true);
-            planeteRouge.gameObject.SetActive(true);
+            if (usageCompteur < 2)
+            {
+                usageVert.gameObject.SetActive(true);
+                usageRouge.gameObject.SetActive(true);
+            }
+            if (societeCompteur < 2)
+            {
+                societeVert.gameObject.SetActive(true);
+                societeRouge.gameObject.SetActive(true);
+            }
+            if (planeteCompteur < 2)
+            {
+                planeteVert.gameObject.SetActive(true);
+                planeteRouge.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -71,6 +82,20 @@ public class JetonsHandler : MonoBehaviour
         societeRouge.gameObject.SetActive(false);
         planeteVert.gameObject.SetActive(false);
         planeteRouge.gameObject.SetActive(false);
+    }
+
+    private void OnPresReceived(NetworkMessage netMsg)
+    {
+        isPresTime = true;
+        if (JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
+        {
+            usageVert.gameObject.SetActive(true);
+            usageRouge.gameObject.SetActive(true);
+            societeVert.gameObject.SetActive(true);
+            societeRouge.gameObject.SetActive(true);
+            planeteVert.gameObject.SetActive(true);
+            planeteRouge.gameObject.SetActive(true);
+        }
     }
 
     private void OnPlaneteClicked()
@@ -108,8 +133,15 @@ public class JetonsHandler : MonoBehaviour
 
     private void OnWaitReceived(NetworkMessage netMsg)
     {
+        isPresTime = false;
         canvas_choix_jetons.SetActive(false);
         canvas_vainqueur.SetActive(true);
+        usageVert.gameObject.SetActive(true);
+        usageRouge.gameObject.SetActive(true);
+        societeVert.gameObject.SetActive(true);
+        societeRouge.gameObject.SetActive(true);
+        planeteVert.gameObject.SetActive(true);
+        planeteRouge.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -119,6 +151,8 @@ public class JetonsHandler : MonoBehaviour
 
     void OnEnable()
     {
+        MyNetworkMessage hasstart = new MyNetworkMessage();
+        JoueurStatic.Client.Send(hasstartID, hasstart);
         if (JoueurStatic.Langue == "FR")
             text.text = "Joueur " + JoueurStatic.Numero;
         else
@@ -132,15 +166,9 @@ public class JetonsHandler : MonoBehaviour
         planeteRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/planeteRouge");
 
         usageCompteur = 0;
-        usageVert.gameObject.SetActive(true);
-        usageRouge.gameObject.SetActive(true);
 
         societeCompteur = 0;
-        societeVert.gameObject.SetActive(true);
-        societeRouge.gameObject.SetActive(true);
 
         planeteCompteur = 0;
-        planeteVert.gameObject.SetActive(true);
-        planeteRouge.gameObject.SetActive(true);
     }
 }
