@@ -112,6 +112,7 @@ public class PresPersos : MonoBehaviour
         }
         else
         {
+            Debug.Log("envoi au client");
             presentateur = GetNextPres(Partie.JoueurCourant);
             InitTourAttenteList();
             MyNetworkMessage msg = new MyNetworkMessage();
