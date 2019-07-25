@@ -9,6 +9,7 @@ public class WaitPersosClient : MonoBehaviour
 {
     [SerializeField] GameObject canvas_persos_table;
     [SerializeField] GameObject canvas_choix_jetons;
+    [SerializeField] Button nextbutton;
     [SerializeField] Text text;
     [SerializeField] Text central;
 
@@ -23,6 +24,7 @@ public class WaitPersosClient : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        nextbutton.onClick.AddListener(() => ButtonClicked());
         JoueurStatic.Client.RegisterHandler(debatID, OnDebatReceived);
         JoueurStatic.Client.RegisterHandler(presentateurID, OnNextPresReceived);
     }
@@ -46,8 +48,6 @@ public class WaitPersosClient : MonoBehaviour
                 presentateur_changed = false;
                 central.text = "Vous présentez dans " + attentejoueurcourant + " tours";
             }
-            MyNetworkMessage msg = new MyNetworkMessage();
-            JoueurStatic.Client.Send(joueurID, msg);
         }
     }
 
@@ -75,6 +75,12 @@ public class WaitPersosClient : MonoBehaviour
         //}
     }
 
+    private void ButtonClicked()
+    {
+        MyNetworkMessage msg = new MyNetworkMessage();
+        JoueurStatic.Client.Send(joueurID, msg);
+    }
+
     private void OnDebatReceived(NetworkMessage netMsg)
     {
         canvas_persos_table.SetActive(false);
@@ -84,6 +90,7 @@ public class WaitPersosClient : MonoBehaviour
     private void OnNextPresReceived(NetworkMessage netMsg)
     {
         listtourattente = netMsg.ReadMessage<MyNetworkMessage>().tableau;
+        nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text = netMsg.ReadMessage<MyNetworkMessage>().text;
         presentateur_changed = true;
     }
 }
