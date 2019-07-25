@@ -10,8 +10,11 @@ public class PresPersos : MonoBehaviour
 {
     #region Properties
     short debatID = 1006;
+    short joueurID = 1019;
+    short presentateurID = 1020;
     private Sprite[] persoSprites;
     private int[,] zones;
+    private int[] listtourattente;
     private int nbRecu;
 
     private string en;
@@ -42,10 +45,12 @@ public class PresPersos : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
+        NetworkServer.RegisterHandler(joueurID, OnReceivedJoueurFinished);
     }
 
     void OnEnable()
     {
+        listtourattente = new int[JoueurStatic.NbJoueurs];
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
@@ -102,7 +107,13 @@ public class PresPersos : MonoBehaviour
             }
         }
         else
+        {
             presentateur = GetNextPres(Partie.JoueurCourant);
+            InitTourAttenteList();
+            MyNetworkMessage msg = new MyNetworkMessage();
+            msg.tableau = listtourattente;
+            NetworkServer.SendToAll(presentateurID, msg);
+        }
     }
 	
     void Update()
@@ -180,6 +191,7 @@ public class PresPersos : MonoBehaviour
         int res;
         if (i - 1 <= 0)
             res = Partie.Joueurs.Count;
+
         else
             res = i - 1;
         return res;
@@ -200,6 +212,48 @@ public class PresPersos : MonoBehaviour
                      canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(1920f, 1080f))
             {
                 canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+            }
+        }
+    }
+
+    private void OnReceivedJoueurFinished(NetworkMessage netMsg)
+    {
+        presentateur = GetNextPres(presentateur);
+        for (int k= 0; k < listtourattente.Length; k++)
+        {
+            listtourattente[k]--;
+        }
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.tableau = listtourattente;
+        NetworkServer.SendToAll(presentateurID, msg);
+    }
+
+    private void InitTourAttenteList()
+    {
+        int[] list_par_ordre_passage = new int[listtourattente.Length];
+        int compteur = 0;
+        for (int k = presentateur; k < listtourattente.Length + presentateur; k++)
+        {
+            if(k < listtourattente.Length)
+            {
+                list_par_ordre_passage[k - presentateur] = k;
+            }
+            else
+            {
+                list_par_ordre_passage[k - presentateur] = compteur;
+                compteur++;
+            }
+        }
+
+        for (int k = 0; k < list_par_ordre_passage.Length; k++)
+        {
+            if (list_par_ordre_passage[k] == Partie.JoueurCourant)
+            {
+                listtourattente[k] = -1;
+            }
+            else
+            {
+                listtourattente[k] = k;
             }
         }
     }

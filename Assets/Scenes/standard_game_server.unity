@@ -2725,7 +2725,7 @@ PrefabInstance:
     - target: {fileID: 7896333963878693367, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896333963878693361, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -10311,8 +10311,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_AnchoredPosition: {x: 0, y: 423}
+  m_SizeDelta: {x: 2000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724355821
 MonoBehaviour:
@@ -16613,7 +16613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1160972300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16708,7 +16708,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_attente_persos: {fileID: 1160972299}
+  canvas_pres_vehicule: {fileID: 1891140711}
   canvas_pres_persos: {fileID: 1753731206}
+  cartes:
+  - {fileID: 1095996756}
+  - {fileID: 482982476}
+  - {fileID: 1854023512}
+  - {fileID: 90595429}
+  - {fileID: 1184035639}
   text: {fileID: 724355821}
 --- !u!1 &1168384041
 GameObject:
