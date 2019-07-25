@@ -39,7 +39,7 @@ public class WaitPersosClient : MonoBehaviour
         if (presentateur_changed)
         {
             Debug.Log("on change de presentateur");
-            int attentejoueurcourant = listtourattente[JoueurStatic.Numero - 1];
+            int attentejoueurcourant = listtourattente[JoueurStatic.Numero];
             Debug.Log("il reste " + attentejoueurcourant + " tours");
             if (attentejoueurcourant == 0)
             {
