@@ -33,7 +33,8 @@ public class WaitPersosClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("il reste " + listtourattente[JoueurStatic.Numero] + " tours");
+        Debug.Log("le presentateur change : " + presentateur_changed);
+        Debug.Log(" taille listtourattente " + listtourattente.Length);
 
         if (presentateur_changed)
         {
@@ -92,6 +93,7 @@ public class WaitPersosClient : MonoBehaviour
 
     private void OnDebatReceived(NetworkMessage netMsg)
     {
+        Debug.Log("debat received");
         presentateur_changed = false;
         nextbutton.gameObject.SetActive(false);
         canvas_persos_table.SetActive(false);
@@ -101,8 +103,9 @@ public class WaitPersosClient : MonoBehaviour
     private void OnNextPresReceived(NetworkMessage netMsg)
     {
         Debug.Log("message recu");
-        listtourattente = netMsg.ReadMessage<MyNetworkMessage>().tableau;
-        nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text = netMsg.ReadMessage<MyNetworkMessage>().text;
+        var objet = netMsg.ReadMessage<MyNetworkMessage>();
+        listtourattente = objet.tableau;
+        nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text = objet.text;
         presentateur_changed = true;
     }
 }
