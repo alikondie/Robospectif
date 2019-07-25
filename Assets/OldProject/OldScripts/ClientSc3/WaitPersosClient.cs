@@ -84,7 +84,7 @@ public class WaitPersosClient : MonoBehaviour
 
     private void ButtonClicked()
     {
-        if (central.text == "Commencer le débat")
+        if (nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Commencer le débat")
         {
             MyNetworkMessage msg = new MyNetworkMessage();
             JoueurStatic.Client.Send(debatID, msg);
