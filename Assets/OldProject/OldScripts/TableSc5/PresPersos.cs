@@ -10,12 +10,17 @@ public class PresPersos : MonoBehaviour
 {
     #region Properties
     short debatID = 1006;
+    short joueurID = 1019;
+    short presentateurID = 1020;
     private Sprite[] persoSprites;
     private int[,] zones;
+    private int[] listtourattente;
     private int nbRecu;
 
     private string en;
     private string fr;
+
+    private string textbutton;
 
     private int presentateur;
     private Joueur pres;
@@ -41,11 +46,13 @@ public class PresPersos : MonoBehaviour
 	#region Unity loop
     void Start()
     {
-        button.onClick.AddListener(() => ButtonClicked());
+        //button.onClick.AddListener(() => ButtonClicked());
+        NetworkServer.RegisterHandler(joueurID, OnReceivedJoueurFinished);
     }
 
     void OnEnable()
     {
+        listtourattente = new int[JoueurStatic.NbJoueurs];
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
@@ -88,9 +95,11 @@ public class PresPersos : MonoBehaviour
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
         if (Partie.Langue == "FR")
-            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+            //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
+            textbutton = "Joueur suivant";
         else
-            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
+            textbutton = "Next player";
+            //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
         if (Partie.Type == "expert")
         {
             foreach (Joueur j in Partie.Joueurs)
@@ -102,7 +111,13 @@ public class PresPersos : MonoBehaviour
             }
         }
         else
+        {
             presentateur = GetNextPres(Partie.JoueurCourant);
+            InitTourAttenteList();
+            MyNetworkMessage msg = new MyNetworkMessage();
+            msg.tableau = listtourattente;
+            NetworkServer.SendToAll(presentateurID, msg);
+        }
     }
 	
     void Update()
@@ -135,9 +150,12 @@ public class PresPersos : MonoBehaviour
 
         if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
             if (Partie.Langue == "FR")
-                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+                //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
+                textbutton = "Commencer le débat";
+
             else
-                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
+                textbutton = "Start debate";
+                //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
         if (Partie.Langue == "FR")
             text.text = "Le joueur " + presentateur + " présente son " + fr;
         else
@@ -147,39 +165,40 @@ public class PresPersos : MonoBehaviour
 
     #region Methods
 
-    private void ButtonClicked()
-    {
-        if ((button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player") || (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant"))
-        {
-            presentateur = GetNextPres(presentateur);
-        }
-        else
-        {
-            canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
-            canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
-            canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
-            canvas_pres_vehicule.SetActive(false);
-            canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
-            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
-            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
-            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
-            foreach (GameObject carte in cartes)
-            {
-                carte.GetComponent<BoxCollider2D>().enabled = true;
-                carte.GetComponent<Mouvement_carte>().enabled = true;
-            }
-            MyStringMessage msg = new MyStringMessage();
-            NetworkServer.SendToAll(debatID, msg);
-            canvas_pres_persos.SetActive(false);
-            canvas_debat.SetActive(true);
-        }        
-    }
+    //private void ButtonClicked()
+    //{
+    //    if ((button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player") || (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant"))
+    //    {
+    //        presentateur = GetNextPres(presentateur);
+    //    }
+    //    else
+    //    {
+    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+    //        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
+    //        canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
+    //        canvas_pres_vehicule.SetActive(false);
+    //        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+    //        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
+    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+    //        foreach (GameObject carte in cartes)
+    //        {
+    //            carte.GetComponent<BoxCollider2D>().enabled = true;
+    //            carte.GetComponent<Mouvement_carte>().enabled = true;
+    //        }
+    //        MyStringMessage msg = new MyStringMessage();
+    //        NetworkServer.SendToAll(debatID, msg);
+    //        canvas_pres_persos.SetActive(false);
+    //        canvas_debat.SetActive(true);
+    //    }        
+    //}
 
     private int GetNextPres(int i)
     {
         int res;
         if (i - 1 <= 0)
             res = Partie.Joueurs.Count;
+
         else
             res = i - 1;
         return res;
@@ -200,6 +219,59 @@ public class PresPersos : MonoBehaviour
                      canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution == new Vector2(1920f, 1080f))
             {
                 canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+            }
+        }
+    }
+
+    private void OnReceivedJoueurFinished(NetworkMessage netMsg)
+    {
+        if ((textbutton == "Next player") || (textbutton == "Joueur suivant"))
+        {
+            presentateur = GetNextPres(presentateur);
+            for (int k = 0; k < listtourattente.Length; k++)
+            {
+                listtourattente[k]--;
+            }
+            MyNetworkMessage msg = new MyNetworkMessage();
+            msg.tableau = listtourattente;
+            msg.text = textbutton;
+            NetworkServer.SendToAll(presentateurID, msg);
+        }
+        else
+        {
+            MyStringMessage msg = new MyStringMessage();
+            NetworkServer.SendToAll(debatID, msg);
+            canvas_pres_persos.SetActive(false);
+            canvas_debat.SetActive(true);
+        }
+    }
+
+    private void InitTourAttenteList()
+    {
+        int[] list_par_ordre_passage = new int[listtourattente.Length];
+        int compteur = 0;
+        for (int k = presentateur; k < listtourattente.Length + presentateur; k++)
+        {
+            if(k < listtourattente.Length)
+            {
+                list_par_ordre_passage[k - presentateur] = k;
+            }
+            else
+            {
+                list_par_ordre_passage[k - presentateur] = compteur;
+                compteur++;
+            }
+        }
+
+        for (int k = 0; k < list_par_ordre_passage.Length; k++)
+        {
+            if (list_par_ordre_passage[k] == Partie.JoueurCourant)
+            {
+                listtourattente[k] = -1;
+            }
+            else
+            {
+                listtourattente[k] = k;
             }
         }
     }

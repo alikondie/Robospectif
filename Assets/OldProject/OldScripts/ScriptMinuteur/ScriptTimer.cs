@@ -20,7 +20,7 @@ public class ScriptTimer : MonoBehaviour
 
     // ---------- METHODES ----------
 
-    // Methode d'inisialisation
+    // Methode d'initialisation
     void Start()
     {
         doitLancer = false;
@@ -48,7 +48,7 @@ public class ScriptTimer : MonoBehaviour
     }
 
         // Methode activation de minuteur
-        public float lancerMinuteur(float nbDebut, float nbvitesse, Transform cercle)
+    public float lancerMinuteur(float nbDebut, float nbvitesse, Transform cercle)
     {
         if (nbDebut < 100)
         {

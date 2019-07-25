@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class MyNetworkMessage : MessageBase
 {
     public int message;
+    public int[] tableau;
+    public string text;
 
     // Start is called before the first frame update
     void Start()

@@ -8,7 +8,9 @@ using System;
 public class AttentePersos : MonoBehaviour
 {
     [SerializeField] GameObject canvas_attente_persos;
+    [SerializeField] GameObject canvas_pres_vehicule;
     [SerializeField] GameObject canvas_pres_persos;
+    [SerializeField] GameObject[] cartes;
     [SerializeField] Text text;
     short persosID = 1007;
     private Sprite[] persoSprites;
@@ -26,6 +28,18 @@ public class AttentePersos : MonoBehaviour
 
     void OnEnable()
     {
+        canvas_pres_vehicule.SetActive(true);
+        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1750f);
+        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
+        foreach (GameObject carte in cartes)
+        {
+            carte.GetComponent<BoxCollider2D>().enabled = false;
+            carte.GetComponent<Mouvement_carte>().enabled = false;
+        }
         if (Partie.Type == "expert")
         {
             fr = "acteur";
@@ -92,6 +106,19 @@ public class AttentePersos : MonoBehaviour
             }
             Tour.PersosDebat = persoSprites;
             Tour.ZonesDebat = zones;
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
+            canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
+            canvas_pres_vehicule.SetActive(false);
+            canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
+            canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+            foreach (GameObject carte in cartes)
+            {
+                carte.GetComponent<BoxCollider2D>().enabled = true;
+                carte.GetComponent<Mouvement_carte>().enabled = true;
+            }
             canvas_attente_persos.SetActive(false);
             canvas_pres_persos.SetActive(true);
         }
