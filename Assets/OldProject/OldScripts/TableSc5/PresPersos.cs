@@ -152,14 +152,6 @@ public class PresPersos : MonoBehaviour
             }
         }
 
-        if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
-            if (Partie.Langue == "FR")
-                //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Commencer le débat";
-                textbutton = "Commencer le débat";
-
-            else
-                textbutton = "Start debate";
-                //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Start debate";
         if (Partie.Langue == "FR")
             text.text = "Le joueur " + presentateur + " présente son " + fr;
         else
@@ -205,6 +197,19 @@ public class PresPersos : MonoBehaviour
         for (int k = 0; k < listtourattente.Length; k++)
         {
             listtourattente[k]--;
+        }
+
+        if ((GetNextPres(presentateur) == Partie.JoueurCourant) || next.IsPrive)
+        {
+            if (Partie.Langue == "FR")
+            {
+                textbutton = "Commencer le débat";
+            }
+
+            else
+            {
+                textbutton = "Start debate";
+            }
         }
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.tableau = listtourattente;
