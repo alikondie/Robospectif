@@ -38,7 +38,6 @@ public class ScriptTimer : MonoBehaviour
         if (doitLancer) {
             imgMinuteur.SetActive(true);
             debut = lancerMinuteur(debut, vitesse, cercleMinuteur);
-            Debug.Log("debut = " + debut);
         }
 
         if (debut >= 100)
