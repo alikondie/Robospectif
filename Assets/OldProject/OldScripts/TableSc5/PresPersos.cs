@@ -112,11 +112,10 @@ public class PresPersos : MonoBehaviour
         }
         else
         {
-            Debug.Log("envoi au client");
             presentateur = GetNextPres(Partie.JoueurCourant);
-            Debug.Log("presentateur = " + presentateur);
-            Debug.Log("taille liste " + listtourattente.Length);
             InitTourAttenteList();
+            for (int i = 0; i < listtourattente.Length; i++)
+                Debug.Log("Joueur " + (i + 1) + " : temps d'attente > " + listtourattente[i]);
             MyNetworkMessage msg = new MyNetworkMessage();
             msg.tableau = listtourattente;
             NetworkServer.SendToAll(presentateurID, msg);
@@ -251,21 +250,30 @@ public class PresPersos : MonoBehaviour
 
     private void InitTourAttenteList()
     {
+        Debug.Log("presentateur = " + presentateur);
+        int localpres = presentateur - 1;
         int[] list_par_ordre_passage = new int[listtourattente.Length];
-        int compteur = 0;
-        for (int k = presentateur; k > presentateur - listtourattente.Length; k--)
+        int compteur = Partie.Joueurs.Count - 2;
+        listtourattente[Partie.JoueurCourant - 1] = -1;
+        for (int k = Partie.JoueurCourant; k < listtourattente.Length + localpres; k++)
         {
-            if(k > 0)
+            listtourattente[k % listtourattente.Length] = compteur;
+            compteur--;
+        }
+        /*
+        for (int k = localpres; k > localpres - listtourattente.Length; k--)
+        {
+            if(k >= 0)
             {
-                list_par_ordre_passage[compteur] = k;
+                listtourattente[compteur] = k;
             }
             else
             {
-                list_par_ordre_passage[compteur] = k + listtourattente.Length;
+                listtourattente[compteur] = k + listtourattente.Length;
             }
             compteur++;
         }
-
+        /*
         for (int k = 0; k < list_par_ordre_passage.Length; k++)
         {
             if (list_par_ordre_passage[k] == Partie.JoueurCourant)
@@ -276,7 +284,7 @@ public class PresPersos : MonoBehaviour
             {
                 listtourattente[k] = k;
             }
-        }
+        }*/
     }
 
     #endregion
