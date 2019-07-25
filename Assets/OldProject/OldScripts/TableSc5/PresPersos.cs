@@ -118,6 +118,7 @@ public class PresPersos : MonoBehaviour
                 Debug.Log("Joueur " + (i + 1) + " : temps d'attente > " + listtourattente[i]);
             MyNetworkMessage msg = new MyNetworkMessage();
             msg.tableau = listtourattente;
+            msg.text = textbutton;
             NetworkServer.SendToAll(presentateurID, msg);
         }
     }
@@ -250,41 +251,13 @@ public class PresPersos : MonoBehaviour
 
     private void InitTourAttenteList()
     {
-        Debug.Log("presentateur = " + presentateur);
-        int localpres = presentateur - 1;
-        int[] list_par_ordre_passage = new int[listtourattente.Length];
         int compteur = Partie.Joueurs.Count - 2;
         listtourattente[Partie.JoueurCourant - 1] = -1;
-        for (int k = Partie.JoueurCourant; k < listtourattente.Length + localpres; k++)
+        for (int k = Partie.JoueurCourant; k < listtourattente.Length + Partie.JoueurCourant - 1; k++)
         {
             listtourattente[k % listtourattente.Length] = compteur;
             compteur--;
         }
-        /*
-        for (int k = localpres; k > localpres - listtourattente.Length; k--)
-        {
-            if(k >= 0)
-            {
-                listtourattente[compteur] = k;
-            }
-            else
-            {
-                listtourattente[compteur] = k + listtourattente.Length;
-            }
-            compteur++;
-        }
-        /*
-        for (int k = 0; k < list_par_ordre_passage.Length; k++)
-        {
-            if (list_par_ordre_passage[k] == Partie.JoueurCourant)
-            {
-                listtourattente[k] = -1;
-            }
-            else
-            {
-                listtourattente[k] = k;
-            }
-        }*/
     }
 
     #endregion
