@@ -33,18 +33,22 @@ public class WaitPersosClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(presentateur_changed)
+        Debug.Log("il reste " + listtourattente[JoueurStatic.Numero] + " tours");
+
+        if (presentateur_changed)
         {
             Debug.Log("on change de presentateur");
             int attentejoueurcourant = listtourattente[JoueurStatic.Numero];
             Debug.Log("il reste " + attentejoueurcourant + " tours");
             if (attentejoueurcourant == 0)
             {
+                presentateur_changed = false;
                 central.text = "Présentez un usage du véhicule par votre personnage.\n Une fois l'usage présenté, passez au joueur suivant";
                 nextbutton.gameObject.SetActive(true);
             }
             else if (attentejoueurcourant < 0)
             {
+                presentateur_changed = false;
                 central.text = "Présentation des usages";
                 nextbutton.gameObject.SetActive(false);
             }
@@ -59,7 +63,6 @@ public class WaitPersosClient : MonoBehaviour
 
     void OnEnable()
     {
-        presentateur_changed = false;
         //if (JoueurStatic.Type == "expert")
         //{
         //    fr = "acteurs";
@@ -89,6 +92,7 @@ public class WaitPersosClient : MonoBehaviour
 
     private void OnDebatReceived(NetworkMessage netMsg)
     {
+        presentateur_changed = false;
         nextbutton.gameObject.SetActive(false);
         canvas_persos_table.SetActive(false);
         canvas_choix_jetons.SetActive(true);
