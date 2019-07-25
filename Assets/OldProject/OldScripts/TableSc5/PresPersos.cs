@@ -52,7 +52,7 @@ public class PresPersos : MonoBehaviour
 
     void OnEnable()
     {
-        listtourattente = new int[JoueurStatic.NbJoueurs];
+        listtourattente = new int[Partie.Joueurs.Count];
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
@@ -114,6 +114,8 @@ public class PresPersos : MonoBehaviour
         {
             Debug.Log("envoi au client");
             presentateur = GetNextPres(Partie.JoueurCourant);
+            Debug.Log("presentateur = " + presentateur);
+            Debug.Log("taille liste " + listtourattente.Length);
             InitTourAttenteList();
             MyNetworkMessage msg = new MyNetworkMessage();
             msg.tableau = listtourattente;

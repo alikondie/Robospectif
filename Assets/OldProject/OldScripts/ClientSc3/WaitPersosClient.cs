@@ -33,12 +33,12 @@ public class WaitPersosClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("il reste " + listtourattente[JoueurStatic.Numero] + " tours");
+        Debug.Log("il reste " + listtourattente[JoueurStatic.Numero - 1] + " tours");
 
         if (presentateur_changed)
         {
             Debug.Log("on change de presentateur");
-            int attentejoueurcourant = listtourattente[JoueurStatic.Numero];
+            int attentejoueurcourant = listtourattente[JoueurStatic.Numero - 1];
             Debug.Log("il reste " + attentejoueurcourant + " tours");
             if (attentejoueurcourant == 0)
             {
