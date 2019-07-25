@@ -47,6 +47,7 @@ public class PresPersos : MonoBehaviour
     void Start()
     {
         //button.onClick.AddListener(() => ButtonClicked());
+        NetworkServer.RegisterHandler(debatID, OnDebatReceived);
         NetworkServer.RegisterHandler(joueurID, OnReceivedJoueurFinished);
     }
 
@@ -168,34 +169,6 @@ public class PresPersos : MonoBehaviour
 
     #region Methods
 
-    //private void ButtonClicked()
-    //{
-    //    if ((button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Next player") || (button.transform.GetChild(0).gameObject.GetComponent<Text>().text == "Joueur suivant"))
-    //    {
-    //        presentateur = GetNextPres(presentateur);
-    //    }
-    //    else
-    //    {
-    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
-    //        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
-    //        canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
-    //        canvas_pres_vehicule.SetActive(false);
-    //        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
-    //        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
-    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
-    //        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
-    //        foreach (GameObject carte in cartes)
-    //        {
-    //            carte.GetComponent<BoxCollider2D>().enabled = true;
-    //            carte.GetComponent<Mouvement_carte>().enabled = true;
-    //        }
-    //        MyStringMessage msg = new MyStringMessage();
-    //        NetworkServer.SendToAll(debatID, msg);
-    //        canvas_pres_persos.SetActive(false);
-    //        canvas_debat.SetActive(true);
-    //    }        
-    //}
-
     private int GetNextPres(int i)
     {
         int res;
@@ -228,25 +201,21 @@ public class PresPersos : MonoBehaviour
 
     private void OnReceivedJoueurFinished(NetworkMessage netMsg)
     {
-        if ((textbutton == "Next player") || (textbutton == "Joueur suivant"))
+        presentateur = GetNextPres(presentateur);
+        for (int k = 0; k < listtourattente.Length; k++)
         {
-            presentateur = GetNextPres(presentateur);
-            for (int k = 0; k < listtourattente.Length; k++)
-            {
-                listtourattente[k]--;
-            }
-            MyNetworkMessage msg = new MyNetworkMessage();
-            msg.tableau = listtourattente;
-            msg.text = textbutton;
-            NetworkServer.SendToAll(presentateurID, msg);
+            listtourattente[k]--;
         }
-        else
-        {
-            MyStringMessage msg = new MyStringMessage();
-            NetworkServer.SendToAll(debatID, msg);
-            canvas_pres_persos.SetActive(false);
-            canvas_debat.SetActive(true);
-        }
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.tableau = listtourattente;
+        msg.text = textbutton;
+        NetworkServer.SendToAll(presentateurID, msg);
+    }
+
+    private void OnDebatReceived(NetworkMessage netMsg)
+    {
+        canvas_pres_persos.SetActive(false);
+        canvas_debat.SetActive(true);
     }
 
     private void InitTourAttenteList()

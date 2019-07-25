@@ -26,16 +26,12 @@ public class WaitPersosClient : MonoBehaviour
     {
         nextbutton.gameObject.SetActive(false);
         nextbutton.onClick.AddListener(() => ButtonClicked());
-        JoueurStatic.Client.RegisterHandler(debatID, OnDebatReceived);
         JoueurStatic.Client.RegisterHandler(presentateurID, OnNextPresReceived);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("le presentateur change : " + presentateur_changed);
-        Debug.Log(" taille listtourattente " + listtourattente.Length);
-
         if (presentateur_changed)
         {
             Debug.Log("on change de presentateur");
@@ -88,22 +84,24 @@ public class WaitPersosClient : MonoBehaviour
 
     private void ButtonClicked()
     {
-        MyNetworkMessage msg = new MyNetworkMessage();
-        JoueurStatic.Client.Send(joueurID, msg);
-    }
-
-    private void OnDebatReceived(NetworkMessage netMsg)
-    {
-        Debug.Log("debat received");
-        presentateur_changed = false;
-        nextbutton.gameObject.SetActive(false);
-        canvas_persos_table.SetActive(false);
-        canvas_choix_jetons.SetActive(true);
+        if (central.text == "Commencer le débat")
+        {
+            MyNetworkMessage msg = new MyNetworkMessage();
+            JoueurStatic.Client.Send(debatID, msg);
+            presentateur_changed = false;
+            nextbutton.gameObject.SetActive(false);
+            canvas_persos_table.SetActive(false);
+            canvas_choix_jetons.SetActive(true);
+        }
+        else
+        {
+            MyNetworkMessage msg = new MyNetworkMessage();
+            JoueurStatic.Client.Send(joueurID, msg);
+        }
     }
 
     private void OnNextPresReceived(NetworkMessage netMsg)
     {
-        Debug.Log("message recu");
         var objet = netMsg.ReadMessage<MyNetworkMessage>();
         listtourattente = objet.tableau;
         nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text = objet.text;
