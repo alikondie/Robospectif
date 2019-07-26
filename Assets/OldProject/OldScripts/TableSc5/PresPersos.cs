@@ -12,6 +12,7 @@ public class PresPersos : MonoBehaviour
     short debatID = 1006;
     short joueurID = 1019;
     short presentateurID = 1020;
+    short debatclientID = 1021;
     private Sprite[] persoSprites;
     private int[,] zones;
     private int[] listtourattente;
@@ -219,6 +220,9 @@ public class PresPersos : MonoBehaviour
 
     private void OnDebatReceived(NetworkMessage netMsg)
     {
+        MyNetworkMessage msg = new MyNetworkMessage();
+        NetworkServer.SendToAll(debatclientID, msg);
+
         canvas_pres_persos.SetActive(false);
         canvas_debat.SetActive(true);
     }

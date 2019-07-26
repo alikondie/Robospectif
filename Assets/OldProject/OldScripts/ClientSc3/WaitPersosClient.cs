@@ -14,6 +14,7 @@ public class WaitPersosClient : MonoBehaviour
     [SerializeField] Text central;
 
     short debatID = 1006;
+    short debatclientID = 1021;
     short joueurID = 1019;
     short presentateurID = 1020;
     private string fr;
@@ -27,6 +28,7 @@ public class WaitPersosClient : MonoBehaviour
         nextbutton.gameObject.SetActive(false);
         nextbutton.onClick.AddListener(() => ButtonClicked());
         JoueurStatic.Client.RegisterHandler(presentateurID, OnNextPresReceived);
+        JoueurStatic.Client.RegisterHandler(debatclientID, OnDebatReceived);
     }
 
     // Update is called once per frame
@@ -88,10 +90,6 @@ public class WaitPersosClient : MonoBehaviour
         {
             MyNetworkMessage msg = new MyNetworkMessage();
             JoueurStatic.Client.Send(debatID, msg);
-            presentateur_changed = false;
-            nextbutton.gameObject.SetActive(false);
-            canvas_persos_table.SetActive(false);
-            canvas_choix_jetons.SetActive(true);
         }
         else
         {
@@ -106,5 +104,13 @@ public class WaitPersosClient : MonoBehaviour
         listtourattente = objet.tableau;
         nextbutton.transform.GetChild(0).gameObject.GetComponent<Text>().text = objet.text;
         presentateur_changed = true;
+    }
+
+    private void OnDebatReceived(NetworkMessage netMsg)
+    {
+        presentateur_changed = false;
+        nextbutton.gameObject.SetActive(false);
+        canvas_persos_table.SetActive(false);
+        canvas_choix_jetons.SetActive(true);
     }
 }
