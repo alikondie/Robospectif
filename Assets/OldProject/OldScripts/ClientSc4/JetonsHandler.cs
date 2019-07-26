@@ -40,11 +40,11 @@ public class JetonsHandler : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked(usageVert.GetComponent<Image>().sprite));       
-        usageRouge.onClick.AddListener(() => OnUsageClicked(usageRouge.GetComponent<Image>().sprite)));       
-        societeVert.onClick.AddListener(() => OnSocieteClicked(societeVert.GetComponent<Image>().sprite)));       
-        societeRouge.onClick.AddListener(() => OnSocieteClicked(societeRouge.GetComponent<Image>().sprite)));       
-        planeteVert.onClick.AddListener(() => OnPlaneteClicked(planeteVert.GetComponent<Image>().sprite)));       
-        planeteRouge.onClick.AddListener(() => OnPlaneteClicked(planeteRouge.GetComponent<Image>().sprite)));
+        usageRouge.onClick.AddListener(() => OnUsageClicked(usageRouge.GetComponent<Image>().sprite));       
+        societeVert.onClick.AddListener(() => OnSocieteClicked(societeVert.GetComponent<Image>().sprite));       
+        societeRouge.onClick.AddListener(() => OnSocieteClicked(societeRouge.GetComponent<Image>().sprite));       
+        planeteVert.onClick.AddListener(() => OnPlaneteClicked(planeteVert.GetComponent<Image>().sprite));       
+        planeteRouge.onClick.AddListener(() => OnPlaneteClicked(planeteRouge.GetComponent<Image>().sprite));
 
         isPresTime = false;
     }
