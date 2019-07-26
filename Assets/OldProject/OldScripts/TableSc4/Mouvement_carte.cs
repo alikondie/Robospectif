@@ -12,7 +12,6 @@ public class Mouvement_carte : MonoBehaviour
     private Vector3 curPosition;
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
-    [SerializeField] GameObject pres_terminee;
     [SerializeField] Button button;
     private GameObject currenttarget;
     private int sens;
