@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 
 public class Jeton_pop : MonoBehaviour
 {
+    [SerializeField] GameObject button;
+
     private Vector3 screenPoint;
     private Vector3 offset;
     private Vector3 curScreenPoint;
@@ -46,6 +48,7 @@ public class Jeton_pop : MonoBehaviour
 
     void OnEnable()
     {
+        button.SetActive(false);
     }
 
 
@@ -77,6 +80,7 @@ public class Jeton_pop : MonoBehaviour
                 MyNetworkMessage msg = new MyNetworkMessage();
                 msg.message = Partie.JoueurCourant;
                 NetworkServer.SendToAll(goID, msg);
+                button.SetActive(true);
 
                 if (Tour.Piles[index] < 8)
                 {
