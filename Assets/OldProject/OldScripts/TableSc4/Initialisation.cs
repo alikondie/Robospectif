@@ -86,15 +86,15 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Tour.NbCartesPosees == 6)
-        {
+        //if (Tour.NbCartesPosees == 6)
+        //{
             
-            button.gameObject.SetActive(true);
-        }
-        else
-        {
-            button.gameObject.SetActive(false);
-        }
+        //    button.gameObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    button.gameObject.SetActive(false);
+        //}
     }
 
     private void ButtonClicked()
@@ -142,8 +142,6 @@ public class Initialisation : MonoBehaviour
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(presID, msg);
-
-        Tour.NbCartesPosees -= 6;
 
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
