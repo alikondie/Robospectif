@@ -142,7 +142,9 @@ public class Initialisation : MonoBehaviour
         MyNetworkMessage msg = new MyNetworkMessage();
         msg.message = Partie.JoueurCourant;
         NetworkServer.SendToAll(presID, msg);
-        
+
+        Tour.NbCartesPosees -= 6;
+
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
 
