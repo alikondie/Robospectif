@@ -440,7 +440,6 @@ GameObject:
   - component: {fileID: 73041075}
   - component: {fileID: 73041073}
   - component: {fileID: 73041072}
-  - component: {fileID: 73041074}
   m_Layer: 5
   m_Name: SocietePositif
   m_TagString: Untagged
@@ -519,20 +518,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &73041074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73041071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 73041073}
-  button: {fileID: 73041072}
 --- !u!222 &73041075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -829,7 +814,6 @@ GameObject:
   - component: {fileID: 149900100}
   - component: {fileID: 149900098}
   - component: {fileID: 149900097}
-  - component: {fileID: 149900099}
   m_Layer: 5
   m_Name: UsageNegatif
   m_TagString: Untagged
@@ -908,20 +892,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &149900099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149900096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 149900098}
-  button: {fileID: 149900097}
 --- !u!222 &149900100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1270,7 +1240,6 @@ GameObject:
   - component: {fileID: 250888458}
   - component: {fileID: 250888456}
   - component: {fileID: 250888455}
-  - component: {fileID: 250888457}
   m_Layer: 5
   m_Name: SocieteNegatif
   m_TagString: Untagged
@@ -1349,20 +1318,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &250888457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 250888454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 250888456}
-  button: {fileID: 250888455}
 --- !u!222 &250888458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3468,7 +3423,6 @@ GameObject:
   - component: {fileID: 734153022}
   - component: {fileID: 734153020}
   - component: {fileID: 734153019}
-  - component: {fileID: 734153021}
   m_Layer: 5
   m_Name: UsagePositif
   m_TagString: Untagged
@@ -3558,20 +3512,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &734153021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734153018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 734153020}
-  button: {fileID: 734153019}
 --- !u!222 &734153022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6680,7 +6620,6 @@ GameObject:
   - component: {fileID: 1637260199}
   - component: {fileID: 1637260197}
   - component: {fileID: 1637260196}
-  - component: {fileID: 1637260198}
   m_Layer: 5
   m_Name: PlanetePositif
   m_TagString: Untagged
@@ -6759,20 +6698,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &1637260198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637260195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 1637260197}
-  button: {fileID: 1637260196}
 --- !u!222 &1637260199
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7010,7 +6935,6 @@ GameObject:
   - component: {fileID: 1719710159}
   - component: {fileID: 1719710157}
   - component: {fileID: 1719710156}
-  - component: {fileID: 1719710158}
   m_Layer: 5
   m_Name: PlaneteNegatif
   m_TagString: Untagged
@@ -7089,20 +7013,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &1719710158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719710155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d350d2d818564ebd77d6e063a8063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 1719710157}
-  button: {fileID: 1719710156}
 --- !u!222 &1719710159
 CanvasRenderer:
   m_ObjectHideFlags: 0
