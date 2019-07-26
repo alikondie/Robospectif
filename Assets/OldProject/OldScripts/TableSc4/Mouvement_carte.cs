@@ -13,6 +13,7 @@ public class Mouvement_carte : MonoBehaviour
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
     [SerializeField] GameObject pres_terminee;
+    [SerializeField] Button button;
     private GameObject currenttarget;
     private int sens;
     private int checkifintarget;
@@ -26,17 +27,25 @@ public class Mouvement_carte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (nbCartePosees == 6)
+        {
+            button.gameObject.SetActive(true);
+        }
+        else
+        {
+            button.gameObject.SetActive(false);
+        }
     }
 
     void OnEnable()
     {
+        nbCartePosees = 0;
         GetSens();
         gameObject.layer = 5;
         currenttarget = null;
@@ -75,7 +84,7 @@ public class Mouvement_carte : MonoBehaviour
         {
             if(!was_in_target)
             {
-                Tour.NbCartesPosees++;
+                nbCartePosees++;
                 Debug.Log("incremente");
                 was_in_target = true;
             }
@@ -139,7 +148,7 @@ public class Mouvement_carte : MonoBehaviour
             if (!was_in_target)
             {
                 was_in_target = true;
-                Tour.NbCartesPosees++;
+                nbCartePosees++;
                 Debug.Log("incremente");
             }
             RelocateCardsWhencardincoming(cardstack);
@@ -148,7 +157,7 @@ public class Mouvement_carte : MonoBehaviour
         else
         {
             was_in_target = false;
-            Tour.NbCartesPosees--;
+            nbCartePosees--;
             Debug.Log("decremente");
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
