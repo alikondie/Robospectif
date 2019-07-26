@@ -40,6 +40,8 @@ public class Mouvement_carte : MonoBehaviour
         was_in_target = false;
         GetSens();
         gameObject.layer = 5;
+        checkifintarget = 0;
+        checkifnomoreintarget = 0;
         currenttarget = null;
     }
     #endregion
