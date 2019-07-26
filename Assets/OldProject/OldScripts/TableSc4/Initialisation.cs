@@ -22,10 +22,11 @@ public class Initialisation : MonoBehaviour
     public static List<string> manualEquipmentCards;
     public static List<string> programmableEquipmentCards;
     public static List<string> autoEquipmentCards;
+    private int nbCartePosees;
     public static string autonomie;
 
     short presID = 1011;
-
+    short CartePoseeID = 1022;
     public static int indice = 0;
     public static Sprite[,] images = new Sprite[6,5];
 
@@ -42,14 +43,13 @@ public class Initialisation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        NetworkServer.RegisterHandler(CartePoseeID, OnCartePoseeReceived);
         button.onClick.AddListener(() => ButtonClicked());
     }
 
     void OnEnable()
     {
-        //Tour.NbCartesPosees = 0;
-
+        nbCartePosees = 0;
         if (Partie.Langue == "FR")
             button.transform.GetChild(0).GetComponent<Text>().text = "Présentation terminée";
         else
@@ -86,21 +86,18 @@ public class Initialisation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Tour.NbCartesPosees == 6)
-        //{
-            
-        //    button.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    button.gameObject.SetActive(false);
-        //}
+        if (nbCartePosees == 6)
+        {
+            button.gameObject.SetActive(true);
+        }
+        else
+        {
+            button.gameObject.SetActive(false);
+        }
     }
 
     private void ButtonClicked()
     {
-
-
         #region recup données
 
             SansHUD.data.AppendLine("Tour " + Partie.Tour);
@@ -145,8 +142,6 @@ public class Initialisation : MonoBehaviour
 
         canvas_plateau_vehicule.SetActive(false);
         canvas_pres_persos.SetActive(true);
-
-
     }
 
     public static void get(Sprite[] image, int zone)
@@ -156,10 +151,7 @@ public class Initialisation : MonoBehaviour
             images[zone-1, i] = image[i];
         }
     }
-
-
-
-
+    
     //function which rotate the canvas depending on the current player who presents the robot
     private void Rotate(int pos)
     {
@@ -179,5 +171,10 @@ public class Initialisation : MonoBehaviour
         children.transform.rotation = rotation;
         cartes.transform.rotation = rotation;
         cartes.transform.position = posCards[pos - 1];
+    }
+
+    private void OnCartePoseeReceived(NetworkMessage netMsg)
+    {
+        nbCartePosees += netMsg.ReadMessage<MyNetworkMessage>().message;
     }
 }

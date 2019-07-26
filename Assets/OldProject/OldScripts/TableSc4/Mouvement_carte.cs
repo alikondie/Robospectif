@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Mouvement_carte : MonoBehaviour
 {
+    short CartePoseeID = 1022;
     private Vector3 screenPoint;
     private Vector3 initialPos;
     private Vector3 offset;
     private Vector3 curPosition;
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
-    [SerializeField] GameObject pres_terminee;
     [SerializeField] Button button;
     private GameObject currenttarget;
     private int sens;
@@ -22,7 +22,6 @@ public class Mouvement_carte : MonoBehaviour
     private bool was_in_target = false;
     private bool test;
 
-    private int nbCartePosees;
     #region unused start and update
     // Start is called before the first frame update
     void Start()
@@ -33,19 +32,11 @@ public class Mouvement_carte : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nbCartePosees == 6)
-        {
-            button.gameObject.SetActive(true);
-        }
-        else
-        {
-            button.gameObject.SetActive(false);
-        }
+
     }
 
     void OnEnable()
     {
-        nbCartePosees = 0;
         GetSens();
         gameObject.layer = 5;
         currenttarget = null;
@@ -84,7 +75,9 @@ public class Mouvement_carte : MonoBehaviour
         {
             if(!was_in_target)
             {
-                nbCartePosees++;
+                MyNetworkMessage msgincremente = new MyNetworkMessage();
+                msgincremente.message = 1;
+                JoueurStatic.Client.Send(CartePoseeID, msgincremente);
                 Debug.Log("incremente");
                 was_in_target = true;
             }
@@ -148,7 +141,9 @@ public class Mouvement_carte : MonoBehaviour
             if (!was_in_target)
             {
                 was_in_target = true;
-                nbCartePosees++;
+                MyNetworkMessage msgincremente = new MyNetworkMessage();
+                msgincremente.message = 1;
+                JoueurStatic.Client.Send(CartePoseeID, msgincremente);
                 Debug.Log("incremente");
             }
             RelocateCardsWhencardincoming(cardstack);
@@ -157,7 +152,9 @@ public class Mouvement_carte : MonoBehaviour
         else
         {
             was_in_target = false;
-            nbCartePosees--;
+            MyNetworkMessage msgdecremente = new MyNetworkMessage();
+            msgdecremente.message = -1;
+            JoueurStatic.Client.Send(CartePoseeID, msgdecremente);
             Debug.Log("decremente");
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
