@@ -18,6 +18,7 @@ public class JetonsHandler : MonoBehaviour
     short goID = 1013;
     short presID = 1017;
     short hasstartID = 1018;
+    short jeton = 1010;
 
     [SerializeField] Button usageVert;
     [SerializeField] Button usageRouge;
@@ -38,12 +39,12 @@ public class JetonsHandler : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
         JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
 
-        usageVert.onClick.AddListener(() => OnUsageClicked());       
-        usageRouge.onClick.AddListener(() => OnUsageClicked());       
-        societeVert.onClick.AddListener(() => OnSocieteClicked());       
-        societeRouge.onClick.AddListener(() => OnSocieteClicked());       
-        planeteVert.onClick.AddListener(() => OnPlaneteClicked());       
-        planeteRouge.onClick.AddListener(() => OnPlaneteClicked());
+        usageVert.onClick.AddListener(() => OnUsageClicked(usageVert.GetComponent<Image>().sprite));       
+        usageRouge.onClick.AddListener(() => OnUsageClicked(usageRouge.GetComponent<Image>().sprite)));       
+        societeVert.onClick.AddListener(() => OnSocieteClicked(societeVert.GetComponent<Image>().sprite)));       
+        societeRouge.onClick.AddListener(() => OnSocieteClicked(societeRouge.GetComponent<Image>().sprite)));       
+        planeteVert.onClick.AddListener(() => OnPlaneteClicked(planeteVert.GetComponent<Image>().sprite)));       
+        planeteRouge.onClick.AddListener(() => OnPlaneteClicked(planeteRouge.GetComponent<Image>().sprite)));
 
         isPresTime = false;
     }
@@ -76,6 +77,11 @@ public class JetonsHandler : MonoBehaviour
 
     private void OnStopReceived(NetworkMessage netMsg)
     {
+        AllFalse();
+    }
+
+    private void AllFalse()
+    {
         usageVert.gameObject.SetActive(false);
         usageRouge.gameObject.SetActive(false);
         societeVert.gameObject.SetActive(false);
@@ -98,8 +104,10 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
-    private void OnPlaneteClicked()
+    private void OnPlaneteClicked(Sprite s)
     {
+        envoyer(s);
+        AllFalse();
         planeteCompteur++;
 
         if (planeteCompteur >= 2)
@@ -109,8 +117,10 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
-    private void OnSocieteClicked()
+    private void OnSocieteClicked(Sprite s)
     {
+        envoyer(s);
+        AllFalse();
         societeCompteur++;
 
         if (societeCompteur >= 2)
@@ -120,8 +130,10 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
-    private void OnUsageClicked()
+    private void OnUsageClicked(Sprite s)
     {
+        envoyer(s);
+        AllFalse();
         usageCompteur++;
 
         if (usageCompteur >= 2)
@@ -142,6 +154,14 @@ public class JetonsHandler : MonoBehaviour
         societeRouge.gameObject.SetActive(true);
         planeteVert.gameObject.SetActive(true);
         planeteRouge.gameObject.SetActive(true);
+    }
+
+    public void envoyer(Sprite s)
+    {
+        MyJetonMessage msg = new MyJetonMessage();
+        msg.joueur = JoueurStatic.Numero;
+        msg.sprite = s.name;
+        JoueurStatic.Client.Send(jeton, msg);
     }
 
     // Update is called once per frame

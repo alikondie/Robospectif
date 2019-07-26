@@ -115,8 +115,17 @@ public class InitDebat : MonoBehaviour
             button.transform.position = persos[pos].transform.position;
             switch (pos)
             {
-                case 1: case 2:
-   //                 button.transform.rotation = null;
+                case 0: case 1:
+                    button.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    break;
+                case 2:
+                    button.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                    break;
+                case 3: case 4:
+                    button.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+                    break;
+                case 5:
+                    button.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
                     break;
             }
         }

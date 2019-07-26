@@ -20,6 +20,8 @@ public class ValiderVainqueur : MonoBehaviour
 
     [SerializeField] Button button;
 
+    [SerializeField] Text central;
+
     private Sprite[] images;
 
     short nextID = 1015;
@@ -102,9 +104,15 @@ public class ValiderVainqueur : MonoBehaviour
     private void OnEnable()
     {
         if (Partie.Langue == "FR")
+        {
             button.transform.GetChild(0).GetComponent<Text>().text = "Valider";
+            central.text = "Joueur " + Partie.JoueurCourant + " choisit le meilleur usage\npour son véhicule autonome";
+        }
         else
+        {
             button.transform.GetChild(0).GetComponent<Text>().text = "Confirm";
+            central.text = "Player " + Partie.JoueurCourant + " chooses the best use\nfor their autonomous vehicle";
+        }
         button.gameObject.SetActive(false);
         foreach (GameObject joueur in joueurs)
         {
