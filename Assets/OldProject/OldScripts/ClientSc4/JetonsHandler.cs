@@ -18,6 +18,7 @@ public class JetonsHandler : MonoBehaviour
     short goID = 1013;
     short presID = 1017;
     short hasstartID = 1018;
+    short RetourID = 1022;
     short jeton = 1010;
 
     [SerializeField] Button usageVert;
@@ -38,6 +39,7 @@ public class JetonsHandler : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(stopID, OnStopReceived);
         JoueurStatic.Client.RegisterHandler(goID, OnGoReceived);
         JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
+        JoueurStatic.Client.RegisterHandler(RetourID, OnRetourReceived);
 
         usageVert.onClick.AddListener(() => OnUsageClicked(usageVert.GetComponent<Image>().sprite));       
         usageRouge.onClick.AddListener(() => OnUsageClicked(usageRouge.GetComponent<Image>().sprite));       
@@ -57,27 +59,26 @@ public class JetonsHandler : MonoBehaviour
         }
         else if (!isPresTime || JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
         {
-            if (usageCompteur < 2)
-            {
-                usageVert.gameObject.SetActive(true);
-                usageRouge.gameObject.SetActive(true);
-            }
-            if (societeCompteur < 2)
-            {
-                societeVert.gameObject.SetActive(true);
-                societeRouge.gameObject.SetActive(true);
-            }
-            if (planeteCompteur < 2)
-            {
-                planeteVert.gameObject.SetActive(true);
-                planeteRouge.gameObject.SetActive(true);
-            }
+            SetTrue();
         }
     }
 
     private void OnStopReceived(NetworkMessage netMsg)
     {
         AllFalse();
+    }
+
+    private void OnRetourReceived(NetworkMessage netMsg)
+    {
+        isPresTime = false;
+        if(JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
+        {
+            AllFalse();
+        }
+        else
+        {
+            SetTrue();
+        }
     }
 
     private void AllFalse()
@@ -88,6 +89,25 @@ public class JetonsHandler : MonoBehaviour
         societeRouge.gameObject.SetActive(false);
         planeteVert.gameObject.SetActive(false);
         planeteRouge.gameObject.SetActive(false);
+    }
+
+    private void SetTrue()
+    {
+        if (usageCompteur < 2)
+        {
+            usageVert.gameObject.SetActive(true);
+            usageRouge.gameObject.SetActive(true);
+        }
+        if (societeCompteur < 2)
+        {
+            societeVert.gameObject.SetActive(true);
+            societeRouge.gameObject.SetActive(true);
+        }
+        if (planeteCompteur < 2)
+        {
+            planeteVert.gameObject.SetActive(true);
+            planeteRouge.gameObject.SetActive(true);
+        }
     }
 
     private void OnPresReceived(NetworkMessage netMsg)

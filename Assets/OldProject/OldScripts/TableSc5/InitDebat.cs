@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +33,10 @@ public class InitDebat : MonoBehaviour
     short nextID = 1015;
     short publicID = 1016;
     short presID = 1017;
+    short RetourID = 1022;
 
     [SerializeField] Button button;
+    [SerializeField] Button bouton_retour;
 
     [SerializeField] GameObject[] persos;
 
@@ -60,6 +62,7 @@ public class InitDebat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bouton_retour.gameObject.SetActive(false);
         clienthasstart = false;
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
@@ -83,6 +86,7 @@ public class InitDebat : MonoBehaviour
         NetworkServer.RegisterHandler(hasstartID, onClientStart);
 
         button.onClick.AddListener(() => ButtonClicked());
+        bouton_retour.onClick.AddListener(() => RetourButtonClicked());
 
     }
 
@@ -276,10 +280,12 @@ public class InitDebat : MonoBehaviour
                 givenJetons.Clear();
                 isDictsEmpty = true;
                 ReinitializeCards();
+                bouton_retour.gameObject.SetActive(false);
                 canvas_debat.SetActive(false);
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
             }
+            bouton_retour.gameObject.SetActive(true);
             MyJetonMessage msg = new MyJetonMessage();
             NetworkServer.SendToAll(stopID, msg);
             MyNetworkMessage pres = new MyNetworkMessage();
@@ -287,6 +293,15 @@ public class InitDebat : MonoBehaviour
             NetworkServer.SendToAll(presID, pres);
             nbClicked++;
         }
+    }
+
+    private void RetourButtonClicked()
+    {
+        nbClicked--;
+        bouton_retour.gameObject.SetActive(false);
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.message = Partie.JoueurCourant;
+        NetworkServer.SendToAll(RetourID, msg);
     }
 
     // Update is called once per frame
