@@ -19,6 +19,10 @@ public class ChoixPerso : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
+    }
+
+    void OnEnable()
+    {
         button.gameObject.SetActive(false);
     }
 
