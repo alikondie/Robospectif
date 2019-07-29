@@ -93,6 +93,8 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
+        central.text = "Posez vos jetons pour les usages adverses";
         nbClicked = 0;
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
@@ -286,7 +288,8 @@ public class InitDebat : MonoBehaviour
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
             }
-            central.text = "Le joueur " + Partie.JoueurCourant; +" pose ses jetons";
+            button.transform.GetChild(0).GetComponent<Text>().text = "choix du vainqueur";
+            central.text = "Le joueur " + Partie.JoueurCourant +" pose ses jetons";
             bouton_retour.gameObject.SetActive(true);
             MyJetonMessage msg = new MyJetonMessage();
             NetworkServer.SendToAll(stopID, msg);
