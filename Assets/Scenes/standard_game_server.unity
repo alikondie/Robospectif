@@ -17665,7 +17665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1190432595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17688,6 +17688,7 @@ MonoBehaviour:
   - {fileID: 1184035639}
   conduite: {fileID: 340953089}
   canvas_pres_vehicule: {fileID: 1891140711}
+  central: {fileID: 659408277}
   baseSprite: {fileID: 21300000, guid: ef5beb048fad1164a81693281c7a1f32, type: 3}
   button: {fileID: 678533884}
   bouton_retour: {fileID: 0}

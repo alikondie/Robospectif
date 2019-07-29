@@ -13,6 +13,7 @@ public class InitDebat : MonoBehaviour
     [SerializeField] GameObject[] cartes;
     [SerializeField] GameObject conduite;
     [SerializeField] GameObject canvas_pres_vehicule;
+    [SerializeField] Text central;
     [SerializeField] Sprite baseSprite;
     private List<GameObject>[] jetons;
     private int[] index;
@@ -285,6 +286,7 @@ public class InitDebat : MonoBehaviour
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
             }
+            central.text = "Le joueur " + Partie.JoueurCourant; +" pose ses jetons";
             bouton_retour.gameObject.SetActive(true);
             MyJetonMessage msg = new MyJetonMessage();
             NetworkServer.SendToAll(stopID, msg);
