@@ -96,7 +96,8 @@ public class InitDebat : MonoBehaviour
         button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
         central.text = "Posez vos jetons pour les usages adverses";
         nbClicked = 0;
-        //canvas_pres_vehicule.SetActive(true);
+        canvas_pres_vehicule.SetActive(false);
+        canvas_pres_vehicule.SetActive(true);
         //canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         //canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
         //canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
@@ -314,6 +315,7 @@ public class InitDebat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkifvehiculeclicked();
         if (clienthasstart)
         {
             MyNetworkMessage msg = new MyNetworkMessage();
