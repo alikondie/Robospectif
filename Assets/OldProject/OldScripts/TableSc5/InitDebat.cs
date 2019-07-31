@@ -96,13 +96,13 @@ public class InitDebat : MonoBehaviour
         button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
         central.text = "Posez vos jetons pour les usages adverses";
         nbClicked = 0;
-        canvas_pres_vehicule.SetActive(true);
-        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
-        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
-        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
+        //canvas_pres_vehicule.SetActive(true);
+        //canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+        //canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
+        //canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        //canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
+        //canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
+        //canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
         foreach (GameObject carte in cartes)
         {
             carte.GetComponent<BoxCollider2D>().enabled = false;
@@ -202,15 +202,7 @@ public class InitDebat : MonoBehaviour
             carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
             x += 2;
         }
-
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
-        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
-        canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
-        canvas_pres_vehicule.SetActive(false);
-        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
-        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
-        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+        
         foreach (GameObject carte in cartes)
         {
             carte.GetComponent<BoxCollider2D>().enabled = true;
@@ -284,6 +276,16 @@ public class InitDebat : MonoBehaviour
                 isDictsEmpty = true;
                 ReinitializeCards();
                 bouton_retour.gameObject.SetActive(false);
+
+                canvas_pres_vehicule.SetActive(false);
+                canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+                canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
+                canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
+                canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
+                canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+                canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
+                canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
+
                 canvas_debat.SetActive(false);
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
