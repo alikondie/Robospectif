@@ -98,12 +98,12 @@ public class InitDebat : MonoBehaviour
         nbClicked = 0;
         canvas_pres_vehicule.SetActive(false);
         canvas_pres_vehicule.SetActive(true);
-        //canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
-        //canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
-        //canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
-        //canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
-        //canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
-        //canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
+        canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
+        canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
+        canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
         foreach (GameObject carte in cartes)
         {
             carte.GetComponent<BoxCollider2D>().enabled = false;
@@ -198,11 +198,7 @@ public class InitDebat : MonoBehaviour
     {
         
         
-        foreach (GameObject carte in cartes)
-        {
-            carte.GetComponent<BoxCollider2D>().enabled = true;
-            carte.GetComponent<Mouvement_carte>().enabled = true;
-        }
+        
         if (Partie.Type == "expert")
         {
             if (nbClicked == 0)
@@ -286,6 +282,11 @@ public class InitDebat : MonoBehaviour
                 {
                     carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
                     x += 2;
+                }
+                foreach (GameObject carte in cartes)
+                {
+                    carte.GetComponent<BoxCollider2D>().enabled = true;
+                    carte.GetComponent<Mouvement_carte>().enabled = true;
                 }
                 canvas_debat.SetActive(false);
                 canvas_choix_vainqueur.SetActive(true);
