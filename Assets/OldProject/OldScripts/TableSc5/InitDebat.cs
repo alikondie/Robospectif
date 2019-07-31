@@ -58,6 +58,8 @@ public class InitDebat : MonoBehaviour
     private int nbClicked;
     private bool clienthasstart;
 
+    private string vainqueurstring;
+
     //sp = sm = ep = em = up = um = 0;
 
     // Start is called before the first frame update
@@ -139,9 +141,15 @@ public class InitDebat : MonoBehaviour
         }
 
         if (Partie.Langue == "FR")
+        {
             button.transform.GetChild(0).GetComponent<Text>().text = fr;
+            vainqueurstring = "Choix du vainqueur";
+        }
         else
+        {
             button.transform.GetChild(0).GetComponent<Text>().text = en;
+            vainqueurstring = "Winner's choice";
+        }
 
         Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
@@ -292,7 +300,7 @@ public class InitDebat : MonoBehaviour
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
             }
-            button.transform.GetChild(0).GetComponent<Text>().text = "choix du vainqueur";
+            button.transform.GetChild(0).GetComponent<Text>().text = vainqueurstring;
             central.text = "Le joueur " + Partie.JoueurCourant +" pose ses jetons";
             bouton_retour.gameObject.SetActive(true);
             MyJetonMessage msg = new MyJetonMessage();
@@ -306,6 +314,10 @@ public class InitDebat : MonoBehaviour
 
     private void RetourButtonClicked()
     {
+        if (Partie.Langue == "FR")
+            button.transform.GetChild(0).GetComponent<Text>().text = fr;
+        else
+            button.transform.GetChild(0).GetComponent<Text>().text = en;
         nbClicked--;
         bouton_retour.gameObject.SetActive(false);
         MyNetworkMessage msg = new MyNetworkMessage();
