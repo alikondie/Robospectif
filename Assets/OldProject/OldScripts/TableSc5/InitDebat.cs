@@ -196,13 +196,7 @@ public class InitDebat : MonoBehaviour
 
     private void ButtonClicked()
     {
-        conduite.transform.GetComponent<RectTransform>().localPosition = new Vector3((float) 2.75, -5, 0);
-        int x = -4;
-        foreach (GameObject carte in cartes)
-        {
-            carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
-            x += 2;
-        }
+        
         
         foreach (GameObject carte in cartes)
         {
@@ -286,7 +280,13 @@ public class InitDebat : MonoBehaviour
                 canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
                 canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
                 canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
-
+                conduite.transform.GetComponent<RectTransform>().localPosition = new Vector3((float)2.75, -5, 0);
+                int x = -4;
+                foreach (GameObject carte in cartes)
+                {
+                    carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
+                    x += 2;
+                }
                 canvas_debat.SetActive(false);
                 canvas_choix_vainqueur.SetActive(true);
                 return ;
