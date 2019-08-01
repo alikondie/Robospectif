@@ -10,6 +10,7 @@ public class InitDebat : MonoBehaviour
 {
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
+    [SerializeField] GameObject helpBg;
     [SerializeField] GameObject[] cartes;
     [SerializeField] GameObject conduite;
     [SerializeField] GameObject canvas_pres_vehicule;
@@ -37,6 +38,7 @@ public class InitDebat : MonoBehaviour
     short RetourID = 1022;
 
     [SerializeField] Button button;
+    [SerializeField] Button help;
     [SerializeField] Button bouton_retour;
 
     [SerializeField] GameObject[] persos;
@@ -89,8 +91,15 @@ public class InitDebat : MonoBehaviour
         NetworkServer.RegisterHandler(hasstartID, onClientStart);
 
         button.onClick.AddListener(() => ButtonClicked());
+        help.onClick.AddListener(() => HelpClicked());
         bouton_retour.onClick.AddListener(() => RetourButtonClicked());
 
+    }
+
+    private void HelpClicked()
+    {
+        canvas_pres_vehicule.SetActive(false);
+        helpBg.SetActive(true);
     }
 
     void OnEnable()
