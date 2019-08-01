@@ -59,7 +59,7 @@ public class InitDebat : MonoBehaviour
 
     private int nbClicked;
     private bool clienthasstart;
-
+    public bool Retour = false;
     private string vainqueurstring;
 
     //sp = sm = ep = em = up = um = 0;
@@ -104,6 +104,7 @@ public class InitDebat : MonoBehaviour
 
     void OnEnable()
     {
+        
         button.transform.GetChild(0).GetComponent<Text>().text = "Terminer le débat";
         central.text = "Posez vos jetons pour les usages adverses";
         nbClicked = 0;
@@ -159,37 +160,44 @@ public class InitDebat : MonoBehaviour
             button.transform.GetChild(0).GetComponent<Text>().text = en;
             vainqueurstring = "Winner's choice";
         }
-
-        Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
-
-        index = new int[] { 0, 0, 0, 0, 0, 0 };
-
-        for (int i = 0; i < 6; i++)
+        if (!Retour)
         {
-            persos[i].transform.GetChild(3).gameObject.SetActive(false);
-            persos[i].transform.GetChild(4).gameObject.SetActive(false);
-            persos[i].transform.GetChild(5).gameObject.SetActive(false);
+            Tour.Piles = new int[] { 0, 0, 0, 0, 0, 0 };
 
-            if (Tour.PersosDebat[i] != null)
+            index = new int[] { 0, 0, 0, 0, 0, 0 };
+
+            for (int i = 0; i < 6; i++)
             {
-                persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
-                persos[i].transform.GetChild(0).gameObject.SetActive(true);
-                if (Tour.ZonesDebat[i, 0] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0] + 2).gameObject.SetActive(true);
-                if (Tour.ZonesDebat[i, 1] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1] + 2).gameObject.SetActive(true);
-            } else
-                persos[i].transform.GetChild(0).gameObject.SetActive(false);
-            for (int j = 1; j <= 2; j++)
-            {
-                foreach (Transform child in persos[i].transform.GetChild(j))
+                persos[i].transform.GetChild(3).gameObject.SetActive(false);
+                persos[i].transform.GetChild(4).gameObject.SetActive(false);
+                persos[i].transform.GetChild(5).gameObject.SetActive(false);
+
+                if (Tour.PersosDebat[i] != null)
                 {
-                    child.gameObject.SetActive(false);
+                    persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
+                    persos[i].transform.GetChild(0).gameObject.SetActive(true);
+                    if (Tour.ZonesDebat[i, 0] != 0)
+                        persos[i].transform.GetChild(Tour.ZonesDebat[i, 0] + 2).gameObject.SetActive(true);
+                    if (Tour.ZonesDebat[i, 1] != 0)
+                        persos[i].transform.GetChild(Tour.ZonesDebat[i, 1] + 2).gameObject.SetActive(true);
+                }
+                else
+                    persos[i].transform.GetChild(0).gameObject.SetActive(false);
+                for (int j = 1; j <= 2; j++)
+                {
+                    foreach (Transform child in persos[i].transform.GetChild(j))
+                    {
+                        child.gameObject.SetActive(false);
+                    }
                 }
             }
         }
-        
-        
+        else
+        {
+            bouton_retour.gameObject.SetActive(true);
+        }
+
+
     }
 
     private void onJetonReceived(NetworkMessage netMsg)
@@ -277,11 +285,11 @@ public class InitDebat : MonoBehaviour
                 {
                     FillPersoData(pers);
                 }
-                persosAndDebate.Clear();
-                persosAndJetons.Clear();
-                givenJetons.Clear();
+                //persosAndDebate.Clear();
+                //persosAndJetons.Clear();
+                //givenJetons.Clear();
                 isDictsEmpty = true;
-                ReinitializeCards();
+                //ReinitializeCards();
                 bouton_retour.gameObject.SetActive(false);
 
                 canvas_pres_vehicule.SetActive(false);
@@ -485,7 +493,6 @@ public class InitDebat : MonoBehaviour
 
     private void ReinitializeCards()
     {
-        
         foreach(GameObject p in persos)
         {
             List<GameObject> jetonSprites = new List<GameObject>();
