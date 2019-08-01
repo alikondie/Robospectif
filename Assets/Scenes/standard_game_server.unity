@@ -22623,6 +22623,13 @@ MonoBehaviour:
   canvas_fin_tour: {fileID: 2130956267}
   canvas_fin: {fileID: 1844340069}
   couronnes: []
+  cartes:
+  - {fileID: 1095996756}
+  - {fileID: 482982476}
+  - {fileID: 1854023512}
+  - {fileID: 90595429}
+  - {fileID: 1184035639}
+  conduite: {fileID: 340953089}
   joueurs:
   - {fileID: 1500085882}
   - {fileID: 1303209152}

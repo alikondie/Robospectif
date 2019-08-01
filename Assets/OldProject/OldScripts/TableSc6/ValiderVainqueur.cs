@@ -17,6 +17,8 @@ public class ValiderVainqueur : MonoBehaviour
   
 
     [SerializeField] GameObject[] couronnes;
+    [SerializeField] GameObject[] cartes;
+    [SerializeField] GameObject conduite;
     [SerializeField] GameObject[] joueurs;
 
     [SerializeField] Button button;
@@ -72,6 +74,13 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void ButtonClicked()
     {
+        int x = -4;
+        foreach (GameObject carte in cartes)
+        {
+            carte.transform.GetComponent<RectTransform>().localPosition = new Vector3(x, 0);
+            x += 2;
+        }
+        conduite.transform.GetComponent<RectTransform>().localPosition = new Vector3((float)2.75, -5, 0);
         canvas_debat.GetComponent<InitDebat>().Retour = false;
 
         int nb = Partie.Joueurs.Count;
