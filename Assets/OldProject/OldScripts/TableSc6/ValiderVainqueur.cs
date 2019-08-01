@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class ValiderVainqueur : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
     [SerializeField] GameObject canvas_fin_tour;
     [SerializeField] GameObject canvas_fin;
@@ -19,6 +20,7 @@ public class ValiderVainqueur : MonoBehaviour
     [SerializeField] GameObject[] joueurs;
 
     [SerializeField] Button button;
+    [SerializeField] Button bouton_retour;
 
     [SerializeField] Text central;
 
@@ -31,6 +33,7 @@ public class ValiderVainqueur : MonoBehaviour
     {
         vainqueur = 0;
         button.onClick.AddListener(() => ButtonClicked());
+        bouton_retour.onClick.AddListener(() => BoutonRetourClicked());
     }
 
     // Update is called once per frame
@@ -99,6 +102,12 @@ public class ValiderVainqueur : MonoBehaviour
             NetworkServer.SendToAll(nextID, endMsg);
             canvas_fin.SetActive(true);
         }
+    }
+
+    private void BoutonRetourClicked()
+    {
+        canvas_choix_vainqueur.SetActive(false);
+        canvas_debat.SetActive(true);
     }
 
     private void OnEnable()
