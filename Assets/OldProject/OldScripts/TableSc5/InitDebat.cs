@@ -276,11 +276,11 @@ public class InitDebat : MonoBehaviour
                 {
                     FillPersoData(pers);
                 }
-                //persosAndDebate.Clear();
-                //persosAndJetons.Clear();
-                //givenJetons.Clear();
+                persosAndDebate.Clear();
+                persosAndJetons.Clear();
+                givenJetons.Clear();
                 isDictsEmpty = true;
-                //ReinitializeCards();
+                ReinitializeCards();
                 bouton_retour.gameObject.SetActive(false);
 
                 canvas_pres_vehicule.SetActive(false);

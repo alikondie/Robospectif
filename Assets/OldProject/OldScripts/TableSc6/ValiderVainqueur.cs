@@ -72,6 +72,8 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void ButtonClicked()
     {
+        canvas_debat.GetComponent<InitDebat>().Retour = false;
+
         int nb = Partie.Joueurs.Count;
         int i = Array.IndexOf(Partie.Positions, vainqueur);
         foreach(Joueur j in Partie.Joueurs)
@@ -107,6 +109,7 @@ public class ValiderVainqueur : MonoBehaviour
     private void BoutonRetourClicked()
     {
         canvas_choix_vainqueur.SetActive(false);
+        canvas_debat.GetComponent<InitDebat>().Retour = true;
         canvas_debat.SetActive(true);
     }
 
