@@ -8,17 +8,19 @@ public class Help : MonoBehaviour
 {
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_vainqueur;
+    [SerializeField] GameObject canvas_vehicule;
     [SerializeField] GameObject helpBg;
-    [SerializeField] Button help;
     [SerializeField] Button back;
 
     private string debat;
     private string vainqueur;
     private string button;
+    private int sens;
 
     // Start is called before the first frame update
     void Start()
     {
+        sens = 0;
         if (Partie.Langue == "FR")
         {
             debat = "Vous pouvez débattre des usages proposés pour ce véhicule autonome. Pour cela, vous pouvez cliquer sur les jetons\n" +
@@ -44,7 +46,6 @@ public class Help : MonoBehaviour
 
             button = "Back";
         }
-        help.onClick.AddListener(() => OnHelpClicked());
         back.onClick.AddListener(() => OnBackClicked());
         Debug.Log("start done");
     }
@@ -52,31 +53,61 @@ public class Help : MonoBehaviour
     private void OnBackClicked()
     {
         helpBg.SetActive(false);
+        canvas_vehicule.SetActive(true);
     }
 
-    private void OnHelpClicked()
+    private void OnEnable()
     {
         if (canvas_debat.activeSelf)
             helpBg.transform.GetChild(0).GetComponent<Text>().text = debat;
         else
             helpBg.transform.GetChild(0).GetComponent<Text>().text = vainqueur;
         helpBg.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = button;
-        helpBg.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Rotate();
-        }
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Mouse Down");
+        Rotate();
     }
 
     private void Rotate()
     {
+        sens = (sens+1) % 4;
+        Debug.Log("sens = " + sens);
         GameObject text = helpBg.transform.GetChild(0).gameObject;
         text.transform.Rotate(Vector3.back, 90);
         back.transform.Rotate(Vector3.back, 90);
+        Vector2 vertical = new Vector2(1080, 1920);
+        Vector2 horizontal = new Vector2(1920, 1080);
+
+        switch (sens)
+        {
+            case 0:
+                back.GetComponent<RectTransform>().localPosition = new Vector3((float)7.6, (float)4.15);
+                text.GetComponent<RectTransform>().sizeDelta = horizontal;
+                text.GetComponent<BoxCollider2D>().size = horizontal;
+                break;
+            case 1:
+                back.GetComponent<RectTransform>().localPosition = new Vector3((float)8.2, (float)-3.3);
+                text.GetComponent<RectTransform>().sizeDelta = vertical;
+                text.GetComponent<BoxCollider2D>().size = vertical;
+                break;
+            case 2:
+                back.GetComponent<RectTransform>().localPosition = new Vector3((float)-7.6, (float)-4.15);
+                text.GetComponent<RectTransform>().sizeDelta = horizontal;
+                text.GetComponent<BoxCollider2D>().size = horizontal;
+                break;
+            case 3:
+                back.GetComponent<RectTransform>().localPosition = new Vector3((float)-8.2, (float)3.3);
+                text.GetComponent<RectTransform>().sizeDelta = vertical;
+                text.GetComponent<BoxCollider2D>().size = vertical;
+                break;
+        }
     }
 }
