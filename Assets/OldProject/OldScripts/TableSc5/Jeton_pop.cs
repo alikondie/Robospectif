@@ -25,7 +25,7 @@ public class Jeton_pop : MonoBehaviour
         Transform canva = this.transform.parent.parent.parent;
         joueurs = new List<GameObject>();
         cartes = new List<GameObject>();
-        for (int i = 3; i <= canva.childCount; i++)
+        for (int i = 3; i <= 8; i++)
         {
             /*for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
             {
