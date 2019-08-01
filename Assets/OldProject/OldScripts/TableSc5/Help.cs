@@ -16,11 +16,28 @@ public class Help : MonoBehaviour
     private string vainqueur;
     private string button;
     private int sens;
+    private Vector2 vertical = new Vector2(1080, 1920);
+    private Vector2 horizontal = new Vector2(1920, 1080);
 
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    private void OnBackClicked()
+    {
+        helpBg.SetActive(false);
+        canvas_vehicule.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
         sens = 0;
+        GameObject text = helpBg.transform.GetChild(0).gameObject;
+        text.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        back.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        back.GetComponent<RectTransform>().localPosition = new Vector3((float)7.6, (float)4.15);
+      //  text.GetComponent<RectTransform>().sizeDelta = horizontal;
         if (Partie.Langue == "FR")
         {
             debat = "Vous pouvez débattre des usages proposés pour ce véhicule autonome. Pour cela, vous pouvez cliquer sur les jetons\n" +
@@ -48,16 +65,6 @@ public class Help : MonoBehaviour
         }
         back.onClick.AddListener(() => OnBackClicked());
         Debug.Log("start done");
-    }
-
-    private void OnBackClicked()
-    {
-        helpBg.SetActive(false);
-        canvas_vehicule.SetActive(true);
-    }
-
-    private void OnEnable()
-    {
         if (canvas_debat.activeSelf)
             helpBg.transform.GetChild(0).GetComponent<Text>().text = debat;
         else
@@ -90,23 +97,19 @@ public class Help : MonoBehaviour
         {
             case 0:
                 back.GetComponent<RectTransform>().localPosition = new Vector3((float)7.6, (float)4.15);
-                text.GetComponent<RectTransform>().sizeDelta = horizontal;
-                text.GetComponent<BoxCollider2D>().size = horizontal;
+               // text.GetComponent<RectTransform>().sizeDelta = horizontal;
                 break;
             case 1:
                 back.GetComponent<RectTransform>().localPosition = new Vector3((float)8.2, (float)-3.3);
-                text.GetComponent<RectTransform>().sizeDelta = vertical;
-                text.GetComponent<BoxCollider2D>().size = vertical;
+               // text.GetComponent<RectTransform>().sizeDelta = vertical;
                 break;
             case 2:
                 back.GetComponent<RectTransform>().localPosition = new Vector3((float)-7.6, (float)-4.15);
-                text.GetComponent<RectTransform>().sizeDelta = horizontal;
-                text.GetComponent<BoxCollider2D>().size = horizontal;
+             //   text.GetComponent<RectTransform>().sizeDelta = horizontal;
                 break;
             case 3:
                 back.GetComponent<RectTransform>().localPosition = new Vector3((float)-8.2, (float)3.3);
-                text.GetComponent<RectTransform>().sizeDelta = vertical;
-                text.GetComponent<BoxCollider2D>().size = vertical;
+             //   text.GetComponent<RectTransform>().sizeDelta = vertical;
                 break;
         }
     }

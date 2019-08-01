@@ -289,7 +289,7 @@ public class InitDebat : MonoBehaviour
                 persosAndJetons.Clear();
                 givenJetons.Clear();
                 isDictsEmpty = true;
-                ReinitializeCards();
+               // ReinitializeCards();
                 bouton_retour.gameObject.SetActive(false);
 
                 canvas_pres_vehicule.SetActive(false);

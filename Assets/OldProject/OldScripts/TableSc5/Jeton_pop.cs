@@ -25,7 +25,7 @@ public class Jeton_pop : MonoBehaviour
         Transform canva = this.transform.parent.parent.parent;
         joueurs = new List<GameObject>();
         cartes = new List<GameObject>();
-        for (int i = 3; i < canva.childCount; i++)
+        for (int i = 3; i <= canva.childCount; i++)
         {
             /*for (int j = 0; j < canva.GetChild(i).GetChild(2).childCount; j++)
             {
@@ -64,7 +64,7 @@ public class Jeton_pop : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Sprite self = this.GetComponent<Image>().sprite;
-        Debug.Log(self.name);
+        Debug.Log(collision.gameObject.name);
         Sprite s = collision.gameObject.GetComponent<Image>().sprite;
         if ( (collision.gameObject.transform != this.transform.parent.parent.GetChild(0)) && (cartes.Contains(collision.gameObject)) && (s.name != "DecideurPublic") && (s.name != "DecideurPrive"))
         {

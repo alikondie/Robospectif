@@ -19770,7 +19770,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 950, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1400918244
 BoxCollider2D:
@@ -19796,7 +19796,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1920, y: 1080}
+  m_Size: {x: 1250, y: 1080}
   m_EdgeRadius: 0
 --- !u!114 &1400918245
 MonoBehaviour:
@@ -22618,7 +22618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7025a84206aaa354089fee0086e0dc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_debat: {fileID: 0}
+  canvas_debat: {fileID: 1190432594}
   canvas_choix_vainqueur: {fileID: 1614783933}
   canvas_fin_tour: {fileID: 2130956267}
   canvas_fin: {fileID: 1844340069}
@@ -22631,7 +22631,7 @@ MonoBehaviour:
   - {fileID: 2054565223}
   - {fileID: 587252533}
   button: {fileID: 1420462729}
-  bouton_retour: {fileID: 0}
+  bouton_retour: {fileID: 1457089867}
   central: {fileID: 462202645}
 --- !u!114 &1614783937
 MonoBehaviour:
