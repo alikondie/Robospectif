@@ -22,7 +22,7 @@ public class ConceptionTerminer : MonoBehaviour
     void Start()
     {
 
-        //ejectedCardsContent = new StringBuilder();
+        //rejectedCardsContent = new StringBuilder();
         /*SansHUD.data.AppendLine("Cartes rejetees");
         SansHUD.data.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");*/
 
@@ -105,16 +105,17 @@ public class ConceptionTerminer : MonoBehaviour
 
                 CarteRejetee carte = new CarteRejetee
                 {
-                    player = numero,
-                    dimension = dimension,
-                    locomotion = locomotion,
-                    equipment1 = equi1,
-                    equipment2 = equi2,
-                    equipment3 = equi3,
+                    Joueur = numero,
+                    Dimension = dimension,
+                    Locomotion = locomotion,
+                    Equipement1 = equi1,
+                    Equipement2 = equi2,
+                    Equipement3 = equi3,
 
                 };
 
                 string json = JsonUtility.ToJson(carte);
+                print("saved");
                 File.WriteAllText(Application.dataPath + "/carte.json", json);
 
                 //SansHUD.data.AppendLine(line);
@@ -139,10 +140,11 @@ public class ConceptionTerminer : MonoBehaviour
 
  public class CarteRejetee {
 
-      public int player;
-      public string dimension;
-      public string locomotion;
-      public string equipment1;
-      public string equipment2;
-      public string equipment3;
+      public int Joueur;
+      public string Dimension;
+      public string Locomotion;
+      public string Equipement1;
+      public string Equipement2;
+      public string Equipement3;
   }
+
