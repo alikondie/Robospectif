@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class InitDebat : MonoBehaviour
 {
@@ -396,8 +397,17 @@ public class InitDebat : MonoBehaviour
             environment = "Concepteur";
         }
 
+        int keyIndex = perso.transform.GetSiblingIndex();
 
-
+        Personnage personnage = new Personnage
+        {
+             Joueur = keyIndex,
+             Person = character,
+             Environnement = environment,
+             UsagePropose = "",
+        };
+        string json = JsonUtility.ToJson(personnage);
+        File.WriteAllText(Application.dataPath + "/conception.json", json);
 
 
         // société +-, environement +-, usage +-
@@ -405,7 +415,7 @@ public class InitDebat : MonoBehaviour
         sp = sm = ep = em = up = um = 0;
         string jetonValue;
 
-        int keyIndex = perso.transform.GetSiblingIndex();
+        
         if(number + 1 != Partie.JoueurCourant) { 
         GameObject p = persosAndJetons[keyIndex];
        // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
@@ -515,4 +525,13 @@ public class InitDebat : MonoBehaviour
             }
         }
     }
+}
+
+public class Personnage{
+    public int Joueur;
+    public string Person;
+    public string Environnement;
+    public string UsagePropose;
+
+
 }
