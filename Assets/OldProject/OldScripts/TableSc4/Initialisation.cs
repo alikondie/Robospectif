@@ -103,8 +103,8 @@ public class Initialisation : MonoBehaviour
 
         #region recup données
 
-            SansHUD.data.AppendLine("Tour " + Partie.Tour);
-            SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
+            /*SansHUD.data.AppendLine("Tour " + Partie.Tour);
+            SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");*/
             currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
             currentTurnData += autonomie + ";";
 
@@ -128,7 +128,7 @@ public class Initialisation : MonoBehaviour
             }
             // suppression du dernier point-virgule
             currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
-            SansHUD.data.AppendLine(currentTurnData);
+            //SansHUD.data.AppendLine(currentTurnData);
             if (manualEquipmentCards != null)
                 manualEquipmentCards.Clear();
             if (programmableEquipmentCards != null)

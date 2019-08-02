@@ -90,7 +90,7 @@ public class ValiderVainqueur : MonoBehaviour
             if (j.Position == vainqueur)
             {
                 j.NbCouronnes++;
-                SansHUD.data.AppendLine("Vainqueur: J " + j.Numero);
+                //SansHUD.data.AppendLine("Vainqueur: J " + j.Numero);
             }
         }
         

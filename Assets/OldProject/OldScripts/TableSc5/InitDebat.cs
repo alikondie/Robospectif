@@ -280,7 +280,7 @@ public class InitDebat : MonoBehaviour
 
 
                 //GameObject p = persos[0].transform.Find("Jetons").gameObject;
-                SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+                //SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
                 foreach (GameObject pers in persos)
                 {
                     FillPersoData(pers);
@@ -450,7 +450,7 @@ public class InitDebat : MonoBehaviour
 
 
           
-            SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
+            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
 
 
         //  }

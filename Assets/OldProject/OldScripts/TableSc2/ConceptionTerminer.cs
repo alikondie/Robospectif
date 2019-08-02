@@ -13,7 +13,7 @@ public class ConceptionTerminer : MonoBehaviour
     [SerializeField] GameObject canvas_plateau_vehicule;
     private int nbJoueur; //Nb Joueurs
     private static int nbJoueurConceptionTerminer; //Conteur du nombre de joueurs a avoir Terminer leur conception
-    
+
     StringBuilder rejectedCardsContent;
 
     // ---------- METHODES ----------
@@ -23,10 +23,10 @@ public class ConceptionTerminer : MonoBehaviour
     {
 
         //ejectedCardsContent = new StringBuilder();
-        SansHUD.data.AppendLine("Cartes rejetees");
-        SansHUD.data.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
-        
-        
+        /*SansHUD.data.AppendLine("Cartes rejetees");
+        SansHUD.data.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");*/
+
+
         // Initialise le compteur
         nbJoueurConceptionTerminer = 1;
 
@@ -38,8 +38,8 @@ public class ConceptionTerminer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(nbJoueurConceptionTerminer == nbJoueur)
+
+        if (nbJoueurConceptionTerminer == nbJoueur)
         {
             #region recup_données
             rejectedCardsContent = new StringBuilder();
@@ -52,7 +52,7 @@ public class ConceptionTerminer : MonoBehaviour
 
             foreach (Joueur j in Partie.Joueurs)
             {
-                string numero = "J " + j.Numero;
+                int numero = j.Numero;
                 string locomotion = "";
                 string dimension = "";
                 string equi1 = "";
@@ -103,8 +103,21 @@ public class ConceptionTerminer : MonoBehaviour
                     }
                 }
 
-                string line = numero + ";" + dimension + ";" + locomotion + ";" + equi1 + ";" + equi2 + ";" + equi3;
-                SansHUD.data.AppendLine(line);
+                CarteRejetee carte = new CarteRejetee
+                {
+                    player = numero,
+                    dimension = dimension,
+                    locomotion = locomotion,
+                    equipment1 = equi1,
+                    equipment2 = equi2,
+                    equipment3 = equi3,
+
+                };
+
+                string json = JsonUtility.ToJson(carte);
+                File.WriteAllText(Application.dataPath + "/carte.json", json);
+
+                //SansHUD.data.AppendLine(line);
 
             }
             //}
@@ -121,4 +134,15 @@ public class ConceptionTerminer : MonoBehaviour
     {
         nbJoueurConceptionTerminer++;
     }
+
 }
+
+ public class CarteRejetee {
+
+      public int player;
+      public string dimension;
+      public string locomotion;
+      public string equipment1;
+      public string equipment2;
+      public string equipment3;
+  }
