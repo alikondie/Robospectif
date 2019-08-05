@@ -29,6 +29,7 @@ public class ValiderVainqueur : MonoBehaviour
     private Sprite[] images;
 
     short nextID = 1015;
+    short retourID = 1023;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +118,8 @@ public class ValiderVainqueur : MonoBehaviour
 
     private void BoutonRetourClicked()
     {
+        MyNetworkMessage msg = new MyNetworkMessage();
+        NetworkServer.SendToAll(retourID, msg);
         canvas_choix_vainqueur.SetActive(false);
         canvas_debat.GetComponent<InitDebat>().Retour = true;
         canvas_debat.SetActive(true);

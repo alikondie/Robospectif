@@ -7767,6 +7767,7 @@ MonoBehaviour:
   canvas_fin_partie: {fileID: 450419836}
   canvas_vainqueur: {fileID: 1299814206}
   canvas_pres_robot: {fileID: 1319778006}
+  canvas_choix_jetons: {fileID: 1365945322}
   text: {fileID: 1832006254}
   central: {fileID: 1963564975}
 --- !u!1 &1306629703
@@ -8275,6 +8276,9 @@ MonoBehaviour:
   societeRouge: {fileID: 250888455}
   planeteVert: {fileID: 1637260196}
   planeteRouge: {fileID: 1719710156}
+  usageCompteur: 0
+  societeCompteur: 0
+  planeteCompteur: 0
 --- !u!114 &1365945324
 MonoBehaviour:
   m_ObjectHideFlags: 0

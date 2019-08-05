@@ -11,21 +11,28 @@ public class AttenteFin : MonoBehaviour
     [SerializeField] GameObject canvas_fin_partie;
     [SerializeField] GameObject canvas_vainqueur;
     [SerializeField] GameObject canvas_pres_robot;
+    [SerializeField] GameObject canvas_choix_jetons;
     [SerializeField] Text text;
     [SerializeField] Text central;
 
     private int position;
 
     short nextID = 1015;
+    short retourID = 1023;
 
     // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(nextID, onWaitReceived);
+        JoueurStatic.Client.RegisterHandler(retourID, onRetourReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)
     {
+        canvas_choix_jetons.GetComponent<JetonsHandler>().planeteCompteur = 0;
+        canvas_choix_jetons.GetComponent<JetonsHandler>().usageCompteur = 0;
+        canvas_choix_jetons.GetComponent<JetonsHandler>().societeCompteur = 0;
+
         string msg = netMsg.ReadMessage<MyStringMessage>().s;
         if (msg.Equals("next"))
         {
@@ -56,5 +63,11 @@ public class AttenteFin : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void onRetourReceived(NetworkMessage netMsg)
+    {
+        canvas_vainqueur.SetActive(false);
+        canvas_choix_jetons.SetActive(true);
     }
 }

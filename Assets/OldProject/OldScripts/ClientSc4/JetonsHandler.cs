@@ -28,9 +28,9 @@ public class JetonsHandler : MonoBehaviour
     [SerializeField] Button planeteVert;
     [SerializeField] Button planeteRouge;
 
-    private int usageCompteur;
-    private int societeCompteur;
-    private int planeteCompteur;
+    public int usageCompteur;
+    public int societeCompteur;
+    public int planeteCompteur;
     private bool isPresTime;
     // Start is called before the first frame update
     void Start()
@@ -204,11 +204,5 @@ public class JetonsHandler : MonoBehaviour
         societeRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/societeRouge");
         planeteVert.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/planeteVert");
         planeteRouge.GetComponent<Image>().sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Jetons/planeteRouge");
-
-        usageCompteur = 0;
-
-        societeCompteur = 0;
-
-        planeteCompteur = 0;
     }
 }
