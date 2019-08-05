@@ -36,8 +36,6 @@ public class Personnage
     public string Person;
     public string Environnement;
     public string UsagePropose;
-
-
 }
 
 public class PlayerInfoData{
@@ -49,7 +47,16 @@ public class PlayerInfoData{
     public string Specialite;
     public string Etablissement;
     public string Remarques;
+}
 
+public class Debate{
+
+    public int Tour;
+    public string Personnage;
+    public int JoueurDonnant;
+    public int JoueurRecevant;
+    public string Jeton;
+    public string Argument;
 
 
 }

@@ -17,6 +17,8 @@ public class Jeton_pop : MonoBehaviour
     private List<GameObject> joueurs;
     private List<GameObject> cartes;
 
+    private InitDebat debatObject;
+
     short goID = 1013;
 
     // Start is called before the first frame update
@@ -39,11 +41,17 @@ public class Jeton_pop : MonoBehaviour
         }
         positionInit = this.transform.position;
 
+        debatObject = transform.root.GetComponent<InitDebat>();
         int index = transform.parent.transform.parent.GetSiblingIndex();
         print("index is " + index);
+        
         GameObject jeton = this.gameObject;
         print("Jeton is " + jeton);
-        joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index, jeton);
+
+        debatObject.debate.Jeton = jeton.GetComponent<Image>().sprite.name;
+        debatObject.debate.JoueurDonnant = index;
+        debatObject.debate.Tour = Partie.Tour;
+        //joueurs[index].transform.parent.GetComponent<InitDebat>().AddGivenJeton(index, jeton);
     }
 
     void OnEnable()
@@ -87,7 +95,10 @@ public class Jeton_pop : MonoBehaviour
                     Debug.Log(Tour.Piles[index]);
                     joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     joueurs[index].transform.GetChild(2).GetChild(Tour.Piles[index]).gameObject.SetActive(true);
-                    // recup donnée envoyer le jeton à partir de la fct AddGivenJeton
+                    debatObject.debate.JoueurRecevant = index;
+                    debatObject.debate.Personnage = joueurs[index].transform.GetChild(0).GetComponent<Image>().name;
+                    debatObject.AddGivenJeton();
+                    //joueurs[index]
 
 
                     Tour.Piles[index]++;

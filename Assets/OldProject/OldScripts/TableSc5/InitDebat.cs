@@ -27,6 +27,7 @@ public class InitDebat : MonoBehaviour
     private Dictionary<int, GameObject> persosAndJetons;
     // récuperer pour chaque joueur les jetons données l'ordre c'est: SDP SDM EDP EDM UDP UDM
     private Dictionary<int, int[]> givenJetons;
+    public Debate debate;
     private bool isDictsEmpty = true;
 
     GameObject objet;
@@ -72,6 +73,7 @@ public class InitDebat : MonoBehaviour
         clienthasstart = false;
         persosAndDebate = new Dictionary<int, string>();
         FillPersoDict();
+        debate = new Debate();
         //givenJetons = new Dictionary<int,  int[]{ 0, 0, 0, 0, 0, 0 } > ();
         jetons = new List<GameObject>[6];
 
@@ -407,7 +409,7 @@ public class InitDebat : MonoBehaviour
              UsagePropose = "",
         };
         string json = JsonUtility.ToJson(personnage);
-        File.WriteAllText(Application.dataPath + "/conception.json", json);
+        File.WriteAllText(Application.dataPath + "/personnage," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" +".json", json);
 
 
         // société +-, environement +-, usage +-
@@ -467,32 +469,10 @@ public class InitDebat : MonoBehaviour
     }
 
     // ajouter un jeton lorsqu'un joueur ajoute un jeton (jeton_pop.cs)
-    public void AddGivenJeton(int numJoueur, GameObject jeton)
+    public void AddGivenJeton()
     {
-        string jetonValue = jeton.GetComponent<Image>().sprite.name;
-        
-        switch (jetonValue)
-        // recuperer pour chaque joueur les jetons données l'ordre c'est SDP SDM EDP EDM UDP UDM
-        {
-            case "planeteRouge":
-                givenJetons[numJoueur][3]++;
-                break;
-            case "societeRouge":
-                givenJetons[numJoueur][1]++;
-                break;
-            case "usageRouge":
-                givenJetons[numJoueur][5]++;
-                break;
-            case "societeVert":
-                givenJetons[numJoueur][0]++;
-                break;
-            case "usageVert":
-                givenJetons[numJoueur][4]++;
-                break;
-            case "planeteVert":
-                givenJetons[numJoueur][2]++;
-                break;
-        }
+        string json = JsonUtility.ToJson(debate);
+        File.WriteAllText(Application.dataPath + "/debat" + debate.JoueurDonnant+","+ DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".json", json);
     }
 
     private void ReinitializeCards()
