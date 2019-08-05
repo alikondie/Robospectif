@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -24,13 +25,14 @@ public class PlayerInfo : MonoBehaviour
     #endregion
 
     #region Variables
-    private StringBuilder data;
+    short playerInfoId = 1050;
+    
 	#endregion
 
 	#region Unity loop
     void Awake()
     {
-        data.AppendLine("id;Nom;Prenom;Sex;Age;Specialite;Etablissement;Remarques");
+        //data.AppendLine("id;Nom;Prenom;Sex;Age;Specialite;Etablissement;Remarques");
 
     }
 
@@ -47,10 +49,19 @@ public class PlayerInfo : MonoBehaviour
 	#endregion
 	
 	#region Methods
-    void fillInformation()
+    public void FillInformation()
     {
-        string infos = JoueurStatic.Numero + ";" + nom + ";" + prenom + ";" + sex.value + ";" + age + ";" + spec + ";" + etab + ";";
-        
+        PlayerInfoMessage infos = new PlayerInfoMessage();
+
+        infos.lastName = nom.text;
+        infos.firstName = prenom.text;
+        infos.age = age.text;
+        infos.sex = sex.value.ToString();
+        infos.specialty = spec.text;
+        infos.establishment = etab.text;
+
+        NetworkServer.SendToAll(playerInfoId, infos);
+
     }
 	#endregion
 }

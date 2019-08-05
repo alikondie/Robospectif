@@ -103,33 +103,96 @@ public class Initialisation : MonoBehaviour
 
         #region recup données
 
-            SansHUD.data.AppendLine("Tour " + Partie.Tour);
-            SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
+            /*SansHUD.data.AppendLine("Tour " + Partie.Tour);
+            SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");*/
             currentTurnData = "J " + Partie.JoueurCourant + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Dim.name + ";" + Partie.Joueurs[Partie.JoueurCourant-1].Loco.name + ";";
             currentTurnData += autonomie + ";";
+            string equi1 = "";
+            string equi2 = ""; 
+            string equi3 = "";
 
             if (manualEquipmentCards != null)
             {
-                foreach (string s in manualEquipmentCards)
+                foreach (string s in manualEquipmentCards) { 
 
-                    currentTurnData += "M " + s + ";";
+                    if(equi1 == "") { 
+                        equi1 = "M " + s + ";";
+                        continue;
+                    }
+                    if (equi2 == "")
+                    {
+                        equi2 = "M " + s + ";";
+                        continue;
+                    }
+                    if (equi3 == "")
+                    {
+                        equi3 = "M " + s + ";";
+                    }
+                }
             }
             if (programmableEquipmentCards != null)
             {
                 foreach (string s in programmableEquipmentCards)
+                {
+                    if (equi1 == "")
+                    {
+                        equi1 = "P " + s + ";";
+                        continue;
+                    }
+                    if (equi2 == "")
+                    {
+                        equi2 = "P " + s + ";";
+                        continue;
+                    }
+                    if (equi3 == "")
+                    {
+                        equi3 = "P " + s + ";";
+                    }
+            }
 
-                    currentTurnData += "P " + s + ";";
+                    
             }
             if (autoEquipmentCards != null)
             {
                 foreach (string s in autoEquipmentCards)
+                {
+                    if (equi1 == "")
+                    {
+                        equi1 = "A " + s + ";";
+                        continue;
+                    }
+                    if (equi2 == "")
+                    {
+                        equi2 = "A " + s + ";";
+                        continue;
+                    }
+                    if (equi3 == "")
+                    {
+                        equi3 = "A " + s + ";";
+                    }
 
-                    currentTurnData += "A " + s + ";";
             }
-            // suppression du dernier point-virgule
-            currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
-            SansHUD.data.AppendLine(currentTurnData);
-            if (manualEquipmentCards != null)
+
+            }
+
+            Conception conception = new Conception
+            {
+                Joueur = Partie.JoueurCourant,
+                Dimension = Partie.Joueurs[Partie.JoueurCourant - 1].Dim.name,
+                Locomotion = Partie.Joueurs[Partie.JoueurCourant - 1].Loco.name,
+                Conduite = autonomie,
+                Equipement1 = equi1,
+                Equipement2 = equi2,
+                Equipement3 = equi3,
+
+            };
+        print("saved");
+        string json = JsonUtility.ToJson(conception);
+        File.WriteAllText(Application.dataPath + "/conception.json", json);
+        // suppression du dernier point-virgule
+        //currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
+        //SansHUD.data.AppendLine(currentTurnData);
+        if (manualEquipmentCards != null)
                 manualEquipmentCards.Clear();
             if (programmableEquipmentCards != null)
                 programmableEquipmentCards.Clear();
@@ -181,3 +244,5 @@ public class Initialisation : MonoBehaviour
         cartes.transform.position = posCards[pos - 1];
     }
 }
+
+

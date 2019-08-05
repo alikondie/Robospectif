@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class InitDebat : MonoBehaviour
 {
@@ -280,7 +281,7 @@ public class InitDebat : MonoBehaviour
 
 
                 //GameObject p = persos[0].transform.Find("Jetons").gameObject;
-                SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
+                //SansHUD.data.AppendLine("Joueur;Perso;Environnement;SR+;SR-;SD+;SD-;ER+;ER-;ED+;ED-;UR+;UR-;UD+;UD-");
                 foreach (GameObject pers in persos)
                 {
                     FillPersoData(pers);
@@ -396,8 +397,17 @@ public class InitDebat : MonoBehaviour
             environment = "Concepteur";
         }
 
+        int keyIndex = perso.transform.GetSiblingIndex();
 
-
+        Personnage personnage = new Personnage
+        {
+             Joueur = keyIndex,
+             Person = character,
+             Environnement = environment,
+             UsagePropose = "",
+        };
+        string json = JsonUtility.ToJson(personnage);
+        File.WriteAllText(Application.dataPath + "/conception.json", json);
 
 
         // société +-, environement +-, usage +-
@@ -405,7 +415,7 @@ public class InitDebat : MonoBehaviour
         sp = sm = ep = em = up = um = 0;
         string jetonValue;
 
-        int keyIndex = perso.transform.GetSiblingIndex();
+        
         if(number + 1 != Partie.JoueurCourant) { 
         GameObject p = persosAndJetons[keyIndex];
        // foreach(KeyValuePair<int,GameObject> p in persosAndJetons)
@@ -450,7 +460,7 @@ public class InitDebat : MonoBehaviour
 
 
           
-            SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
+            //SansHUD.data.AppendLine(persosAndDebate[keyIndex]);
 
 
         //  }
@@ -516,3 +526,5 @@ public class InitDebat : MonoBehaviour
         }
     }
 }
+
+

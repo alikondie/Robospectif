@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
 using System.Text;
+using System.IO;
 
 class RegisterHostMessage : MessageBase { public float message; }
 
@@ -21,6 +22,7 @@ public class SansHUD : NetworkManager
     short imageID = 1001;
     short conceptionID = 1002;
     short chronoID = 1003;
+    short playerInfoId = 1050;
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
@@ -62,6 +64,7 @@ public class SansHUD : NetworkManager
         NetworkServer.RegisterHandler(messageID, OnMessageReceived);
         NetworkServer.RegisterHandler(imageID, onImageReceived);
         NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
+        NetworkServer.RegisterHandler(playerInfoId, OnPlayerInfoReceived);
         //NetworkServer.RegisterHandler(1005, onTestReceived);
     }
 
@@ -134,8 +137,26 @@ public class SansHUD : NetworkManager
         Text_Connexion.recupInfoJoueur(id);        
     }
 
- 
 
+
+
+    private void OnPlayerInfoReceived(NetworkMessage netMsg)
+    {
+        var objectMessage = netMsg.ReadMessage<PlayerInfoMessage>();
+        PlayerInfoData personnage = new PlayerInfoData
+        {
+            Nom = objectMessage.lastName,
+            Prenom = objectMessage.firstName,
+            Sex = objectMessage.sex,
+            Age = objectMessage.age,
+            Specialite = objectMessage.specialty,
+            Etablissement = objectMessage.establishment,
+            Remarques = "",
+        };
+        string json = JsonUtility.ToJson(personnage);
+        File.WriteAllText(Application.dataPath + "/joueur_"+personnage.Nom+".json", json);
+
+    }
 
     public void OnCommandSent(NetworkMessage netMsg)
     {
@@ -169,16 +190,6 @@ public class SansHUD : NetworkManager
         Debug.Log("Client has requested to get his player added to the game");
 
     }
-
-
-
-
-
-
-
-
-
-
 
     public override void OnServerDisconnect(NetworkConnection conn)
     {

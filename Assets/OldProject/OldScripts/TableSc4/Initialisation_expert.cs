@@ -53,8 +53,8 @@ public class Initialisation_expert : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(() => ButtonClicked());
-        SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
-        SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");
+        /*SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
+        SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");*/
     }
 
     void OnEnable()
