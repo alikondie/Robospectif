@@ -138,13 +138,5 @@ public class ConceptionTerminer : MonoBehaviour
 
 }
 
- public class CarteRejetee {
 
-      public int Joueur;
-      public string Dimension;
-      public string Locomotion;
-      public string Equipement1;
-      public string Equipement2;
-      public string Equipement3;
-  }
 

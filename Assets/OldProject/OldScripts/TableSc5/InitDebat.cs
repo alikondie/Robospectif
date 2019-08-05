@@ -527,11 +527,4 @@ public class InitDebat : MonoBehaviour
     }
 }
 
-public class Personnage{
-    public int Joueur;
-    public string Person;
-    public string Environnement;
-    public string UsagePropose;
 
-
-}

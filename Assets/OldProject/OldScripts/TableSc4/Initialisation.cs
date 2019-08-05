@@ -245,14 +245,4 @@ public class Initialisation : MonoBehaviour
     }
 }
 
-public class Conception
-{
-    public int Joueur;
-    public string Dimension;
-    public string Locomotion;
-    public string Conduite;
-    public string Equipement1;
-    public string Equipement2;
-    public string Equipement3; 
 
-}
