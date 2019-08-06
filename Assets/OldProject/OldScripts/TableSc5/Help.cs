@@ -27,7 +27,8 @@ public class Help : MonoBehaviour
     private void OnBackClicked()
     {
         helpBg.SetActive(false);
-        canvas_vehicule.SetActive(true);
+        if (canvas_debat.activeSelf)
+            canvas_vehicule.SetActive(true);
     }
 
     private void OnEnable()

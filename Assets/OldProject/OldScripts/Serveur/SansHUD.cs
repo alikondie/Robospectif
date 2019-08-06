@@ -26,7 +26,7 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "172.21.232.220";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
     // recolte de données main script
     public static StringBuilder data;
@@ -154,7 +154,7 @@ public class SansHUD : NetworkManager
             Remarques = "",
         };
         string json = JsonUtility.ToJson(playerInfo);
-        File.WriteAllText(Application.dataPath + "/joueur_"+ playerInfo.Nom+"," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" +.json", json);
+        //File.WriteAllText(Application.dataPath + "/joueur_"+ playerInfo.Nom+"," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" +.json", json);
 
     }
 

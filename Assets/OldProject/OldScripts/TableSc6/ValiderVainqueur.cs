@@ -22,7 +22,10 @@ public class ValiderVainqueur : MonoBehaviour
     [SerializeField] GameObject[] joueurs;
 
     [SerializeField] Button button;
+    [SerializeField] Button help;
     [SerializeField] Button bouton_retour;
+
+    [SerializeField] GameObject helpBg;
 
     [SerializeField] Text central;
 
@@ -37,6 +40,7 @@ public class ValiderVainqueur : MonoBehaviour
         vainqueur = 0;
         button.onClick.AddListener(() => ButtonClicked());
         bouton_retour.onClick.AddListener(() => BoutonRetourClicked());
+        help.onClick.AddListener(() => HelpClicked());
     }
 
     // Update is called once per frame
@@ -60,6 +64,11 @@ public class ValiderVainqueur : MonoBehaviour
                 button.gameObject.SetActive(true);
             }
         }
+    }
+
+    private void HelpClicked()
+    {
+        helpBg.SetActive(true);
     }
 
     private void OnCardClicked(GameObject carte)
