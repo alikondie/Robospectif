@@ -28,9 +28,6 @@ public class JetonsHandler : MonoBehaviour
     [SerializeField] Button planeteVert;
     [SerializeField] Button planeteRouge;
 
-    public int usageCompteur;
-    public int societeCompteur;
-    public int planeteCompteur;
     private bool isPresTime;
     // Start is called before the first frame update
     void Start()
@@ -93,17 +90,17 @@ public class JetonsHandler : MonoBehaviour
 
     private void SetTrue()
     {
-        if (usageCompteur < 2)
+        if (JoueurStatic.UsageCompteur < 2)
         {
             usageVert.gameObject.SetActive(true);
             usageRouge.gameObject.SetActive(true);
         }
-        if (societeCompteur < 2)
+        if (JoueurStatic.SocieteCompteur < 2)
         {
             societeVert.gameObject.SetActive(true);
             societeRouge.gameObject.SetActive(true);
         }
-        if (planeteCompteur < 2)
+        if (JoueurStatic.PlaneteCompteur < 2)
         {
             planeteVert.gameObject.SetActive(true);
             planeteRouge.gameObject.SetActive(true);
@@ -128,9 +125,9 @@ public class JetonsHandler : MonoBehaviour
     {
         envoyer(s);
         AllFalse();
-        planeteCompteur++;
+        JoueurStatic.PlaneteCompteur++;
 
-        if (planeteCompteur >= 2)
+        if (JoueurStatic.PlaneteCompteur >= 2)
         {
             planeteVert.gameObject.SetActive(false);
             planeteRouge.gameObject.SetActive(false);
@@ -141,9 +138,9 @@ public class JetonsHandler : MonoBehaviour
     {
         envoyer(s);
         AllFalse();
-        societeCompteur++;
+        JoueurStatic.SocieteCompteur++;
 
-        if (societeCompteur >= 2)
+        if (JoueurStatic.SocieteCompteur >= 2)
         {
             societeVert.gameObject.SetActive(false);
             societeRouge.gameObject.SetActive(false);
@@ -154,9 +151,9 @@ public class JetonsHandler : MonoBehaviour
     {
         envoyer(s);
         AllFalse();
-        usageCompteur++;
+        JoueurStatic.UsageCompteur++;
 
-        if (usageCompteur >= 2)
+        if (JoueurStatic.UsageCompteur >= 2)
         {
             usageVert.gameObject.SetActive(false);
             usageRouge.gameObject.SetActive(false);
