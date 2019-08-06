@@ -29,9 +29,9 @@ public class AttenteFin : MonoBehaviour
 
     private void onWaitReceived(NetworkMessage netMsg)
     {
-        canvas_choix_jetons.GetComponent<JetonsHandler>().planeteCompteur = 0;
-        canvas_choix_jetons.GetComponent<JetonsHandler>().usageCompteur = 0;
-        canvas_choix_jetons.GetComponent<JetonsHandler>().societeCompteur = 0;
+        JoueurStatic.SocieteCompteur = 0;
+        JoueurStatic.PlaneteCompteur = 0;
+        JoueurStatic.UsageCompteur = 0;
 
         string msg = netMsg.ReadMessage<MyStringMessage>().s;
         if (msg.Equals("next"))

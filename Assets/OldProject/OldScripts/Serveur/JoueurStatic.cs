@@ -26,6 +26,9 @@ public class JoueurStatic
     private static string type;
     private static bool isPrive;
     private static bool isPublic;
+    private static int usageCompteur;
+    private static int societeCompteur;
+    private static int planeteCompteur;
 #pragma warning disable CS0618 // Le type ou le membre est obsolète
     private static NetworkClient client;
 #pragma warning restore CS0618 // Le type ou le membre est obsolète
@@ -106,4 +109,7 @@ public class JoueurStatic
     public static int NbJoueurs { get => nbJoueurs; set => nbJoueurs = value; }
     public static bool IsPrive { get => isPrive; set => isPrive = value; }
     public static bool IsPublic { get => isPublic; set => isPublic = value; }
+    public static int UsageCompteur { get => usageCompteur; set => usageCompteur = value; }
+    public static int SocieteCompteur { get => societeCompteur; set => societeCompteur = value; }
+    public static int PlaneteCompteur { get => planeteCompteur; set => planeteCompteur = value; }
 }
