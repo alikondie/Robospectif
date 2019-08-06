@@ -115,12 +115,7 @@ public class JetonsHandler : MonoBehaviour
         isPresTime = true;
         if (JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
         {
-            usageVert.gameObject.SetActive(true);
-            usageRouge.gameObject.SetActive(true);
-            societeVert.gameObject.SetActive(true);
-            societeRouge.gameObject.SetActive(true);
-            planeteVert.gameObject.SetActive(true);
-            planeteRouge.gameObject.SetActive(true);
+            SetTrue();
         }
     }
 
@@ -168,12 +163,7 @@ public class JetonsHandler : MonoBehaviour
         isPresTime = false;
         canvas_choix_jetons.SetActive(false);
         canvas_vainqueur.SetActive(true);
-        usageVert.gameObject.SetActive(true);
-        usageRouge.gameObject.SetActive(true);
-        societeVert.gameObject.SetActive(true);
-        societeRouge.gameObject.SetActive(true);
-        planeteVert.gameObject.SetActive(true);
-        planeteRouge.gameObject.SetActive(true);
+        SetTrue();
     }
 
     public void envoyer(Sprite s)
