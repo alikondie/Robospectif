@@ -9,6 +9,9 @@ using UnityEngine.Networking;
 public class PlayerInfo : MonoBehaviour
 {
     #region Properties
+
+    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_infos_joueurs;
     public Text nom;
     public Text prenom;
     public Text age;
@@ -61,6 +64,9 @@ public class PlayerInfo : MonoBehaviour
         infos.establishment = etab.text;
 
         NetworkServer.SendToAll(playerInfoId, infos);
+
+        canvas_infos_joueurs.SetActive(false);
+        canvas_choix_cartes.SetActive(true);
 
     }
 	#endregion

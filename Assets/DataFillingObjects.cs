@@ -47,6 +47,7 @@ public class PlayerInfoData{
     public string Specialite;
     public string Etablissement;
     public string Remarques;
+    public Conception conception;
 }
 
 public class Debate{
