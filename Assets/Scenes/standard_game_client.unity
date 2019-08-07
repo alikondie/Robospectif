@@ -6523,8 +6523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac56d9b09dacf1d4bb166163f2a85c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_infos_joueurs: {fileID: 1080856987}
   nom: {fileID: 602330402}
   prenom: {fileID: 2055273066}
   age: {fileID: 1958325386}
@@ -8289,6 +8287,9 @@ MonoBehaviour:
   societeRouge: {fileID: 250888455}
   planeteVert: {fileID: 1637260196}
   planeteRouge: {fileID: 1719710156}
+  usageCompteur: 0
+  societeCompteur: 0
+  planeteCompteur: 0
 --- !u!114 &1365945324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11483,6 +11484,6 @@ PrefabInstance:
         type: 3}
       propertyPath: canvas_choix_cartes
       value: 
-      objectReference: {fileID: 1080856987}
+      objectReference: {fileID: 160886055}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529d8d73016909243977708c2afec217, type: 3}
