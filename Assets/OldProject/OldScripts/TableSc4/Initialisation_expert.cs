@@ -59,6 +59,7 @@ public class Initialisation_expert : MonoBehaviour
 
     void OnEnable()
     {
+        Tour.NbCartesPosees = 0;
         if(start)
         {
             start = false;
@@ -67,7 +68,6 @@ public class Initialisation_expert : MonoBehaviour
             position_init_locomotion = PositionInitiale(locomotion);
             position_init_equipement = PositionInitiale(equipement);
         }
-        //Tour.NbCartesPosees = 0;
         MyDecideurMessage msg = new MyDecideurMessage();
         foreach (Joueur j in Partie.Joueurs)
         {

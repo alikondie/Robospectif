@@ -41,6 +41,7 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     void OnEnable()
     {
+        was_in_target = false;
         ismouseintarget = false;
         isnbequipmentmax = false;
         isalreadylocomotionordimension = false;

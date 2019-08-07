@@ -9,21 +9,25 @@ using UnityEngine.UI;
 
 public class recapitulatif : MonoBehaviour
 {
+    [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject canvas_choix_vainqueur;
     [SerializeField] GameObject canvas_fin_tour;
     [SerializeField] GameObject canvas_fin;
     
     [SerializeField] GameObject[] joueurs;
 
+    [SerializeField] Button bouton_retour;
     [SerializeField] Button button;
 
     private Sprite[] images;
 
+    short retourID = 1023;
     short nextID = 1015;
 
     // Start is called before the first frame update
     void Start()
     {
+        bouton_retour.onClick.AddListener(() => BoutonRetourClicked());
         button.onClick.AddListener(() => ButtonClicked());
     }
 
@@ -156,5 +160,13 @@ public class recapitulatif : MonoBehaviour
             compteur++;
 
         }
+    }
+    private void BoutonRetourClicked()
+    {
+        MyNetworkMessage msg = new MyNetworkMessage();
+        NetworkServer.SendToAll(retourID, msg);
+        canvas_choix_vainqueur.SetActive(false);
+        canvas_debat.GetComponent<InitDebat>().Retour = true;
+        canvas_debat.SetActive(true);
     }
 }
