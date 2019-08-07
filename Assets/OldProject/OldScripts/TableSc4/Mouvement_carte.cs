@@ -79,7 +79,6 @@ public class Mouvement_carte : MonoBehaviour
             if(!was_in_target)
             {
                 Tour.NbCartesPosees++;
-                Debug.Log("incremente");
                 was_in_target = true;
             }
             gameObject.transform.position = currenttarget.transform.position;
