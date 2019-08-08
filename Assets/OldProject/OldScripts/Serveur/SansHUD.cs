@@ -29,7 +29,7 @@ public class SansHUD : NetworkManager
     private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
     // recolte de données main script
-    public static StringBuilder data;
+    public static Dictionary<int, PlayerInfoData> playerInfos;
 
     void Start()
     {
@@ -54,7 +54,7 @@ public class SansHUD : NetworkManager
             canvas_client.SetActive(true);
         }
 
-        data = new StringBuilder();
+        playerInfos = new Dictionary<int, PlayerInfoData>();
     }
 
 
@@ -156,7 +156,8 @@ public class SansHUD : NetworkManager
         };
         string json = JsonUtility.ToJson(playerInfo);
         print(json);
-        Text_Connexion.addConnectedPlayer();
+        playerInfos.Add(objectMessage.id, playerInfo);
+        //Text_Connexion.addConnectedPlayer();
         
         //File.WriteAllText(Application.dataPath + "/joueur_"+ playerInfo.Nom+"," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" +.json", json);
 

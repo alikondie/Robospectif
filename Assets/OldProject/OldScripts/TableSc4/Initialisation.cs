@@ -187,8 +187,10 @@ public class Initialisation : MonoBehaviour
 
             };
         print("saved");
-        string json = JsonUtility.ToJson(conception);
-        File.WriteAllText(Application.dataPath + "/conception," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".json", json);
+        SansHUD.playerInfos[Partie.JoueurCourant].conception = conception;
+        string json = JsonUtility.ToJson(SansHUD.playerInfos[Partie.JoueurCourant]);
+        print(json);
+        //File.WriteAllText(Application.dataPath + "/conception," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".json", json);
         // suppression du dernier point-virgule
         //currentTurnData = currentTurnData.Remove(currentTurnData.Length - 1);
         //SansHUD.data.AppendLine(currentTurnData);

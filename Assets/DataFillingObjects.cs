@@ -50,6 +50,8 @@ public class PlayerInfoData{
     public string Specialite;
     public string Etablissement;
     public string Remarques;
+    public CarteRejetee cartesRejetees;
+    public Conception conception;
 }
 
 public class Debate{
