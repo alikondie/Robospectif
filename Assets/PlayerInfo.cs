@@ -16,6 +16,9 @@ public class PlayerInfo : MonoBehaviour
     public TMP_Dropdown sex;
     public Text etab;
 
+    public GameObject joueur_infos;
+    public GameObject joueur_attente;
+
     #endregion
 
     #region Inputs
@@ -61,7 +64,9 @@ public class PlayerInfo : MonoBehaviour
         infos.establishment = etab.text;
 
         NetworkServer.SendToAll(playerInfoId, infos);
+        joueur_infos.SetActive(false);
+        joueur_attente.SetActive(true);
 
-    }
+}
 	#endregion
 }

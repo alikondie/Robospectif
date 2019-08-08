@@ -126,6 +126,11 @@ public class Text_Connexion : MonoBehaviour
         int pos = Array.IndexOf(Partie.Positions, i);
         connectes[pos] = 1;
         estDebut = true;
+        
+    }
+
+    public static void addConnectedPlayer()
+    {
         nbJoueursConnectes++;
     }
 
