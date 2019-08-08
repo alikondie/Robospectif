@@ -6682,6 +6682,8 @@ MonoBehaviour:
   spec: {fileID: 1125648879}
   sex: {fileID: 72384498}
   etab: {fileID: 1626897729}
+  joueur_infos: {fileID: 1080856987}
+  joueur_attente: {fileID: 1669510948}
 --- !u!114 &1080856989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9425,26 +9427,13 @@ GameObject:
   - component: {fileID: 1669510952}
   - component: {fileID: 1669510951}
   - component: {fileID: 1669510950}
-  - component: {fileID: 1669510949}
   m_Layer: 5
-  m_Name: Canvas_infos_joueurs (1)
+  m_Name: Canvas_attente_joueurs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1669510949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669510948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bbc4b44ae4d9a74b933962881be2b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_IsActive: 0
 --- !u!114 &1669510950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11713,11 +11702,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_position_joueur
       objectReference: {fileID: 0}
-    - target: {fileID: 7193206705955183922, guid: 529d8d73016909243977708c2afec217,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7193206705955183924, guid: 529d8d73016909243977708c2afec217,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11827,6 +11811,6 @@ PrefabInstance:
         type: 3}
       propertyPath: canvas_choix_cartes
       value: 
-      objectReference: {fileID: 160886055}
+      objectReference: {fileID: 1080856987}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529d8d73016909243977708c2afec217, type: 3}

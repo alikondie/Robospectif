@@ -12,8 +12,7 @@ public class PlayerInfo : MonoBehaviour
     public Text nom;
     public Text prenom;
     public Text age;
-    public Text spec;
-    public TMP_Dropdown sex;
+    public Text spec
     public Text etab;
 
     public GameObject joueur_infos;
@@ -59,7 +58,6 @@ public class PlayerInfo : MonoBehaviour
         infos.lastName = nom.text;
         infos.firstName = prenom.text;
         infos.age = age.text;
-        infos.sex = sex.value.ToString();
         infos.specialty = spec.text;
         infos.establishment = etab.text;
 
