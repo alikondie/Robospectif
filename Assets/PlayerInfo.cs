@@ -12,7 +12,7 @@ public class PlayerInfo : MonoBehaviour
     public Text nom;
     public Text prenom;
     public Text age;
-    public Text spec
+    public Text spec;
     public Text etab;
 
     public GameObject joueur_infos;
