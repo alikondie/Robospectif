@@ -6271,10 +6271,9 @@ MonoBehaviour:
   prenom: {fileID: 2055273066}
   age: {fileID: 1958325386}
   spec: {fileID: 1125648879}
-  sex: {fileID: 0}
   etab: {fileID: 1626897729}
   joueur_infos: {fileID: 1080856987}
-  joueur_attente: {fileID: 1669510948}
+  joueur_attente: {fileID: 5257337}
 --- !u!114 &1080856989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6355,7 +6354,7 @@ RectTransform:
   - {fileID: 806644166}
   - {fileID: 78967447}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11256,7 +11255,7 @@ PrefabInstance:
     - target: {fileID: 7193206705955183924, guid: 529d8d73016909243977708c2afec217,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7193206705955183924, guid: 529d8d73016909243977708c2afec217,
         type: 3}
@@ -11327,6 +11326,6 @@ PrefabInstance:
         type: 3}
       propertyPath: canvas_choix_cartes
       value: 
-      objectReference: {fileID: 1080856987}
+      objectReference: {fileID: 160886055}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529d8d73016909243977708c2afec217, type: 3}

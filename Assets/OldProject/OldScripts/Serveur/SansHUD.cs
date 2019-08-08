@@ -155,7 +155,7 @@ public class SansHUD : NetworkManager
         };
         string json = JsonUtility.ToJson(playerInfo);
         print(json);
-        Text_Connexion.addConnectedPlayer();
+        
         //File.WriteAllText(Application.dataPath + "/joueur_"+ playerInfo.Nom+"," + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" +.json", json);
 
     }
