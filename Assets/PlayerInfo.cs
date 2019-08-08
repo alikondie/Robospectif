@@ -61,7 +61,15 @@ public class PlayerInfo : MonoBehaviour
         infos.specialty = spec.text;
         infos.establishment = etab.text;
 
-        NetworkServer.SendToAll(playerInfoId, infos);
+        print(infos.lastName);
+        print(infos.firstName);
+        print(infos.age);
+        print(infos.specialty);
+        print(infos.establishment);
+
+
+
+        JoueurStatic.Client.Send(playerInfoId, infos);
         joueur_infos.SetActive(false);
         joueur_attente.SetActive(true);
 
