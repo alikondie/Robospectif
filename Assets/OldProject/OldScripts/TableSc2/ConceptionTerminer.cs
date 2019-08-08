@@ -115,8 +115,6 @@ public class ConceptionTerminer : MonoBehaviour
                 };
                 List<CarteRejetee> l = new List<CarteRejetee>();
                 l.Add(carte);
-                l.Add(carte);
-                l.Add(carte);
                 string json = JsonHelper.ToJson(l,true);
                 print(json);
                 File.WriteAllText(Application.dataPath + "/carte, +" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".json", json);
