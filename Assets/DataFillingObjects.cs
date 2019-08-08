@@ -42,6 +42,7 @@ public class Personnage
 
 public class PlayerInfoData{
 
+    public int id;
     public string Nom;
     public string Prenom;
     public string Sex;

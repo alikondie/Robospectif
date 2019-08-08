@@ -55,6 +55,7 @@ public class PlayerInfo : MonoBehaviour
     {
         PlayerInfoMessage infos = new PlayerInfoMessage();
 
+        infos.id = JoueurStatic.Numero;
         infos.lastName = nom.text;
         infos.firstName = prenom.text;
         infos.age = age.text;

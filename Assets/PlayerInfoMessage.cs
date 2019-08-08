@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class PlayerInfoMessage : MessageBase
 {
+    public int id;
     public string lastName;
     public string firstName;
     public string sex;
