@@ -19,7 +19,7 @@ public class CarteRejetee
     public string Equipement2;
     public string Equipement3;
 }
-
+[Serializable]
 public class Conception
 {
     public int Joueur;
@@ -31,7 +31,7 @@ public class Conception
     public string Equipement3;
 
 }
-
+[Serializable]
 public class Personnage
 {
     public int Joueur;
@@ -39,7 +39,7 @@ public class Personnage
     public string Environnement;
     public string UsagePropose;
 }
-
+[Serializable]
 public class PlayerInfoData{
 
     public int id;
@@ -50,10 +50,11 @@ public class PlayerInfoData{
     public string Specialite;
     public string Etablissement;
     public string Remarques;
-    public CarteRejetee cartesRejetees;
     public Conception conception;
-}
+    public CarteRejetee cartesRejetees;
 
+}
+[Serializable]
 public class Debate{
 
     public int Tour;
@@ -65,7 +66,7 @@ public class Debate{
 
 
 }
-
+[Serializable]
 public static class JsonHelper
 {
     public static List<T> FromJson<T>(string json)
