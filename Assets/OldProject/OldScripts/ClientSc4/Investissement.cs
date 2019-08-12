@@ -39,6 +39,8 @@ public class Investissement : MonoBehaviour
 
     private void OnEnable()
     {
+        JoueurStatic.CompteurRouge = 0;    
+        JoueurStatic.CompteurVert = 0;    
         if (JoueurStatic.Langue == "FR")
         {
             joueur.text = "Joueur " + JoueurStatic.Numero;
@@ -68,7 +70,7 @@ public class Investissement : MonoBehaviour
             if (JoueurStatic.NbJoueurs == 6)
                 nb = 2;
 
-            for (int j = 0; j < nb; j++)
+            for (int j = 0; j < nb - JoueurStatic.CompteurRouge; j++)
             {
                 rouges.transform.GetChild(j).gameObject.SetActive(true);
             }
@@ -123,7 +125,7 @@ public class Investissement : MonoBehaviour
             int nb = 5;
             if (JoueurStatic.NbJoueurs == 6)
                 nb = 6;
-            for (int i = nb; i < 6; i++)
+            for (int i = nb - JoueurStatic.CompteurVert; i < 6; i++)
             {
                 verts.transform.GetChild(i).gameObject.SetActive(false);
             }
