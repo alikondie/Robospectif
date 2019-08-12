@@ -2890,8 +2890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f5b1765689e444e9554148dff7fc28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_vainqueur: {fileID: 0}
-  canvas_choix_jetons: {fileID: 0}
+  canvas_vainqueur: {fileID: 823076305}
+  canvas_choix_jetons: {fileID: 1365945322}
 --- !u!114 &823076307
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,13 +17,18 @@ public class Investissement : MonoBehaviour
     [SerializeField] GameObject canvas_fin;
 
     short publicID = 1016;
+    short RetourID = 1022;
     short nextID = 1015;
+
+    private bool retour;
 
     // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(publicID, OnPublicReceived);
         JoueurStatic.Client.RegisterHandler(nextID, OnWaitReceived);
+        JoueurStatic.Client.RegisterHandler(RetourID, OnRetourReceived);
+        retour = false;
     }
 
     // Update is called once per frame
@@ -44,39 +49,7 @@ public class Investissement : MonoBehaviour
             central.text = "Investments";
         }
 
-        for (int j = 0; j < verts.transform.childCount; j++)
-        {
-            verts.transform.GetChild(j).gameObject.SetActive(true);
-        }
-
-        for (int i = 0; i < rouges.transform.childCount; i++)
-        {
-            rouges.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        if (JoueurStatic.IsPrive)
-        {
-            decideur.sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Decideurs/DecideurPrive");
-            decideur.gameObject.SetActive(true);
-            central.gameObject.SetActive(false);
-            int nb = 5;
-            if (JoueurStatic.NbJoueurs == 6)
-                nb = 6;
-            int compteur = 1;
-            for (int i = nb; i < 6; i++)
-            {
-                verts.transform.GetChild(i).gameObject.SetActive(false);
-                compteur++;
-            }
-        } else
-        {
-            central.gameObject.SetActive(true);
-            decideur.gameObject.SetActive(false);
-            for (int i = 0; i < verts.transform.childCount; i++)
-            {
-                verts.transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+        InitDecideur();
     }
 
     private void OnPublicReceived(NetworkMessage netMsg)
@@ -122,6 +95,47 @@ public class Investissement : MonoBehaviour
         {
             canvas_jetons.SetActive(false);
             canvas_fin.SetActive(true);
+        }
+    }
+
+    private void OnRetourReceived(NetworkMessage netMsg)
+    {
+        InitDecideur();
+    }
+
+    private void InitDecideur()
+    {
+        for (int j = 0; j < verts.transform.childCount; j++)
+        {
+            verts.transform.GetChild(j).gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < rouges.transform.childCount; i++)
+        {
+            rouges.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        if (JoueurStatic.IsPrive)
+        {
+            decideur.sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Decideurs/DecideurPrive");
+            decideur.gameObject.SetActive(true);
+            central.gameObject.SetActive(false);
+            int nb = 5;
+            if (JoueurStatic.NbJoueurs == 6)
+                nb = 6;
+            for (int i = nb; i < 6; i++)
+            {
+                verts.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            central.gameObject.SetActive(true);
+            decideur.gameObject.SetActive(false);
+            for (int i = 0; i < verts.transform.childCount; i++)
+            {
+                verts.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 }
