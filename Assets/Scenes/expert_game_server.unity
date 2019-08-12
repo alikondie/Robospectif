@@ -14708,26 +14708,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000015258789
       objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 186
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7896333962775384483, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_Color.r
@@ -14912,6 +14892,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1131766931}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 186
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06034251815215a45835f9e607861cb2, type: 3}
 --- !u!1 &1131766918 stripped
@@ -17129,6 +17129,13 @@ MonoBehaviour:
   canvas_pres_vehicule: {fileID: 1443536213}
   central: {fileID: 0}
   baseSprite: {fileID: 0}
+  debate:
+    Tour: 0
+    Personnage: 
+    JoueurDonnant: 0
+    JoueurRecevant: 0
+    Jeton: 
+    Argument: 
   button: {fileID: 2128672223}
   help: {fileID: 0}
   bouton_retour: {fileID: 251962192}
@@ -28249,7 +28256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas_attente_persos: {fileID: 2026254558}
-  canvas_pres_vehicule: {fileID: 0}
+  canvas_pres_vehicule: {fileID: 1443536213}
   canvas_pres_persos: {fileID: 71064241}
   cartes: []
   text: {fileID: 941241528}
