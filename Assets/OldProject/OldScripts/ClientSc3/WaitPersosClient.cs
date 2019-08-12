@@ -17,8 +17,6 @@ public class WaitPersosClient : MonoBehaviour
     short debatclientID = 1021;
     short joueurID = 1019;
     short presentateurID = 1020;
-    private string fr;
-    private string en;
     private bool presentateur_changed;
     private int[] listtourattente;
 
@@ -41,46 +39,41 @@ public class WaitPersosClient : MonoBehaviour
             Debug.Log("il reste " + attentejoueurcourant + " tours");
             if (attentejoueurcourant == 0)
             {
-                presentateur_changed = false;
-                central.text = "Présentez un usage du véhicule par votre personnage.\n Une fois l'usage présenté, passez au joueur suivant";
+                if (JoueurStatic.Langue == "FR")
+                    central.text = "Présentez un usage du véhicule par votre personnage.\n Une fois l'usage présenté, passez au joueur suivant";
+                else
+                    central.text = "Present how your character would use this vehicle.\n When you're done, hand over to the next player";
                 nextbutton.gameObject.SetActive(true);
             }
             else if (attentejoueurcourant < 0)
             {
-                presentateur_changed = false;
-                central.text = "Présentation des usages";
+                if (JoueurStatic.Langue == "FR")
+                    central.text = "Présentation des usages";
+                else
+                    central.text = "Uses presentation";
                 nextbutton.gameObject.SetActive(false);
             }
             else
             {
                 nextbutton.gameObject.SetActive(false);
-                presentateur_changed = false;
-                central.text = "Vous présentez dans " + attentejoueurcourant + " tours";
+                if (JoueurStatic.Langue == "FR")
+                    central.text = "Vous présentez dans " + attentejoueurcourant + " tours";
+                else
+                    central.text = "Your present in " + attentejoueurcourant + " turns";
             }
+            presentateur_changed = false;
         }
     }
 
     void OnEnable()
     {
-        //if (JoueurStatic.Type == "expert")
-        //{
-        //    fr = "acteurs";
-        //    en = "Roles";
-        //}
-        //else
-        //{
-        //    fr = "personnages";
-        //    en = "Characters";
-        //}
         if (JoueurStatic.Langue == "FR")
         {
             text.text = "Joueur " + JoueurStatic.Numero.ToString();
-            //central.text = "Présentation des\n" + fr;
         }
         else
         {
             text.text = "Player " + JoueurStatic.Numero;
-            //central.text = en + "\npresentation";
         }
     }
 

@@ -29,6 +29,8 @@ public class JoueurStatic
     private static int usageCompteur;
     private static int societeCompteur;
     private static int planeteCompteur;
+    private static int compteurVert;
+    private static int compteurRouge;
 #pragma warning disable CS0618 // Le type ou le membre est obsolète
     private static NetworkClient client;
 #pragma warning restore CS0618 // Le type ou le membre est obsolète
@@ -112,4 +114,6 @@ public class JoueurStatic
     public static int UsageCompteur { get => usageCompteur; set => usageCompteur = value; }
     public static int SocieteCompteur { get => societeCompteur; set => societeCompteur = value; }
     public static int PlaneteCompteur { get => planeteCompteur; set => planeteCompteur = value; }
+    public static int CompteurVert { get => compteurVert; set => compteurVert = value; }
+    public static int CompteurRouge { get => compteurRouge; set => compteurRouge = value; }
 }
