@@ -6120,7 +6120,7 @@ MonoBehaviour:
   spec: {fileID: 1125648879}
   etab: {fileID: 1626897729}
   joueur_infos: {fileID: 1080856987}
-  joueur_attente: {fileID: 160886055}
+  joueur_choixcartes: {fileID: 0}
 --- !u!114 &1080856989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10998,6 +10998,6 @@ PrefabInstance:
         type: 3}
       propertyPath: canvas_choix_cartes
       value: 
-      objectReference: {fileID: 1080856987}
+      objectReference: {fileID: 160886055}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529d8d73016909243977708c2afec217, type: 3}
