@@ -28,17 +28,23 @@ public class AttentePersos : MonoBehaviour
 
     void OnEnable()
     {
+        if (Partie.Type == "expert")
+            canvas_pres_vehicule.GetComponent<Initialisation_expert>().enabled = false;
+        else
+            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1750f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
         canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
-        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
         canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = false;
         canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
         foreach (GameObject carte in cartes)
         {
             carte.GetComponent<BoxCollider2D>().enabled = false;
-            carte.GetComponent<Mouvement_carte>().enabled = false;
+            if (Partie.Type == "expert")
+                carte.GetComponent<Mouvement_carte_expert>().enabled = false;
+            else
+                carte.GetComponent<Mouvement_carte>().enabled = false;
         }
         if (Partie.Type == "expert")
         {
@@ -53,9 +59,9 @@ public class AttentePersos : MonoBehaviour
             nbAttendus = Partie.Joueurs.Count - 1;
         }
         if (Partie.Langue == "FR")
-            text.text = "Choisissez votre\n" + fr;
+            text.text = "Choisissez votre " + fr;
         else
-            text.text = "Chose your\n" + en;
+            text.text = "Chose your " + en;
 
         persoSprites = new Sprite[] { null, null, null, null, null, null };
 
@@ -100,7 +106,7 @@ public class AttentePersos : MonoBehaviour
                     persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPrive");
                 } else if (j.IsPublic)
                 {
-                    Debug.Log(j.Position);
+                    Debug.Log(persoSprites[j.Position]);
                     persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPublic");
                 }
             }
@@ -111,13 +117,19 @@ public class AttentePersos : MonoBehaviour
             canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
             canvas_pres_vehicule.SetActive(false);
             canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f, 1080f);
-            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
+            if (Partie.Type == "expert")
+                canvas_pres_vehicule.GetComponent<Initialisation_expert>().enabled = true;
+            else
+                canvas_pres_vehicule.GetComponent<Initialisation>().enabled = true;
             canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<BoxCollider2D>().enabled = true;
             canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = true;
             foreach (GameObject carte in cartes)
             {
                 carte.GetComponent<BoxCollider2D>().enabled = true;
-                carte.GetComponent<Mouvement_carte>().enabled = true;
+                if (Partie.Type == "expert")
+                    carte.GetComponent<Mouvement_carte_expert>().enabled = true;
+                else
+                    carte.GetComponent<Mouvement_carte>().enabled = true;
             }
             canvas_attente_persos.SetActive(false);
             canvas_pres_persos.SetActive(true);

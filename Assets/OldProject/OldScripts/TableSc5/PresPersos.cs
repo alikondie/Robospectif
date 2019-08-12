@@ -55,17 +55,23 @@ public class PresPersos : MonoBehaviour
     void OnEnable()
     {
         listtourattente = new int[Partie.Joueurs.Count];
+        if (Partie.Type == "expert")
+            canvas_pres_vehicule.GetComponent<Initialisation_expert>().enabled = false;
+        else
+            canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
         canvas_pres_vehicule.SetActive(true);
         canvas_pres_vehicule.GetComponent<CanvasScaler>().referenceResolution = new Vector2(10000f, 10000f);
         canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(false);
         canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
-        canvas_pres_vehicule.GetComponent<Initialisation>().enabled = false;
         canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent< BoxCollider2D>().enabled = false;
         canvas_pres_vehicule.transform.GetChild(1).GetChild(0).GetChild(7).GetComponent<Mouvement_carte>().enabled = false;
         foreach (GameObject carte in cartes)
         {
             carte.GetComponent<BoxCollider2D>().enabled = false;
-            carte.GetComponent<Mouvement_carte>().enabled = false;
+            if (Partie.Type == "expert")
+                carte.GetComponent<Mouvement_carte_expert>().enabled = false;
+            else
+                carte.GetComponent<Mouvement_carte>().enabled = false;
         }
         if (Partie.Type == "expert")
         {
