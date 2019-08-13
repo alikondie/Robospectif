@@ -67,14 +67,14 @@ public class ChoixCartes : MonoBehaviour
             JoueurStatic.Acteurs[0] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a1);
             JoueurStatic.Acteurs[1] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a2);
             JoueurStatic.Acteurs[2] = Resources.Load<Sprite>(JoueurStatic.Langue + "/Acteurs/" + a3);
+
+            canvas_choix_cartes.SetActive(false);
+
+            if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
+                canvas_attente_acteur.SetActive(true);
+            else
+                canvas_choix_acteur.SetActive(true);
         }
-
-        canvas_choix_cartes.SetActive(false);
-
-        if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
-            canvas_attente_acteur.SetActive(true);
-        else
-            canvas_choix_acteur.SetActive(true);
     }
 
     private void OnDecideurReceived(NetworkMessage netMsg)
