@@ -3501,7 +3501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725388e2f88abfc47a6935a6a9f57419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_persos_table: {fileID: 0}
+  canvas_persos_table: {fileID: 377935893}
   canvas_pres_perso: {fileID: 1031067871}
   button: {fileID: 1432711779}
   perso: {fileID: 2127272498}
