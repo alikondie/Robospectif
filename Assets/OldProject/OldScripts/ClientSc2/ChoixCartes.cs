@@ -57,7 +57,7 @@ public class ChoixCartes : MonoBehaviour
     {
         Debug.Log("conception");
         var message = netMsg.ReadMessage<MyActeurMessage>();
-        Debug.Log(message = netMsg.ReadMessage<MyActeurMessage>());
+        Debug.Log(message.numero == JoueurStatic.Numero);
         if (message.numero == JoueurStatic.Numero)
         {
             string a1 = message.acteur1;
