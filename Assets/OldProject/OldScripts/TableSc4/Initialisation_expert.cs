@@ -206,6 +206,7 @@ public class Initialisation_expert : MonoBehaviour
         msg.acteur2 = j.Acteurs[1].name;
         msg.acteur3 = j.Acteurs[2].name;
         NetworkServer.SendToAll(conceptionID, msg);
+        Debug.Log("message envoye pour " + j.Numero);
     }
 
     #region random

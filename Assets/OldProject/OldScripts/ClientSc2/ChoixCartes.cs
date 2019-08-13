@@ -55,7 +55,9 @@ public class ChoixCartes : MonoBehaviour
 
     private void OnConceptionReceived(NetworkMessage netMsg)
     {
+        Debug.Log("conception");
         var message = netMsg.ReadMessage<MyActeurMessage>();
+        Debug.Log(message = netMsg.ReadMessage<MyActeurMessage>());
         if (message.numero == JoueurStatic.Numero)
         {
             string a1 = message.acteur1;

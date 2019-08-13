@@ -34,7 +34,6 @@ public class PresPersos : MonoBehaviour
     [SerializeField] GameObject canvas_debat;
     [SerializeField] GameObject[] persos;
     [SerializeField] GameObject[] cartes;
-    [SerializeField] Button button;
     [SerializeField] Text text;
 	#endregion
 	
@@ -47,7 +46,6 @@ public class PresPersos : MonoBehaviour
 	#region Unity loop
     void Start()
     {
-        //button.onClick.AddListener(() => ButtonClicked());
         NetworkServer.RegisterHandler(debatID, OnDebatReceived);
         NetworkServer.RegisterHandler(joueurID, OnReceivedJoueurFinished);
     }
@@ -93,21 +91,14 @@ public class PresPersos : MonoBehaviour
             if (Tour.PersosDebat[i] != null)
             {
                 persos[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Tour.PersosDebat[i];
-               /* persos[i].transform.GetChild(0).gameObject.SetActive(true);
-                if (Tour.ZonesDebat[i, 0] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 0]).gameObject.SetActive(true);
-                if (Tour.ZonesDebat[i, 1] != 0)
-                    persos[i].transform.GetChild(Tour.ZonesDebat[i, 1]).gameObject.SetActive(true);*/
             }
             else
                 persos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
         if (Partie.Langue == "FR")
-            //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Joueur suivant";
             textbutton = "Joueur suivant";
         else
             textbutton = "Next player";
-            //button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Next player";
         if (Partie.Type == "expert")
         {
             foreach (Joueur j in Partie.Joueurs)
@@ -119,16 +110,15 @@ public class PresPersos : MonoBehaviour
             }
         }
         else
-        {
             presentateur = GetNextPres(Partie.JoueurCourant);
-            InitTourAttenteList();
-            for (int i = 0; i < listtourattente.Length; i++)
-                Debug.Log("Joueur " + (i + 1) + " : temps d'attente > " + listtourattente[i]);
-            MyNetworkMessage msg = new MyNetworkMessage();
-            msg.tableau = listtourattente;
-            msg.text = textbutton;
-            NetworkServer.SendToAll(presentateurID, msg);
-        }
+
+        InitTourAttenteList();
+        for (int i = 0; i < listtourattente.Length; i++)
+            Debug.Log("Joueur " + (i + 1) + " : temps d'attente > " + listtourattente[i]);
+        MyNetworkMessage msg = new MyNetworkMessage();
+        msg.tableau = listtourattente;
+        msg.text = textbutton;
+        NetworkServer.SendToAll(presentateurID, msg);
     }
 	
     void Update()
@@ -201,6 +191,17 @@ public class PresPersos : MonoBehaviour
     private void OnReceivedJoueurFinished(NetworkMessage netMsg)
     {
         presentateur = GetNextPres(presentateur);
+        foreach (Joueur j in Partie.Joueurs)
+        {
+            if (presentateur == j.Numero)
+            {
+                pres = j;
+            }
+            if (GetNextPres(presentateur) == j.Numero)
+            {
+                next = j;
+            }
+        }
         for (int k = 0; k < listtourattente.Length; k++)
         {
             listtourattente[k]--;
@@ -235,12 +236,39 @@ public class PresPersos : MonoBehaviour
 
     private void InitTourAttenteList()
     {
-        int compteur = Partie.Joueurs.Count - 2;
-        listtourattente[Partie.JoueurCourant - 1] = -1;
-        for (int k = Partie.JoueurCourant; k < listtourattente.Length + Partie.JoueurCourant - 1; k++)
+        if (Partie.Type == "expert")
         {
-            listtourattente[k % listtourattente.Length] = compteur;
-            compteur--;
+            int compteur = Partie.Joueurs.Count - 3;
+            int pub = -1;
+            int priv = -1;
+            foreach (Joueur j in Partie.Joueurs)
+            {
+                if (j.IsPublic)
+                {
+                    listtourattente[j.Numero - 1] = -1;
+                    pub = j.Numero;
+                }
+                else if (j.IsPrive)
+                {
+                    listtourattente[j.Numero - 1] = -1;
+                    priv = j.Numero;
+                }
+            }
+            for (int k = priv; k < listtourattente.Length + pub - 1; k++)
+            {
+                listtourattente[k % listtourattente.Length] = compteur;
+                compteur--;
+            }
+        }
+        else
+        {
+            int compteur = Partie.Joueurs.Count - 2;
+            listtourattente[Partie.JoueurCourant - 1] = -1;
+            for (int k = Partie.JoueurCourant; k < listtourattente.Length + Partie.JoueurCourant - 1; k++)
+            {
+                listtourattente[k % listtourattente.Length] = compteur;
+                compteur--;
+            }
         }
     }
 
