@@ -16,7 +16,7 @@ public class PlayerInfo : MonoBehaviour
     public Text etab;
 
     public GameObject joueur_infos;
-    public GameObject joueur_choixcartes;
+    public GameObject joueur_choix_cartes;
 
     #endregion
 
@@ -65,7 +65,7 @@ public class PlayerInfo : MonoBehaviour
 
         JoueurStatic.Client.Send(playerInfoId, infos);
         joueur_infos.SetActive(false);
-        joueur_choixcartes.SetActive(true);
+        joueur_choix_cartes.SetActive(true);
 
 }
 	#endregion

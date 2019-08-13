@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036c4d4f6e51d3848be62fa608000af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas_choix_cartes: {fileID: 0}
+  canvas_infos_joueurs: {fileID: 0}
   canvas_position_joueurs: {fileID: 7193206705955183922}
   buttons:
   - {fileID: 7193206706697445566}

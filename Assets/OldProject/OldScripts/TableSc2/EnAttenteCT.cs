@@ -33,7 +33,7 @@ public class EnAttenteCT : MonoBehaviour
         if (Partie.Langue == "FR")
             this.transform.GetChild(1).GetComponent<Text>().text = "Choisissez vos cartes !";
         else
-            this.transform.GetChild(1).GetComponent<Text>().text = "Chose your cards !";
+            this.transform.GetChild(1).GetComponent<Text>().text = "Choose your cards !";
 
         foreach (Joueur j in Partie.Joueurs)
         {

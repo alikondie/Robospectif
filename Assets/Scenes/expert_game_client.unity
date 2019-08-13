@@ -6044,6 +6044,11 @@ PrefabInstance:
       propertyPath: joueur_choixcartes
       value: 
       objectReference: {fileID: 160886055}
+    - target: {fileID: 6819165816276053380, guid: 824e3373bf7813b418ae59753c40a1bb,
+        type: 3}
+      propertyPath: joueur_choix_cartes
+      value: 
+      objectReference: {fileID: 160886055}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 824e3373bf7813b418ae59753c40a1bb, type: 3}
 --- !u!1 &1408093142 stripped
@@ -8756,6 +8761,11 @@ PrefabInstance:
     - target: {fileID: 7193206705955183921, guid: 529d8d73016909243977708c2afec217,
         type: 3}
       propertyPath: canvas_choix_cartes
+      value: 
+      objectReference: {fileID: 1408093142}
+    - target: {fileID: 7193206705955183921, guid: 529d8d73016909243977708c2afec217,
+        type: 3}
+      propertyPath: canvas_infos_joueurs
       value: 
       objectReference: {fileID: 1408093142}
     m_RemovedComponents: []

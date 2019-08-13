@@ -1333,7 +1333,7 @@ MonoBehaviour:
   spec: {fileID: 6819165816230671863}
   etab: {fileID: 6819165815729422681}
   joueur_infos: {fileID: 6819165816276053379}
-  joueur_choixcartes: {fileID: 0}
+  joueur_choix_cartes: {fileID: 0}
 --- !u!1 &6819165816451405249
 GameObject:
   m_ObjectHideFlags: 0

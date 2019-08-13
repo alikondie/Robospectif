@@ -7,7 +7,7 @@ using System;
 
 public class Init : MonoBehaviour
 {
-    [SerializeField] GameObject canvas_choix_cartes;
+    [SerializeField] GameObject canvas_infos_joueurs;
     [SerializeField] GameObject canvas_position_joueurs;
     short messageID = 1000;
     short positionsID = 1005;
@@ -44,7 +44,7 @@ public class Init : MonoBehaviour
         message.message = JoueurStatic.Numero;
         JoueurStatic.Client.Send(messageID, message);
         canvas_position_joueurs.SetActive(false);
-        canvas_choix_cartes.SetActive(true);
+        canvas_infos_joueurs.SetActive(true);
     }
 
     // un autre joueur a sélectionné l'un des boutons
