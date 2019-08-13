@@ -15,6 +15,7 @@ public class FinTour : MonoBehaviour
     [SerializeField] Button fin;
 
     short nextID = 1015;
+    short nextexpertID = 1024;
 
     // Start is called before the first frame update
     void Start()
@@ -43,20 +44,38 @@ public class FinTour : MonoBehaviour
     private void ProchainClicked()
     {
         MyStringMessage next = new MyStringMessage();
-        next.s = "next";
-        NetworkServer.SendToAll(nextID, next);
-        canvas_fin_tour.SetActive(false);
-        canvas_plateau_vehicule.SetActive(true);
-        //SceneManager.LoadScene("Scene_4");
+        if (Partie.Type == "expert")
+        {
+            next.s = "next";
+            NetworkServer.SendToAll(nextexpertID, next);
+            canvas_fin_tour.SetActive(false);
+            canvas_plateau_vehicule.SetActive(true);
+        }
+        else
+        {
+            next.s = "next";
+            NetworkServer.SendToAll(nextID, next);
+            canvas_fin_tour.SetActive(false);
+            canvas_plateau_vehicule.SetActive(true);
+        }
     }
 
     private void FinClicked()
     {
         MyStringMessage end = new MyStringMessage();
-        end.s = "end";
-        NetworkServer.SendToAll(nextID, end);
-        canvas_fin_tour.SetActive(false);
-        canvas_fin.SetActive(true);
-        //SceneManager.LoadScene("SceneFin");
+        if (Partie.Type == " expert")
+        {
+            end.s = "end";
+            NetworkServer.SendToAll(nextexpertID, end);
+            canvas_fin_tour.SetActive(false);
+            canvas_fin.SetActive(true);
+        }
+        else
+        {
+            end.s = "end";
+            NetworkServer.SendToAll(nextID, end);
+            canvas_fin_tour.SetActive(false);
+            canvas_fin.SetActive(true);
+        }
     }
 }
