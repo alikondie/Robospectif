@@ -9583,7 +9583,17 @@ MonoBehaviour:
   dimensioncard: []
   locomotioncard:
   - {fileID: 2054416168}
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!1 &712707907
 GameObject:
@@ -14152,7 +14162,17 @@ MonoBehaviour:
   - {fileID: 1277198270}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!224 &1089718911
 RectTransform:
@@ -17750,7 +17770,17 @@ MonoBehaviour:
   - {fileID: 1089718906}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!1 &1280205664
 GameObject:
@@ -18697,7 +18727,17 @@ MonoBehaviour:
   - {fileID: 1277198270}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!224 &1309020858
 RectTransform:
@@ -20345,7 +20385,17 @@ MonoBehaviour:
   - {fileID: 1277198270}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!224 &1415600835
 RectTransform:
@@ -20492,7 +20542,17 @@ MonoBehaviour:
   - {fileID: 1277198270}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!1 &1421284679
 GameObject:
@@ -26268,7 +26328,17 @@ MonoBehaviour:
   - {fileID: 1277198270}
   dimensioncard: []
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!224 &1874640780
 RectTransform:
@@ -29177,7 +29247,17 @@ MonoBehaviour:
   dimensioncard:
   - {fileID: 1719285545}
   locomotioncard: []
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!1 &2054416168
 GameObject:
@@ -29299,7 +29379,17 @@ MonoBehaviour:
   dimensioncard: []
   locomotioncard:
   - {fileID: 696730352}
-  cartes: []
+  cartes:
+  - {fileID: 1719285545}
+  - {fileID: 1874640775}
+  - {fileID: 1309020853}
+  - {fileID: 1418963129}
+  - {fileID: 696730352}
+  - {fileID: 2051554841}
+  - {fileID: 2054416168}
+  - {fileID: 1415600830}
+  - {fileID: 1089718906}
+  - {fileID: 1277198270}
   pres_terminee: {fileID: 156932954}
 --- !u!1 &2056933761
 GameObject:

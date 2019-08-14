@@ -161,6 +161,7 @@ public class Mouvement_carte_expert : MonoBehaviour
             {
                 was_in_target = true;
                 Tour.NbCartesPosees++;
+                Debug.Log("incremente");
                 ChangeStateInListIsPosed(true);
                 
             }
@@ -278,8 +279,12 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     private void ChangeStateInListIsPosed(bool tof)
     {
+        Debug.Log(cartes.Length);
         for(int k =0; k < cartes.Length; k++)
         {
+            Debug.Log("go name = " + gameObject.name);
+            Debug.Log("cartes[" + k + "] = " + cartes[k].name);
+            Debug.Log("should be " + tof);
             if(gameObject.name == cartes[k].name)
             {
                 Tour.Listiscartesposees[k] = tof;
