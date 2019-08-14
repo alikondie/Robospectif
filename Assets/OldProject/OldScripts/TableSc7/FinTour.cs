@@ -10,6 +10,7 @@ public class FinTour : MonoBehaviour
     [SerializeField] GameObject canvas_fin_tour;
     [SerializeField] GameObject canvas_plateau_vehicule;
     [SerializeField] GameObject canvas_fin;
+    [SerializeField] GameObject cartes;
 
     [SerializeField] Button prochain;
     [SerializeField] Button fin;
@@ -43,6 +44,14 @@ public class FinTour : MonoBehaviour
 
     private void ProchainClicked()
     {
+        for (int k = 0; k < Tour.Listiscartesposees.Length; k++)
+        {
+            Tour.Listiscartesposees[k] = false;
+        }
+        for (int k = 0; k < 10; k++)
+        {
+            cartes.transform.GetChild(k).gameObject.SetActive(true);
+        }
         MyStringMessage next = new MyStringMessage();
         if (Partie.Type == "expert")
         {

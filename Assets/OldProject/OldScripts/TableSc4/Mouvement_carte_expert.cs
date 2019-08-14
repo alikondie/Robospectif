@@ -14,6 +14,7 @@ public class Mouvement_carte_expert : MonoBehaviour
     [SerializeField] GameObject[] equipmentcards;
     [SerializeField] GameObject[] dimensioncard;
     [SerializeField] GameObject[] locomotioncard;
+    [SerializeField] GameObject[] cartes;
     [SerializeField] GameObject pres_terminee;
     private GameObject currenttarget;
     private int checkifintarget;
@@ -59,7 +60,6 @@ public class Mouvement_carte_expert : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log(Tour.NbCartesPosees);
         ismouseintarget = IsTheMousInTargetCollider();
         if (targettable.Length >= 3)
         {
@@ -78,6 +78,7 @@ public class Mouvement_carte_expert : MonoBehaviour
             if(was_in_target && targettable.Length < 3)
             {
                 Tour.NbCartesPosees--;
+                ChangeStateInListIsPosed(false);
                 was_in_target = false;
             }
         }
@@ -104,6 +105,8 @@ public class Mouvement_carte_expert : MonoBehaviour
             if (!was_in_target)
             {
                 Tour.NbCartesPosees++;
+                ChangeStateInListIsPosed(true);
+
                 was_in_target = true;
             }
             gameObject.transform.position = currenttarget.transform.position;
@@ -158,6 +161,8 @@ public class Mouvement_carte_expert : MonoBehaviour
             {
                 was_in_target = true;
                 Tour.NbCartesPosees++;
+                ChangeStateInListIsPosed(true);
+                
             }
             RelocateCardsWhencardincoming(cardstack);
             AssignEquipmentsTypes(currenttarget, allCardStack,true);
@@ -165,6 +170,7 @@ public class Mouvement_carte_expert : MonoBehaviour
         else
         {
             was_in_target = false;
+            ChangeStateInListIsPosed(false);
             Tour.NbCartesPosees--;
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
@@ -269,6 +275,18 @@ public class Mouvement_carte_expert : MonoBehaviour
         }
         return nb_equipmentsposees >= 3;
     }
+
+    private void ChangeStateInListIsPosed(bool tof)
+    {
+        for(int k =0; k < cartes.Length; k++)
+        {
+            if(gameObject.name == cartes[k].name)
+            {
+                Tour.Listiscartesposees[k] = tof;
+            }
+        }
+    }
+
 
     #region data
     private void AssignEquipmentsTypes(GameObject target, List<GameObject> equipments,bool isIncoming)

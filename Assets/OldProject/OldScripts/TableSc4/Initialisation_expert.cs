@@ -63,6 +63,7 @@ public class Initialisation_expert : MonoBehaviour
         if(start)
         {
             start = false;
+            
             position_init_conduite = conduite.transform.position;
             position_init_dimension = PositionInitiale(dimension);
             position_init_locomotion = PositionInitiale(locomotion);
@@ -150,7 +151,10 @@ public class Initialisation_expert : MonoBehaviour
         #endregion
         if (Partie.Type == "expert")
         {
-            Debug.Log(Partie.Joueurs.Count);
+            for(int k = 0; k < 10; k++)
+            {
+                cartes.transform.GetChild(k).gameObject.SetActive(Tour.Listiscartesposees[k]);
+            }
             foreach (Joueur j in Partie.Joueurs)
             {
                 if (!j.IsPrive && !j.IsPublic)
