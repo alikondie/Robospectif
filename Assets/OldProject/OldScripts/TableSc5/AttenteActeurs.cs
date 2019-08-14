@@ -13,7 +13,7 @@ public class AttenteActeurs : MonoBehaviour
     [SerializeField] Text central;
     [SerializeField] Image decideur;
 
-    short debatID = 1006;
+    short debatclientID = 1021;
 
     // Start is called before the first frame update
     void Start()
