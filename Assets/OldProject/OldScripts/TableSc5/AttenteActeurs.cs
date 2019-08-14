@@ -18,7 +18,7 @@ public class AttenteActeurs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        JoueurStatic.Client.RegisterHandler(debatID, OnActeurSelected);
+        JoueurStatic.Client.RegisterHandler(debatclientID, OnActeurSelected);
     }
 
     // Update is called once per frame

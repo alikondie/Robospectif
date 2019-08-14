@@ -52,6 +52,12 @@ public class Initialisation_expert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Tour.Listiscartesposees = new bool[cartes.transform.childCount];
+
+        for (int k = 0; k < Tour.Listiscartesposees.Length; k++)
+        {
+            Tour.Listiscartesposees[k] = false;
+        }
         button.onClick.AddListener(() => ButtonClicked());
         /*SansHUD.data.AppendLine("Tour no° " + Partie.Tour);
         SansHUD.data.AppendLine("Joueur;Dimension;Loco;Conduite;Equi1;Equi2;Equi3");*/
@@ -59,6 +65,7 @@ public class Initialisation_expert : MonoBehaviour
 
     void OnEnable()
     {
+
         Tour.NbCartesPosees = 0;
         if(start)
         {
@@ -210,7 +217,6 @@ public class Initialisation_expert : MonoBehaviour
         msg.acteur2 = j.Acteurs[1].name;
         msg.acteur3 = j.Acteurs[2].name;
         NetworkServer.SendToAll(conceptionID, msg);
-        Debug.Log("message envoye pour " + j.Numero);
     }
 
     #region random

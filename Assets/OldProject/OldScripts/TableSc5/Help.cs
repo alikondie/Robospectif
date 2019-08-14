@@ -60,11 +60,10 @@ public class Help : MonoBehaviour
         else
         {
             if (Partie.Type == "expert")
-                debat = "Investors decide wether to";
-               /* debat = "Les investisseurs décident ou non de financer un projet. Pour être validé, un projet doit recevoir 3 jetons verts.\n" +
-                    "L'investisseur prive commence. Lorsqu'il a fini d'attribuer ses jetons, il décide de laisser la main à l'investisseur public.\n" +
-                    "L'investisseur public peut à son tour financer des projets grâce à ses jetons verts, mais peut également poser un véto sur un projet\n" +
-                    "déjà financé en lui attribuant un jeton rouge.";*/
+                debat = "Investors decide wether they want to fund a project or not. To be valid, a project must receive 3 green tokens.\n" +
+                    "The private investor starts first. When they're done assigning their tokens, they hand over to the public investor.\n" +
+                    "The public investor can then fund projects by giving green tokens, but they also can deny a project that's already valid\n" +
+                    "by assigning it a red token.";
             else
                 debat = "You can discuss the proposed uses for this autonomous vehicle. To do so, you can click on the tokens on\n" +
                 "your personal space. It will then appear on the digital table in front of you. You can then assign it to another\n" +

@@ -81,6 +81,12 @@ public class recapitulatif : MonoBehaviour
             {
                 if (j.Numero == newPriv)
                     j.IsPrive = true;
+
+                if ((j.Acteurs != null) && (j.Acteurs[0] != null))
+                {
+                    for (int i = 0; i < j.Acteurs.Length; i++)
+                        Main.Global.TabA.addImage(new Main.Image(Main.Global.TabA.Taille, j.Acteurs[i]));
+                }
             }
             canvas_fin_tour.SetActive(true);
         }
