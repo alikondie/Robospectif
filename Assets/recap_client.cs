@@ -34,7 +34,8 @@ public class recap_client : MonoBehaviour
 
     private void OnNextPresReceived(NetworkMessage netMsg)
     {
-        if (netMsg.Equals("next"))
+        string msg = netMsg.ReadMessage<MyStringMessage>().s;
+        if (msg.Equals("next"))
         {
             canvas_vainqueur.SetActive(false);
             canvas_choix_cartes.SetActive(true);
