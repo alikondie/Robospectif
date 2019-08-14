@@ -13,8 +13,7 @@ public class Investissement : MonoBehaviour
     [SerializeField] GameObject rouges;
     [SerializeField] Image decideur;
     [SerializeField] GameObject canvas_jetons;
-    [SerializeField] GameObject canvas_choix_cartes;
-    [SerializeField] GameObject canvas_fin;
+    [SerializeField] GameObject canvas_recap;
 
     short publicID = 1016;
     short RetourID = 1022;
@@ -87,17 +86,8 @@ public class Investissement : MonoBehaviour
 
     private void OnWaitReceived(NetworkMessage netMsg)
     {
-        string msg = netMsg.ReadMessage<MyStringMessage>().s;
-        if (msg.Equals("next"))
-        {
             canvas_jetons.SetActive(false);
-            canvas_choix_cartes.SetActive(true);
-        }
-        else
-        {
-            canvas_jetons.SetActive(false);
-            canvas_fin.SetActive(true);
-        }
+            canvas_recap.SetActive(true);
     }
 
     private void OnRetourReceived(NetworkMessage netMsg)

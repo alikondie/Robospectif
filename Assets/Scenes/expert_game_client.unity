@@ -5224,8 +5224,7 @@ MonoBehaviour:
   rouges: {fileID: 1743193576}
   decideur: {fileID: 1493559065}
   canvas_jetons: {fileID: 1365945322}
-  canvas_choix_cartes: {fileID: 160886055}
-  canvas_fin: {fileID: 450419836}
+  canvas_recap: {fileID: 823076305}
 --- !u!114 &1365945324
 MonoBehaviour:
   m_ObjectHideFlags: 0
