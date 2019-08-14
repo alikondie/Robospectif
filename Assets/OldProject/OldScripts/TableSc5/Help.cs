@@ -41,9 +41,15 @@ public class Help : MonoBehaviour
       //  text.GetComponent<RectTransform>().sizeDelta = horizontal;
         if (Partie.Langue == "FR")
         {
-            debat = "Vous pouvez débattre des usages proposés pour ce véhicule autonome. Pour cela, vous pouvez cliquer sur les jetons\n" +
-                "présents sur votre espace personnel. Il apparaîtra devant vous sur la table numérique. Vous pouvez ensuite\n" +
-                "l'attribuer à un autre joueur en le glissant sur sa carte, tout en présentant votre argument en même temps.";
+            if (Partie.Type == "expert")
+                debat = "Les investisseurs décident ou non de financer un projet. Pour être validé, un projet doit recevoir 3 jetons verts.\n" +
+                    "L'investisseur prive commence. Lorsqu'il a fini d'attribuer ses jetons, il décide de laisser la main à l'investisseur public.\n" +
+                    "L'investisseur public peut à son tour financer des projets grâce à ses jetons verts, mais peut également poser un véto sur un projet\n" +
+                    "déjà financé en lui attribuant un jeton rouge.";
+            else
+                debat = "Vous pouvez débattre des usages proposés pour ce véhicule autonome. Pour cela, vous pouvez cliquer sur les jetons\n" +
+                    "présents sur votre espace personnel. Il apparaîtra devant vous sur la table numérique. Vous pouvez ensuite\n" +
+                    "l'attribuer à un autre joueur en le glissant sur sa carte, tout en présentant votre argument en même temps.";
 
             vainqueur = "Le concepteur du véhicule autonome choisit maintenant l'usage qu'il a trouvé le plus convaincant.\n" +
                 "Il faut pour cela cliquer sur la carte du personnage associé à cet usage, puis de cliquer sur le bouton \"valider\"\n" +
@@ -53,7 +59,14 @@ public class Help : MonoBehaviour
         }
         else
         {
-            debat = "You can discuss the proposed uses for this autonomous vehicle. To do so, you can click on the tokens on\n" +
+            if (Partie.Type == "expert")
+                debat = "Investors decide wether to";
+               /* debat = "Les investisseurs décident ou non de financer un projet. Pour être validé, un projet doit recevoir 3 jetons verts.\n" +
+                    "L'investisseur prive commence. Lorsqu'il a fini d'attribuer ses jetons, il décide de laisser la main à l'investisseur public.\n" +
+                    "L'investisseur public peut à son tour financer des projets grâce à ses jetons verts, mais peut également poser un véto sur un projet\n" +
+                    "déjà financé en lui attribuant un jeton rouge.";*/
+            else
+                debat = "You can discuss the proposed uses for this autonomous vehicle. To do so, you can click on the tokens on\n" +
                 "your personal space. It will then appear on the digital table in front of you. You can then assign it to another\n" +
                 "player by making it slide onto their card, while you present your argument";
 
