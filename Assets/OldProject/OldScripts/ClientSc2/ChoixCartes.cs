@@ -70,10 +70,12 @@ public class ChoixCartes : MonoBehaviour
 
             canvas_choix_cartes.SetActive(false);
 
-            if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
-                canvas_attente_acteur.SetActive(true);
-            else
-                canvas_choix_acteur.SetActive(true);
+            canvas_choix_acteur.SetActive(true);
+        }
+        if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
+        {
+            canvas_choix_cartes.SetActive(false);
+            canvas_attente_acteur.SetActive(true);
         }
     }
 
