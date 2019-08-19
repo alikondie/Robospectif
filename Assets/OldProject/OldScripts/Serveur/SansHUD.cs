@@ -288,7 +288,7 @@ public class SansHUD : NetworkManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
 
-        StopClient();
+        //StopClient();
 
         if (conn.lastError != NetworkError.Ok)
 
