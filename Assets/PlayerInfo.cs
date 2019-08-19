@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -28,13 +29,15 @@ public class PlayerInfo : MonoBehaviour
 
     #region Variables
     short playerInfoId = 1050;
-    
-	#endregion
+    short startID = 1025;
+    string type;
+    #endregion
 
-	#region Unity loop
+    #region Unity loop
     void Awake()
     {
         //data.AppendLine("id;Nom;Prenom;Sex;Age;Specialite;Etablissement;Remarques");
+        JoueurStatic.Client.RegisterHandler(startID, OnStartReceived);
 
     }
 
@@ -64,9 +67,21 @@ public class PlayerInfo : MonoBehaviour
 
 
         JoueurStatic.Client.Send(playerInfoId, infos);
-        joueur_infos.SetActive(false);
-        joueur_choix_cartes.SetActive(true);
+        if (type == "expert")
+        {
+            SceneManager.LoadScene("expert_game_client");
+        }
+        else
+        {
+            joueur_infos.SetActive(false);
+            joueur_choix_cartes.SetActive(true);
+        }
 
-}
-	#endregion
+    }
+
+    private void OnStartReceived(NetworkMessage netMsg)
+    {
+        string type = netMsg.ReadMessage<MyStringMessage>().s;
+    }
+    #endregion
 }
