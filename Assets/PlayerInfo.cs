@@ -36,8 +36,6 @@ public class PlayerInfo : MonoBehaviour
     void Awake()
     {
         //data.AppendLine("id;Nom;Prenom;Sex;Age;Specialite;Etablissement;Remarques");
-        JoueurStatic.Client.RegisterHandler(startID, OnStartReceived);
-
     }
 
     void FixedUpdate()
@@ -76,11 +74,6 @@ public class PlayerInfo : MonoBehaviour
             joueur_choix_cartes.SetActive(true);
         }
     }
-
-    private void OnStartReceived(NetworkMessage netMsg)
-    {
-        string 
-            = netMsg.ReadMessage<MyStringMessage>().s;
-    }
+    
     #endregion
 }
