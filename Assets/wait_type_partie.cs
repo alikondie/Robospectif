@@ -25,9 +25,11 @@ public class wait_type_partie : MonoBehaviour
     private void OnStartReceived(NetworkMessage netMsg)
     {
         string msg = netMsg.ReadMessage<MyStringMessage>().s;
-
+        Debug.Log("received!");
         if (msg == "expert")
         {
+            Debug.Log("expert!");
+
             SceneManager.LoadScene("expert_game_client");
         }
         else
