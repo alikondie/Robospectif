@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class wait_type_partie : MonoBehaviour
 {
-
+    [SerializeField] GameObject canvas_standard_next;
+    [SerializeField] GameObject canvas_current;
     short startID = 1025;
 
     // Start is called before the first frame update
@@ -31,7 +32,8 @@ public class wait_type_partie : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("standard_game_client");
+            canvas_current.SetActive(false);
+            canvas_standard_next.SetActive(true);
         }
     }
 }
