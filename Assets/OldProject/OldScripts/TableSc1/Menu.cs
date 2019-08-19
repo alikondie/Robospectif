@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class Menu : MonoBehaviour
 
     [SerializeField] Button france;
     [SerializeField] Button english;
+    short startID = 1025;
 
 
     // Start is called before the first frame update
@@ -54,6 +56,7 @@ public class Menu : MonoBehaviour
     private void StandardClicked()
     {
         Partie.Type = "standard";
+        sendtypetoclient();
         SceneManager.LoadScene("standard_game_server");
     }
 
@@ -66,6 +69,14 @@ public class Menu : MonoBehaviour
     private void ExpertClicked()
     {
         Partie.Type = "expert";
+        sendtypetoclient();
         SceneManager.LoadScene("expert_game_server");
+    }
+
+    private void sendtypetoclient()
+    {
+        MyStringMessage startMsg = new MyStringMessage();
+        startMsg.s = Partie.Type;
+        NetworkServer.SendToAll(startID, startMsg);
     }
 }
