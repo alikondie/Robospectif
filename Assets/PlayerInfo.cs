@@ -30,7 +30,6 @@ public class PlayerInfo : MonoBehaviour
     #region Variables
     short playerInfoId = 1050;
     short startID = 1025;
-    string type;
     #endregion
 
     #region Unity loop
@@ -67,7 +66,7 @@ public class PlayerInfo : MonoBehaviour
 
 
         JoueurStatic.Client.Send(playerInfoId, infos);
-        if (type == "expert")
+        if (JoueurStatic.Type == "expert")
         {
             SceneManager.LoadScene("expert_game_client");
         }
@@ -76,12 +75,12 @@ public class PlayerInfo : MonoBehaviour
             joueur_infos.SetActive(false);
             joueur_choix_cartes.SetActive(true);
         }
-
     }
 
     private void OnStartReceived(NetworkMessage netMsg)
     {
-        string type = netMsg.ReadMessage<MyStringMessage>().s;
+        string 
+            = netMsg.ReadMessage<MyStringMessage>().s;
     }
     #endregion
 }
