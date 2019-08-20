@@ -10303,6 +10303,13 @@ MonoBehaviour:
   - {fileID: 2045262882}
   - {fileID: 693610391}
   - {fileID: 1263524333}
+  joueursrecap:
+  - {fileID: 1233604856}
+  - {fileID: 1667821987}
+  - {fileID: 804721895}
+  - {fileID: 943912970}
+  - {fileID: 1031373305}
+  - {fileID: 1778924116}
   bouton_retour: {fileID: 1283769046}
   button: {fileID: 1203330867}
 --- !u!114 &746853053

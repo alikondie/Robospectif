@@ -50,13 +50,14 @@ public class recapitulatif : MonoBehaviour
         Debug.Log("jetons verts : " + Partie.NbJetonsVert);
         Debug.Log("jetons rouges : " + Partie.NbJetonsRouge);
 
-        for(int k = 0; k < joueurs.Length; k++)
+        for (int k = 0; k < joueurs.Length; k++)
         {
             for (int j = 0; j < 8; j++)
             {
                 joueurs[k].transform.GetChild(1).transform.GetChild(j).gameObject.SetActive(false);
                 joueursdebat[k].transform.GetChild(2).transform.GetChild(j).gameObject.SetActive(false);
             }
+        }
 
         canvas_choix_vainqueur.SetActive(false);
         if (Partie.Joueurs.Count < 6 && Partie.NbJetonsVert < 8  || Partie.Joueurs.Count == 6 && Partie.NbJetonsVert < 9)
