@@ -11,6 +11,8 @@ public class AttenteLogo : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log(Ip_serveur);
+
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4);
         if (ipv4 == Ip_serveur)
         {
@@ -18,7 +20,7 @@ public class AttenteLogo : StateMachineBehaviour
         }
         else
         {
-            SceneManager.LoadScene("menu_client");
+            SceneManager.LoadScene("standard_game_client");
         }
     }
 }
