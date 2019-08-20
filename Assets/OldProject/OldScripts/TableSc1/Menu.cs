@@ -56,9 +56,7 @@ public class Menu : MonoBehaviour
     private void StandardClicked()
     {
         Partie.Type = "standard";
-        MyStringMessage startMsg = new MyStringMessage();
-        startMsg.s = Partie.Type;
-        NetworkServer.SendToAll(startID, startMsg);
+        sendtypetoclient();
         SceneManager.LoadScene("standard_game_server");
     }
 
@@ -71,9 +69,14 @@ public class Menu : MonoBehaviour
     private void ExpertClicked()
     {
         Partie.Type = "expert";
+        sendtypetoclient();
+        SceneManager.LoadScene("expert_game_server");
+    }
+
+    private void sendtypetoclient()
+    {
         MyStringMessage startMsg = new MyStringMessage();
         startMsg.s = Partie.Type;
         NetworkServer.SendToAll(startID, startMsg);
-        SceneManager.LoadScene("expert_game_server");
     }
 }
