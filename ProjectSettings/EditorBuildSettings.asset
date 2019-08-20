@@ -17,7 +17,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/standard_game_server.unity
     guid: 65e4fb0493dfbaa4caee60b043c03bfd
-  - enabled: 0
-    path: Assets/Scenes/menu_client.unity
-    guid: 044ccf67d0af1f143916cb5f9cb0b03e
   m_configObjects: {}
