@@ -19,12 +19,14 @@ public class AttenteFin : MonoBehaviour
 
     short nextID = 1015;
     short retourID = 1023;
+    short suiteID = 1026;
 
     // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(nextID, onWaitReceived);
         JoueurStatic.Client.RegisterHandler(retourID, onRetourReceived);
+        JoueurStatic.Client.RegisterHandler(suiteID, onSuiteReceived);
     }
 
     private void onWaitReceived(NetworkMessage netMsg)
@@ -69,5 +71,17 @@ public class AttenteFin : MonoBehaviour
     {
         canvas_vainqueur.SetActive(false);
         canvas_choix_jetons.SetActive(true);
+    }
+
+    private void onSuiteReceived(NetworkMessage netMsg)
+    {
+        if (JoueurStatic.Langue == "FR")
+        {
+            central.text = "Fin du tour";
+        }
+        else
+        {
+            central.text = "End of turn";
+        }
     }
 }

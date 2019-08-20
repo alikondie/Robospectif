@@ -17,6 +17,7 @@ public class FinTour : MonoBehaviour
 
     short nextID = 1015;
     short nextexpertID = 1024;
+    short suiteID = 1026;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +43,14 @@ public class FinTour : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        MyStringMessage suiteMsg = new MyStringMessage();
+        NetworkServer.SendToAll(suiteID, suiteMsg);
+    }
+
     private void ProchainClicked()
     {
-        for (int k = 0; k < Tour.Listiscartesposees.Length; k++)
-        {
-            Tour.Listiscartesposees[k] = false;
-        }
         for (int k = 0; k < 10; k++)
         {
             cartes.transform.GetChild(k).gameObject.SetActive(true);
@@ -55,6 +58,10 @@ public class FinTour : MonoBehaviour
         MyStringMessage next = new MyStringMessage();
         if (Partie.Type == "expert")
         {
+            for (int k = 0; k < Tour.Listiscartesposees.Length; k++)
+            {
+                Tour.Listiscartesposees[k] = false;
+            }
             next.s = "next";
             NetworkServer.SendToAll(nextexpertID, next);
             canvas_fin_tour.SetActive(false);
