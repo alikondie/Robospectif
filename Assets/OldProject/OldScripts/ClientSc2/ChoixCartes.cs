@@ -16,15 +16,14 @@ public class ChoixCartes : MonoBehaviour
     [SerializeField] Text attente;
     [SerializeField] GameObject decideur;
 
-    private bool start = true;
-
     short decideurID = 1014;
     short conceptionID = 1002;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        JoueurStatic.Client.RegisterHandler(decideurID, OnDecideurReceived);
+        JoueurStatic.Client.RegisterHandler(conceptionID, OnConceptionReceived);
     }
 
     // Update is called once per frame
@@ -35,12 +34,6 @@ public class ChoixCartes : MonoBehaviour
 
     private void OnEnable()
     {
-        if(start)
-        {
-            start = false;
-            JoueurStatic.Client.RegisterHandler(decideurID, OnDecideurReceived);
-            JoueurStatic.Client.RegisterHandler(conceptionID, OnConceptionReceived);
-        }
         choix.gameObject.SetActive(false);
         attente.gameObject.SetActive(false);
         decideur.gameObject.SetActive(false);
