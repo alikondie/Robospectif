@@ -87,7 +87,7 @@ public class Button_ready_next_scene : MonoBehaviour
         PlayerPrefs.SetInt("nbJoueur", nb);    //Envoie le nombre de Joueur
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         // ----- PARTIE NATHAN -----
         // Envoi des positions
@@ -163,7 +163,7 @@ public class Button_ready_next_scene : MonoBehaviour
 
         // --------------------------
 
-        // Debug.Log("Click");
+         Debug.Log("Click");
         //SceneManager.LoadScene("Scene_2");
         canvas_mains.SetActive(false);
         canvas_joueurs.SetActive(true);

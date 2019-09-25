@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4172,6 +4172,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1055644368}
+    - target: {fileID: 7896333964540409641, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMouseDown
       objectReference: {fileID: 0}
     - target: {fileID: 7896333964649525599, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -4370,6 +4375,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1055644368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7896333964540409640, guid: 06034251815215a45835f9e607861cb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1055644354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb4484ebcce4b4389d673c157f89f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1067049203
 GameObject:
   m_ObjectHideFlags: 0

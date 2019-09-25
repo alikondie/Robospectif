@@ -3182,26 +3182,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000015258789
       objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 186
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7896333962775384483, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_Color.r
@@ -3339,7 +3319,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1927218929}
+      objectReference: {fileID: 178269501}
+    - target: {fileID: 7896333964540409641, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMouseDown
+      objectReference: {fileID: 0}
     - target: {fileID: 7896333964649525599, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_Sprite
@@ -3386,6 +3371,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 7896333964654145764}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 186
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06034251815215a45835f9e607861cb2, type: 3}
 --- !u!1 &178269499 stripped
@@ -3620,6 +3625,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3c0b2c3a7c4b581448132d6ff96a845f, type: 3}
   - {fileID: 21300000, guid: 6470334925619a4439f64f6bef920a1b, type: 3}
   - {fileID: 21300000, guid: 523339b911336f94f935ac3df8d25268, type: 3}
+--- !u!114 &178269501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7896333964540409640, guid: 06034251815215a45835f9e607861cb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 178269498}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb4484ebcce4b4389d673c157f89f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &181790944
 GameObject:
   m_ObjectHideFlags: 0
@@ -13083,7 +13100,7 @@ MonoBehaviour:
   m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 172.21.232.220
+  m_NetworkAddress: 192.168.1.45
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
@@ -13152,7 +13169,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   canvas_serveur: {fileID: 178269499}
-  canvas_client: {fileID: 0}
+  canvas_client: {fileID: 1806459679}
   manager: {fileID: 903383415}
 --- !u!114 &903383416
 MonoBehaviour:
@@ -17948,6 +17965,13 @@ MonoBehaviour:
   canvas_pres_vehicule: {fileID: 1891140711}
   central: {fileID: 659408277}
   baseSprite: {fileID: 21300000, guid: ef5beb048fad1164a81693281c7a1f32, type: 3}
+  debate:
+    Tour: 0
+    Personnage: 
+    JoueurDonnant: 0
+    JoueurRecevant: 0
+    Jeton: 
+    Argument: 
   button: {fileID: 678533884}
   help: {fileID: 1571714647}
   bouton_retour: {fileID: 916408747}
@@ -24774,7 +24798,6 @@ MonoBehaviour:
   - {fileID: 1854023512}
   - {fileID: 90595429}
   - {fileID: 1184035639}
-  button: {fileID: 0}
   text: {fileID: 1946910730}
 --- !u!114 &1753731208
 MonoBehaviour:
@@ -27804,19 +27827,13 @@ PrefabInstance:
       objectReference: {fileID: 1806459682}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08f5a020e2ebc004c81ecb907950293d, type: 3}
---- !u!1 &1927218929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9029799748890803036, guid: 08f5a020e2ebc004c81ecb907950293d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1927218928}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1927218930 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3438103368302519924, guid: 08f5a020e2ebc004c81ecb907950293d,
     type: 3}
   m_PrefabInstance: {fileID: 1927218928}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927218929}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34fd20af3d9eec2469afb4e9ea90db64, type: 3}
@@ -30725,6 +30742,7 @@ MonoBehaviour:
   canvas_fin_tour: {fileID: 2130956267}
   canvas_plateau_vehicule: {fileID: 1891140711}
   canvas_fin: {fileID: 1844340069}
+  cartes: {fileID: 0}
   prochain: {fileID: 1289447785}
   fin: {fileID: 1937281004}
 --- !u!114 &2130956269

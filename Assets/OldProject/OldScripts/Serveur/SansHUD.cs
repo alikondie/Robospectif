@@ -26,14 +26,21 @@ public class SansHUD : NetworkManager
     public static short clientID = 123;
     private bool conceptionTerminee;
     public static int premierFini;
-    private string Ip_serveur = "172.21.232.218";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
+    private string Ip_serveur = "192.168.1.24";  // IP Table 192.168.43.40    192.168.1.10  127.0.0.1
     public static string spriteString;
     // recolte de données main script
     public static Dictionary<int, PlayerInfoData> playerInfos;
-
-    void Start()
+    private void Awake()
     {
         
+        Ip_serveur = AdressManager.ipAdress;
+        //print(NetworkManager.singleton.networkAddress);
+        
+    }
+    void Start()
+    {
+        //Ip_serveur = AdressManager.ipAdress;
+        //NetworkManager.singleton.networkAddress = Ip_serveur;
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
         if(ipv4 == Ip_serveur) 

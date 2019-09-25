@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8328,6 +8328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_infos_joueurs
       objectReference: {fileID: 0}
+    - target: {fileID: 6819165816276053379, guid: 824e3373bf7813b418ae59753c40a1bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6819165816276053432, guid: 824e3373bf7813b418ae59753c40a1bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8438,6 +8443,11 @@ PrefabInstance:
       propertyPath: joueur_choix_cartes
       value: 
       objectReference: {fileID: 160886055}
+    - target: {fileID: 6819165816451405251, guid: 824e3373bf7813b418ae59753c40a1bb,
+        type: 3}
+      propertyPath: m_Text
+      value: "Activit\xE9 :"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 824e3373bf7813b418ae59753c40a1bb, type: 3}
 --- !u!1001 &7193206705952040267

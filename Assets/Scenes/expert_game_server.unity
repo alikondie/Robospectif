@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10303,13 +10303,7 @@ MonoBehaviour:
   - {fileID: 2045262882}
   - {fileID: 693610391}
   - {fileID: 1263524333}
-  joueursrecap:
-  - {fileID: 1233604856}
-  - {fileID: 1667821987}
-  - {fileID: 804721895}
-  - {fileID: 943912970}
-  - {fileID: 1031373305}
-  - {fileID: 1778924116}
+  joueursdebat: []
   bouton_retour: {fileID: 1283769046}
   button: {fileID: 1203330867}
 --- !u!114 &746853053
@@ -14870,6 +14864,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1131766919}
+    - target: {fileID: 7896333964540409641, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMouseDown
       objectReference: {fileID: 0}
     - target: {fileID: 7896333964649525599, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
@@ -14917,6 +14916,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1131766931}
+    - target: {fileID: 7896333964540409685, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -137.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896333964540409685, guid: 06034251815215a45835f9e607861cb2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 37.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8323525990000964774, guid: 06034251815215a45835f9e607861cb2,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -14945,6 +14954,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1131766917}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1131766919 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7896333964540409640, guid: 06034251815215a45835f9e607861cb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1131766917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb4484ebcce4b4389d673c157f89f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131766920 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7896333964507783083, guid: 06034251815215a45835f9e607861cb2,
@@ -20167,7 +20188,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   canvas_serveur: {fileID: 1131766918}
-  canvas_client: {fileID: 0}
+  canvas_client: {fileID: 1737746354}
   manager: {fileID: 1391642955}
 --- !u!114 &1391642956
 MonoBehaviour:
