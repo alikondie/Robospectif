@@ -45,10 +45,11 @@ public class SansHUD : NetworkManager
         
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        manager.networkAddress = AdressManager.ipAdress;
-        manager.networkPort = 7777;
+
         if (AdressManager.isServer) 
         {
+            manager.networkAddress = ipv4;
+            manager.networkPort = 7777;
             Partie.Initialize();
             //NetworkServer.Listen(7777);
             manager.StartServer(); // Connection Serveur
@@ -57,6 +58,8 @@ public class SansHUD : NetworkManager
         }
         else 
         {
+            manager.networkAddress = AdressManager.ipAdress;
+            manager.networkPort = 7777;
             Ip_serveur = AdressManager.ipAdress;
             manager.StartClient(); // Connection Smartphone
             Debug.Log("client");
@@ -79,7 +82,7 @@ public class SansHUD : NetworkManager
         NetworkServer.RegisterHandler(imageID, onImageReceived);
         NetworkServer.RegisterHandler(conceptionID, onConceptionReceived);
         NetworkServer.RegisterHandler(playerInfoId, OnPlayerInfoReceived);
-        //NetworkServer.RegisterHandler(1005, onTestReceived);
+        NetworkServer.RegisterHandler(1005, onTestReceived);
     }
 
     private void onTestReceived(NetworkMessage netMsg)
