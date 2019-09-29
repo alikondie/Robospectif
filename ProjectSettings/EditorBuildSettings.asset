@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: e878c9cb7f1e5f844af280a1eb0a4597
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/expert_game_client.unity
     guid: 29b37cfb95854b94f988c8cbbad2604f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/expert_game_server.unity
     guid: 58cffca5d7cd71b4f8936e8786afa07c
   - enabled: 1
