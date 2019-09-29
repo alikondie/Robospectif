@@ -13,7 +13,7 @@ public class AttenteLogo : StateMachineBehaviour
     {
         Ip_serveur = AdressManager.ipAdress;
 
-        string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4);
+       // string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4);
         if (AdressManager.isServer)
         {
             SceneManager.LoadScene("menu");

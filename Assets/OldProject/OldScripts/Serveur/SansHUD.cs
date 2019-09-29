@@ -41,12 +41,13 @@ public class SansHUD : NetworkManager
     {
         //Ip_serveur = AdressManager.ipAdress;
         //NetworkManager.singleton.networkAddress = Ip_serveur;
-        manager.networkAddress = Ip_serveur;
-        manager.networkPort = 7777;
+
         
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        if(AdressManager.isServer) 
+        manager.networkAddress = ipv4;
+        manager.networkPort = 7777;
+        if (AdressManager.isServer) 
         {
             Partie.Initialize();
             //NetworkServer.Listen(7777);
