@@ -45,7 +45,7 @@ public class SansHUD : NetworkManager
         
         conceptionTerminee = false;
         string ipv4 = IPManager.GetIP(IPManager.ADDRESSFAM.IPv4); // On met l'adresse IP de l'appareil courant dans ipv4
-        manager.networkAddress = ipv4;
+        manager.networkAddress = AdressManager.ipAdress;
         manager.networkPort = 7777;
         if (AdressManager.isServer) 
         {
@@ -73,7 +73,7 @@ public class SansHUD : NetworkManager
 
     private void RegisterHandlers()
     {
-        print("got here");
+        
         NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnected);
         NetworkServer.RegisterHandler(messageID, OnMessageReceived);
         NetworkServer.RegisterHandler(imageID, onImageReceived);
