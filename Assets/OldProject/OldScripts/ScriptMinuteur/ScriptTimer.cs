@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+////script du timer lors du choix des cartes du véhicule, qui s'active dès que le 1er joueur a terminé son véhicule
 public class ScriptTimer : MonoBehaviour
 {
     // ---------- ATTRIBUETS ----------
@@ -20,7 +21,6 @@ public class ScriptTimer : MonoBehaviour
 
     // ---------- METHODES ----------
 
-    // Methode d'initialisation
     void Start()
     {
         doitLancer = false;
@@ -31,7 +31,6 @@ public class ScriptTimer : MonoBehaviour
 
     }
 
-    // Méthode de Mise A Jour
     void Update()
     {
 

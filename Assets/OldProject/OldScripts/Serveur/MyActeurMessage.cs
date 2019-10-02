@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+////class de message pour communication client/serveur, donc uniquement des attributs.
 public class MyActeurMessage : MessageBase
 {
     public int numero;
     public string acteur1;
     public string acteur2;
     public string acteur3;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+////main script de pres perso côté client, gère le choix de la zone d'usage par le joueur
 public class script_LogosEnvironnement : MonoBehaviour
 {
     private int[] choixZone; // TABLEAU A RECUPERER 
@@ -38,16 +39,17 @@ public class script_LogosEnvironnement : MonoBehaviour
 
     // METHODE
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        ////bouton valider
         button.onClick.AddListener(() => ButtonClicked());
         button.gameObject.SetActive(false);
     }
 
     private void ButtonClicked()
     {
+        ////apres avoir appuyé sur valider, on indique toutes les infos au serveur et on
+        //// passa à la scène suivante
         MyPersoMessage msg = new MyPersoMessage();
         persoSprite = perso.sprite.name;
         msg.numero = JoueurStatic.Numero;
@@ -84,6 +86,7 @@ public class script_LogosEnvironnement : MonoBehaviour
         nombreChoix = 0;
     }
 
+    //// gère le stockage d'info pour savoir quelle zone a ou ont été cliqué
     void Update()
     {
         perso.sprite = JoueurStatic.Actif;

@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+////main script attaché au débat (version standard et expert), il permet de tout gérer (appui sur bouton retour, help, etc.)
 public class InitDebat : MonoBehaviour
 {
     [SerializeField] GameObject canvas_debat;
@@ -66,7 +67,6 @@ public class InitDebat : MonoBehaviour
 
     //sp = sm = ep = em = up = um = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         bouton_retour.gameObject.SetActive(false);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//// script attaché aux cartes, permet de gérer tout le déplacement des cartes.
 public class Mouvement_carte : MonoBehaviour
 {
     private Vector3 screenPoint;
@@ -13,27 +14,14 @@ public class Mouvement_carte : MonoBehaviour
     [SerializeField] GameObject[] targettable;
     [SerializeField] GameObject[] equipmentcards;
     [SerializeField] GameObject pres_terminee;
-    private GameObject currenttarget;
+    private GameObject currenttarget; //indique la cible avec laquelle la carte entre en collision
     private int sens;
     private int checkifintarget;
-    private int decalage;
+    private int decalage; //décalage lorsque plusieurs cartes équipement sont placées au même endroit
     private int checkifnomoreintarget;
-    private bool was_in_target = false;
+    private bool was_in_target = false; //pour savoir si la carte entre dans la position cible, ou en ressort
     private bool test;
-
     private int nbCartePosees;
-    #region unused start and update
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnEnable()
     {
@@ -44,7 +32,6 @@ public class Mouvement_carte : MonoBehaviour
         checkifnomoreintarget = 0;
         currenttarget = null;
     }
-    #endregion
 
     private void OnMouseDown()
     {
@@ -57,25 +44,31 @@ public class Mouvement_carte : MonoBehaviour
     {
         if (!IsTheMousInTargetCollider())
         {
+            ////fonction de déplacement basique des cartes
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
             transform.position = curPosition;
         }
 
+        ////si la carte est un équipement
         if (targettable.Length >= 2)
         {
             decalage = 0;
             if (checkifintarget == 1)
             {
+                ////si la carte entre dans une cible
                 CheckIfAlreadyCards();
             }
             else if (checkifnomoreintarget == 0)
             {
+                ////si la carte sort d'une cible
                 CheckIfAlreadyCards();
             }
         }
         else if (currenttarget != null)
         {
+            ////si la carte entre en collision avec la cible et que toutes les autres conditions n'ont pas 
+            //// été remplie on place la carte à l'emplacement
             if(!was_in_target)
             {
                 Tour.NbCartesPosees++;
@@ -86,6 +79,7 @@ public class Mouvement_carte : MonoBehaviour
         }
     }
     
+    ////fonction pour savoir si la carte entre en collision avec une cible
     private bool IsTheMousInTargetCollider()
     {
         foreach (GameObject target in targettable)
@@ -109,6 +103,8 @@ public class Mouvement_carte : MonoBehaviour
         return false;
     }
 
+    ////vérifie s'il y a déjà des cartes à l'emplacement (dans le cas des cartes équipements)
+    ////et met à jour le décalage en fonction.
     private void CheckIfAlreadyCards()
     {
         List<GameObject> cardstack = new List<GameObject>();
@@ -144,7 +140,6 @@ public class Mouvement_carte : MonoBehaviour
             {
                 was_in_target = true;
                 Tour.NbCartesPosees++;
-                Debug.Log("incremente");
             }
             RelocateCardsWhencardincoming(cardstack);
             AssignEquipmentsTypes(currenttarget, allCardStack,true);
@@ -153,12 +148,13 @@ public class Mouvement_carte : MonoBehaviour
         {
             was_in_target = false;
             Tour.NbCartesPosees--;
-            Debug.Log("decremente");
             RelocateCardsWhencardleaves(cardstack);
             AssignEquipmentsTypes(currenttarget, cardstack,false);
         }
     }
 
+    ////méthode qui bougent les cartes déjà posées à l'emplacement (dans le cas des équipements)
+    ////si on pose une carte équipement sur un emplacementpossédant déjà au moins 1 carte.
     private void RelocateCardsWhencardincoming(List<GameObject> stack)
     {
         if(stack.Count != 0)
@@ -193,6 +189,7 @@ public class Mouvement_carte : MonoBehaviour
         }
     }
 
+    ////même objectif que la méthode précédente, mais lorsque qu'un équipement est retiré
     private void RelocateCardsWhencardleaves(List<GameObject> stack)
     {
         if (stack.Count != 0)
@@ -204,6 +201,7 @@ public class Mouvement_carte : MonoBehaviour
         }
     }
 
+    ////positionnement basique des cartes (autres que équipements)lors de la collision avec un emplacement
     private void MoveCard(GameObject card)
     {
         if (sens == 1 || sens == 3)
@@ -225,7 +223,7 @@ public class Mouvement_carte : MonoBehaviour
                 card.transform.position -= new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
             }
         }
-        else /*if (sens == 2)*/
+        else 
         {
             if (card.transform.position.x > currenttarget.transform.position.x)
             {
@@ -244,20 +242,11 @@ public class Mouvement_carte : MonoBehaviour
                 card.transform.position -= new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
             }
         }
-        //else if (sens == 3)
-        //{
-        //    if()
-        //    card.transform.position += new Vector3(0.0f, currenttarget.GetComponent<BoxCollider2D>().bounds.extents.y, 0.0f);
-        //}
-        //else
-        //{
-        //    card.transform.position += new Vector3(currenttarget.GetComponent<BoxCollider2D>().bounds.extents.x, 0.0f, 0.0f);
-        //}
     }
 
+    ////récupère le sens, en fonction de la position du joueur qui présente
     private void GetSens()
     {
-        //int pos = 1;
         int pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         switch (pos)
         {

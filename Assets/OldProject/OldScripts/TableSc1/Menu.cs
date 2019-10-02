@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+////script de la scène du menu, composé uniquement de bouton, qui détermine une partie des 
+//// variables globales de la partie (langue, type) 
 public class Menu : MonoBehaviour
 {
     [SerializeField] Button standard;
@@ -15,7 +17,6 @@ public class Menu : MonoBehaviour
     [SerializeField] Button english;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         Partie.Initialize();
@@ -25,12 +26,6 @@ public class Menu : MonoBehaviour
         expert.onClick.AddListener(() => ExpertClicked());
         france.onClick.AddListener(() => FranceClicked());
         english.onClick.AddListener(() => EnglishClicked());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void EnglishClicked()

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
+////main script de choix jeton. Il gère toute la scène (affichage des jetons dispo, etc.)
 public class JetonsHandler : MonoBehaviour
 {
     [SerializeField] GameObject canvas_choix_jetons;
@@ -29,7 +30,7 @@ public class JetonsHandler : MonoBehaviour
     [SerializeField] Button planeteRouge;
 
     private bool isPresTime;
-    // Start is called before the first frame update
+
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(vainqueurID, OnWaitReceived);
@@ -38,6 +39,7 @@ public class JetonsHandler : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(presID, OnPresReceived);
         JoueurStatic.Client.RegisterHandler(RetourID, OnRetourReceived);
 
+        ////les jetons sont des boutons
         usageVert.onClick.AddListener(() => OnUsageClicked(usageVert.GetComponent<Image>().sprite));       
         usageRouge.onClick.AddListener(() => OnUsageClicked(usageRouge.GetComponent<Image>().sprite));       
         societeVert.onClick.AddListener(() => OnSocieteClicked(societeVert.GetComponent<Image>().sprite));       
@@ -48,6 +50,7 @@ public class JetonsHandler : MonoBehaviour
         isPresTime = false;
     }
 
+    //// message permettant d'activer les jetons pour les joueurs hormis le présentateur du véhicule
     private void OnGoReceived(NetworkMessage netMsg)
     {
         if(!isPresTime && JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
@@ -60,16 +63,20 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
+    ////lorsque qu'un joueur a choisi un jeton, plus aucun joueur ne peut poser de jeton
+    //// tant que le jeton n'a pas été attribué sur le serveur
     private void OnStopReceived(NetworkMessage netMsg)
     {
         AllFalse();
     }
 
+    ////appui sur le bouton retour de la scène suivante
     private void OnRetourReceived(NetworkMessage netMsg)
     {
         isPresTime = false;
         if(JoueurStatic.Numero == netMsg.ReadMessage<MyNetworkMessage>().message)
         {
+            //// si le joueur est le présentateur
             AllFalse();
         }
         else
@@ -78,6 +85,7 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
+    ////on "désaffiche" tous les jetons
     private void AllFalse()
     {
         usageVert.gameObject.SetActive(false);
@@ -88,8 +96,11 @@ public class JetonsHandler : MonoBehaviour
         planeteRouge.gameObject.SetActive(false);
     }
 
+    //// on affiche tous les jetons dispo
     private void SetTrue()
     {
+        ////les 3 variables compteur indiquent le nombre de jetons de chaque type posés,ceci est utile
+        ////qu'en cas d'usage du bouton retour de la scène suivante.
         if (JoueurStatic.UsageCompteur < 2)
         {
             usageVert.gameObject.SetActive(true);
@@ -116,6 +127,9 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
+    ////les 3 fonctions suivantes envoi sur le serveur le jeton cliqué
+    //// et gère le nombre de jetons à afficher selon le nombre de jeton 
+    //// de chaque type déjà utilisé
     private void OnPlaneteClicked(Sprite s)
     {
         envoyer(s);
@@ -155,6 +169,7 @@ public class JetonsHandler : MonoBehaviour
         }
     }
 
+    ////apres l appui sur le bouton de choix vainqueur sur le serveur pour prévenir les clients
     private void OnWaitReceived(NetworkMessage netMsg)
     {
         isPresTime = false;
@@ -163,17 +178,13 @@ public class JetonsHandler : MonoBehaviour
         SetTrue();
     }
 
+    ////on paramètre l'envoi en fonction du jeton cliqué
     public void envoyer(Sprite s)
     {
         MyJetonMessage msg = new MyJetonMessage();
         msg.joueur = JoueurStatic.Numero;
         msg.sprite = s.name;
         JoueurStatic.Client.Send(jeton, msg);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void OnEnable()

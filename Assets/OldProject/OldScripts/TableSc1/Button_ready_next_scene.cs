@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 using System;
 using Random = UnityEngine.Random;
 
+////script attaché au bouton de la première scène, pour passer à la sélection de la position des 
+////joueurs. Il permet de stocker notamment les positions de chaque joueur, pour le reste de la partie.
 public class Button_ready_next_scene : MonoBehaviour
 {
     [SerializeField] GameObject canvas_mains;
@@ -19,7 +21,6 @@ public class Button_ready_next_scene : MonoBehaviour
     private int[] positions;
     short positionsID = 1005;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (Partie.Langue == "FR")
@@ -59,11 +60,6 @@ public class Button_ready_next_scene : MonoBehaviour
         MiseAJourText();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     private void MiseAJourText()
     {
         int nb = 0;
@@ -89,7 +85,6 @@ public class Button_ready_next_scene : MonoBehaviour
 
     void OnMouseDown()
     {
-        // ----- PARTIE NATHAN -----
         // Envoi des positions
         for (int i = 1; i <= 6; i++)
         {
@@ -163,12 +158,12 @@ public class Button_ready_next_scene : MonoBehaviour
 
         // --------------------------
 
-        // Debug.Log("Click");
-        //SceneManager.LoadScene("Scene_2");
         canvas_mains.SetActive(false);
         canvas_joueurs.SetActive(true);
     }
 
+    ////les 4 fonctions suivantes permettent de générer et stocker les cartes qui seront ensuite 
+    ////distribuées aux joueurs.
     private Sprite[] RandomDim()
     {
         int x = 0, y = 0;

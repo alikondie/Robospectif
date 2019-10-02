@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+////Script attaché au canvas de position des joueurs (côté client), il permet de générer les cartes que possède le joueur durant la partie
 public class Main : MonoBehaviour
 {
     [SerializeField] Sprite[] acteursFR;

@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using static Main;
 using Image = UnityEngine.UI.Image;
 
+////main script de la scène du plateau véhicule (version standard)
 public class Initialisation_expert : MonoBehaviour
 {
     #region variables
@@ -49,7 +50,7 @@ public class Initialisation_expert : MonoBehaviour
 
     string currentTurnData = "";
     #endregion
-    // Start is called before the first frame update
+    
     void Start()
     {
         Tour.Listiscartesposees = new bool[cartes.transform.childCount];
@@ -65,12 +66,10 @@ public class Initialisation_expert : MonoBehaviour
 
     void OnEnable()
     {
-
         Tour.NbCartesPosees = 0;
         if(start)
         {
             start = false;
-            
             position_init_conduite = conduite.transform.position;
             position_init_dimension = PositionInitiale(dimension);
             position_init_locomotion = PositionInitiale(locomotion);
@@ -158,6 +157,9 @@ public class Initialisation_expert : MonoBehaviour
         #endregion
         if (Partie.Type == "expert")
         {
+            ////comme en version expert il y a plus de cartes présentent sur le plateau que le
+            //// nombre de carte à poser (toujours 6), on ne garde que les cartes utilisées pour
+            //// la suite de la partie (plateau du véhicule dispo pour les joueurs au débat et pres des perso)
             for(int k = 0; k < 10; k++)
             {
                 cartes.transform.GetChild(k).gameObject.SetActive(Tour.Listiscartesposees[k]);

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.Networking;
 
+
+////Script principal de choix des cartes (cotés client)
 public class MainScript : MonoBehaviour
 {
     short cardID = 1009;
@@ -19,10 +21,9 @@ public class MainScript : MonoBehaviour
     private Main.Image[] locomotions;
     private Main.Image[] equipements;
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        ////Initialisation de tous les éléments d'UI
         button.gameObject.SetActive(false);
 
         foreach (GameObject i in dimensionGO)
@@ -43,13 +44,7 @@ public class MainScript : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(cardID, OnCardsReceived);
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    ////à l'activation du canvas, les textes sont mis à jour selon la langue choisie
     void OnEnable()
     {
         if (JoueurStatic.Langue == "FR")
@@ -71,6 +66,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
+    ////le serveur génère puis envoit les cartes à travers un message, puis le joueur les stocke et les affiche
     private void OnCardsReceived(NetworkMessage netMsg)
     {
         var v = netMsg.ReadMessage<MyCardMessage>();

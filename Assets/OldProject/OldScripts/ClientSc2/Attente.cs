@@ -6,6 +6,9 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+////Srcipt attaché au canvas de présentation du robot (côté client). il est utilisé par les versions standards et experte.
+//// Il indique au joueur que le robot est en cours de présentation
 public class Attente : MonoBehaviour
 {
 
@@ -17,30 +20,27 @@ public class Attente : MonoBehaviour
 
     short presID = 1011;
 
-    // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(presID, onWaitReceived);
     }
 
+    ////réception de message indiquant que la présentation du robot est terminé, et qu'il faut donc changer de canvas
     private void onWaitReceived(NetworkMessage netMsg)
     {
         int fini = netMsg.ReadMessage<MyNetworkMessage>().message;
         canvas_pres_robot.SetActive(false);
         if (JoueurStatic.Numero == fini)
         {
+            ////si le joueur est le présentateur du robot, on active le canvas correspondant, qui l'invite à écouter 
+            ////les usages des autres joueurs
             canvas_persos_table.SetActive(true);
         }
         else
         {
+            ////on active le canvas de choix des persos pour les joueurs autre que le présentateur du robot
             canvas_choix_persos.SetActive(true);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnEnable()

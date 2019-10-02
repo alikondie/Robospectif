@@ -19,11 +19,6 @@ public class Help : MonoBehaviour
     private Vector2 vertical = new Vector2(1080, 1920);
     private Vector2 horizontal = new Vector2(1920, 1080);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     private void OnBackClicked()
     {
         helpBg.SetActive(false);
@@ -38,7 +33,6 @@ public class Help : MonoBehaviour
         text.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         back.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         back.GetComponent<RectTransform>().localPosition = new Vector3((float)7.6, (float)4.15);
-      //  text.GetComponent<RectTransform>().sizeDelta = horizontal;
         if (Partie.Langue == "FR")
         {
             if (Partie.Type == "expert")
@@ -85,14 +79,8 @@ public class Help : MonoBehaviour
         helpBg.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = button;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     private void OnMouseDown()
     {
-        Debug.Log("Mouse Down");
         Rotate();
     }
 

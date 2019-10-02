@@ -44,7 +44,6 @@ public class Text_Connexion : MonoBehaviour
         estDebut = false;
         // Recuperation du Nombre de joueur:
         nbJoueur = PlayerPrefs.GetInt("nombreJoueur");     // Nombre de Joueurs
-        //nbJoueur = 6; // Nombre de Joueurs
 
 
 
@@ -56,7 +55,6 @@ public class Text_Connexion : MonoBehaviour
 
     }
 
-    // Méthode de Mise A Jour
     void Update()
     {
         int[] t = connectes;

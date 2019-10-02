@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+////class de message pour communication client/serveur, donc uniquement des attributs.
 public class MyPositionsMessage : MessageBase
 {
     public int position1;
@@ -13,16 +14,4 @@ public class MyPositionsMessage : MessageBase
     public int position6;
     public string langue;
     public string type;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

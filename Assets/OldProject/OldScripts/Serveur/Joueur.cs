@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+////classe joueur, qui permet de stocker des variables globales d'un joueur durant une partie 
 public class Joueur
 {
     private int numero;
@@ -20,19 +22,6 @@ public class Joueur
     private int nbCouronnes;
     private bool isPrive;
     private bool isPublic;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public int Numero
     {

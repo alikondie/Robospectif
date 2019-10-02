@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
 
+////main script de la scène de choix des jetons pour la partie expert côté client, il affiche 
+//// le sprite des décideurs public et privé aux joueurs correspondant, et indique aux autres 
+//// joueurs que les décideurs sont en train d'investir.
 public class Investissement : MonoBehaviour
 {
     [SerializeField] Text joueur;
@@ -21,19 +24,12 @@ public class Investissement : MonoBehaviour
 
     private bool retour;
 
-    // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(publicID, OnPublicReceived);
         JoueurStatic.Client.RegisterHandler(nextID, OnWaitReceived);
         JoueurStatic.Client.RegisterHandler(RetourID, OnRetourReceived);
         retour = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnEnable()
@@ -57,6 +53,7 @@ public class Investissement : MonoBehaviour
     {
         if (JoueurStatic.IsPublic)
         {
+            ////pour le joueur public on affiche le sprite correspondant et les jetons
             central.gameObject.SetActive(false);
             decideur.sprite = Resources.Load<Sprite>(JoueurStatic.Langue + "/Decideurs/DecideurPublic");
             decideur.gameObject.SetActive(true);
@@ -73,8 +70,10 @@ public class Investissement : MonoBehaviour
             {
                 rouges.transform.GetChild(j).gameObject.SetActive(true);
             }
-        } else
+        }
+        else
         {
+            ////idem mais pour le privé
             central.gameObject.SetActive(true);
             decideur.gameObject.SetActive(false);
             for (int i = 0; i < verts.transform.childCount; i++)
@@ -84,12 +83,14 @@ public class Investissement : MonoBehaviour
         }
     }
 
+//// message indiquant qu'on change de canvas
     private void OnWaitReceived(NetworkMessage netMsg)
     {
             canvas_jetons.SetActive(false);
             canvas_recap.SetActive(true);
     }
 
+////bouton retour appuyé dans la scène de recap
     private void OnRetourReceived(NetworkMessage netMsg)
     {
         InitDecideur();
@@ -97,6 +98,7 @@ public class Investissement : MonoBehaviour
 
     private void InitDecideur()
     {
+        ////On active les jetons selon le nombre disponible pour les 2 décideurs
         for (int j = 0; j < verts.transform.childCount; j++)
         {
             verts.transform.GetChild(j).gameObject.SetActive(true);

@@ -6,6 +6,13 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+////Ce script est utilisé par le canvas d'attente du choix du vainqueur par le présentateur (côté client)
+////, il permet soit de passer au tour suivant, soit de terminer la partie.
+////Le canvas côté serveur est composé de 3 boutons, un pour continuer la partie, un autre pour la terminer, 
+////et un dernier pour retourner au débat (ajouté suite au constat que les joueurs appuient parfois sur le
+//// bouton pour passer à la suite, sans avoir terminé le débat).
+////Ce script va donc réagir au bouton sur lequel les joueurs ont décidé d'appuyer.
+
 public class AttenteFin : MonoBehaviour
 {
     [SerializeField] GameObject canvas_fin_partie;
@@ -21,7 +28,6 @@ public class AttenteFin : MonoBehaviour
     short retourID = 1023;
     short suiteID = 1026;
 
-    // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(nextID, onWaitReceived);
@@ -29,8 +35,12 @@ public class AttenteFin : MonoBehaviour
         JoueurStatic.Client.RegisterHandler(suiteID, onSuiteReceived);
     }
 
+    ////Cette méthode de réception de message venant du serveur permet de passer soit au canvas de fin de partie 
+    ////(si le bouton correspondant a été cliqué sur la table numérique, le serveur envoie le message comportant 
+    ////le string "end"), soit au canvas de présentation du robot du présentateur suivant (message reçu : "next")
     private void onWaitReceived(NetworkMessage netMsg)
     {
+        //on réinitialise ces variables car le tour est fini, on ne pourra donc plus revenir au débat avant le tour suivant
         JoueurStatic.SocieteCompteur = 0;
         JoueurStatic.PlaneteCompteur = 0;
         JoueurStatic.UsageCompteur = 0;
@@ -48,6 +58,8 @@ public class AttenteFin : MonoBehaviour
         }
     }
 
+    ////à l'activation du canvas de fin de tour côté client, l'affichage dynamique se met à jour si la langue 
+    ////choisie est l'anglais
     void OnEnable()
     {
         if (JoueurStatic.Langue == "FR")
@@ -61,18 +73,16 @@ public class AttenteFin : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    ////Méthode de réception de message suite à l'appuie du bouton retour côté serveur, donc désactive 
+    ////le canvas courant, et réactive le précédent.
     private void onRetourReceived(NetworkMessage netMsg)
     {
         canvas_vainqueur.SetActive(false);
         canvas_choix_jetons.SetActive(true);
     }
 
+    ////Méthode de réception de message suite à l'appuie du bouton valider côté serveur, qui implique la fin du tour,
+    ////donc pas de nouveau canvas côté client, car on change seulement le texte affiché pour indiquer que le tour est fini
     private void onSuiteReceived(NetworkMessage netMsg)
     {
         if (JoueurStatic.Langue == "FR")

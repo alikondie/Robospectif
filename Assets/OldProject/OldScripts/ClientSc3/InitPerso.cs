@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+////script attaché au canvas de choix des persos (côté client)
 public class InitPerso : MonoBehaviour
 {
     [SerializeField] Text text;
@@ -10,20 +11,7 @@ public class InitPerso : MonoBehaviour
     [SerializeField] Image[] personnagesGO;
     [SerializeField] Image[] ticks;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    ////à l'activation du canvas, on initialise toutes les éléments d'UI (cartes, textes en fonction de la langue)
     void OnEnable()
     {
         for (int i = 0; i < ticks.Length; i++)

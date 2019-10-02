@@ -12,7 +12,6 @@ public class TitreConnexion : MonoBehaviour
     private int estConnecter;
     // ---------- METHODES ----------
 
-    // Methode d'inisialisation
     void Start()
     {
         Text textTitre = titreScene.GetComponent<Text>();
@@ -23,7 +22,6 @@ public class TitreConnexion : MonoBehaviour
             textTitre.text = "Connect to the table !";
     }
 
-    // Méthode de Mise A Jour
     void Update()
     {
         estConnecter = PlayerPrefs.GetInt("TousConnecter");

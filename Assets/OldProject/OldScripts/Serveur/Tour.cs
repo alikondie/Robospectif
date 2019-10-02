@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+////classe permettant de stocker des variales globales d'un tour dans une partie
 public class Tour 
 {
     private static Sprite[] persosDebat;

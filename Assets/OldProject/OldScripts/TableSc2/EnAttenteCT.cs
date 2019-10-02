@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+////script d'attente du choix des cartes du véhicule par les joueurs
 public class EnAttenteCT : MonoBehaviour
 {
     short cardID = 1009;
@@ -17,10 +18,8 @@ public class EnAttenteCT : MonoBehaviour
 
     // ---------- METHODES ----------
 
-    // Methode d'inisialisation
     void Start()
     {
-        // Initialise du boolean
         estPremier = false;
 
         // Recuperation du Nombre de joueur:
@@ -38,17 +37,11 @@ public class EnAttenteCT : MonoBehaviour
         foreach (Joueur j in Partie.Joueurs)
         {
             MyCardMessage msg = new MyCardMessage();
-            //Debug.Log(j.Dimensions[0].ToString().Substring(0, j.Dimensions[0].ToString().Length - 21));
-            //Debug.Log(Resources.Load<Sprite>("image/Dimension/" + j.Dimensions[0].ToString().Substring(0, j.Dimensions[0].ToString().Length - 21)));
             msg.dim1 = j.Dimensions[0].name;
             msg.dim2 = j.Dimensions[1].name;
 
-            //Debug.Log(j.Locomotions[0].ToString().Substring(0, j.Locomotions[0].ToString().Length - 21));
-            //Debug.Log(Resources.Load<Sprite>("image/Locomotion/" + j.Locomotions[0].ToString().Substring(0, j.Locomotions[0].ToString().Length - 21)));
             msg.loco1 = j.Locomotions[0].name;
             msg.loco2 = j.Locomotions[1].name;
-            //Debug.Log(j.Equipements[0].ToString().Substring(0, j.Equipements[0].ToString().Length - 21));
-            //Debug.Log(Resources.Load<Sprite>("image/Equipements/" + j.Equipements[0].ToString().Substring(0, j.Equipements[0].ToString().Length - 21)));
             msg.equi1 = j.Equipements[0].name;
             msg.equi2 = j.Equipements[1].name;
             msg.equi3 = j.Equipements[2].name;
@@ -66,14 +59,10 @@ public class EnAttenteCT : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (estPremier)
         {
-
-            //changer de scene
-            //SceneManager.LoadScene(nomSceneDemander);
             canvas_attente_choix_cartes.SetActive(false);
             canvas_sablier.SetActive(true);
         }

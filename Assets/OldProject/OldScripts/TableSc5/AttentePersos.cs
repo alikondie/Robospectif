@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
 
+////Script attaché au canvas d'attente du serveur lors du choix des persos/acteurs par les joueurs
+//// Il affiche le véhicule précédemment choisi pour que les joueurs puissent l'avoir sous les yeux 
+//// pour faire leur choix.
 public class AttentePersos : MonoBehaviour
 {
     [SerializeField] GameObject canvas_attente_persos;
@@ -13,14 +16,13 @@ public class AttentePersos : MonoBehaviour
     [SerializeField] GameObject[] cartes;
     [SerializeField] Text text;
     short persosID = 1007;
-    private Sprite[] persoSprites;
-    private int[,] zones;
+    private Sprite[] persoSprites;//permet de stocker les persos/acteurs choisis par les joueurs
+    private int[,] zones;//idem pour les zones d'usage
     private int nbRecu;
     private string fr;
     private string en;
     private int nbAttendus;
 
-    // Start is called before the first frame update
     void Start()
     {
         NetworkServer.RegisterHandler(persosID, OnPersoReceived);
@@ -28,6 +30,9 @@ public class AttentePersos : MonoBehaviour
 
     void OnEnable()
     {
+        #region desable interactibles
+        ////Cette région permet de désactiver l'ensemble des scripts permettant de bouger les cartes 
+        ////dans le canvas du plateau du véhicule, afin de l'afficher sans pouvoir intéragir avec
         if (Partie.Type == "expert")
             canvas_pres_vehicule.GetComponent<Initialisation_expert>().enabled = false;
         else
@@ -46,6 +51,8 @@ public class AttentePersos : MonoBehaviour
             else
                 carte.GetComponent<Mouvement_carte>().enabled = false;
         }
+        #endregion
+
         if (Partie.Type == "expert")
         {
             fr = "acteur";
@@ -70,8 +77,10 @@ public class AttentePersos : MonoBehaviour
         nbRecu = 0;
     }
 
+    //message reçu lorsqu'un joueur a fait son choix
     private void OnPersoReceived(NetworkMessage netMsg)
     {
+        ////on stocke toutes les infos du perso/acteurs choisi
         var v = netMsg.ReadMessage<MyPersoMessage>();
         int i = v.numero;
         string s = v.image;
@@ -93,7 +102,6 @@ public class AttentePersos : MonoBehaviour
         nbRecu++;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (nbRecu == nbAttendus)
@@ -102,16 +110,18 @@ public class AttentePersos : MonoBehaviour
             {
                 if (j.IsPrive)
                 {
-                    Debug.Log(j.Position);
                     persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPrive");
-                } else if (j.IsPublic)
+                } 
+                else if (j.IsPublic)
                 {
-                    Debug.Log(persoSprites[j.Position]);
                     persoSprites[j.Position] = Resources.Load<Sprite>(Partie.Langue + "/Decideurs/DecideurPublic");
                 }
             }
             Tour.PersosDebat = persoSprites;
             Tour.ZonesDebat = zones;
+
+            #region enable interactibles
+            ////On réactive les ééments du plateau véhicule précédemment désactivés
             canvas_pres_vehicule.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
             canvas_pres_vehicule.transform.GetChild(0).gameObject.SetActive(true);
             canvas_pres_vehicule.transform.GetChild(1).gameObject.SetActive(true);
@@ -131,6 +141,7 @@ public class AttentePersos : MonoBehaviour
                 else
                     carte.GetComponent<Mouvement_carte>().enabled = true;
             }
+            #endregion
             canvas_attente_persos.SetActive(false);
             canvas_pres_persos.SetActive(true);
         }

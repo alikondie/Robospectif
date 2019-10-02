@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+////Script attaché au canvas de choix des acteurs (côté client) version experte
 public class ChoixCartes : MonoBehaviour
 {
 
@@ -19,21 +20,15 @@ public class ChoixCartes : MonoBehaviour
     short decideurID = 1014;
     short conceptionID = 1002;
 
-    // Start is called before the first frame update
     void Start()
     {
         JoueurStatic.Client.RegisterHandler(decideurID, OnDecideurReceived);
         JoueurStatic.Client.RegisterHandler(conceptionID, OnConceptionReceived);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnEnable()
     {
+        ////on initialise les textes qui seront affichés
         choix.gameObject.SetActive(false);
         attente.gameObject.SetActive(false);
         decideur.gameObject.SetActive(false);
@@ -49,17 +44,16 @@ public class ChoixCartes : MonoBehaviour
             choix.text = "Chose the cards for the\nautonomous vehicle";
             attente.text = "Wait for the other players to shape\an autonomous vehicle";
         }
-
-
     }
 
+
+    ////Les joueurs autres que les décideurs reçoivent un message permettant stocker les acteurs
     private void OnConceptionReceived(NetworkMessage netMsg)
     {
-        Debug.Log("conception");
         var message = netMsg.ReadMessage<MyActeurMessage>();
-        Debug.Log(message.numero == JoueurStatic.Numero);
         if (message.numero == JoueurStatic.Numero)
         {
+            ////On remplit les informations donnant les acteurs piochés par le joueur non décideur
             string a1 = message.acteur1;
             string a2 = message.acteur2;
             string a3 = message.acteur3;
@@ -74,13 +68,16 @@ public class ChoixCartes : MonoBehaviour
         }
         if (JoueurStatic.IsPrive || JoueurStatic.IsPublic)
         {
+            ////Les décideurs passent directement au canvas suivant pour attendre que les joueurs choisissent leur acteur
             canvas_choix_cartes.SetActive(false);
             canvas_attente_acteur.SetActive(true);
         }
     }
-
+    ////Méthode de réception qui permet de stocker les informations dynamique de chaque joueur, notamment si c'est un 
+    ////présentateur d'acteur ou un décideur. Affiche aussi le bon texte en fonction du rôle du joueur
     private void OnDecideurReceived(NetworkMessage netMsg)
     {
+
         var message = netMsg.ReadMessage<MyDecideurMessage>();
         int priv = message.priv;
         int pub = message.pub;

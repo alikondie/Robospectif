@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+////Script attaché au cartes équipement dans le canvas de choix des cartes (côté client).
+////il permet d'initialiser les cartes sélectionnées par le joueur (cartes face au joueur)
 public class Equipement : MonoBehaviour
 {
     public static bool[] selection;
@@ -13,7 +15,6 @@ public class Equipement : MonoBehaviour
     [SerializeField] Image image2;
     [SerializeField] Image image3;
 
-    // Start is called before the first frame update
     void Start()
     {
         selection = new bool[6];
@@ -24,12 +25,6 @@ public class Equipement : MonoBehaviour
         selection[4] = false;
         selection[5] = false;
         indice = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public static int TraiteIndice(int i)

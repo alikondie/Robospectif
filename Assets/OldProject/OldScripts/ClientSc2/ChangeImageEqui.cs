@@ -5,16 +5,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+////Script permettant de changer la position des cartes lorsque les joueurs appuie sur une carte lors du canvas de sélection de carte
 public class ChangeImageEqui : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
     private bool[] selection;
     [SerializeField] Image image;
     private int indice;
 
-    // Start is called before the first frame update
     void Start()
-
     {
         selection = Equipement.selection;
         if (image.name == "ImageEquipement1")

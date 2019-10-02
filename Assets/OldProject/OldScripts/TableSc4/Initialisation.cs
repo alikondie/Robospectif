@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using static Main;
 using Image = UnityEngine.UI.Image;
 
+////main script de la scène du plateau véhicule (version standard)
 public class Initialisation : MonoBehaviour
 {
     #region variables
@@ -39,10 +40,9 @@ public class Initialisation : MonoBehaviour
 
     string currentTurnData = "";
     #endregion
-    // Start is called before the first frame update
+    
     void Start()
     {
-
         button.onClick.AddListener(() => ButtonClicked());
     }
 
@@ -69,6 +69,8 @@ public class Initialisation : MonoBehaviour
         pos = Array.IndexOf(Partie.Positions, Partie.JoueurCourant) + 1;
         Rotate(pos);
         #region players cards display
+
+        //// on prend les cartes du présentateur courant (JoueurCourant = présentateur)
         foreach (Joueur j in Partie.Joueurs)
         {
             if (j.Numero == Partie.JoueurCourant)
@@ -83,12 +85,12 @@ public class Initialisation : MonoBehaviour
         #endregion
     }
 
-    // Update is called once per frame
+    ////on n'affiche le bouton de présentation terminée uniquement lorsque toutes les cartes sont
+    //// posées
     void Update()
     {
         if (Tour.NbCartesPosees == 6)
         {
-            
             button.gameObject.SetActive(true);
         }
         else
@@ -99,8 +101,6 @@ public class Initialisation : MonoBehaviour
 
     private void ButtonClicked()
     {
-
-
         #region recup données
 
             /*SansHUD.data.AppendLine("Tour " + Partie.Tour);
@@ -221,9 +221,6 @@ public class Initialisation : MonoBehaviour
             images[zone-1, i] = image[i];
         }
     }
-
-
-
 
     //function which rotate the canvas depending on the current player who presents the robot
     private void Rotate(int pos)

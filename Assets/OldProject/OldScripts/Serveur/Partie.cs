@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+////classe permettant de stocker des variales globales de la partie
 public class Partie
 {
     private static string type;
@@ -63,16 +64,4 @@ public class Partie
     }
     public static string Type { get => type; set => type = value; }
     public static string Langue { get => langue; set => langue = value; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

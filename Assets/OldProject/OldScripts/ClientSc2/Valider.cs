@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+////Script attaché au bouton valider du canvas de choix des cartes
 public class Valider : MonoBehaviour
 {
     public static Main.Image[] personnages;
@@ -23,16 +24,17 @@ public class Valider : MonoBehaviour
     short conceptionID = 1002;
     short chronoID = 1003;
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        ////On initialise les variables stockées pour le reste de la partie (cartes choisies)
         JoueurStatic.Persos = new Sprite[6];
         JoueurStatic.PersosChoisis = new bool[] { false, false, false, false, false, false };
         button.onClick.AddListener(() => ButtonClicked());
         JoueurStatic.Client.RegisterHandler(chronoID, onChronoReceived);
     }
 
+    ////Quand un premier joueur termine de choisir les cartes de son robot, les autres joueurs reçoivent 
+    //// un message pour activer un chronomètre de 30 secondes 
     private void onChronoReceived(NetworkMessage netMsg)
     {
         int joueurFini = netMsg.ReadMessage<MyNetworkMessage>().message;
@@ -42,6 +44,8 @@ public class Valider : MonoBehaviour
         }
     }
 
+    ////lorsqu'un joueur appuie sur valider, on stocke les choix du joueur, met à jour les caractéristique du robot
+    //// et on passe au canvas suivant
     private void ButtonClicked()
     {
         JoueurStatic.Dim = dim.sprite;
@@ -66,9 +70,10 @@ public class Valider : MonoBehaviour
         canvas_pres_robot.SetActive(true);
     }
 
-    // Update is called once per frame
+    //// est utilisé pour le chronomètre
     void Update()
     {
+        ////lorsque le chronomètre est terminé, on sélectionne automatiquement les cartes devant le joueur
         if (ScriptTimer.done)
             ButtonClicked();
     }

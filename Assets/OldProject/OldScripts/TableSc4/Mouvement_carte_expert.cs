@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//// script attaché aux cartes (version expert), permet de gérer tout le déplacement des cartes.
 public class Mouvement_carte_expert : MonoBehaviour
 {
     private Vector3 screenPoint;
@@ -23,22 +24,9 @@ public class Mouvement_carte_expert : MonoBehaviour
     private bool was_in_target = false;
     private bool test;
 
-    private bool isnbequipmentmax;
+    private bool isnbequipmentmax;// si on a déjà posé 3 cartes équipements
     private bool isalreadylocomotionordimension;
     private bool ismouseintarget;
-
-    #region unused start and update
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnEnable()
     {
@@ -49,7 +37,6 @@ public class Mouvement_carte_expert : MonoBehaviour
         gameObject.layer = 5;
         currenttarget = null;
     }
-    #endregion
 
     private void OnMouseDown()
     {

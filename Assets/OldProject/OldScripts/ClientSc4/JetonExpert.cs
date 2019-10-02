@@ -5,20 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
 
+////script attaché aux jetons pour indiquer que les jetons sont des boutons
 public class JetonExpert : MonoBehaviour
 {
     short jeton = 1010;
 
-    // Start is called before the first frame update
     void Start()
     {
         this.GetComponent<Button>().onClick.AddListener(() => OnButtonClicked());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnButtonClicked()

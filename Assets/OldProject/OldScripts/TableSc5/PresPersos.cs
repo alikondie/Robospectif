@@ -36,12 +36,6 @@ public class PresPersos : MonoBehaviour
     [SerializeField] GameObject[] cartes;
     [SerializeField] Text text;
 	#endregion
-	
-	#region Go or components
-	#endregion
-	
-	#region Variables
-	#endregion
 
 	#region Unity loop
     void Start()

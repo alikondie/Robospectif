@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+////classe joueur, qui permet de stocker des variables globales d'une partie 
+
 public class JoueurStatic
 {
     private static int numero;

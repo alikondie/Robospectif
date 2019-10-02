@@ -7,6 +7,8 @@ using System.IO;
 using System.Text;
 using System;
 
+////script attaché à la scène du sablier, pendant que les joueurs choisissent les cartes 
+//// de leur véhicule. Le code commenté correspond à la prise de donnée, qui n'est pas terminée.
 public class ConceptionTerminer : MonoBehaviour
 {
     [SerializeField] GameObject canvas_sablier;
@@ -18,7 +20,6 @@ public class ConceptionTerminer : MonoBehaviour
 
     // ---------- METHODES ----------
 
-    // Methode d'inisialisation
     void Start()
     {
 
@@ -35,16 +36,14 @@ public class ConceptionTerminer : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        ////lorsque le premier joueur a fait son choix, on stocke les cartes qu'il a choisi,
+        //// pour ensuite les afficher sur le plateau du véhicule.
         if (nbJoueurConceptionTerminer == nbJoueur)
         {
             #region recup_données
             rejectedCardsContent = new StringBuilder();
-            //for(int i)
-            //SceneManager.LoadScene(nomSceneDemander);
 
             //rejectedCardsContent.AppendLine("Joueur;Dimension;Locomotion;Equipement1;Equipement2;Equipement3");
             //string filePath = "donnees\\cartes_rejetees_le_" + DateTime.Now.ToString("dd-MM-yyyy") + "_a_" + DateTime.Now.ToString("hh") + "h" + DateTime.Now.ToString("mm") + "m" + DateTime.Now.ToString("ss") + "s" + ".csv";

@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+////Script du canvas de fin de partie. Il indique seulement au joueur que la partie est terminée
 public class Fin : MonoBehaviour
 {
     [SerializeField] Text text;
     [SerializeField] Text central;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     void OnEnable()
     {
@@ -25,11 +22,5 @@ public class Fin : MonoBehaviour
             text.text = "Player " + JoueurStatic.Numero;
             central.text = "Game over";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

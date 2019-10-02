@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
 
+
+////Script du canvas du positionnement des joueurs (côté client), avant le début de la partie
 public class Init : MonoBehaviour
 {
     [SerializeField] GameObject canvas_infos_joueurs;
@@ -14,9 +16,11 @@ public class Init : MonoBehaviour
     [SerializeField] Button[] buttons;
     [SerializeField] Text[] texts;
     public int[] positions;
-    // Start is called before the first frame update
+
     void Start()
     {
+
+        ////on initialise toutes les variables de positions des joueurs, et on attribut les listener aux boutons
         positions = new int[6];
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -38,16 +42,20 @@ public class Init : MonoBehaviour
 
     private void onButtonClicked(int i)
     {
+
+        ////lorsque le joueur clique sur sa position, on met à jour dans joueur static le numéro du joueur et sa 
+        ////position, puis on envoie au serveur un message pour lui indiquer que le joueur i a cliqué
         JoueurStatic.Numero = positions[i];
         JoueurStatic.Position = i + 1;
         MyNetworkMessage message = new MyNetworkMessage();
         message.message = JoueurStatic.Numero;
         JoueurStatic.Client.Send(messageID, message);
+        ////on passe au canvas suivant
         canvas_position_joueurs.SetActive(false);
         canvas_infos_joueurs.SetActive(true);
     }
 
-    // un autre joueur a sélectionné l'un des boutons
+    // méthode de réception de message indiquant qu'une position a été prise et qu'elle n'est donc plus disponible
     void OnMessageReceived(NetworkMessage message)
     {
         int i = message.ReadMessage<MyNetworkMessage>().message;
@@ -55,13 +63,16 @@ public class Init : MonoBehaviour
         {
             if (positions[j] == i)
             {
+                ////on désactive le bouton qui a été cliqué par un autre joueur
                 buttons[j].gameObject.SetActive(false);
             }
         }
     }
 
+    ////message de réception pour indiquer qu'il faut choisir sa position
     private void OnPositionsReceived(NetworkMessage netMsg)
     {
+        ////On positionne et affiche seulement les boutons correspondant aux emplacements sélectionnés sur le serveur au canvas précédent
         int i = 0;
         var message = netMsg.ReadMessage<MyPositionsMessage>();
         int[] posMsg = new int[] { message.position1, message.position2, message.position3, message.position4, message.position5, message.position6 };
@@ -76,6 +87,9 @@ public class Init : MonoBehaviour
                 i++;
             }
         }
+
+        ////le message contient les informations globales de la partie, on les stocke donc dans joueurstatic pour 
+        //// y avoir accès à tout moment depuis le client
         JoueurStatic.Langue = message.langue;
         JoueurStatic.Type = message.type;
         if (JoueurStatic.Langue == "FR")
@@ -83,12 +97,5 @@ public class Init : MonoBehaviour
         else
             this.transform.GetChild(7).GetComponent<Text>().text = "Chose the player number that\ncorresponds to your position";
         JoueurStatic.NbJoueurs = i;
-        Debug.Log("nbjoueurs = " + JoueurStatic.NbJoueurs);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
